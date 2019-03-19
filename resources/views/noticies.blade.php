@@ -18,6 +18,8 @@
         @forelse($noticies as $noticia)
         <div class="col-sm-6">
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
+              <img class="card-img-top" alt="imatge de la noticia" style="width: 200px;height: 300px; object-fit: cover;" src="{{$noticia->path_img}}">
+
                 <div class="card-body d-flex flex-column align-items-start">
                     <form method="get">
                         <input type="hidden" name="catId" value="{{$noticia->catId}}">
@@ -27,15 +29,13 @@
                     <h3 class="mb-0">
                         <a class="text-dark">{{$noticia->titol}}</a>
                     </h3>
-                    <p class="card-text mb-auto">{!!html_entity_decode(str_limit($noticia->descripcio, $limit=200, $end
+                    <p class="card-text mb-auto">{!!html_entity_decode(str_limit($noticia->descripcio, $limit=100, $end
                         = "..."))!!}</p>
                     <form action="{{ route('noticia',$noticia->id)}}" method="get">
                         <input type="hidden" name="id" value="{{$noticia->id}}">
                         <button type="submit" class="btn btn-outline-info">Continuar llegint</button>
                     </form>
                 </div>
-                <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
-                    alt="imatge de la noticia" style="width: 200px;height: 300px;" src="{{$noticia->path_img}}">
             </div>
         </div>
         @empty

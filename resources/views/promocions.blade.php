@@ -18,6 +18,8 @@
         @forelse($promocions as $promocio)
         <div class="col-sm-6">
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
+              <img class="card-img-top" alt="imatge de la promocio" style="width: 200px;height: 300px; object-fit: cover;" src="{{$promocio->path_img}}">
+
                 <div class="card-body d-flex flex-column align-items-start">
                     <h3 class="mb-0">
                         <a class="text-dark">{{$promocio->titol}}</a>
@@ -29,8 +31,6 @@
                         <button type="submit" class="btn btn-outline-info">Continuar llegint</button>
                     </form>
                 </div>
-                <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
-                    alt="imatge de la promocio" style="width: 200px;height: 300px;" src="{{$promocio->path_img}}">
             </div>
         </div>
         @empty

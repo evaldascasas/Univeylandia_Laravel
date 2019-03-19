@@ -20,7 +20,7 @@ class AtraccionsSeeder extends Seeder
              'accessibilitat' => '1',
              'acces_express' => '1',
              'descripcio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec ligula est. Sed vitae ligula finibus, euismod odio sed, volutpat sem. Proin tincidunt nunc nisl, sit amet aliquam leo elementum ac. Maecenas eros mauris, posuere id faucibus id, elementum tincidunt enim. Phasellus elementum urna eget feugiat interdum. Nulla aliquet feugiat velit vitae feugiat. Sed gravida bibendum iaculis. Donec quis facilisis ligula. Nullam mattis turpis sed nisi lobortis ultricies. Donec non magna lobortis, posuere lacus a, auctor eros. Donec auctor ligula leo, a scelerisque erat porttitor eu. Aliquam porttitor tempus purus ac tristique. Nullam fermentum, lacus vitae cursus ornare, dolor enim tincidunt elit, in tempus ligula erat vitae tellus. Aenean et nibh sed ex sagittis vehicula. ',
-             'path' => '/storage/atraccions/1552503087maxresdefault.jpg',
+             'path' => '/storage/atraccions/atraccio_general.jpg',
              'votacions' => 20,
          ]);
 
@@ -33,7 +33,7 @@ class AtraccionsSeeder extends Seeder
              'accessibilitat' => '2',
              'acces_express' => '1',
              'descripcio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec ligula est. Sed vitae ligula finibus, euismod odio sed, volutpat sem. Proin tincidunt nunc nisl, sit amet aliquam leo elementum ac. Maecenas eros mauris, posuere id faucibus id, elementum tincidunt enim. Phasellus elementum urna eget feugiat interdum. Nulla aliquet feugiat velit vitae feugiat. Sed gravida bibendum iaculis. Donec quis facilisis ligula. Nullam mattis turpis sed nisi lobortis ultricies. Donec non magna lobortis, posuere lacus a, auctor eros. Donec auctor ligula leo, a scelerisque erat porttitor eu. Aliquam porttitor tempus purus ac tristique. Nullam fermentum, lacus vitae cursus ornare, dolor enim tincidunt elit, in tempus ligula erat vitae tellus. Aenean et nibh sed ex sagittis vehicula. ',
-             'path' => '/storage/atraccions/1552503087maxresdefault.jpg',
+             'path' => '/storage/atraccions/atraccio_general.jpg',
              'votacions' => 20,
          ]);
 
@@ -46,7 +46,7 @@ class AtraccionsSeeder extends Seeder
              'accessibilitat' => '3',
              'acces_express' => '1',
              'descripcio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec ligula est. Sed vitae ligula finibus, euismod odio sed, volutpat sem. Proin tincidunt nunc nisl, sit amet aliquam leo elementum ac. Maecenas eros mauris, posuere id faucibus id, elementum tincidunt enim. Phasellus elementum urna eget feugiat interdum. Nulla aliquet feugiat velit vitae feugiat. Sed gravida bibendum iaculis. Donec quis facilisis ligula. Nullam mattis turpis sed nisi lobortis ultricies. Donec non magna lobortis, posuere lacus a, auctor eros. Donec auctor ligula leo, a scelerisque erat porttitor eu. Aliquam porttitor tempus purus ac tristique. Nullam fermentum, lacus vitae cursus ornare, dolor enim tincidunt elit, in tempus ligula erat vitae tellus. Aenean et nibh sed ex sagittis vehicula. ',
-             'path' => '/storage/atraccions/1552503087maxresdefault.jpg',
+             'path' => '/storage/atraccions/atraccio_general.jpg',
              'votacions' => 8,
          ]);
      }

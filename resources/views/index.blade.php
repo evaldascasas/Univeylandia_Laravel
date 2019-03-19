@@ -43,12 +43,12 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="font-weight-bold text-center">TOP PROMOCIONS 2018-2019</h1>
+      <h1 class="font-weight-bold text-center">PROMOCIONS NADAL 2019</h1>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <img src="/img/promocions/promocio1.jpg" class="img-fluid" alt="imatge promoció 1">
+      <a href="{{route('promocions')}}"><img src="/img/promocions/promocio1.jpg" class="img-fluid" alt="imatge promoció 1"></a>
     </div>
   </div>
 </div>
@@ -65,18 +65,19 @@
     @forelse($noticies as $noticia)
     <div class="col-sm-6">
       <div class="card flex-md-row mb-4 box-shadow h-md-250">
+        <img class="card-img-top" alt="imatge de la noticia" style="width: 200px;height: 300px; object-fit: cover;" src="{{$noticia->path_img}}">
+
         <div class="card-body d-flex flex-column align-items-start">
-            <a href="/noticies?catId={{$noticia->catId}}" class="d-inline-block mb-2 text-success" style="background: none;border: none;"> {{$noticia->categoria}}</a>
+          <a href="/noticies?catId={{$noticia->catId}}" class="d-inline-block mb-2 text-success" style="background: none;border: none;"> {{$noticia->categoria}}</a>
           <h3 class="mb-0">
             <a class="text-dark">{{$noticia->titol}}</a>
           </h3>
-            <p class="card-text mb-auto">{!!html_entity_decode(str_limit($noticia->descripcio, $limit=200, $end = "..."))!!}</p>
+            <p class="card-text mb-auto">{!!html_entity_decode(str_limit($noticia->descripcio, $limit=100, $end = "..."))!!}</p>
             <form action="{{ route('noticia',$noticia->id)}}" method="get">
               <input type="hidden" name="id" value="{{$noticia->id}}">
               <button type="submit" class="btn btn-outline-info">Continuar llegint</button>
             </form>
           </div>
-          <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="imatge de la noticia" style="width: 200px;height: 300px;" src="{{$noticia->path_img}}">
     </div>
   </div>
   @empty

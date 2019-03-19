@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
-                <img src="/img/rodeo.jpg" class="card-img-top" alt="..." style="height: 300px">
+                <img src="/img/tenda_fotos.jpg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover">
                 <div class="card-body align-self-center">
                     <a href="{{URL::route('tendaFotos')}}" class="btn btn-primary">Fotos</a>
                 </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-4">
         <div class="card">
-            <img src="/img/tendaRoba.jpg " class="card-img-top" alt="..." style="height: 300px">
+              <img src="/img/tendaRoba.jpg " class="card-img-top" alt="..." style="height: 300px; object-fit: cover">
             <div class="card-body align-self-center">
                 <a href="#" class="btn btn-primary">Roba Univeylandia</a>
             </div>
@@ -30,7 +30,7 @@
     </div>
     <div class="col-sm-4">
         <div class="card">
-            <img src="/img/Merchandising.jpg" class="card-img-top" alt="..." style="height: 300px">
+            <img src="/img/Merchandising.jpg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover">
             <div class="card-body align-self-center">
                 <a href="#" class="btn btn-primary">Merchandising Univeylandia</a>
             </div>
