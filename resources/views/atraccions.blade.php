@@ -15,7 +15,7 @@
 
   <div class="row">
   @foreach($atraccionetes as $atraccio)
-      <div class="col-sm-4" >
+      <div class="col-sm-4 mb-3">
         <div class="card">
            <img class="card-img-top" width="100px" src="{{ $atraccio->path }}" alt="Card image" style="width:100%" >
            <div class="card-body d-flex flex-column align-items-start">
