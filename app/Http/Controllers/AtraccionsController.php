@@ -163,7 +163,6 @@ class AtraccionsController extends Controller
                 File::delete($image_path);
             }
 
-
             $file = $request->file('image');
             $file_name = time() . $file->getClientOriginalName();
             $file_path = 'storage/atraccions';
