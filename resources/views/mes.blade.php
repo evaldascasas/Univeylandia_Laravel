@@ -32,7 +32,6 @@
         </div>
     </div>
 
-    <!--<div>-->
     <p id="gelatilandia"><b>Gelatilandia ...</b></p>
 
     <div id="TableContainer"></div>
