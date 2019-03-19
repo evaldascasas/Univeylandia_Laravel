@@ -66,7 +66,7 @@
     <div class="col-sm-6">
       <div class="card flex-md-row mb-4 box-shadow h-md-250">
         <div class="card-body d-flex flex-column align-items-start">
-            <button class="d-inline-block mb-2 text-success" type="submit" style="background: none;border: none;">{{$noticia->categoria}}</button>
+            <a href="/noticies?catId={{$noticia->catId}}" class="d-inline-block mb-2 text-success" style="background: none;border: none;"> {{$noticia->categoria}}</a>
           <h3 class="mb-0">
             <a class="text-dark">{{$noticia->titol}}</a>
           </h3>
