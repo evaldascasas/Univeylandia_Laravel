@@ -70,14 +70,14 @@
 
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('incidencies*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('incidencies*') ? 'true' : 'false' }}" href="#submenu3">
+            <a class="nav-link {{ request()->routeIs('incidencies*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('incidencies*') ? 'true' : 'false' }}" href="#submenu4">
               <span data-feather="alert-triangle"></span>
               Incidències
               <span data-feather="chevron-right"></span>
             </a>
           </li>
 
-          <ul class="nav flex-column collapse {{ request()->routeIs('incidencies*') ? 'show' : '' }}" id="submenu3" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('incidencies*') ? 'show' : '' }}" id="submenu4" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('incidencies.create') ? 'active' : '' }}" href="{{URL::route('incidencies.create')}}"><span data-feather="plus-square"></span>Crear Inicidència</a>
             </li>
@@ -90,14 +90,14 @@
           </ul>
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('GestioServeis*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('GestioServeis*') ? 'true' : 'false' }}" href="#submenu4">
+            <a class="nav-link {{ request()->routeIs('GestioServeis*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('GestioServeis*') ? 'true' : 'false' }}" href="#submenu5">
               <span data-feather="truck"></span>
               Gestio de Serveis
               <span data-feather="chevron-right"></span>
             </a>
           </li>
 
-          <ul class="nav flex-column collapse {{ request()->routeIs('GestioServeis*') ? 'show' : '' }}" id="submenu4" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('GestioServeis*') ? 'show' : '' }}" id="submenu5" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('GestioServeis.create') ? 'active' : '' }}" href="{{URL::route('GestioServeis.create')}}"><span data-feather="plus-square"></span>Crear Servei</a>
             </li>
@@ -107,14 +107,14 @@
           </ul>
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('serveis*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('serveis*') ? 'true' : 'false' }}" href="#submenu5">
+            <a class="nav-link {{ request()->routeIs('serveis*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('serveis*') ? 'true' : 'false' }}" href="#submenu6">
               <span data-feather="truck"></span>
               Assignacions Empleat-Servei-Zona
               <span data-feather="chevron-right"></span>
             </a>
           </li>
 
-          <ul class="nav flex-column collapse {{ request()->routeIs('serveis*') ? 'show' : '' }}" id="submenu5" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('serveis*') ? 'show' : '' }}" id="submenu6" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('serveis.create') ? 'active' : '' }}" href="{{URL::route('serveis.create')}}"><span data-feather="plus-square"></span>Crear Assignació</a>
             </li>
@@ -125,14 +125,14 @@
 
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('zones*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('zones*') ? 'true' : 'false' }}" href="#submenu6">
+            <a class="nav-link {{ request()->routeIs('zones*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('zones*') ? 'true' : 'false' }}" href="#submenu7">
               <span data-feather="truck"></span>
               Zones
               <span data-feather="chevron-right"></span>
             </a>
           </li>
 
-          <ul class="nav flex-column collapse {{ request()->routeIs('zones*') ? 'show' : '' }}" id="submenu6" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('zones*') ? 'show' : '' }}" id="submenu7" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('zones.create') ? 'active' : '' }}" href="{{  URL::route('zones.create')  }}"><span data-feather="plus-square"></span>Crear Zona</a>
             </li>
@@ -143,14 +143,14 @@
 
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('productes*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('productes*') ? 'true' : 'false' }}" href="#submenu7">
+            <a class="nav-link {{ request()->routeIs('productes*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('productes*') ? 'true' : 'false' }}" href="#submenu8">
               <span data-feather="truck"></span>
               Productes
               <span data-feather="chevron-right"></span>
             </a>
           </li>
 
-          <ul class="nav flex-column collapse {{ request()->routeIs('productes*') ? 'show' : '' }}" id="submenu7" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('productes*') ? 'show' : '' }}" id="submenu8" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('productes.create') ? 'active' : '' }}" href="{{  URL::route('productes.create')  }}"><span data-feather="plus-square"></span>Crear Producte</a>
             </li>
@@ -165,13 +165,13 @@
 
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('noticies*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="false" href="#submenu8">
+            <a class="nav-link {{ request()->routeIs('noticies*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="false" href="#submenu9">
               <span data-feather="alert-triangle"></span>
               Notícies
               <span data-feather="chevron-right"></span>
             </a>
           </li>
-          <ul class="nav flex-column collapse {{ request()->routeIs('noticies*') ? 'show' : '' }}" id="submenu8" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('noticies*') ? 'show' : '' }}" id="submenu9" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('noticies.create*') ? 'active' : '' }}" href="{{ route('noticies.create') }}"><span data-feather="user-plus"></span>Crear Noticia</a>
             </li>
@@ -182,14 +182,14 @@
 
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('imatges*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('imatges*') ? 'true' : 'false' }}" href="#submenu9">
+            <a class="nav-link {{ request()->routeIs('imatges*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('imatges*') ? 'true' : 'false' }}" href="#submenu10">
               <span data-feather="alert-triangle"></span>
               Imatges
               <span data-feather="chevron-right"></span>
             </a>
           </li>
 
-          <ul class="nav flex-column collapse {{ request()->routeIs('imatges*') ? 'show' : '' }}" id="submenu9" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('imatges*') ? 'show' : '' }}" id="submenu10" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('imatges.create') ? 'active' : '' }}" href="{{  URL::route('imatges.create')  }}"><span data-feather="user-plus"></span>Afegir Imatge</a>
             </li>
@@ -199,14 +199,14 @@
           </ul>
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('AssignEmpZona*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('AssignEmpZona*') ? 'true' : 'false' }}" href="#submenu10">
+            <a class="nav-link {{ request()->routeIs('AssignEmpZona*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('AssignEmpZona*') ? 'true' : 'false' }}" href="#submenu11">
               <span data-feather="truck"></span>
               Empleats Zones
               <span data-feather="chevron-right"></span>
             </a>
           </li>
 
-          <ul class="nav flex-column collapse {{ request()->routeIs('AssignEmpZona*') ? 'show' : '' }}" id="submenu10" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('AssignEmpZona*') ? 'show' : '' }}" id="submenu11" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('AssignEmpZona.create') ? 'active' : '' }}" href="{{  URL::route('AssignEmpZona.create')  }}"><span data-feather="plus-square"></span>Crear Assignació</a>
             </li>
@@ -217,13 +217,13 @@
 
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu11">
+            <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu12">
               <span data-feather="alert-triangle"></span>
               Promocions
               <span data-feather="chevron-right"></span>
             </a>
           </li>
-          <ul class="nav flex-column collapse {{ request()->routeIs('promocions*') ? 'show' : '' }}" id="submenu11" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('promocions*') ? 'show' : '' }}" id="submenu12" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('promocions.create') ? 'active' : '' }}" href="{{  URL::route('promocions.create')  }}"><span data-feather="user-plus"></span>Crear Promoció</a>
             </li>
