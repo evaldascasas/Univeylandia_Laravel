@@ -10,7 +10,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ asset('img/mapa_parc.jpg') }}">{{ __('Mapa') }}</a>
+                <a class="nav-link" href="#">{{ __('Mapa') }}</a>
             </li>
             @guest
             <li class="nav-item">
@@ -64,6 +64,7 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <li><a class="dropdown-item" href="{{ route('perfil') }}">{{ __('Perfil') }}</a></li>
                     <li><a class="dropdown-item" href="{{ route('incidencia') }}">{{ __('Incidències') }}</a></li>
+                    <li><a class="dropdown-item" href="{{ route('tasques') }}">{{ __('Tasques') }}</a></li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
@@ -119,6 +120,7 @@
                     <li><a class="dropdown-item" href="{{ route('perfil') }}">{{ __('Perfil') }}</a></li>
                     <li><a class="dropdown-item" href="{{ route('incidencia') }}">{{ __('Incidències') }}</a></li>
                     <li><a class="dropdown-item" href="{{ route('gestio') }}">{{ __('Gestió') }}</a></li>
+                    <li><a class="dropdown-item" href="{{ route('tasques') }}">{{ __('Tasques') }}</a></li>
 
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

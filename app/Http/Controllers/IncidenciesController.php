@@ -111,6 +111,35 @@ class IncidenciesController extends Controller
     }
 
     /**
+     * Store a newly created client resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_incidencia(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'priority' => 'required|integer'
+        ]);
+
+        $user = Auth::user();
+
+        $incidencia = new Incidencia([
+            'titol' => $request->get('title'),
+            'descripcio' => $request->get('description'),
+            'id_prioritat' => $request->get('priority'),
+            'id_estat' => 1,
+            'id_usuari_reportador' => $user->id,
+        ]);
+
+        $incidencia->save();
+
+        return redirect('incidencia')->with('success', 'Incidència reportada correctament');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -212,7 +241,7 @@ class IncidenciesController extends Controller
 
         $incidencia->save();
 
-        return redirect('gestio/incidencies')->with('success', 'Incidència finalitzada correctament');
+        return redirect('/tasques')->with('success', 'Incidència finalitzada correctament');
     }
 
     /**

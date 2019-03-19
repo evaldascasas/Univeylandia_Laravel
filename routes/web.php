@@ -32,7 +32,7 @@
  /* RUTES GRUP 1 */
  Auth::routes(['verify' => true]);
 
- Route::post('/incidencia', 'HomeController@store_incidencia')->name('incidencia')->middleware(['auth','verified']);
+ Route::post('/incidencia', 'IncidenciesController@store_incidencia')->name('incidencia')->middleware(['auth','verified']);
 
  Route::get('gestio/incidencies/assign', 'IncidenciesController@assigned')->name('incidencies.assign')->middleware(['auth','is_admin','verified']);
 
@@ -57,6 +57,10 @@
  Route::get('/votacions',"HomeController@votacions")->name('votacions');
 
  Route::post('/votacions',"HomeController@votacio_accio")->name('votacio_accio');
+
+ Route::get('/tasques','HomeController@tasques')->name('tasques')->middleware(['auth','is_worker','verified']);
+
+ Route::patch('/tasques/{id}', 'IncidenciesController@conclude')->name('incidencies.conclude')->middleware(['auth','is_worker','verified']);
  
  /* RUTES GRUP 2 */
  Route::any('/gestio/atraccions/crearassignaciomantenimentdate/{id}','AtraccionsController@crearAssignacioMantenimentDate')->name('atraccions.crearassignaciomantenimentdate')->middleware(['auth','is_admin','verified']);

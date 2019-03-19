@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Carbon\Carbon;
 
-use \App\Incidencia;
-use \App\PrioritatIncidencia;
 use Auth;
 use View;
 
+use \App\Incidencia;
+use \App\PrioritatIncidencia;
 use \App\Producte;
 use \App\Tipus_producte;
 use \App\Atributs_producte;
@@ -139,33 +139,35 @@ class HomeController extends Controller
       return view('incidencia', compact('prioritats'));
     }
 
-    /**
-     * Store a newly created client resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store_incidencia(Request $request)
+    public function tasques()
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'priority' => 'required|integer'
-        ]);
+      $user = Auth::user();
 
-        $user = Auth::user();
+      $incidencies_per_fer = Incidencia::where('id_usuari_assignat', $user->id)
+      ->where('id_estat',2)
+      ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
+      ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
+      ->get([
+        'incidencies.id as id',
+        'incidencies.titol as titol',
+        'incidencies.descripcio as descripcio',
+        'tipus_prioritat.nom_prioritat as nom_prioritat',
+        'estat_incidencies.nom_estat as nom_estat',
+      ]);
 
-        $incidencia = new Incidencia([
-            'titol' => $request->get('title'),
-            'descripcio' => $request->get('description'),
-            'id_prioritat' => $request->get('priority'),
-            'id_estat' => 1,
-            'id_usuari_reportador' => $user->id,
-        ]);
+      /*$incidencies_fetes = Incidencia::where('id_usuari_assignat', $user->id)
+      ->where('id_estat',3)
+      ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
+      ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
+      ->get([
+        'incidencies.id as id',
+        'incidencies.titol as titol',
+        'incidencies.descripcio as descripcio',
+        'tipus_prioritat.nom_prioritat as nom_prioritat',
+        'estat_incidencies.nom_estat as nom_estat',
+      ]);*/
 
-        $incidencia->save();
-
-        return redirect('incidencia')->with('success', 'Incidència reportada correctament');
+      return view('tasques', compact(['incidencies_per_fer']));
     }
 
 /*Funcio que rep*/
