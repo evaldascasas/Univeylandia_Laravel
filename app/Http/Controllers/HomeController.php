@@ -155,6 +155,24 @@ class HomeController extends Controller
         'estat_incidencies.nom_estat as nom_estat',
       ]);
 
+      $assignacio = DB::table('assign_emp_atraccions')
+          ->leftJoin('users','users.id', 'assign_emp_atraccions.id_empleat')
+          ->leftJoin('atraccions','atraccions.id', 'assign_emp_atraccions.id_atraccio')
+          ->leftJoin('rols','rols.id', 'users.id')
+          ->where('users.id',$user->id)
+                ->get([
+                  'assign_emp_atraccions.id as id',
+                  'assign_emp_atraccions.id_empleat as id_empleat',
+                  'assign_emp_atraccions.id_atraccio as id_atraccio',
+                  'assign_emp_atraccions.data_inici as data_inici',
+                  'assign_emp_atraccions.data_fi as data_fi',
+                  'users.nom as nom_empleat',
+                  'users.cognom1 as cognom_empleat',
+                  'atraccions.nom_atraccio as nom_atraccio',
+                  'rols.nom_rol as nom_rol',
+                  'atraccions.id as id_atra'
+              ]);
+
       /*$incidencies_fetes = Incidencia::where('id_usuari_assignat', $user->id)
       ->where('id_estat',3)
       ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
@@ -167,7 +185,7 @@ class HomeController extends Controller
         'estat_incidencies.nom_estat as nom_estat',
       ]);*/
 
-      return view('tasques', compact(['incidencies_per_fer']));
+      return view('tasques', compact(['incidencies_per_fer','assignacio']));
     }
 
 /*Funcio que rep*/
@@ -308,6 +326,13 @@ class HomeController extends Controller
                 'producte' => $element_cistella->producte,
                 'quantitat' => $element_cistella->quantitat
         ]);
+        DB::transaction(function () use ($linia_cistella) {
+
+            $dades->save();
+
+            $usuari->save();
+
+        });
 
         $linia_venta ->save();
         $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);

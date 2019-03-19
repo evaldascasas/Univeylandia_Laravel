@@ -6,7 +6,7 @@
 @endsection
 @section("content")
 
-<div class="container  mt-3">
+<div class="container mt-3">
     <div class="row">
         <div class="col-sm-12">
             <h3 class="font-weight-bold text-center text-uppercase">Tasques</h3>
@@ -101,6 +101,30 @@
                 <!-- Fi modal -->
                 @endforeach
             </tbody>
+        </table>
+    </div>
+
+    <div class="table-responsive">
+      <h6 class="font-weight-bold text-center">Assignacions a atraccions</h6>
+      <table
+          class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+          id="results_table" role="grid">
+          <thead class="thead-light">
+              <tr>
+                <th>Nom Atraccio</th>
+                <th>Data Inici</th>
+                <th>Acces Finalitzacio</th>
+              </tr>
+          </thead>
+          <tbody>
+              @foreach($assignacio as $atraccio)
+              <tr>
+                  <td>{{$atraccio->nom_atraccio}}</td>
+                  <td>{{$atraccio->data_inici}}</td>
+                  <td>{{$atraccio->data_fi}}</td>
+              </tr>
+              @endforeach
+          </tbody>
         </table>
     </div>
 
