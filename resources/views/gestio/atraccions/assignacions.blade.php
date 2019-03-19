@@ -33,10 +33,8 @@
                 <thead>
                     <tr>
                         <td>ID</td>
-                        <td>ID_empleat</td>
                         <td>Nom Empleat</td>
                         <td>Cognom Empleat</td>
-                        <td>ID_atraccio</td>
                         <td>Nom Atraccio</td>
                         <td>Data Inici</td>
                         <td>Data Fi</td>
@@ -47,10 +45,8 @@
                     @foreach($assignacio as $assigna)
                     <tr>
                         <td>{{$assigna->id}}</td>
-                        <td>{{$assigna->id_empleat}}</td>
                         <td>{{$assigna->nom_empleat }}</td>
                         <td>{{$assigna->cognom_empleat }}</td>
-                        <td>{{$assigna->id_atraccio }}</td>
                         <td>{{$assigna->nom_atraccio }}</td>
                         <td>{{$assigna->data_inici }}</td>
                         <td>{{$assigna->data_fi }}</td>
@@ -63,7 +59,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button id="confirm_delete" class="btn btn-danger btn-sm" type="submit">Suprimir</button>
-                            </form> 
+                            </form>
                           </div>
                         </td>
                     </tr>
