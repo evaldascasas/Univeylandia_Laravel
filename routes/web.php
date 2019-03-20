@@ -38,6 +38,8 @@
 
  Route::get('gestio/incidencies/assign', 'IncidenciesController@assigned')->name('incidencies.assign')->middleware(['auth','is_admin','verified']);
 
+ Route::get('gestio/incidencies/done', 'IncidenciesController@done')->name('incidencies.done')->middleware(['auth','is_admin','verified']);
+
  Route::resource('gestio/incidencies', 'IncidenciesController')->middleware(['auth','is_admin','verified']);
 
  Route::resource('gestio/empleats', 'EmpleatsController')->middleware(['auth','is_admin','verified']);

@@ -19,7 +19,7 @@
 </div>
 @endif
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Llistat d'incidències per assignar</h1>
+    <h1 class="h2">Llistat d'incidències finalitzades</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-secondary" value="Exportar">
@@ -58,8 +58,6 @@
                     <div class="btn-group btn-group-sm" role="group" aria-label="Accions">
                         <a class="btn btn-outline-success btn-sm"
                             href="{{ route('incidencies.show', $incidencia->id) }}">Mostrar</a>
-                        <a class="btn btn-outline-primary btn-sm"
-                            href="{{ route('incidencies.edit', $incidencia->id) }}">Assignar</a>
 
                         <form action="{{ route('incidencies.destroy', $incidencia->id)}}" method="post">
                             @csrf

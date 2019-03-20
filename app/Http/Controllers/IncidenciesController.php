@@ -67,6 +67,32 @@ class IncidenciesController extends Controller
         return view('gestio/incidencies/assign', compact('incidencies'));
     }
 
+    /**
+     * Display the done incidences
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function done()
+    {
+        $incidencies = Incidencia::where('id_estat', 3)
+        ->orderBy('id_prioritat', 'DESC')
+        ->join('users AS u1', 'incidencies.id_usuari_reportador', 'u1.id')
+        ->join('users AS u2', 'incidencies.id_usuari_assignat', 'u2.id')
+        ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
+        ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
+        ->get([
+            'incidencies.id as id',
+            'incidencies.titol as titol',
+            'incidencies.descripcio as descripcio',
+            'u1.nom as nom_usuari_reportador',
+            'u2.nom as nom_usuari_assignat',
+            'tipus_prioritat.nom_prioritat as nom_prioritat',
+            'estat_incidencies.nom_estat as nom_estat'
+        ]);
+
+        return view('gestio/incidencies/done', compact('incidencies'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -152,6 +178,8 @@ class IncidenciesController extends Controller
         $prioritats = PrioritatIncidencia::all();
 
         $treballadors = User::where('id_rol', 3)
+        ->orWhere('id_rol', 4)
+        ->orWhere('id_rol', 5)
         ->whereNotNull('email_verified_at')
         ->get();
 
