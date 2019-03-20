@@ -27,6 +27,7 @@
  Route::get('/promocions',"HomeController@promocions")->name('promocions');
  Route::get('/promocions/n',"HomeController@promocio")->name('promocio');
  Route::get('/tendes/figures', array('as' => 'tenda_figures','uses' => 'HomeController@tenda_figures'));
+ Route::get('/construccio','HomeController@construccio')->name('construccio');
 
  /* RUTES GRUP 1 */
  Auth::routes(['verify' => true]);

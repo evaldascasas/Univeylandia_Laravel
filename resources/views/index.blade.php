@@ -7,15 +7,24 @@
 @section("content")
 <!-- SLIDER-->
 <div id="carousel" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
+  <div class="carousel-inner" >
     <div class="carousel-item active">
       <img class="d-block w-100" src="/img/slider1.jpg" alt="imatge del parc">
+      <div class="carousel-caption">
+          <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
+      </div>
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="/img/slider2.jpg" alt="imatge del parc">
+      <div class="carousel-caption">
+          <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
+      </div>
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="/img/slider3.jpg" alt="imatge del parc">
+      <div class="carousel-caption">
+          <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
+      </div>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
@@ -28,16 +37,6 @@
   </a>
 </div>
 <!-- FI SLIDER -->
-
-<!-- TEXT DE BENVINGUDA -->
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1 class="display-1 text-center"> Bevingut al parc dels teus somnis!</h1>
-    </div>
-  </div>
-</div>
-<!-- text de benvinguda -->
 
 <!-- PROMOCIONS -->
 <div class="container mt-3">
@@ -96,7 +95,7 @@
   <div class="row">
     <div class="col-sm-12">
       <iframe title="Localitzacio del parc"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d192184.82159763432!2d1.129910761830178!3d41.180613533420534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe10dd3fa1290f47!2sTANATORI+RIOS+HEVIA!5e0!3m2!1sca!2ses!4v1541009987889" width="100%" height="200px" frameborder="0" style="border:0" allowfullscreen></iframe>
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.4047935586386!2d0.5816534201918497!3d40.70910459358563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a0fe735557799b%3A0x3fade49ba3687306!2sInstitut+Montsi%C3%A0+i+CFA+Sebasti%C3%A0+Juan+Arb%C3%B3!5e0!3m2!1sca!2ses!4v1553034764770" width="100%" height="200px" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
   </div>
 </div>

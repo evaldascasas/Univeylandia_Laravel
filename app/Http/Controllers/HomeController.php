@@ -526,4 +526,9 @@ class HomeController extends Controller
 
     }
 
+    public function construccio()
+    {
+      return view('construccio');
+    }
+
 }

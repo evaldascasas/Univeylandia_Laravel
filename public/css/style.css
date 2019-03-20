@@ -6,6 +6,13 @@ body{
     margin-top: 1px;
 }
 
+.message {
+    background: rgb(0, 0, 0); 
+    background: rgba(0, 0, 0, 0.5); 
+    width: 100%;
+    padding: 20px;
+}
+
 
 .dropdown-submenu {
   position: relative;
