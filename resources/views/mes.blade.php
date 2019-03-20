@@ -160,7 +160,7 @@
 
     function colorParagraphs() {
         for (var i = 0; i < paragrafs.length; i++) {
-            paragrafs[i].style.backgroundColor = "red";
+            paragrafs[i].style.backgroundColor = "grey";
         }
     }
 
