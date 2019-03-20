@@ -62,7 +62,12 @@
             <a href="https://dinahosting.com/">
                 <img style="max-width: 90px" src="http://websalpunt.cat//wp-content/uploads/2013/09/dinahosting.jpg">
             </a>
-            <img style="max-width: 90px" src="/img/CC.png">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <span>Totes les imatges de la pàgina web estan extretes de <a href="https://pixabay.com/es/">Pixabay</a></span>
         </div>
     </div>
 
