@@ -19,14 +19,20 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('atraccions') }}">Atraccions</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('votacions')}}">Top atraccions</a>
-            </li>
-            <li class="nav-item">
+            <li class="nav-item dropdown">
                 <a class="nav-link" href="{{ route('entrades') }}">Compra entrades</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link" href="{{ route('tenda') }}">Botiga</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Més</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                    <li><a class="dropdown-item" href="{{ route('votacions')}}">Top atraccions</a></li>
+                    <li><a class="dropdown-item" href="{{ route('multimedia')}}">Multimèdia</a></li>
+                    <li><a class="dropdown-item" href="{{ route('mes')}}">Botigues i restaurants</a></li>
+                </ul>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"

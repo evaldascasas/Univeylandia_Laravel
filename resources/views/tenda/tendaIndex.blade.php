@@ -16,15 +16,15 @@
             <div class="card">
                 <img src="/img/tenda_fotos.jpg" class="card-img-top" alt="..." style="height: 300px; object-fit: cover">
                 <div class="card-body align-self-center">
-                    <a href="{{URL::route('tendaFotos')}}" class="btn btn-primary">Fotos</a>
+                    <a href="{{route('tendaFotos')}}" class="btn btn-primary">Fotos</a>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
         <div class="card">
-              <img src="/img/tendaRoba.jpg " class="card-img-top" alt="..." style="height: 300px; object-fit: cover">
+              <img src="/img/ticket.png" class="card-img-top" alt="..." style="height: 300px; object-fit: cover">
             <div class="card-body align-self-center">
-                <a href="#" class="btn btn-primary">Roba Univeylandia</a>
+                <a href="{{ route('entrades') }}" class="btn btn-primary">Entrades</a>
             </div>
         </div>
     </div>

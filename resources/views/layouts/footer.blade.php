@@ -2,17 +2,18 @@
     <div class="row border-bottom">
 
         <div class="col-sm-2">
-            <h6>Univeylandia</h6>
+            <h6 class="text-uppercase">Univeylandia</h6>
             <ul class="list-inline">
                 <li><a href="{{ route('construccio') }}">Sobre nosaltres</a></li>
                 <li><a href="{{ route('construccio') }}">Treballa amb nosaltres</a></li>
                 <li><a href="{{ route('construccio') }}">Partners</a></li>
                 <li><a href="{{ route('contacte') }}">Contacte</a></li>
+                <li><a href="{{ route('tenda') }}">Botiga online</a></li>
             </ul>
         </div>
 
         <div class="col-sm-2">
-            <h6>Condicions</h6>
+            <h6 class="text-uppercase">Condicions</h6>
             <ul class="list-inline">
                 <li><a href="{{ route('construccio') }}">Condicions generals</a></li>
                 <li><a href="{{ route('construccio') }}">Política de privacitat</a></li>
@@ -21,21 +22,24 @@
         </div>
 
         <div class="col-sm-2">
-            <h6>Parc</h6>
+            <h6 class="text-uppercase">Parc</h6>
             <ul class="list-inline">
+                <li><a href="{{ route('atraccions') }}">Atraccions</a></li>
+                <li><a href="{{ route('votacions') }}">Top atraccions</a></li>
                 <li><a href="{{ route('noticies') }}">Noticies</a></li>
                 <li><a href="{{ route('promocions') }}">Promocions</a></li>
-                <li><a href="{{ route('atraccions') }}">Atraccions</a></li>
             </ul>
         </div>
 
         <div class="col-sm-3">
-            <h3>Contacta</h3>
-            <span>642 18 90 00</span>
+            <h6 class="text-uppercase">Contacta</h6>
+            <span>555 555 555</span>
+            <br/>
+            <span>contacto@univeylandia-parc.cat</span>
         </div>
 
         <div class="col-sm-3 mb-3">
-            <h3>Segueix-nos</h3>
+            <h6 class="text-uppercase">Segueix-nos</h6>
             <a href="#">
                 <img class="img_face"
                     src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCIgdmlld0JveD0iMCAwIDQ5LjY1MiA0OS42NTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ5LjY1MiA0OS42NTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMjQuODI2LDBDMTEuMTM3LDAsMCwxMS4xMzcsMCwyNC44MjZjMCwxMy42ODgsMTEuMTM3LDI0LjgyNiwyNC44MjYsMjQuODI2YzEzLjY4OCwwLDI0LjgyNi0xMS4xMzgsMjQuODI2LTI0LjgyNiAgICBDNDkuNjUyLDExLjEzNywzOC41MTYsMCwyNC44MjYsMHogTTMxLDI1LjdoLTQuMDM5YzAsNi40NTMsMCwxNC4zOTYsMCwxNC4zOTZoLTUuOTg1YzAsMCwwLTcuODY2LDAtMTQuMzk2aC0yLjg0NXYtNS4wODhoMi44NDUgICAgdi0zLjI5MWMwLTIuMzU3LDEuMTItNi4wNCw2LjA0LTYuMDRsNC40MzUsMC4wMTd2NC45MzljMCwwLTIuNjk1LDAtMy4yMTksMGMtMC41MjQsMC0xLjI2OSwwLjI2Mi0xLjI2OSwxLjM4NnYyLjk5aDQuNTZMMzEsMjUuN3ogICAgIiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />

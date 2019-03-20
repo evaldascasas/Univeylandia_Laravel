@@ -20,13 +20,13 @@
  Route::get('/gestio',"HomeController@gestio")->name('gestio')->middleware(['auth','is_admin','verified']);
  Route::get('/perfil',"HomeController@perfil")->name('perfil')->middleware(['auth','verified']);
  Route::get('/incidencia',"HomeController@incidencia")->name('incidencia')->middleware(['auth','verified']);
- Route::get('/mes', "HomeController@mes")->name('mes');
- Route::get('/pizzeria',"HomeController@pizzeria")->name('pizzeria');
+ //Route::get('/mes', "HomeController@mes")->name('mes');
+ //Route::get('/pizzeria',"HomeController@pizzeria")->name('pizzeria');
  Route::get('/faq',"HomeController@faq")->name('faq');
- Route::get('/multimedia',"HomeController@multimedia")->name('multimedia');
+ //Route::get('/multimedia',"HomeController@multimedia")->name('multimedia');
  Route::get('/promocions',"HomeController@promocions")->name('promocions');
  Route::get('/promocions/n',"HomeController@promocio")->name('promocio');
- Route::get('/tendes/figures', array('as' => 'tenda_figures','uses' => 'HomeController@tenda_figures'));
+ //Route::get('/tendes/figures', array('as' => 'tenda_figures','uses' => 'HomeController@tenda_figures'));
  Route::get('/construccio','HomeController@construccio')->name('construccio');
 
  /* RUTES GRUP 1 */

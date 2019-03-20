@@ -14,7 +14,6 @@ const submissionComponent = {
               </a>
               <!-- <span class="tag is-small">#{{ submission.id }}</span> -->
             </strong>
-
           </p>
         </div>
       </div>
@@ -23,9 +22,8 @@ const submissionComponent = {
         <span class="icon is-small" @click="upvote(submission.id)">
         <input name="id_atraccio" type="hidden" :value="submission.id">
         </i> <strong class="has-text-info">{{ submission.votes }}</strong>
-
-        </span></button>
-
+        </span>
+      </button>
       </div>
     </div>`,
   props: ['submission', 'submissions'],
