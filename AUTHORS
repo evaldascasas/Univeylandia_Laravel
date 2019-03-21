@@ -1,0 +1,7 @@
+This project uses third-party components:
+  * The Laravel Framework - https://laravel.com/ - License: https://github.com/laravel/laravel#license
+  * DataTables JQuery Plug-in - https://datatables.net/ - License: https://datatables.net/license/
+  * SweetAlert2 - https://sweetalert2.github.io/ - License: https://github.com/sweetalert2/sweetalert2/blob/master/LICENSE
+  * FeatherIcons - https://feathericons.com/ - License: https://github.com/feathericons/feather#license
+  * Font Awesome Free - https://fontawesome.com/ - License: https://fontawesome.com/license
+  * Bootstrap 4 - https://getbootstrap.com/ - License: https://github.com/twbs/bootstrap/blob/v4.0.0/LICENSE
