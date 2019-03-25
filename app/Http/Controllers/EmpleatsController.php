@@ -134,7 +134,6 @@ class EmpleatsController extends Controller
             'telefon' => $request->get('telefon'),
             'id_rol' => $request->get('id_rol'),
             'id_dades_empleat' => ($dades->id),
-            'actiu' => 1
         ]);
 
         //use a transaction so IF the query fails it does not insert nor update the resources

@@ -71,7 +71,7 @@
        </div>
      </div>
 
-     <button class="btn btn-secondary" type="reset">Cancel·lar</button>
+     <a class="btn btn-secondary" href="{{ URL::previous() }}">Cancel·lar</a>
    </form>
  
  @endsection

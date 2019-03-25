@@ -91,7 +91,6 @@ class RegisterController extends Controller
             'telefon' => $data['telephone-number'],
             'id_rol' => 1,
             'id_dades_empleat' => null,
-            'actiu' => 0,
         ]);
     }
 }
