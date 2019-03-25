@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\File;
 use \App\Atraccion;
@@ -21,18 +20,17 @@ class ImageController extends Controller
 
 	public function create()
 	{
+		$atraccions = Atraccion::all();
 
-		$atraccions=DB::table('atraccions')->get();
-		return view ('gestio/imatges/create', compact("atraccions"));
-
+		return view ('gestio/imatges/create', compact('atraccions'));
 	}
 
    	public function save(Request $request)
    	{
-	   //validació
-	   $validate = $this->validate($request,[
-		   'description' => 'required',
-		   'image_path' => 'required|image'
+		$request->validate([
+			'description' => 'required',
+			'image_path' => 'required|image',
+			'atraccio' => 'required|numeric'
 		]);
 
 		//agafant les dades
@@ -121,7 +119,8 @@ class ImageController extends Controller
 
 	    $imatge_product->save();
 
-		$atraccions=DB::table('atraccions')->get();
+		$atraccions = Atraccion::all();
+
 	   	return view('gestio/imatges/create',compact("atraccions"));
 	}
 }

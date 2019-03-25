@@ -27,8 +27,6 @@ class AtraccionsController extends Controller
 
     private $data_fi_global;
 
-
-
     /**
      * Display a listing of the resource.
      *
@@ -55,8 +53,8 @@ class AtraccionsController extends Controller
             ]);
 
         $atraccions = Atraccion::all();
-        return view('gestio/atraccions/index', compact('atraccionetes'));
 
+        return view('gestio/atraccions/index', compact('atraccionetes'));
 
     }
 
@@ -254,8 +252,8 @@ class AtraccionsController extends Controller
     {
 
       request()->validate([
-       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
-       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
+          'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:data_fi_assignacio_empleat',
+          'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:data_inici_assignacio_empleat',
       ]);
 
         $data_inici_global = $request->get('data_inici_assignacio_empleat');
@@ -270,57 +268,55 @@ class AtraccionsController extends Controller
     }
 
     public function crearAssignacioMantenimentDate(Request $request, $id)
-{
+    {
         $atraccio = Atraccion::find($id);
         return view('/gestio/atraccions/crearassignaciomantenimentdate', compact('atraccio'));
-    }
-
-    public function crearAssignacioNetejaDate(Request $request, $id)
-{
-        $atraccio = Atraccion::find($id);
-        return view('/gestio/atraccions/crearassignacionetejadate', compact('atraccio'));
     }
 
     public function crearAssignacioNeteja(Request $request, $id)
     {
 
       request()->validate([
-       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
-       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
+       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:data_fi_assignacio_empleat',
+       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:data_inici_assignacio_empleat',
       ]);
-$user = AssignacioAtraccion::assignarNetejaFiltro();
+      
+      $user = AssignacioAtraccion::assignarNetejaFiltro();
 
       $data_inici_global = $request->get('data_inici_assignacio_empleat');
       $data_fi_global = $request->get('data_fi_assignacio_empleat');
 
       $atraccio = Atraccion::find($id);
-
-
-             return view('/gestio/atraccions/crearassignacioneteja', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
+      
+      return view('/gestio/atraccions/crearassignacioneteja', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
     }
 
-    public function crearAssignacioGeneralDate(Request $request, $id)
-  {
-    $atraccio = Atraccion::find($id);
-    return view('/gestio/atraccions/crearassignaciogeneraldate', compact('atraccio'));
+    public function crearAssignacioNetejaDate(Request $request, $id)
+    {
+        $atraccio = Atraccion::find($id);
+        return view('/gestio/atraccions/crearassignacionetejadate', compact('atraccio'));
     }
-
 
     public function crearAssignacioGeneral(Request $request, $id)
     {
 
       request()->validate([
-       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
-       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
+       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:data_fi_assignacio_empleat',
+       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:data_inici_assignacio_empleat',
       ]);
       $data_inici_global = $request->get('data_inici_assignacio_empleat');
       $data_fi_global = $request->get('data_fi_assignacio_empleat');
       $atraccio = Atraccion::find($id);
 
       $user = AssignacioAtraccion::assignarGeneralFiltro();
+      
+      return view('/gestio/atraccions/crearassignaciogeneral', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
+    }
 
-
-             return view('/gestio/atraccions/crearassignaciogeneral', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
+    public function crearAssignacioGeneralDate(Request $request, $id)
+    {
+        $atraccio = Atraccion::find($id);
+        return view('/gestio/atraccions/crearassignaciogeneraldate', compact('atraccio'));
     }
 
 
@@ -328,20 +324,21 @@ $user = AssignacioAtraccion::assignarNetejaFiltro();
     {
 
         $atraccio = Atraccion::find($id);
+
         $assignacio = new AssignacioAtraccion([
             'id_empleat'=>$request->get('id_empleat'),
             'id_atraccio'=>$request->get('id_atraccio'),
             'data_inici'=> $request->get('data_inici_modal'),
             'data_fi'=>$request->get('data_fi_modal')
-
         ]);
+
         $assignacio->save();
 
         return redirect('/gestio/atraccions/assigna')->with('success', 'OK bro :)');
     }
-
-        public function assignacions()
-        {
+    
+    public function assignacions()
+    {
             $assignacio = DB::table('assign_emp_atraccions')
             ->leftJoin('users','users.id', 'assign_emp_atraccions.id_empleat')
             ->leftJoin('atraccions','atraccions.id', 'assign_emp_atraccions.id_atraccio')

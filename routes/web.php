@@ -100,7 +100,7 @@
  Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
  
  /* Guardar PDF */
- Route::get('/view/atraccions/index', 'AtraccionsController@guardarPDF');
+ Route::get('/view/atraccions/index', 'AtraccionsController@guardarPDF')->middleware(['auth','is_admin','verified']);
  
  /* Gestio imatges */
  Route::get("/gestio/imatges", "ImageController@create")->name('imatges.create')->middleware(['auth','is_admin','verified']);
@@ -111,13 +111,13 @@
  Route::resource('/gestio/productes', 'gestioProductes')->middleware(['auth','is_admin','verified']);
  Route::resource('/gestio/ventes', 'VentesController')->middleware(['auth','is_admin','verified']);
  
- Route::get('/cistella', 'HomeController@cistella')->name('cistella')->middleware(['auth','verified']);
+ Route::get('/cistella','HomeController@cistella')->name('cistella')->middleware(['auth','verified']);
  Route::delete('/cistella', 'HomeController@cistella_delete')->name('cistella')->middleware(['auth','verified']);
  Route::get('/compra', 'HomeController@compra')->name('compra')->middleware(['auth','verified']);
  Route::get('/compra_finalitzada', 'HomeController@compra_finalitzada')->name('compra_finalitzada')->middleware(['auth','verified']);
  
  /* Tenda */
- Route::get('/tenda', 'TendaController@indexTenda')->name('tenda');
+ Route::get('/tenda','TendaController@indexTenda')->name('tenda');
  Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos');
  Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos');
  Route::get('/comprarFotos/{id}','TendaController@afegir_Foto');
