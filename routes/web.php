@@ -104,6 +104,11 @@
 
  Route::get('/view/atraccions/assigna', 'AtraccionsController@guardarAssignacionsPDF')->middleware(['auth','is_admin','verified']);
 
+ Route::get('/view/gestioProductes/index', 'gestioProductes@guardarProductePDF')->middleware(['auth','is_admin','verified']);
+
+
+
+
  
  /* Gestio imatges */
  Route::get("/gestio/imatges", "ImageController@create")->name('imatges.create')->middleware(['auth','is_admin','verified']);

@@ -238,4 +238,27 @@ class gestioProductes extends Controller
         $atributs_producte->delete();
         return redirect('/gestio/productes') ->with('success', 'Producte eliminat correctament');
     }
+
+    public function guardarProductePDF () {
+      $tipus_producte = Tipus_producte::all();
+
+        $productes = DB::table('productes')
+            ->join('atributs_producte', 'atributs_producte.id', '=', 'productes.atributs')
+            ->join('tipus_producte', 'tipus_producte.id', '=', 'atributs_producte.nom')
+            ->select('productes.id as id' ,'tipus_producte.nom as nom', 'tipus_producte.id as tid', 'atributs_producte.mida as mida','atributs_producte.tickets_viatges as tickets_viatges','atributs_producte.foto_path as foto_path','atributs_producte.foto_path_aigua as foto_path_aigua','atributs_producte.preu as preu','productes.descripcio as descripcio','productes.estat as estat', 'tipus_producte.preu_base as preu_base')
+            ->orderBy('estat', 'DESC')
+            ->orderBy('nom', 'ASC');
+
+            
+            
+            $mytime = Carbon\Carbon::now();
+            $temps = $mytime->toDateString();
+
+            $atraccions = AssignacioAtraccion::all();
+            $pdf = PDF::loadView('/gestio/atraccions/pdfProductes', compact('productes', 'reeee', 'tipus_producte', 'tipus_search', 'tipus_producte_seleccionat', 'estat_search'));
+            return $pdf->download('productes'.$temps.'.pdf');
+
+
+    }
+
 }
