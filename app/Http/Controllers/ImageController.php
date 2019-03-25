@@ -108,9 +108,9 @@ class ImageController extends Controller
 	    $imatge->id_atraccio=$id_atraccio;
 	    $imatge->save();
 
-    	$atributs_producte = 	Imatge::latest()
-     							->take(1)
-     							->get();
+		$atributs_producte = Imatge::latest()
+		->take(1)
+		->get();
 
 	    $imatge_product = new Producte();
 	    $imatge_product->descripcio=$description;

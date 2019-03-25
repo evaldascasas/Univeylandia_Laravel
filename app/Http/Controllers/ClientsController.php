@@ -14,7 +14,10 @@ class ClientsController extends Controller
      */
     public function index()
     {
-       $usuaris= User::where('email_verified_at','!=', null)->where('id_rol',1)->get();
+       $usuaris = User::whereNotNull('email_verified_at')
+       ->where('id_rol',1)
+       ->get();
+
        return view("gestio/clients/index", compact("usuaris"));
     }
 
@@ -36,21 +39,22 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
+        $randomPass = str_random(8);
+
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
             'cognom1' => ['required', 'string', 'max:255'],
-            'cognom2' => ['string', 'max:255'],
+            'cognom2' => ['string', 'max:255','nullable'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'contrasenya' => ['required', 'string', 'min:6'],
             'date' => ['required', 'date'],
             'adreca' => ['required', 'string'],
             'ciutat' => ['required', 'string'],
             'provincia' => ['required', 'string'],
             'cp' => ['required', 'string'],
-            'tipus_document' => ['required'],
+            'tipus_document' => ['required','in:DNI,NIE'],
             'numero_document' => ['required'],
-            'sexe' => ['required'],
-            'telefon' => ['required', 'string'],
+            'sexe' => ['required','in:Home,Dona'],
+            'telefon' => ['required','numeric','min:9'],
         ]);
 
         $usuari = new User ([
@@ -58,7 +62,7 @@ class ClientsController extends Controller
             'cognom1' => $request->get('cognom1'),
             'cognom2' => $request->get('cognom2'),
             'email' => $request->get('email'),
-            'password' => Hash::make($request->get('contrasenya')),
+            'password' => Hash::make($randomPass),
             'data_naixement' => $request->get('date'),
             'adreca' => $request->get('adreca'),
             'ciutat' => $request->get('ciutat'),
@@ -69,12 +73,11 @@ class ClientsController extends Controller
             'sexe' => $request->get('sexe'),
             'telefon' => $request->get('telefon'),
             'id_rol' => 1,
-            'actiu' => 0,
         ]);
         
         $usuari->save();
         
-        return view('gestio/clients/create');
+        return redirect('/gestio/clients')->with('success', 'Client creat correctament');
     }
 
     /**
@@ -85,9 +88,9 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-       $usuari=User::findOrFail($id);
+       $usuari = User::findOrFail($id);
 
-       return view ('gestio/clients/show', compact('usuari'));
+       return view('gestio/clients/show', compact('usuari'));
     }
 
     /**
@@ -98,9 +101,9 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-       $usuari=User::findOrFail($id);
+       $usuari = User::findOrFail($id);
 
-       return view ('gestio/clients/edit', compact('usuari'));
+       return view('gestio/clients/edit', compact('usuari'));
     }
 
     /**
@@ -112,27 +115,40 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
-      $usuari = User::findOrFail($id);
-      
-      $usuari->nom = $request->get('nom');
-      $usuari->cognom1 = $request->get('cognom1');
-      $usuari->cognom2 = $request->get('cognom2');
-      $usuari->tipus_document = $request->get('tipus_document');
-      $usuari->numero_document = $request->get('numero_document');
-      $usuari->data_naixement = $request->get('date');
-      $usuari->sexe = $request->get('sexe');
-      $usuari->telefon = $request->get('telefon');
-      $usuari->email = $request->get('email');
-      $usuari->adreca = $request->get('adreca');
-      $usuari->ciutat = $request->get('ciutat');
-      $usuari->provincia = $request->get('provincia');
-      $usuari->password = Hash::make($request->get('contrasenya'));
-      $usuari->codi_postal = $request->get('cp');
-      
-      $usuari->update();
-
-      return redirect('gestio/clients');
+        $request->validate([
+            'nom' => ['required', 'string', 'max:255'],
+            'cognom1' => ['required', 'string', 'max:255'],
+            'cognom2' => ['string', 'max:255','nullable'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'date' => ['required', 'date'],
+            'adreca' => ['required', 'string'],
+            'ciutat' => ['required', 'string'],
+            'provincia' => ['required', 'string'],
+            'cp' => ['required', 'string'],
+            'tipus_document' => ['required','in:DNI,NIE'],
+            'numero_document' => ['required'],
+            'sexe' => ['required','in:Home,Dona'],
+            'telefon' => ['required','numeric','min:9'],
+        ]);
+        
+        $usuari = User::findOrFail($id);
+        $usuari->nom = $request->get('nom');
+        $usuari->cognom1 = $request->get('cognom1');
+        $usuari->cognom2 = $request->get('cognom2');
+        $usuari->tipus_document = $request->get('tipus_document');
+        $usuari->numero_document = $request->get('numero_document');
+        $usuari->data_naixement = $request->get('date');
+        $usuari->sexe = $request->get('sexe');
+        $usuari->telefon = $request->get('telefon');
+        $usuari->email = $request->get('email');
+        $usuari->adreca = $request->get('adreca');
+        $usuari->ciutat = $request->get('ciutat');
+        $usuari->provincia = $request->get('provincia');
+        $usuari->codi_postal = $request->get('cp');
+        
+        $usuari->save();
+        
+        return redirect('/gestio/clients')->with('success', 'Client modificat correctament');
     }
     /**
      * Remove the specified resource from storage.
@@ -142,11 +158,12 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-      $usuaris=User::findOrFail($id);
+      $usuaris = User::findOrFail($id);
 
-      $usuaris->email_verified_at=null;
+      $usuaris->email_verified_at = null;
+
       $usuaris->save();
 
-      return redirect('gestio/clients');
+      return redirect('/gestio/clients')->with('success', 'Client desactivat correctament');
     }
 }

@@ -60,6 +60,8 @@
                 <td>{{$usuari->telefon}}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Accions">
+                        <a href="{{ route('clients.show', $usuari->id) }}"
+                            class="btn btn-outline-success">Mostrar</a>
                         <a href="{{route('clients.edit', $usuari->id)}}"
                             class="btn btn-outline-primary btn-sm">Modificar</a>
                         <form method="post" action="{{route('clients.destroy', $usuari->id)}}">
