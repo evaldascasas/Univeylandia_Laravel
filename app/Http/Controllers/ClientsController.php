@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use \App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Image;
+use PDF;
+use Carbon;
 
 class ClientsController extends Controller
 {
@@ -165,5 +168,17 @@ class ClientsController extends Controller
       $usuaris->save();
 
       return redirect('/gestio/clients')->with('success', 'Client desactivat correctament');
+    }
+
+    public function guardarClientPDF () {
+        $usuaris = User::whereNotNull('email_verified_at')
+       ->where('id_rol',1)
+       ->get();
+
+        $mytime = Carbon\Carbon::now();
+        $temps = $mytime->toDateString();
+
+        $pdf = PDF::loadView('/gestio/clients/pdfClient', compact('usuaris'))->setPaper('a3', 'landscape');
+        return $pdf->download('client'.$temps.'.pdf');
     }
 }

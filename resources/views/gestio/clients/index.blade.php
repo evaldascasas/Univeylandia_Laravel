@@ -8,16 +8,17 @@
 
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Llistar clients actius</h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary" value="Exportar">
-                <span data-feather="save"></span>
-                Exportar
-            </button>
+        <h1 class="h2">Clients </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <form action="{{action('ClientsController@guardarClientPDF')}}">
+                    <button class="btn btn-sm btn-outline-secondary">
+                        <span data-feather="save"></span>
+                        Exportar</button>
+            </div>
+            </form>
         </div>
     </div>
-</div>
 
 <div class="table-responsive">
     <table
