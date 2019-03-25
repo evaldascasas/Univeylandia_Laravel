@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
             TipusPrioritatTableSeeder::class,
             TipusAtraccionsTableSeeder::class,
             AtraccionsSeeder::class,
-            TipusProducteSeeder::class,
             ZonesSeeder::class,
             Empleat_zona::class,
             CategoriesSeeder::class,

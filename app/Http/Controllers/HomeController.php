@@ -326,13 +326,6 @@ class HomeController extends Controller
                 'producte' => $element_cistella->producte,
                 'quantitat' => $element_cistella->quantitat
         ]);
-        DB::transaction(function () use ($linia_cistella) {
-
-            $dades->save();
-
-            $usuari->save();
-
-        });
 
         $linia_venta ->save();
         $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
