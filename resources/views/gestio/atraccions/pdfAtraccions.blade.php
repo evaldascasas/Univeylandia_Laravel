@@ -10,10 +10,15 @@
     </title>
   </head>
   <body>
-      <div> 
-        <img margin="0px" src="/home/alumne/Documentos/univeylandia_sprint3_final/public/img/univeylandia_logo_petit.png">
+ 
+      <div class="col-md-6 mb-6">
+          <img margin="0px" src="http://i68.tinypic.com/mrwxa1.png">
       </div>
-    <br>
+      <div class="col-md-6 mb-6">
+        <h1 class="h2">Llistat d'atraccions </h1>
+      </div>
+      <br>
+
     <div class="row">
       <div class="col-12">
         <table class="table table-striped">

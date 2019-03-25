@@ -50,11 +50,11 @@
             <div class="row">
               <div class="col-4">
                 <label for="example-date-input" class="col-6 col-form-label">Data inici</label>
-                <input class="form-control" name="data_inici_assignacio_empleat" type="date">
+                <input class="form-control" name="data_inici_assignacio_empleat" type="date"  min="<?php echo date('Y-m-d')?>">
               </div>
               <div class="col-4">
                 <label for="example-date-input" class="col-6 col-form-label">Data fi</label>
-                <input class="form-control" name="data_fi_assignacio_empleat"  type="date">
+                <input class="form-control" name="data_fi_assignacio_empleat"  type="date"  min="<?php echo date('Y-m-d')?>">
               </div>
               <div class="col-4">
   <br>

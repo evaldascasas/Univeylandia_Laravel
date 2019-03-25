@@ -217,7 +217,7 @@ class AtraccionsController extends Controller
         $temps = $mytime->toDateString();
 
         $atraccions = Atraccion::all();
-        $pdf = PDF::loadView('/gestio/atraccions/pdf', compact('atraccionetes'));
+        $pdf = PDF::loadView('/gestio/atraccions/pdfAtraccions', compact('atraccionetes'));
         return $pdf->download('atraccions'.$temps.'.pdf');
 
     }
@@ -252,8 +252,8 @@ class AtraccionsController extends Controller
     {
 
       request()->validate([
-          'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:data_fi_assignacio_empleat',
-          'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:data_inici_assignacio_empleat',
+       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:data_fi_assignacio_empleat',
+       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:data_inici_assignacio_empleat',
       ]);
 
         $data_inici_global = $request->get('data_inici_assignacio_empleat');
@@ -396,6 +396,34 @@ class AtraccionsController extends Controller
 
             return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio suprimida correctament');
         }
+
+
+        public function guardarAssignacionsPDF()
+    {
+        $assignacio = DB::table('assign_emp_atraccions')
+            ->leftJoin('users','users.id', 'assign_emp_atraccions.id_empleat')
+            ->leftJoin('atraccions','atraccions.id', 'assign_emp_atraccions.id_atraccio')
+            ->leftJoin('rols','rols.id', 'users.id')
+                  ->get([
+                    'assign_emp_atraccions.id as id',
+                    'assign_emp_atraccions.id_empleat as id_empleat',
+                    'assign_emp_atraccions.id_atraccio as id_atraccio',
+                    'assign_emp_atraccions.data_inici as data_inici',
+                    'assign_emp_atraccions.data_fi as data_fi',
+                    'users.nom as nom_empleat',
+                    'users.cognom1 as cognom_empleat',
+                    'atraccions.nom_atraccio as nom_atraccio',
+                    'rols.nom_rol as nom_rol'
+                ]);
+
+        $mytime = Carbon\Carbon::now();
+        $temps = $mytime->toDateString();
+
+        $atraccions = AssignacioAtraccion::all();
+        $pdf = PDF::loadView('/gestio/atraccions/pdfAssignacions', compact('assignacio'));
+        return $pdf->download('assignacioAtraccions'.$temps.'.pdf');
+
+    }
 
 
 
