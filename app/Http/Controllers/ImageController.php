@@ -4,123 +4,119 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Http\File;
+use Carbon\Carbon;
+
 use \App\Atraccion;
 use \App\Imatge;
 use \App\Tipus_producte;
-use Input;
 use \App\Producte;
+
 use Image;
+use File;
 
 //use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
+	/**
+     * Display a listing of the images.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	public function index()
+	{
+		$images = Imatge::all();
 
-	public function create()
+		return view('gestio/imatges/index', compact('images'));
+	}
+
+	/**
+     * Show the form for uploading a new set of images.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	public function save()
 	{
 		$atraccions = Atraccion::all();
 
-		return view ('gestio/imatges/create', compact('atraccions'));
+		return view('gestio/imatges/upload', compact('atraccions'));
 	}
 
-   	public function save(Request $request)
+	/**
+	 * 
+	 */
+   	public function upload(Request $request)
    	{
+		$og_dir = 'storage/clients/originals/';
+		$water_dir = 'storage/clients/';
+		$thumb_dir = 'storage/clients/thumb/';
+		$watermark = '../public/img/watermark.png';
+
+		$preu = Tipus_producte::where('id',8)
+		->first();
+
+		$today = Carbon::today()->format('Y-m-d');
+
 		$request->validate([
-			'description' => 'required',
-			'image_path' => 'required|image',
-			'atraccio' => 'required|numeric'
+			'image' => 'required',
+			'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+			'attraction' => 'required|numeric'
 		]);
 
-		//agafant les dades
-		$image_path = $request->file('image_path');
-		$description = $request->input('description');
-		$id_atraccio = $request->get('atraccio');
+		// comprovar si hi ha imatges en el form
+		if($request->hasFile('image')) {
 
-		    $file = $request->file('image_path');
+            // crear directori si no existeix
+            if( ! File::exists($og_dir)) {
+                 File::makeDirectory($og_dir, 0777, true);
+            }
+            if ( ! File::exists($water_dir)) {
+                 File::makeDirectory($water_dir, 0777, true);
+			}
+			if ( ! File::exists($thumb_dir)) {
+				File::makeDirectory($thumb_dir, 0777, true);
+		   }
 
-		    $file_name = time() . $file->getClientOriginalName();
-		    $file_path = 'img';
-		    $img = Image::make($file->getRealPath())->resize(800, 600)
-		    ->save($file_path."/".$file_name);
+			$images = $request->file('image');
 
-		    //Marca D'aigua
-		    $nom = $image_path->getClientOriginalName();
-		    $tipus =  $image_path->getMimeType();
+			foreach($images as $image) {
+				$rnd = rand(11111111,99999999);
 
-	    //IF per a png
-	    if ($tipus == 'image/png') {
+				$og_image = Image::make($image);
 
-		    $im = imagecreatefrompng("../public/img/".$file_name);
-		    $marcaAigua = imagecreatefrompng("../public/img/logo.png");
-		    $margeDret = 10;
-		    $margeInf = 10;
-		    $sx = imagesx($marcaAigua);
-		    $sy = imagesy($marcaAigua);
+				$og_image->resize(null, 1080, function ($constraint) {
+					$constraint->aspectRatio();
+					// $constraint->upsize();
+				})->encode('png', 100);
 
-	        imagecopymerge($im, $marcaAigua ,400, 450, 0, 0, 410, 160, 30);
-	        //header('Content-Type: image/png');
-	        imagepng($im, "img/".$description."_marca.png");
-	        imagedestroy($im);
+				$og_image->save($og_dir.$rnd.$today.'.png');
 
-	    //IF per a jpeg
-	    }else if ($tipus == 'image/jpeg') {
+				$water_img = $og_image->insert($watermark,'center');
 
-	        $im = imagecreatefromjpeg("../public/img/".$file_name);
-	        $marcaAigua = imagecreatefrompng("../public/img/logo.png");
-	        $margeDret = 10;
-	        $margeInf = 10;
-	        $sx = imagesx($marcaAigua);
-	        $sy = imagesy($marcaAigua);
+				$water_img->save($water_dir.$rnd.$today.'.png');
 
-	        imagecopymerge($im, $marcaAigua ,400, 450, 0, 0, 410, 160, 30);
-	        imagepng($im, "img/".$description."_marca.png");
-	        imagedestroy($im);
+				$thumbnail = $water_img->resize(100, 100, function ($constraint) {
+					$constraint->aspectRatio();
+					$constraint->upsize();
+				})->encode('png', 65);
 
-			//IF per a gif
-	       }else if ($tipus == 'image/gif'){
-	       	$im = imagecreatefromgif("../public/img/".$file_name);
-	        $marcaAigua = imagecreatefromgif("../public/img/logo.png");
-	        $margeDret = 10;
-	        $margeInf = 10;
-	        $sx = imagesx($marcaAigua);
-	        $sy = imagesy($marcaAigua);
+				$thumbnail->save($thumb_dir.$rnd.$today.'.png');
 
-	        imagecopymerge($im, $marcaAigua ,400, 450, 0, 0, 410, 160, 30);
-	        //header('Content-Type: image/png');
-	        imagepng($im, "img/".$description."_marca.png");
-	        imagedestroy($im);
-	       }
+				$guardar_imatge = new Imatge([
+					'nom' => 8,
+					'mida' => '1080 pixels',
+					'foto_path' => $og_dir.$og_image->basename,
+					'foto_path_aigua' => $water_dir.$water_img->basename,
+					'thumbnail' => $thumb_dir.$thumbnail->basename,
+					'preu' => $preu->preu_base,
+					'id_atraccio' => $request->get('attraction'),
+				]);
 
-	    $imageAigua="img/".$description."_marca.png";
+				$guardar_imatge->save();
+			}
+			
+		}
 
-	    $preu=5;
-	    $mida= "800x600px";
-	    $estat=1;
-
-	    $imatge = new Imatge();
-	    $imatge->foto_path=$image_path;
-	    $imatge->foto_path_aigua=$imageAigua;
-	    $imatge->nom=8;
-	    $imatge->preu=$preu;
-	    $imatge->mida=$mida;
-	    $imatge->id_atraccio=$id_atraccio;
-	    $imatge->save();
-
-		$atributs_producte = Imatge::latest()
-		->take(1)
-		->get();
-
-	    $imatge_product = new Producte();
-	    $imatge_product->descripcio=$description;
-	    $imatge_product->atributs=$atributs_producte[0]->id;
-	    $imatge_product->estat=$estat;
-
-	    $imatge_product->save();
-
-		$atraccions = Atraccion::all();
-
-	   	return view('gestio/imatges/create',compact("atraccions"));
+	   	return redirect('gestio/imatges')->with('success','Imatges pujades correctament!');
 	}
 }

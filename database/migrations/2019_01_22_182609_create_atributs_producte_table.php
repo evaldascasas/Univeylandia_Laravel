@@ -20,8 +20,9 @@ class CreateAtributsProducteTable extends Migration
             $table->string('tickets_viatges')->nullable();
             $table->string('foto_path')->nullable();
             $table->string('foto_path_aigua')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->integer('preu');
-            $table->string('id_atraccio')->nullable();
+            $table->unsignedInteger('id_atraccio')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });

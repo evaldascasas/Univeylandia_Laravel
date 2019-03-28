@@ -15,9 +15,9 @@
 
   <div class="row">
   @foreach($atraccions as $atraccio)
-      <div class="col-sm-4" >
+      <div class="col-sm-4">
         <div class="card">
-           <img class="card-img-top" width="100px" src="{{url('/')}}/{{ $atraccio->foto_path_aigua}}" alt="Card image" style="width:100%" >
+           <img class="card-img-top img-responsive img-thumbnail" src="{{ asset($atraccio->thumbnail) }}" alt="Card image">
            <div class="card-body d-flex flex-column align-items-start">
              <a href="{{url("/comprarFotos/{$atraccio->id}")}}" type="button" class="btn btn-primary">Comprar</a>
            </div>

@@ -93,9 +93,9 @@
  
  Route::resource('/gestio/atraccions', 'AtraccionsController')->middleware(['auth','is_admin','verified']);
  
- Route::get('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload')->middleware(['auth','is_admin','verified']);
+//  Route::get('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload')->middleware(['auth','is_admin','verified']);
  
- Route::post('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload.post')->middleware(['auth','is_admin','verified']);
+//  Route::post('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload.post')->middleware(['auth','is_admin','verified']);
  
  Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
  
@@ -111,8 +111,9 @@
 
  
  /* Gestio imatges */
- Route::get("/gestio/imatges", "ImageController@create")->name('imatges.create')->middleware(['auth','is_admin','verified']);
- Route::post("/gestio/imatges/save", "ImageController@save")->name('imatges.save')->middleware(['auth','is_admin','verified']);
+ Route::get("/gestio/imatges", "ImageController@index")->name('imatges.index')->middleware(['auth','is_admin','verified']);
+ Route::get("/gestio/imatges/upload", "ImageController@save")->name('imatges.upload')->middleware(['auth','is_admin','verified']);
+ Route::post("/gestio/imatges/upload", "ImageController@upload")->middleware(['auth','is_admin','verified']);
  
  /* Entrades */
  Route::post('/entrades', array('as' => 'entrades','uses' => 'HomeController@parc_afegir_cistella'));
