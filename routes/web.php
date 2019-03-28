@@ -106,6 +106,9 @@
 
  Route::get('/view/gestioProductes/index', 'gestioProductes@guardarProductePDF')->middleware(['auth','is_admin','verified']);
 
+ Route::get('/view/clients/index', 'ClientsController@guardarClientPDF')->middleware(['auth','is_admin','verified']);
+
+
 
 
 
