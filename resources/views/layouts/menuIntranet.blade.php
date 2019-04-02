@@ -186,7 +186,7 @@
 
           <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('imatges*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('imatges*') ? 'true' : 'false' }}" href="#submenu10">
-              <span data-feather="alert-triangle"></span>
+              <span data-feather="image"></span>
               Imatges
               <span data-feather="chevron-right"></span>
             </a>
@@ -194,10 +194,10 @@
 
           <ul class="nav flex-column collapse {{ request()->routeIs('imatges*') ? 'show' : '' }}" id="submenu10" data-parent="#sidebar">
             <li class="nav-item">
-              <a class="nav-link nav-interior {{ request()->routeIs('imatges.upload') ? 'active' : '' }}" href="{{  route('imatges.upload')  }}"><span data-feather="user-plus"></span>Afegir Imatge</a>
+              <a class="nav-link nav-interior {{ request()->routeIs('imatges.upload') ? 'active' : '' }}" href="{{  route('imatges.upload')  }}"><span data-feather="image"></span>Afegir Imatge</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-interior {{ request()->routeIs('imatges.index') ? 'active' : '' }}" href="{{ route('imatges.index') }}"><span data-feather="file-text"></span>Veure Imatges</a>
+              <a class="nav-link nav-interior {{ request()->routeIs('imatges.index') ? 'active' : '' }}" href="{{ route('imatges.index') }}"><span data-feather="image"></span>Veure Imatges</a>
             </li>
           </ul>
 

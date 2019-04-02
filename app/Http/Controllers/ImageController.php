@@ -25,7 +25,17 @@ class ImageController extends Controller
      */
 	public function index()
 	{
-		$images = Imatge::all();
+		$images = Imatge::join('atraccions','id_atraccio','atraccions.id')
+		->get([
+			'atributs_producte.id as id',
+			'atributs_producte.foto_path as foto_path',
+			'atributs_producte.foto_path_aigua as foto_path_aigua',
+			'atributs_producte.thumbnail as thumbnail',
+			'atributs_producte.created_at as created_at',
+			'atraccions.nom_atraccio as nom_atraccio',
+		]);
+
+		//dd($images);
 
 		return view('gestio/imatges/index', compact('images'));
 	}
@@ -55,7 +65,7 @@ class ImageController extends Controller
 		$preu = Tipus_producte::where('id',8)
 		->first();
 
-		$today = Carbon::today()->format('Y-m-d');
+		//$today = Carbon::today()->format('Y-m-d');
 
 		$request->validate([
 			'image' => 'required',
@@ -80,34 +90,39 @@ class ImageController extends Controller
 			$images = $request->file('image');
 
 			foreach($images as $image) {
-				$rnd = rand(11111111,99999999);
 
 				$og_image = Image::make($image);
 
 				$og_image->resize(null, 1080, function ($constraint) {
 					$constraint->aspectRatio();
-					// $constraint->upsize();
+					$constraint->upsize();
 				})->encode('png', 100);
 
-				$og_image->save($og_dir.$rnd.$today.'.png');
+				$og_image_name = rand(11111111,99999999).time().'.png';
+
+				$og_image->save($og_dir.$og_image_name);
 
 				$water_img = $og_image->insert($watermark,'center');
 
-				$water_img->save($water_dir.$rnd.$today.'.png');
+				$water_img_name = rand(11111111,99999999).time().'.png';
 
-				$thumbnail = $water_img->resize(100, 100, function ($constraint) {
+				$water_img->save($water_dir.$water_img_name);
+
+				$thumbnail = $water_img->resize(null, 72, function ($constraint) {
 					$constraint->aspectRatio();
 					$constraint->upsize();
-				})->encode('png', 65);
+				})->encode('png', 75);
 
-				$thumbnail->save($thumb_dir.$rnd.$today.'.png');
+				$thumb_name = rand(11111111,99999999).time().'.png';
+
+				$thumbnail->save($thumb_dir.$thumb_name);
 
 				$guardar_imatge = new Imatge([
 					'nom' => 8,
 					'mida' => '1080 pixels',
-					'foto_path' => $og_dir.$og_image->basename,
-					'foto_path_aigua' => $water_dir.$water_img->basename,
-					'thumbnail' => $thumb_dir.$thumbnail->basename,
+					'foto_path' => $og_dir.$og_image_name,
+					'foto_path_aigua' => $water_dir.$water_img_name,
+					'thumbnail' => $thumb_dir.$thumb_name,
 					'preu' => $preu->preu_base,
 					'id_atraccio' => $request->get('attraction'),
 				]);

@@ -11,7 +11,8 @@
 </div>
 
 @if ($errors->any())
-<div class="alert alert-danger">
+<div class="alert alert-danger alert-important">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -25,7 +26,7 @@
     <div class="form-group">
         <div class="col-md-6 mb-3">
             <label for="image">Imatges</label>
-            <input type="file" class="form-control-file" name="image[]" multiple="true" required>
+            <input type="file" class="form-control-file" name="image[]" multiple="true" accept="image/*" required>
         </div>
         <div class="col-md-6 mb-3">
             <label for="attraction">Atracció a la que pertanyen les imatges</label>

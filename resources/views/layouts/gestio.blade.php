@@ -13,6 +13,9 @@
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
   <!-- Feather Icons -->
   <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 
@@ -46,15 +49,24 @@
 </head>
 <body>
     @include("layouts.navbarIntranet")
+
     @yield("navbarIntranet")
+
     @include("layouts.menuIntranet")
+
     @yield("menuIntranet")
+
     <main role="main" class="col-md-10 ml-sm-auto px-4 mb-3">
-    @yield("content")
+      @include('layouts.flash-message')
+      @yield("content")
     </main>
 
   <!-- Feather icons & Datatables -->
   <script src="{{ asset('js/scripts.js') }}"></script>
+  <script>
+      $('div.alert').not('.alert-important').delay(3000).slideUp(350);
+  </script>
+    
 
 </body>
 </html>
