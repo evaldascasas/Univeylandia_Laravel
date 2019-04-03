@@ -109,6 +109,15 @@
       </tbody>
     </table>
     </div>
+
+    <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST" id="payment-form"
+          action="{!! URL::to('paypal') !!}">
+    	  <div class="w3-container w3-teal w3-padding-16">Paywith Paypal</div>
+    	  {{ csrf_field() }}
+    	  <input class="w3-input w3-border" id="amount" type="text" name="amount"></p>
+    	  <button class="w3-btn w3-blue">Pay with PayPal</button>
+    	</form>
+      
 <div class="column col-5">
   <div class="card" style="width: 100%">
   <div class="card-body">
