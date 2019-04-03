@@ -132,6 +132,14 @@ class HomeController extends Controller
       return view('multimedia');
     }
 
+    public function equipdirectiu()
+    {
+      $rUrl = '/../../../storage/json/team.json';
+
+      $data = json_decode(file_get_contents($rUrl), true);
+      return view('equipdirectiu')->withData($data);
+    }
+
     public function incidencia()
     {
       $prioritats = PrioritatIncidencia::all();
