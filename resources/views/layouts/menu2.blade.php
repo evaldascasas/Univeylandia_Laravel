@@ -8,32 +8,32 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ request()->routeIs('home') || request()->routeIs('noticies') || request()->routeIs('promocions') ? 'active' : '' }}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Parc</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="{{ route('noticies') }}">Noticies</a></li>
-                    <li><a class="dropdown-item" href="{{ route('promocions') }}">Promocions</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('noticies') ? 'active' : '' }}" href="{{ route('noticies') }}">Noticies</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('promocions') ? 'active' : '' }}" href="{{ route('promocions') }}">Promocions</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('atraccions') }}">Atraccions</a>
+                <a class="nav-link {{ request()->routeIs('atraccions') ? 'active' : '' }}" href="{{ route('atraccions') }}">Atraccions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('votacions')}}">Top atraccions</a>
+                <a class="nav-link {{ request()->routeIs('votacions') ? 'active' : '' }}" href="{{ route('votacions')}}">Top atraccions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('entrades') }}">Compra entrades</a>
+                <a class="nav-link {{ request()->routeIs('entrades') ? 'active' : '' }}" href="{{ route('entrades') }}">Compra entrades</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ route('tenda') }}">Botiga</a>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('tenda*') ? 'active' : '' }}" href="{{ route('tenda') }}">Botiga</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ request()->routeIs('contacte') || request()->routeIs('faq') ? 'active' : '' }}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Ajuda</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                    <li><a class="dropdown-item" href="{{ route('contacte')}}">Contacte</a></li>
-                    <li><a class="dropdown-item" href="{{ route('faq')}}">Preguntes freqüents</a></li>
+                <ul class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink2">
+                    <li><a class="dropdown-item {{ request()->routeIs('contacte') ? 'active' : '' }}" href="{{ route('contacte')}}">Contacte</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('faq') ? 'active' : '' }}" href="{{ route('faq')}}">Preguntes freqüents</a></li>
                 </ul>
             </li>
         </ul>
