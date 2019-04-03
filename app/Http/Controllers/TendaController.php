@@ -79,28 +79,12 @@ class TendaController extends Controller
      */
     public function afegir_Foto($id)
     {
-        $Usuari=Auth::user();
-        $idUsuari=$Usuari->id;
-        $quantitat=1;
-        $estat=1;
         
         //Busco ID producte
         $atributs_producte = Atributs_producte::find($id);
-
-        //faig l'insert a linia productes
-        /*$linia_productes = new Venta_productes([
-            'id_usuari'=>$idUsuari,
-            'preu_total'=>$atributs_producte->preu,
-            'estat'=>$estat,
-            'producte'=>$atributs_producte->nom,
-            'quantitat'=>$quantitat
-        ]);
-            
-        $linia_productes->save();*/
         
         $producte = Producte::where('atributs',$atributs_producte->id)
-        ->get();
-
+        ->first();
 
         //Comprobo si existeix la cistella i si no existeix la creo i si existeix faig l'insert a cistelles
         if ( Cistella::where('id_usuari',Auth::id() )->count() > 0) {
@@ -111,8 +95,8 @@ class TendaController extends Controller
             //faig insert a linia cistella              
             $linia_cistella = new Linia_cistella([
                 'id_cistella' => $cistella->id,
-                'producte' => $producte[0]->id,
-                'quantitat' => $quantitat
+                'producte' => $producte->id,
+                'quantitat' => 1
             ]);
             
             $linia_cistella ->save();
@@ -130,17 +114,13 @@ class TendaController extends Controller
             //faig l'insert a linia cistella
             $linia_cistella = new Linia_cistella([
                 'id_cistella' => $cistella->id,
-                'producte' => $producte[0]->id,
-                'quantitat' => $quantitat
+                'producte' => $producte->id,
+                'quantitat' => 1
             ]);
   
             $linia_cistella ->save();
         }
-        
-        //consultes laravel
-        //select bo
-        /* SELECT nom,preu,foto_path_aigua from atributs_producte where foto_path_aigua is not null and id IN(select atributs from productes where id in (select producte from linia_cistelles));*/
-        
+                
         return redirect('/cistella')->with('success', 'Foto afegida a la cistella correctament');
     }
 

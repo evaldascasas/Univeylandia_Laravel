@@ -84,16 +84,16 @@ class EmpleatsController extends Controller
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
             'cognom1' => ['required', 'string', 'max:255'],
-            'cognom2' => ['string', 'max:255'],
+            'cognom2' => ['nullable','string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'data_naixement' => ['required', 'date'],
             'adreca' => ['required', 'string'],
             'ciutat' => ['required', 'string'],
             'provincia' => ['required', 'string'],
             'codi_postal' => ['required', 'string'],
-            'tipus_document' => ['required', 'string'],
+            'tipus_document' => ['required', 'in:DNI,NIE'],
             'numero_document' => ['required', 'string'],
-            'sexe' => ['required', 'string'],
+            'sexe' => ['required', 'in:Home,Dona'],
             'id_rol' => ['required', 'integer'],
             'codi_seg_social' => ['required', 'string', 'unique:dades_empleats'],
             'num_nomina' => ['required', 'string', 'unique:dades_empleats'],
@@ -142,6 +142,8 @@ class EmpleatsController extends Controller
             $dades->save();
 
             $usuari->save();
+
+            
 
         });
 

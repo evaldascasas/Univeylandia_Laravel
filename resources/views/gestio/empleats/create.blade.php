@@ -12,7 +12,8 @@
     </div>
 
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-danger alert-important">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <ul>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -27,47 +28,50 @@
         <div class="form-group row">
             <div class="col-md-3 mb-3">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control form-control-sm" name="nom">
+                <input type="text" class="form-control form-control-sm" name="nom" value="{{ old('nom') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="cognom1">1er Cognom</label>
-                <input type="text" class="form-control form-control-sm" name="cognom1">
+                <input type="text" class="form-control form-control-sm" name="cognom1" value="{{ old('cognom1') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="cognom2">2n Cognom</label>
-                <input type="text" class="form-control form-control-sm" name="cognom2">
+                <input type="text" class="form-control form-control-sm" name="cognom2" value="{{ old('cognom2') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="email">Email</label>
-                <input type="text" class="form-control form-control-sm" name="email">
+                <input type="text" class="form-control form-control-sm" name="email" value="{{ old('email') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="data_naixement">Data Naixement</label>
-                <input type="date" class="form-control form-control-sm" name="data_naixement">
+                <input type="date" class="form-control form-control-sm" name="data_naixement" value="{{ old('data_naixement') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="adreca">Adreça</label>
-                <input type="text" class="form-control form-control-sm" name="adreca">
+                <input type="text" class="form-control form-control-sm" name="adreca" value="{{ old('adreca') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="ciutat">Ciutat</label>
-                <input type="text" class="form-control form-control-sm" name="ciutat">
+                <input type="text" class="form-control form-control-sm" name="ciutat" value="{{ old('ciutat') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="provincia">Provincia</label>
-                <input type="text" class="form-control form-control-sm" name="provincia">
+                <input type="text" class="form-control form-control-sm" name="provincia" value="{{ old('provincia') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="codi_postal">Codi postal</label>
-                <input type="text" class="form-control form-control-sm" name="codi_postal">
+                <input type="text" class="form-control form-control-sm" name="codi_postal" value="{{ old('codi_postal') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="tipus_document">Tipus document</label>
-                <input type="text" class="form-control form-control-sm" name="tipus_document">
+                <select class="form-control form-control-sm" name="tipus_document" value="{{ old('tipus_document') }}">
+                    <option value="DNI">DNI</option>
+                    <option value="NIE">NIE</option>
+                </select>
             </div>
             <div class="col-md-3 mb-3">
                 <label for="numero_document">Número document</label>
-                <input type="text" class="form-control form-control-sm" name="numero_document">
+                <input type="text" class="form-control form-control-sm" name="numero_document" value="{{ old('numero_document') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="sexe">Sexe</label>
@@ -78,7 +82,7 @@
             </div>
             <div class="col-md-3 mb-3">
                 <label for="telefon">Telèfon</label>
-                <input type="text" class="form-control form-control-sm" name="telefon">
+                <input type="text" class="form-control form-control-sm" name="telefon" value="{{ old('telefon') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="id_rol">Rol</label>
@@ -94,31 +98,31 @@
         <div class="form-group row">
             <div class="col-md-3 mb-3">
                 <label for="codi_seg_social">Codi Seg. Social</label>
-                <input type="text" class="form-control form-control-sm" name="codi_seg_social">
+                <input type="text" class="form-control form-control-sm" name="codi_seg_social" value="{{ old('codi_seg_social') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="num_nomina">Número nòmina</label>
-                <input type="text" class="form-control form-control-sm" id="num_nomina" name="num_nomina">
+                <input type="text" class="form-control form-control-sm" id="num_nomina" name="num_nomina" value="{{ old('num_nomina') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="iban">IBAN</label>
-                <input type="text" class="form-control form-control-sm" id="IBAN" name="IBAN">
+                <input type="text" class="form-control form-control-sm" id="IBAN" name="IBAN" value="{{ old('IBAN') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="especialitat">Especialitat</label>
-                <input type="text" class="form-control form-control-sm" id="especialitat" name="especialitat">
+                <input type="text" class="form-control form-control-sm" id="especialitat" name="especialitat" value="{{ old('especialitat') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="carrec">Càrrec</label>
-                <input type="text" class="form-control form-control-sm" id="carrec" name="carrec">
+                <input type="text" class="form-control form-control-sm" id="carrec" name="carrec" value="{{ old('carrec') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="date_inici_contracte">Data inici contracte</label>
-                <input type="date" class="form-control form-control-sm" name="data_inici_contracte">
+                <input type="date" class="form-control form-control-sm" name="data_inici_contracte" value="{{ old('data_inici_contracte') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="date_fi_contracte">Data fi contracte</label>
-                <input type="date" class="form-control form-control-sm" name="data_fi_contracte">
+                <input type="date" class="form-control form-control-sm" name="data_fi_contracte" value="{{ old('data_fi_contracte') }}">
             </div>
             <div class="col-md-3 mb-3">
                 <label for="horari">Horari</label>

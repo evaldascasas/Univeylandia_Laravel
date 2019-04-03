@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use \App\Atraccion;
@@ -58,14 +59,12 @@ class ImageController extends Controller
    	public function upload(Request $request)
    	{
 		$og_dir = 'storage/clients/originals/';
-		$water_dir = 'storage/clients/';
+		$water_dir = 'storage/clients/water/';
 		$thumb_dir = 'storage/clients/thumb/';
-		$watermark = '../public/img/watermark.png';
+		$watermark = public_path('/img/watermark.png');
 
 		$preu = Tipus_producte::where('id',8)
 		->first();
-
-		//$today = Carbon::today()->format('Y-m-d');
 
 		$request->validate([
 			'image' => 'required',
@@ -117,7 +116,7 @@ class ImageController extends Controller
 
 				$thumbnail->save($thumb_dir.$thumb_name);
 
-				$guardar_imatge = new Imatge([
+				$atributs = new Imatge([
 					'nom' => 8,
 					'mida' => '1080 pixels',
 					'foto_path' => $og_dir.$og_image_name,
@@ -127,7 +126,23 @@ class ImageController extends Controller
 					'id_atraccio' => $request->get('attraction'),
 				]);
 
-				$guardar_imatge->save();
+				$atributs->save();
+
+				$producte = new Producte([
+					'atributs' => ($atributs->id),
+					'descripcio' => 'Foto',
+					'estat' => 1,
+				]);
+
+				$producte->save();
+
+				// DB::transaction(function () use($atributs, $producte) {
+				// 	$atributs->save();
+				// 	dump($atributs);
+				// 	$producte->save();
+				// 	dump($producte);
+				// });
+				
 			}
 			
 		}
