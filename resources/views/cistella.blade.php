@@ -140,6 +140,36 @@
             </div>
         </div>
     </div>
+
+    <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST" id="payment-form"
+          action="{!! URL::to('paypal') !!}">
+    	  <div class="w3-container w3-teal w3-padding-16">Paywith Paypal</div>
+    	  {{ csrf_field() }}
+    	  <input class="w3-input w3-border" id="amount" type="text" name="amount"></p>
+    	  <button class="w3-btn w3-blue">Pay with PayPal</button>
+    	</form>
+      
+<div class="column col-5">
+  <div class="card" style="width: 100%">
+  <div class="card-body">
+    <h5 class="card-title" style="font-weight: bold;">Dades Usuari</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><span style="font-weight: bold;">Nom:</span>&nbsp;&nbsp;&nbsp;{{$user->nom}}</li>
+    <li class="list-group-item"><span style="font-weight: bold;">Cognom:</span>&nbsp;&nbsp;&nbsp;{{$user->cognom1}}</</li>
+    <li class="list-group-item"><span style="font-weight: bold;">Cognom:</span>&nbsp;&nbsp;&nbsp;{{$user->cognom2}}</</li>
+    <li class="list-group-item"><span style="font-weight: bold;">Email:</span>&nbsp;&nbsp;&nbsp;{{$user->email}}</</li>
+    <li class="list-group-item"><span style="font-weight: bold;">Adreça:</span>&nbsp;&nbsp;&nbsp;{{$user->adreca}}</li>
+  </ul>
+  <div class="card-body">
+    @if ($compteTotal > 0)
+    <div class="row" style="margin-left: 150px">
+          <div style="font-weight: bold; margin-top: 5px; margin-left: 30px">TOTAL:</div>
+          <div style="font-weight: bold; align-items: center;margin-top: 5px; margin-left: 30px">{{$compteTotal}}€</div>
+          <a href="/compra" style="text-decoration: none;margin-left: 30px"><button type="button" class="btn btn-success" >Comprar</button> </a>
+    </div>
+    @endif
+  </div>
 </div>
 </div>
 

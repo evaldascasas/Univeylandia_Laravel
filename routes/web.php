@@ -133,3 +133,8 @@
  Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos');
  Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos');
  Route::get('/comprarFotos/{id}','TendaController@afegir_Foto');
+
+
+ /* PAYPAL */
+Route::post('paypal', 'PaymentController@payWithpaypal');
+Route::get('status', 'PaymentController@getPaymentStatus');
