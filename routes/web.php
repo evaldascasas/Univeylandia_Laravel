@@ -42,6 +42,12 @@
 
  Route::resource('gestio/incidencies', 'IncidenciesController')->middleware(['auth','is_admin','verified']);
 
+ Route::get('gestio/empleats/deactivated', 'EmpleatsController@trashed')->name('empleats.deactivated')->middleware(['auth','is_admin','verified']);
+
+ Route::patch('gestio/empleats/deactivated/{user}/reactivate', 'EmpleatsController@reactivate')->name('empleats.reactivate')->middleware(['auth','is_admin','verified']);
+ 
+ Route::delete('gestio/empleats/deactivated/{user}', 'EmpleatsController@annihilate')->name('empleats.annihilate')->middleware(['auth','is_admin','verified']);
+
  Route::resource('gestio/empleats', 'EmpleatsController')->middleware(['auth','is_admin','verified']);
 
  Route::resource('gestio/zones', 'ZonesController')->middleware(['auth','is_admin','verified']);

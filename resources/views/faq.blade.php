@@ -19,7 +19,7 @@
     <div class="card">
       <div class="card-header" id="headingOne">
         <p class="mb-0">
-          <a href="#" class="card-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <a href="#" class="card-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             Segons la meva alçada, en quines atraccions puc pujar?
           </a>
         </p>
@@ -37,7 +37,7 @@
     <div class="card">
       <div class="card-header" id="headingTwo">
         <p class="mb-0">
-          <a href="#" class="card-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <a href="#" class="card-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             En cas de necessitat, puc sortir del parc i després tornar a entrar?
           </a>
         </p>
@@ -54,7 +54,7 @@
     <div class="card">
       <div class="card-header" id="headingThree">
         <p class="mb-0">
-          <a href="#" class="card-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <a href="#" class="card-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
             On puc consultar el Calendari del parc?
           </a>
         </p>
@@ -69,7 +69,7 @@
     <div class="card">
       <div class="card-header" id="headingFour">
         <p class="mb-0">
-          <a href="#" class="card-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          <a href="#" class="card-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
             Si plou, ens tornen els diners i / o tanca el parc?
           </a>
         </p>
@@ -88,7 +88,7 @@
     <div class="card">
       <div class="card-header" id="headingFive">
         <p class="mb-0">
-          <a href="#" class="card-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          <a href="#" class="card-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
             Com és l'accés a les atraccions per a persones amb discapacitat?
           </a>
         </p>
