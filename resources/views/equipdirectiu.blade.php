@@ -12,10 +12,9 @@
 	<script>
 		$(document).ready(function() {
 			$.ajax({
-                $path = storage_path() . "/js/${team}.json";
                 cache: false,
 				type: "get",
-				url: "../../public/js/team.json",
+				url: "{{ asset('storage/team.json') }}",
 				beforeSend: function() {
 					$("#team").html("Loading...");
 				},
