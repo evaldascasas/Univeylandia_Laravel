@@ -11,7 +11,23 @@
   background: #F3F3F3;
 }
 </style>
+<div class="column col-7">
+            @if($numeroTickets > 0)
+                    @forelse($linia_cistella as $cistella)
+                    <p style="display:none"> {{$total = $total + ($cistella->preu* $cistella->quantitat)}} </p>
+                    @empty
+                    @endforelse
+            @endif
+            @if($numeroFotos > 0)
+                    @foreach($fotos as $cistellafoto)
+                        <p style="display:none">
+                            {{$total2 = $total2 + ($cistellafoto->preu * $cistellafoto->quantitat)}} </p>
+                    @endforeach
+                    @endif
+                        <p style="display:none"> {{$compteTotal = $total + $total2}} </p>
+</div>
 
+        <?php echo($compteTotal); ?>
 <div class="container jumbotron mt-3">
   <div class="row">
       <div class="col-sm-12">
@@ -57,6 +73,11 @@
       </div>
         <button class="btn btn-success" type="submit">Pagar i finalitzar</button>
         <a href="{{ URL::previous() }}" class="btn btn-secondary" value="Enrere">Enrere</a>
+      </form>
+      <form method="POST" id="payment-form" action="{!! URL::to('paypal') !!}">
+          {{ csrf_field() }}
+    	      <input  id="amount" type="text" name="amount" value="{{$compteTotal}}" hidden></p>
+            <button class="btn btn-primary" type="submit">Pagar amb Paypal i finalitzar</button>
       </form>
     </div>
 </div>

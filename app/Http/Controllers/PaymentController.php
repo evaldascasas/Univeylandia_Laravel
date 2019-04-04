@@ -1,12 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;                                                       //IMPORTS GENERALS
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use PayPal\Api\Amount;
+
+use Redirect;                                                                            // IMPORTS DE SESSIO, URL, USUARI, VIEW
+use Session;
+use URL;
+use Auth;
+use View;
+
+use PayPal\Api\Amount;                                                                    // IMPORTS PER A PAYPAL
 use PayPal\Api\Details;
 use PayPal\Api\Item;
-/** All Paypal Details class **/
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
@@ -15,9 +22,16 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
-use Redirect;
-use Session;
-use URL;
+
+use App\Http\Controllers\HomeController;                                                //IMPORTS PER LES VENTES
+use \App\Producte;
+use \App\Tipus_producte;
+use \App\Atributs_producte;
+use \App\Cistella;
+use \App\Linia_cistella;
+use \App\Venta_productes;
+use \App\Linia_ventes;
+
 class PaymentController extends Controller
 {
     private $_api_context;
@@ -71,11 +85,11 @@ class PaymentController extends Controller
             $payment->create($this->_api_context);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
-                \Session::put('error', 'Connection timeout');
-                return Redirect::to('/cistella');
+                \Session::put('error', 'Conexio fora de temps');
+                return Redirect::to('/compra');
             } else {
-                \Session::put('error', 'Some error occur, sorry for inconvenient');
-                return Redirect::to('/cistella');
+                \Session::put('error', 'Error desconegut, sentim les molesties');
+                return Redirect::to('/compra');
             }
         }
         foreach ($payment->getLinks() as $link) {
@@ -90,8 +104,8 @@ class PaymentController extends Controller
             /** redirect to paypal **/
             return Redirect::away($redirect_url);
         }
-        \Session::put('error', 'Unknown error occurred');
-        return Redirect::to('/cistella');
+        \Session::put('error', 'Error desconegut');
+        return Redirect::to('/compra');
     }
     public function getPaymentStatus()
     {
@@ -100,8 +114,8 @@ class PaymentController extends Controller
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-            \Session::put('error', 'Payment failed');
-            return Redirect::to('/cistella');
+            \Session::put('error', 'Error amb el pagament');
+            return Redirect::to('/compra');
         }
         $payment = Payment::get($payment_id, $this->_api_context);
         $execution = new PaymentExecution();
@@ -109,10 +123,13 @@ class PaymentController extends Controller
         /**Execute the payment **/
         $result = $payment->execute($execution, $this->_api_context);
         if ($result->getState() == 'approved') {
-            \Session::put('success', 'Payment success');
+
+            $prova = (new HomeController)->compra_finalitzada();
+            
+            \Session::put('success', 'Compra realitzada correctament');
             return Redirect::to('/cistella');
         }
-        \Session::put('error', 'Payment failed');
-        return Redirect::to('/cistella');
+        \Session::put('error', 'Error amb el pagament');
+        return Redirect::to('/compra');
     }
 }
