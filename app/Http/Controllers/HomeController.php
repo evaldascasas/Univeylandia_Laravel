@@ -132,6 +132,12 @@ class HomeController extends Controller
       return view('multimedia');
     }
 
+    public function equipdirectiu()
+    {
+
+      return view('equipdirectiu');
+    }
+
     public function incidencia()
     {
       $prioritats = PrioritatIncidencia::all();
@@ -288,14 +294,8 @@ class HomeController extends Controller
       return redirect('/cistella')->with('success', 'Ticket afegit a la cistella correctament');
     }
 
-    public function compra(){
-
-      return view("/compra");
-
-    }
-
     public function compra_finalitzada(){
-
+      
       $elements_cistella = DB::table('linia_cistelles')
           ->join('cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
           ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
@@ -303,7 +303,7 @@ class HomeController extends Controller
           ->select('cistelles.id_usuari as id_usuari', 'cistelles.id as id_cistella_orig', 'linia_cistelles.id as id_linia', 'linia_cistelles.id_cistella as id_cistella_linia', 'linia_cistelles.producte as producte', 'linia_cistelles.quantitat as quantitat', 'atributs_producte.preu as preu')
           ->where('cistelles.id_usuari', '=', Auth::id())
           ->get();
-      //dd($elements_cistella);
+
       $preu_total = 0;
 
       foreach ($elements_cistella as $element_cistella) {
@@ -391,6 +391,45 @@ class HomeController extends Controller
       //$atributs_producte->delete();
 
       return redirect('/cistella')->with('success', 'Producte eliminat correctament');
+    }
+
+    public function compra(){
+      $linia_cistella = Cistella::join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
+      ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
+      ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
+      ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
+      ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat')
+      ->where('cistelles.id_usuari', '=', Auth::id())
+      ->where('atributs_producte.foto_path_aigua','=', null)
+      ->orderBy('nom', 'ASC')
+      ->paginate(100);
+
+      $numeroTickets = $linia_cistella->count();
+
+    $total = 0;
+    $total2=0;
+    $compteTotal=0;
+
+    $fotos = DB::table('cistelles')
+
+      ->join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
+      ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
+      ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
+      ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
+      ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu','atributs_producte.foto_path_aigua as fotoaigua', 'linia_cistelles.quantitat as quantitat')
+      ->where('cistelles.id_usuari', '=', Auth::id())
+      ->where('atributs_producte.foto_path_aigua','!=', null)
+      ->orderBy('nom', 'ASC')
+      ->paginate(100);
+
+    $numeroFotos = $fotos->count();
+
+    $user = Auth::user();
+
+    $usuari = User::where('id', '=', Auth::id());
+
+      return view('/compra', compact('linia_cistella', 'total','fotos','total2','compteTotal','numeroFotos','numeroTickets','user'));
+
     }
 
     public function llistarAtraccionsPublic($id)
