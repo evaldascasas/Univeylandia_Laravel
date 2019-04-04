@@ -134,14 +134,9 @@ class ImageController extends Controller
 					'estat' => 1,
 				]);
 
-				$producte->save();
-
-				// DB::transaction(function () use($atributs, $producte) {
-				// 	$atributs->save();
-				// 	dump($atributs);
-				// 	$producte->save();
-				// 	dump($producte);
-				// });
+				if($atributs->save()) {
+					$producte->save();
+				}
 				
 			}
 			

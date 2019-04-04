@@ -25,6 +25,9 @@
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('empleats.index') ? 'active' : '' }}" href="{{route('empleats.index')}}"><span data-feather="file-text"></span>Gestionar Empleats</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('empleats.deactivated') ? 'active' : '' }}" href="{{route('empleats.deactivated')}}"><span data-feather="file-text"></span>Empleats desactivats</a>
+            </li>
             </li>
           </ul>
 

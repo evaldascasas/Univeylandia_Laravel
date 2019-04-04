@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 use \App\Horari;
@@ -23,6 +23,7 @@ class EmpleatsController extends Controller
     {
         $users = User::whereNotNull('email_verified_at')
         ->where('id_rol','!=',1)
+        ->where('id_rol','!=',2)
         ->whereNotNull('id_dades_empleat')
         ->leftJoin('dades_empleats','dades_empleats.id', 'users.id_dades_empleat')
         ->leftJoin('rols','rols.id', 'users.id_rol')
@@ -79,7 +80,7 @@ class EmpleatsController extends Controller
      */
     public function store(Request $request)
     {
-        //$randomPass = str_random(8);
+        $randomPass = str_random(8);
 
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
@@ -121,7 +122,7 @@ class EmpleatsController extends Controller
             'cognom1' => $request->get('cognom1'),
             'cognom2' => $request->get('cognom2'),
             'email' => $request->get('email'),
-            //'password' => Hash::make($randomPass),
+            // 'password' => Hash::make($randomPass),
             'password' => Hash::make('secret'),
             'data_naixement' => $request->get('data_naixement'),
             'adreca' => $request->get('adreca'),
@@ -136,18 +137,22 @@ class EmpleatsController extends Controller
             'id_dades_empleat' => ($dades->id),
         ]);
 
-        //use a transaction so IF the query fails it does not insert nor update the resources
-        DB::transaction(function () use ($dades, $usuari) {
-
-            $dades->save();
-
+        if($dades->save()) {
             $usuari->save();
+            return redirect('/gestio/empleats')->with('success', 'Empleat creat correctament');
+        } else {
+            return redirect()->back()->with('error', 'Error.');
+        }
 
-            
+        // //use a transaction so IF the query fails it does not insert nor update the resources
+        // DB::transaction(function () use ($dades, $usuari) {
 
-        });
+        //     $dades->save();
 
-        return redirect('/gestio/empleats')->with('success', 'Empleat creat correctament');
+        //     $usuari->save();
+
+        // });
+        
     }
 
     /**
@@ -267,10 +272,101 @@ class EmpleatsController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->email_verified_at = null;
 
-        $user->save();
+        $dades_id = $user->id_dades_empleat;
+
+        $dades = DadesEmpleat::findOrFail($dades_id);
+
+        $user->delete();
+
+        $dades->delete();
 
         return redirect('/gestio/empleats')->with('success', 'Empleat desactivat correctament');
     }
+
+    /**
+     * List all the trashed employees.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        $users = User::onlyTrashed()
+        ->whereNotNull('email_verified_at')
+        ->where('id_rol','!=',1)
+        ->whereNotNull('id_dades_empleat')
+        ->join('dades_empleats','dades_empleats.id', 'users.id_dades_empleat')
+        ->join('rols','rols.id', 'users.id_rol')
+        ->join('horaris', 'horaris.id', 'dades_empleats.id_horari')
+        ->get([
+            'users.id',
+            'users.nom',
+            'users.cognom1',
+            'users.cognom2',
+            'users.email',
+            'users.password',
+            'users.data_naixement',
+            'users.adreca',
+            'users.ciutat',
+            'users.provincia',
+            'users.codi_postal',
+            'users.tipus_document',
+            'users.numero_document',
+            'users.sexe',
+            'users.telefon',
+            'users.cognom2',
+            'users.id_rol',
+            'dades_empleats.codi_seg_social as codi_seg_social',
+            'dades_empleats.num_nomina as num_nomina',
+            'dades_empleats.IBAN as IBAN',
+            'dades_empleats.especialitat as especialitat',
+            'dades_empleats.carrec as carrec',
+            'dades_empleats.data_inici_contracte as data_inici_contracte',
+            'dades_empleats.data_fi_contracte as data_fi_contracte',
+            'horaris.torn as id_horari',
+        ]);
+    
+        return view('gestio/empleats/deactivated', compact('users'));
+    }
+
+    /**
+     * Reactivate a trashed employee.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function reactivate()
+    {
+
+    }
+    
+
+    /**
+     * Permanently delete an employee.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function annihilate($id)
+    {
+        $user = User::onlyTrashed()
+        ->where('id',$id)
+        ->where('id_rol','!=',1)
+        ->first();
+
+        $dades_id = $user->id_dades_empleat;
+
+        $dades = DadesEmpleat::onlyTrashed()
+        ->where('id',$dades_id)
+        ->first();
+
+        // dump($user);
+        // dump($dades);
+        $user->forceDelete();
+        $dades->forceDelete();
+
+        return redirect('/gestio/empleats/deactivated')->with('success', 'Empleat eliminat de la base de dades correctament.');
+    }
+
+
 }
