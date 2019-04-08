@@ -143,6 +143,7 @@ class AtraccionsController extends Controller
     public function update(Request $request, $id)
     {
 
+
         $atraccio = Atraccion::findOrFail($id);
 
         $atraccio->nom_atraccio = $request->get('nom');
@@ -250,27 +251,15 @@ class AtraccionsController extends Controller
 
     public function crearAssignacioManteniment(Request $request, $id)
     {
-
-      request()->validate([
-       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:data_fi_assignacio_empleat',
-       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:data_inici_assignacio_empleat',
-      ]);
-
-        $data_inici_global = $request->get('data_inici_assignacio_empleat');
-        $data_fi_global = $request->get('data_fi_assignacio_empleat');
-
         $atraccio = Atraccion::find($id);
 
         $user = AssignacioAtraccion::assignarMantenimentFiltro();
 
+        $data_inici_global = $request->data_inici_assignacio_empleat;
+        $data_fi_global = $request->data_fi_assignacio_empleat;
+        
 
-        return view('/gestio/atraccions/crearassignaciomanteniment', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
-    }
-
-    public function crearAssignacioMantenimentDate(Request $request, $id)
-    {
-        $atraccio = Atraccion::find($id);
-        return view('/gestio/atraccions/crearassignaciomantenimentdate', compact('atraccio'));
+        return view('/gestio/atraccions/crearassignaciomanteniment', compact('user', 'atraccio', 'data_inici_global'));
     }
 
     public function crearAssignacioNeteja(Request $request, $id)

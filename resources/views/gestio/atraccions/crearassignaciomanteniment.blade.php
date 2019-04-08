@@ -39,6 +39,23 @@
         <div class="col-12 table-responsive">
             <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
                 id="results_table" role="grid">
+                  <form id="form">
+                    <div class="row">
+                      <div class="col-5">
+                        <label for="example-date-input" class="col-6 col-form-label">Data inici</label>
+                        <input class="form-control" name="data_inici_assignacio_empleat" type="date"  min="<?php echo date('Y-m-d')?>">
+                      </div>
+                      <div class="col-5">
+                        <label for="example-date-input" class="col-6 col-form-label">Data fi</label>
+                        <input class="form-control" name="data_fi_assignacio_empleat"  type="date"  min="<?php echo date('Y-m-d')?>">
+                      </div>
+                      <div class="col-2">
+                      <br><br>
+                        <button id="submit" type="submit" class="btn btn-primary submit-contacte">Consultar</button>
+                      </div>
+                    </div>
+                  </form>
+              <br>
       <thead class="thead-light">
                         <tr>
                         <th>Nom</th>
@@ -49,8 +66,6 @@
                         </tr>
                     </thead>
                 <tbody>
-
-
 
                   @foreach($user as $users)
 
@@ -89,12 +104,12 @@
           </div>
           <div class="col-6">
             <span>Data Inici:</span>
-            <input type="date" class="form-control" name="data_inici_modal" readonly value="{{ $data_inici_global}}"/>
+            <input type="date" class="form-control" name="data_inici_modal" readonly value=""/>
           </div>
 
           <div class="col-6">
             <span>Data Fi:</span>
-            <input type="date" class="form-control" name="data_fi_modal" readonly value="{{ $data_fi_global}}"/>
+            <input type="date" class="form-control" name="data_fi_modal" readonly value=""/>
           </div>
           <br>
       </div>
@@ -107,11 +122,41 @@
   </div>
 </div>
 
-                    @endforeach
-                    </tbody>
-                </table>
-
-            </div>
+      @endforeach
+    </tbody>
+  </table>
+      <script>
+      $(document).ready(function(){
+        jQuery('#submit').click(function(e){
+          e.preventDefault();
+          $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+        $.ajax({
+            url: window.location.pathname,
+            type: "post",
+            data: {
+              data_inici_assignacio_empleat: jQuery('#data_inici_assignacio_empleat').val(),
+              data_fi_assignacio_empleat: jQuery('#data_fi_assignacio_empleat').val(),
+            },
+            error: function(xhr, status, error) {
+        alert("Error: " + xhr.status + " - " + error);
+      },
+            success: function(result) {
+                $("#submit").html("Enviat Correctament");
+              $("#submit").attr("disabled", true);
+              $("#submit").removeClass("btn btn-primary");
+              $("#submit").addClass("btn btn-success");
+              $("#form")[0].reset();
+                console.log(result);
+            }});
+        });
+      });
+      </script>
+      
+</div>
         
 
 @endsection

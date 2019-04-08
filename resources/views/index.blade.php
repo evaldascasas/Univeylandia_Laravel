@@ -94,11 +94,52 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <iframe title="Localitzacio del parc"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.4047935586386!2d0.5816534201918497!3d40.70910459358563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a0fe735557799b%3A0x3fade49ba3687306!2sInstitut+Montsi%C3%A0+i+CFA+Sebasti%C3%A0+Juan+Arb%C3%B3!5e0!3m2!1sca!2ses!4v1553034764770" width="100%" height="200px" frameborder="0" style="border:0" allowfullscreen></iframe>
+    
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>  
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc4rbBZW_EiNrWWjzcgb2NnFAeBD66cSs&callback=myMap"></script>    
+        <script>
+               $(document).ready(function(){
+                  var marker;
+                  var geocoder = new google.maps.Geocoder();
+                  var myLatlng = new google.maps.LatLng(40.7160476, 0.5648026);
+                  var mapOptions = {zoom: 7, center: myLatlng, mapTypeId: google.maps.MapTypeId.ROADMAP}
+                  var map = new google.maps.Map($("#map").get(0), mapOptions);
+                
+                  $("#links a").click(function() {
+                    var address = $(this).text();
+                    if (marker) { marker.setMap(null); }
+                    geocoder.geocode({address: address}, function(results) {
+                        marker = new google.maps.Marker({
+                          position: results[0].geometry.location,	map: map
+                        });
+                        var overlay = new google.maps.OverlayView();
+                      overlay.draw = function() {
+                        var point = overlay.getProjection().fromLatLngToContainerPixel(
+                          marker.getPosition());
+                        $("#message").html(
+                          "This is: " + address + 
+                          "<br><a href=http://maps.google.com/maps?daddr=" + 
+                          address + ">Get directions to here</a>");
+                        $("#message").show().css({
+                          top: point.y + 10,
+                          left:point.x 
+                        });
+                      };
+                      overlay.setMap(map);
+                    });
+                  });
+                });
+          </script>
+
+          <div id="map" style="width:100%;height:400px;"></div>
+          <ul id="links">
+                    <li><a href="#">Univeylandia</a></li>
+                    <li><a href="#">IES Montsia</a></li>
+          </ul>
+          <div id="message" style="display:none;"></div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 <!-- FI LOCALITZA -->
 </div>
 
