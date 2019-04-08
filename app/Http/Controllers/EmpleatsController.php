@@ -335,9 +335,21 @@ class EmpleatsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function reactivate()
+    public function reactivate($id)
     {
+        $user = User::onlyTrashed()
+        ->where('id',$id)
+        ->first();
 
+        $dades_id = $user->id_dades_empleat;
+
+        $dades = DadesEmpleat::onlyTrashed()
+        ->where('id',$dades_id)
+        ->restore();
+
+        $user->restore();
+
+        return redirect('/gestio/empleats')->with('success', 'Empleat restaurat correctament.');
     }
     
 

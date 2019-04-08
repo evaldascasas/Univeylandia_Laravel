@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>Map with valid credentials</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+      
+      <script type="text/javascript">
+      var map = null;
+
+      function getMap()
+      {
+          map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'Ao75dk-rsXEPmE4Hl7VX_4JkwgKhy6wLZHUfRY5WwD0b9elkTEaxE3xCKtbWmVSR'});
+      }   
+      </script>
+
+   </head>
+   <body onload="getMap();">
+      <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+   </body>
+</html>

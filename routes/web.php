@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/maps', function(){
+    return View::make("maps");
+ });
  Route::get('/',"HomeController@index")->name('home');
  Route::get('/contacte','HomeController@contacte')->name('contacte');
  Route::get('/noticies',"HomeController@noticies")->name('noticies');
@@ -121,9 +124,9 @@
 
  
  /* Gestio imatges */
- Route::get("/gestio/imatges", "ImageController@index")->name('imatges.index')->middleware(['auth','is_admin','verified']);
- Route::get("/gestio/imatges/upload", "ImageController@save")->name('imatges.upload')->middleware(['auth','is_admin','verified']);
- Route::post("/gestio/imatges/upload", "ImageController@upload")->middleware(['auth','is_admin','verified']);
+ Route::get("/gestio/productes/imatges", "ImageController@index")->name('imatges.index')->middleware(['auth','is_admin','verified']);
+ Route::get("/gestio/productes/imatges/upload", "ImageController@save")->name('imatges.upload')->middleware(['auth','is_admin','verified']);
+ Route::post("/gestio/productes/imatges/upload", "ImageController@upload")->middleware(['auth','is_admin','verified']);
  
  /* Entrades */
  Route::post('/entrades', array('as' => 'entrades','uses' => 'HomeController@parc_afegir_cistella'));
