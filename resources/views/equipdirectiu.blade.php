@@ -28,10 +28,18 @@
 					$.each(data, function() {
 			    		$.each(this, function(key, value) {
 							$("#team").append(
-								"Nom :  " + value.name + "<br>" + 
-								"Carrec : " + value.title + "<br>" + 
-								"Valors : " + value.bio + "<br><br>"
-							);
+								"<div class='row'> " + 
+									"<div class='col-sm-9''> " +
+										"<br><br>" + 
+										"<dt> Nom : " + value.name + "</dt><br>" +
+										"<dt>Carrec : </dt>" + value.title + "<br>" +
+										"<dt>Valors : </dt> " + value.bio + "<br><br>" +  
+									"</div> " +
+									"<div class='col-sm-3''> " +
+									 value.img + "<br><br><br>" +
+									"</div> " +
+								"</div> "
+ 							);
 						});
 					});
 				}
@@ -43,10 +51,12 @@
 <body>
     <header></header>
     <main>
-        <div class="container">
+        <div class="container" class="container jumbotron mt-3" >
             <div class="row">
+			<br><br>
                 <div class="col-sm-12"><h1 class="display-3">Equip directiu d'Univeylandia</h1></div>
             </div>
+			<br> <br>
             
             <div id="team"></div>
     </main>

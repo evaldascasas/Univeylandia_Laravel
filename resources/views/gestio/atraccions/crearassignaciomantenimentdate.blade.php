@@ -51,6 +51,8 @@
                 <input class="form-control" name="data_fi_assignacio_empleat"  type="date"  min="<?php echo date('Y-m-d')?>">
               </div>
               <div class="col-4">
+              </div>
+            </div>
   <br>
   <br>
          <button type="submit" class="btn">Enviar</button>
