@@ -28,6 +28,8 @@
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('empleats.deactivated') ? 'active' : '' }}" href="{{route('empleats.deactivated')}}"><span data-feather="file-text"></span>Empleats desactivats</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('empleats.admins') ? 'active' : '' }}" href="{{route('empleats.admins')}}"><span data-feather="file-text"></span>Administradors</a>
             </li>
           </ul>
 

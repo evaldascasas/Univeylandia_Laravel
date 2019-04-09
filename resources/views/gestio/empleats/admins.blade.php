@@ -13,7 +13,7 @@
 </style>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">{{ __('Administrar empleats') }}</h1>
+    <h1 class="h2">{{ __('Administradors') }}</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-secondary" value="Exportar">
@@ -30,14 +30,14 @@
         id="results_table" role="grid">
         <thead class="thead-light">
             <tr>
-                <th>Nom</th>
-                <th>Cognom1</th>
-                <th>Cognom2</th>
-                <th>Num Document</th>
-                <th>Codi Seg Social</th>
-                <th>Especialitat</th>
-                <th>Càrrec</th>
-                <th>Horari</th>
+                <th>{{ __('Nom') }}</th>
+                <th>{{ __('Cognom1') }}</th>
+                <th>{{ __('Cognom2') }}</th>
+                <th>{{ __('Num Document') }}</th>
+                <th>{{ __('Codi SS') }}</th>
+                <th>{{ __('Especialitat') }}</th>
+                <th>{{ __('Càrrec') }}</th>
+                <th>{{ __('Horari') }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -58,8 +58,7 @@
                             href="{{ route('empleats.show', $user->id) }}">{{ __('Mostrar') }}</a>
                         <a class="btn btn-outline-primary btn-sm"
                             href="{{ route('empleats.edit', $user->id) }}">{{ __('Modificar') }}</a>
-
-                        <form action="{{ route('empleats.destroy', $user->id)}}" method="post">
+                        <form action="{{ route('empleats.annihilate', $user->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button id="confirm_delete" class="btn btn-outline-danger btn-sm" type="submit"

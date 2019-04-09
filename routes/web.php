@@ -52,6 +52,8 @@ Route::get('/maps', function(){
  
  Route::delete('gestio/empleats/deactivated/{user}', 'EmpleatsController@annihilate')->name('empleats.annihilate')->middleware(['auth','is_admin','verified']);
 
+ Route::get('gestio/empleats/admins', 'EmpleatsController@admins')->name('empleats.admins')->middleware(['auth','is_admin','verified']);
+
  Route::resource('gestio/empleats', 'EmpleatsController')->middleware(['auth','is_admin','verified']);
 
  Route::resource('gestio/zones', 'ZonesController')->middleware(['auth','is_admin','verified']);

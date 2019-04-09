@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -22,7 +24,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'nom', 
         'cognom1', 
         'cognom2', 
-        'email', 
+        'email',
+        'email_verified_at',
         'password', 
         'data_naixement', 
         'adreca', 
@@ -45,5 +48,26 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // /**
+    //  * Send the email verification notification.
+    //  *
+    //  * @return void
+    //  */
+    // public function sendEmailVerificationNotification()
+    // {
+    //     $this->notify(new VerifyEmail);
+    // }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
+    }
 
 }
