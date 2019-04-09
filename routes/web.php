@@ -21,7 +21,8 @@ Route::get('/maps', function(){
  Route::get('/atraccions/{id}',"HomeController@llistarAtraccionsPublic")->name('atraccions_generades');
  Route::get('/entrades',"HomeController@entrades")->name('entrades');
  Route::get('/gestio',"HomeController@gestio")->name('gestio')->middleware(['auth','is_admin','verified']);
- Route::get('/perfil',"HomeController@perfil")->name('perfil')->middleware(['auth','verified']);
+ Route::get('/perfil',"PerfilController@index")->name('perfil')->middleware(['auth','verified']);
+ Route::get('/perfil/download/{id}','PerfilController@imgDownload')->middleware(['auth','verified']);
  Route::get('/incidencia',"HomeController@incidencia")->name('incidencia')->middleware(['auth','verified']);
  //Route::get('/mes', "HomeController@mes")->name('mes');
  //Route::get('/pizzeria',"HomeController@pizzeria")->name('pizzeria');
