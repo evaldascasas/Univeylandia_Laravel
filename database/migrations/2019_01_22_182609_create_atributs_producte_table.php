@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateAtributsProducteTable extends Migration
 {
     /**
@@ -23,11 +21,11 @@ class CreateAtributsProducteTable extends Migration
             $table->string('thumbnail')->nullable();
             $table->integer('preu');
             $table->unsignedInteger('id_atraccio')->nullable();
+            $table->timestamp('data_entrada')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
-
     /**
      * Reverse the migrations.
      *
