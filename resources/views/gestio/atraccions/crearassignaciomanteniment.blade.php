@@ -5,7 +5,14 @@
 @section("menuIntranet")
 @endsection
 @section("content")
-
+    <head> 
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTables.editor.css">
+    <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.tableTools.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.editor.js"></script>
+    </head>
     <style>
       .uper {
         margin-top: 40px;
@@ -32,14 +39,6 @@
           </div>
 
 
-
-
-
-          <div class="col-12">
-        <div class="col-12 table-responsive">
-            <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
-                id="results_table" role="grid">
-                  <form id="form">
                     <div class="row">
                       <div class="col-5">
                         <label for="example-date-input" class="col-6 col-form-label">Data inici</label>
@@ -51,111 +50,100 @@
                       </div>
                       <div class="col-2">
                       <br><br>
-                        <button id="submit" type="submit" class="btn btn-primary submit-contacte">Consultar</button>
+                        <input id="submit" value="Consultar" type="button" class="btn btn-primary submit-contacte"></button>
                       </div>
                     </div>
-                  </form>
+
+      <div class="col-12">
+        <div class="col-12 table-responsive">
+            <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed" id="results_table" role="grid">
               <br>
-      <thead class="thead-light">
-                        <tr>
+                    <thead class="thead-light">
+                      <tr>
                         <th>Nom</th>
                         <th>Cognom1</th>
                         <th>Cognom2</th>
                         <th>Num Document</th>
                         <th>Accions</th>
-                        </tr>
+                      </tr>
                     </thead>
-                <tbody>
+                <tbody></tbody>
+            </table>
+        </div>
+       </div>
+                 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --> <!-- jQuery CDN -->
+<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>                
+                 
+<script type='text/javascript'>
+     $(document).ready(function(){
 
-                  @foreach($user as $users)
+       // Fetch all records
+       $('#but_fetchall').click(function(){
+	      fetchRecords(0);
+       });
 
-                    <tr>
-                        <td>{{ $users->nom }}</td>
-                        <td>{{ $users->cognom1 }}</td>
-                        <td>{{ $users->cognom2 }}</td>
-                        <td>{{ $users->numero_document }}</td>
-                        <td><a class="btn btn-success btn-sm" href="#" data-toggle="modal" data-target="#ModalEmpleat{{$users->id}}">Assignar</a></td>
-                    </tr>
+       // Buscar per dates
+       $('#submit').click(function(){
+          var data_inici = $('#data_inici_assignacio_empleat').val();
+          var data_fi = $('#data_fi_assignacio_empleat').val();
 
-                    <!-- Modal -->
-<div class="modal fade" id="ModalEmpleat{{$users->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Assignar Empleat</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="{{ route('atraccions.guardarAssignacio', $atraccio->id) }}" >
-      @csrf
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-6">
-            <span>Atraccio:</span>
-            <input type="text" class="form-control" name="id_atraccio" value="{{ $atraccio->id }}" hidden/>
-            <input type="text" class="form-control" name="nom_atraccio" value="{{ $atraccio->nom_atraccio }}" disabled />
-          </div>
-          <div class="col-6">
-            <span>Empleat:</span>
-            <input type="text" class="form-control" name="id_empleat" value="{{ $users->id }}" hidden />
-            <input type="text" class="form-control" name="nom_empleat" readonly value="{{ $users->nom}}"/>
+	      
+	      fetchRecords(data_inici, data_fi);
+       });
 
-          </div>
-          <div class="col-6">
-            <span>Data Inici:</span>
-            <input type="date" class="form-control" name="data_inici_modal" readonly value=""/>
-          </div>
+     });  
+     
+  function fetchRecords(data_inici, data_fi){
+    $.ajax({
+      url: '/gestio/atraccions/crearassignaciomanteniment/+id';
+      type: 'get',
+      dataType: 'json',
+      succes: function(response){
 
-          <div class="col-6">
-            <span>Data Fi:</span>
-            <input type="date" class="form-control" name="data_fi_modal" readonly value=""/>
-          </div>
-          <br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Finalitzar assignament</button>
-      </div>
-      </form>
-      </div>
-  </div>
-</div>
+        var len=0;
+        $('#results_table tbody').empty();
+        if(response['data'] !=null){
+          len = response['data'].length;
+        }
 
-      @endforeach
-    </tbody>
-  </table>
-      <script>
-      $(document).ready(function(){
-        jQuery('#submit').click(function(e){
-          e.preventDefault();
-          $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        if(len >0){
+          for (var i=0; i<len; i++){
+            var nom = response['data'][i].nom;
+            var cognom1 = response['data'][i].cognom1;
+            var cognom2 = response['data'][i].cognom2;
+            var num_document = response ['data'][i].num_document;
+
+            var tr_str = "<tr>" + 
+            "      <td align='center'>" + nom + "</td>" +
+                   "<td align='center'>" + username + "</td>" +
+                   "<td align='center'>" + name + "</td>" +
+                   "<td align='center'>" + email + "</td>" +
+               "</tr>";
+
+               $("#results_table tbody").append(tr_str);
           }
-      });
-        $.ajax({
-            url: window.location.pathname,
-            type: "post",
-            data: {
-              data_inici_assignacio_empleat: jQuery('#data_inici_assignacio_empleat').val(),
-              data_fi_assignacio_empleat: jQuery('#data_fi_assignacio_empleat').val(),
-            },
-            error: function(xhr, status, error) {
-        alert("Error: " + xhr.status + " - " + error);
-      },
-            success: function(result) {
-                $("#submit").html("Enviat Correctament");
-              $("#submit").attr("disabled", true);
-              $("#submit").removeClass("btn btn-primary");
-              $("#submit").addClass("btn btn-success");
-              $("#form")[0].reset();
-                console.log(result);
-            }});
-        });
-      });
-      </script>
-      
+        }else if(response['data'] !=null){
+          var tr_str = "<tr>" + 
+            "<td align='center'>" + response['data'].nom + "</td>" +
+            "<td align='center'>" + response['data'].cognom1 + "</td>" +
+            "<td align='center'>" + response['data'].cognom2 + "</td>" +
+            "<td align='center'>" + response['data'].num_document + "</td>" + 
+            "</tr>";
+
+            $("#result_table tbody").append(tr_str);
+        }else{
+          var tr_str = "<tr>" +
+            "<td> align='center' colspans='4'> No record found.</td>" +
+            "</tr>";
+
+            $("#result_table tbody").append(tr_str);
+        }
+      }
+    });
+  }
+  </script>
+                           
 </div>
         
 
