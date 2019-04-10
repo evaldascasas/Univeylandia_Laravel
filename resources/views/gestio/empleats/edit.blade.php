@@ -10,6 +10,17 @@
         <h1 class="h2">Modificar empleat: {{ $user->nom }} {{ $user->cognom1 }} {{ $user->congom2 }}</h1>
     </div>
 
+    @if ($errors->any())
+    <div class="alert alert-danger alert-important">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <form method="post" action="{{ route('empleats.update', $user->id) }}">
         @method('PATCH')
         @csrf
@@ -122,7 +133,7 @@
             </div>
             <div class="col-md-3 mb-3">
                 <label for="id_horari">Horari</label>
-                <select class="form-control form-control-sm" name="id_rol">
+                <select class="form-control form-control-sm" name="id_horari">
                     @foreach($horaris as $horari)
                     @if($dades->id_horari == $horari->id)
                     <option selected value="{{ $dades->id_horari }}">{{ $horari->torn }}</option>

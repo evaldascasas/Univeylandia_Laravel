@@ -142,6 +142,6 @@ class ImageController extends Controller
 			
 		}
 
-	   	return redirect('gestio/imatges')->with('success','Imatges pujades correctament!');
+	   	return redirect('gestio/productes/imatges')->with('success','Imatges pujades correctament!');
 	}
 }

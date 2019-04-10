@@ -42,6 +42,25 @@ $(document).on('click','#confirm_delete', function(e) {
     });
 });
 
+$(document).on('click','#confirm_reactivation', function(e) {
+    e.preventDefault();
+    var form = $(this).parents('form');
+    Swal.fire({
+        title: 'Estàs segur?',
+        text: "Aquesta acció reactivarà l'usuari desactivat!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.value) {
+            form.submit();
+        }
+    });
+});
+
 feather.replace({style: "width:1em"});
 
 CKEDITOR.replace('descripcio_atraccio');

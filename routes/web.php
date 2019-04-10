@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/maps', function(){
+    return View::make("maps");
+ });
  Route::get('/',"HomeController@index")->name('home');
  Route::get('/contacte','HomeController@contacte')->name('contacte');
  Route::get('/noticies',"HomeController@noticies")->name('noticies');
@@ -18,7 +21,8 @@
  Route::get('/atraccions/{id}',"HomeController@llistarAtraccionsPublic")->name('atraccions_generades');
  Route::get('/entrades',"HomeController@entrades")->name('entrades');
  Route::get('/gestio',"HomeController@gestio")->name('gestio')->middleware(['auth','is_admin','verified']);
- Route::get('/perfil',"HomeController@perfil")->name('perfil')->middleware(['auth','verified']);
+ Route::get('/perfil',"PerfilController@index")->name('perfil')->middleware(['auth','verified']);
+ Route::get('/perfil/download/{id}','PerfilController@imgDownload')->middleware(['auth','verified']);
  Route::get('/incidencia',"HomeController@incidencia")->name('incidencia')->middleware(['auth','verified']);
  //Route::get('/mes', "HomeController@mes")->name('mes');
  //Route::get('/pizzeria',"HomeController@pizzeria")->name('pizzeria');
@@ -49,6 +53,8 @@
  Route::patch('gestio/empleats/deactivated/{user}/reactivate', 'EmpleatsController@reactivate')->name('empleats.reactivate')->middleware(['auth','is_admin','verified']);
  
  Route::delete('gestio/empleats/deactivated/{user}', 'EmpleatsController@annihilate')->name('empleats.annihilate')->middleware(['auth','is_admin','verified']);
+
+ Route::get('gestio/empleats/admins', 'EmpleatsController@admins')->name('empleats.admins')->middleware(['auth','is_admin','verified']);
 
  Route::resource('gestio/empleats', 'EmpleatsController')->middleware(['auth','is_admin','verified']);
 
@@ -99,7 +105,13 @@
 //  Route::get('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload')->middleware(['auth','is_admin','verified']);
  
 //  Route::post('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload.post')->middleware(['auth','is_admin','verified']);
+
+ Route::get('gestio/clients/deactivated', 'ClientsController@trashed')->name('clients.deactivated')->middleware(['auth','is_admin','verified']);
+
+ Route::patch('gestio/clients/deactivated/{user}/reactivate', 'ClientsController@reactivate')->name('clients.reactivate')->middleware(['auth','is_admin','verified']);
  
+ Route::delete('gestio/clients/deactivated/{user}', 'ClientsController@annihilate')->name('clients.annihilate')->middleware(['auth','is_admin','verified']);
+
  Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
  
  /* Guardar PDF */
@@ -117,9 +129,9 @@
 
  
  /* Gestio imatges */
- Route::get("/gestio/imatges", "ImageController@index")->name('imatges.index')->middleware(['auth','is_admin','verified']);
- Route::get("/gestio/imatges/upload", "ImageController@save")->name('imatges.upload')->middleware(['auth','is_admin','verified']);
- Route::post("/gestio/imatges/upload", "ImageController@upload")->middleware(['auth','is_admin','verified']);
+ Route::get("/gestio/productes/imatges", "ImageController@index")->name('imatges.index')->middleware(['auth','is_admin','verified']);
+ Route::get("/gestio/productes/imatges/upload", "ImageController@save")->name('imatges.upload')->middleware(['auth','is_admin','verified']);
+ Route::post("/gestio/productes/imatges/upload", "ImageController@upload")->middleware(['auth','is_admin','verified']);
  
  /* Entrades */
  Route::post('/entrades', array('as' => 'entrades','uses' => 'HomeController@parc_afegir_cistella'));

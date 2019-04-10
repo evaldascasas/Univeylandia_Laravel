@@ -28,6 +28,8 @@
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('empleats.deactivated') ? 'active' : '' }}" href="{{route('empleats.deactivated')}}"><span data-feather="file-text"></span>Empleats desactivats</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('empleats.admins') ? 'active' : '' }}" href="{{route('empleats.admins')}}"><span data-feather="file-text"></span>Administradors</a>
             </li>
           </ul>
 
@@ -45,6 +47,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('clients.index') ? 'active' : '' }}" href="{{route('clients.index')}}"><span data-feather="file-text"></span>Gestionar Clients</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('clients.deactivated') ? 'active' : '' }}" href="{{route('clients.deactivated')}}"><span data-feather="file-text"></span>Clients desactivats</a>
             </li>
           </ul>
 
@@ -156,12 +161,18 @@
             </a>
           </li>
 
-          <ul class="nav flex-column collapse {{ request()->routeIs('productes*') ? 'show' : '' }}" id="submenu8" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('productes*') || request()->routeIs('imatges*') ? 'show' : '' }}" id="submenu8" data-parent="#sidebar">
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('productes.create') ? 'active' : '' }}" href="{{  route('productes.create')  }}"><span data-feather="plus-square"></span>Crear Producte</a>
             </li>
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('productes.index') ? 'active' : '' }}" href="{{ route('productes.index') }}"><span data-feather="file-text"></span>Gestionar Productes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('imatges.upload') ? 'active' : '' }}" href="{{  route('imatges.upload')  }}"><span data-feather="image"></span>Afegir Imatges</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('imatges.index') ? 'active' : '' }}" href="{{ route('imatges.index') }}"><span data-feather="image"></span>Veure Imatges</a>
             </li>
           </ul>
 
@@ -187,7 +198,7 @@
           </ul>
 
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('imatges*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('imatges*') ? 'true' : 'false' }}" href="#submenu10">
               <span data-feather="image"></span>
               Imatges
@@ -202,7 +213,7 @@
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('imatges.index') ? 'active' : '' }}" href="{{ route('imatges.index') }}"><span data-feather="image"></span>Veure Imatges</a>
             </li>
-          </ul>
+          </ul> --}}
 
           <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('AssignEmpZona*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('AssignEmpZona*') ? 'true' : 'false' }}" href="#submenu11">
