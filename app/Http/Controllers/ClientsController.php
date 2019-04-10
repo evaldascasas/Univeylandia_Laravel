@@ -192,6 +192,45 @@ class ClientsController extends Controller
         return view('gestio/clients/deactivated', compact('users'));
     }
 
+    /**
+     * Reactivate a trashed employee.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function reactivate($id)
+    {
+        $user = User::onlyTrashed()
+        ->where('id',$id)
+        ->first();
+
+        $user->restore();
+
+        return redirect('/gestio/clients')->with('success', 'Client restaurat correctament.');
+    }
+
+    /**
+     * Permanently delete a client.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function annihilate($id)
+    {
+        $user = User::onlyTrashed()
+        ->where('id',$id)
+        ->first();
+
+        $user->forceDelete();
+
+        return redirect('/gestio/clients/deactivated')->with('success', 'Client eliminat de la base de dades correctament.');
+    }
+
+    /**
+     * Generate a PDF with client data.
+     * 
+     * @return PDF
+     */
     public function guardarClientPDF () 
     {
         $usuaris = User::whereNotNull('email_verified_at')

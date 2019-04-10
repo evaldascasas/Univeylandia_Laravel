@@ -20,7 +20,7 @@
    </div>
    @endif
 
-   <form method="post" action="/gestio/clients/{{$usuari->id}}">
+   <form method="post" action="{{ route('clients.update', $usuari->id) }}">
     @csrf
     @METHOD('PATCH')
      <div class="form-row">
@@ -40,8 +40,13 @@
          <label for="tipus_document">{{ __('Tipus document') }}</label>
          <div class="input-group">
            <select class="form-control form-control-sm" name="tipus_document">
-             <option>DNI</option>
-             <option>NIE</option>
+             @if($usuari->tipus_document === 'DNI')
+             <option selected value="{{ $usuari->tipus_document }}">{{ $usuari->tipus_document }}</option>
+             <option value="NIE">NIE</option>
+             @else
+             <option value="DNI">DNI</option>
+             <option selected value="{{ $usuari->tipus_document }}">{{ $usuari->tipus_document }}</option>
+             @endif
            </select>
          </div>
        </div>
@@ -58,12 +63,12 @@
        <div class="col-md-3 mb-3">
          <label for="sexe">{{ __('Sexe') }}</label>
          <select class="form-control form-control-sm" name="sexe">
-          @if($user->sexe == 'Home')
-          <option selected value="{{ $user->sexe }}">{{ $user->sexe }}</option>
+          @if($usuari->sexe === 'Home')
+          <option selected value="{{ $usuari->sexe }}">{{ $usuari->sexe }}</option>
           <option value="Dona">Dona</option>
           @else
-          <option selected value="{{ $user->sexe }}">{{ $user->sexe }}</option>
           <option value="Home">Home</option>
+          <option selected value="{{ $usuari->sexe }}">{{ $usuari->sexe }}</option>
           @endif
          </select>
        </div>
@@ -98,7 +103,7 @@
      </div>
 
      <button class="btn btn-outline-primary" type="submit" value="Guardar">{{ __('Modificar') }}</button>
-     <a href="{{ URL::previous() }}" class="btn btn-outline-secondary">{{ __('Cancel·lar') }}</a>
+     <a href="{{ route('clients.index') }}" class="btn btn-outline-secondary">{{ __('Cancel·lar') }}</a>
    </form>
  
  @endsection
