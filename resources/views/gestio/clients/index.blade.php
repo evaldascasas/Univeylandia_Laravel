@@ -8,14 +8,15 @@
 
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Clients </h1>
+        <h1 class="h2">{{ __('Clients') }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <form action="{{action('ClientsController@guardarClientPDF')}}">
                     <button class="btn btn-sm btn-outline-secondary">
                         <span data-feather="save"></span>
-                        Exportar</button>
-            </div>
+                        {{ __('Exportar') }}
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -26,19 +27,19 @@
         id="results_table" role="grid">
         <thead class="thead-light">
             <tr>
-                <th>Nom</th>
-                <th>Primer Cognom</th>
-                <th>Segon Cognom</th>
-                <th>Email</th>
-                <th>Data Naixement</th>
-                <th>Adreça</th>
-                <th>Ciutat</th>
-                <th>Provincia</th>
-                <th>Codi Postal</th>
-                <th>Tipus Document</th>
-                <th>Numero Document</th>
-                <th>Sexe</th>
-                <th>Telèfon</th>
+                <th>{{ __('Nom') }}</th>
+                <th>{{ __('1r Cognom') }}</th>
+                <th>{{ __('2n Cognom') }}</th>
+                <th>{{ __('Email') }}</th>
+                <th>{{ __('Data naixement') }}</th>
+                <th>{{ __('Adreça') }}</th>
+                <th>{{ __('Ciutat') }}</th>
+                <th>{{ __('Provincia') }}</th>
+                <th>{{ __('CP') }}</th>
+                <th>{{ __('Tipus document') }}</th>
+                <th>{{ __('Número document') }}</th>
+                <th>{{ __('Sexe') }}</th>
+                <th>{{ __('Telèfon') }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -62,14 +63,14 @@
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Accions">
                         <a href="{{ route('clients.show', $usuari->id) }}"
-                            class="btn btn-outline-success">Mostrar</a>
+                            class="btn btn-outline-success">{{ __('Mostrar') }}</a>
                         <a href="{{route('clients.edit', $usuari->id)}}"
-                            class="btn btn-outline-primary btn-sm">Modificar</a>
+                            class="btn btn-outline-primary btn-sm">{{ __('Modificar') }}</a>
                         <form method="post" action="{{route('clients.destroy', $usuari->id)}}">
                             @csrf
                             @method('DELETE')
                             <button id="confirm_delete" class="btn btn-outline-danger btn-sm" type="submit"
-                                value="Eliminar">Eliminar</button>
+                                value="Desactivar">{{ __('Desactivar') }}</button>
                         </form>
                     </div>
                 </td>
