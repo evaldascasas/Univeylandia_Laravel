@@ -249,18 +249,54 @@ class AtraccionsController extends Controller
     }
 
 
+    public function assignaEmpleat(Request $request, $id) 
+    {
+        $data_inici_global = $request->data_inici_assignacio_empleat;
+        $data_fi_global = $request->data_fi_assignacio_empleat;
+
+        $user = AssignacioAtraccion::assignarMantenimentFiltro();
+
+        return response()->json($user);
+    }
+    
     public function crearAssignacioManteniment(Request $request, $id)
     {
         $atraccio = Atraccion::find($id);
 
-        $user = AssignacioAtraccion::assignarMantenimentFiltro();
+        $emp_manteniment = DB::table('users','assign_emp_atraccions')
+        ->where('id_rol',3)
+        ->whereNotNull('id_dades_empleat')
+        ->leftJoin('assign_emp_atraccions','assign_emp_atraccions.id_empleat','users.id')
+        ->get([
+        'users.id',
+        'users.nom',
+        'users.cognom1',
+        'users.cognom2',
+        'users.email',
+        'users.password',
+        'users.data_naixement',
+        'users.adreca',
+        'users.ciutat',
+        'users.provincia',
+        'users.codi_postal',
+        'users.tipus_document',
+        'users.numero_document',
+        'users.sexe',
+        'users.telefon',
+        'users.cognom2',
+        'users.id_rol',
+        'assign_emp_atraccions.id',
+        'assign_emp_atraccions.id_empleat',
+        'assign_emp_atraccions.id_atraccio',
+        'assign_emp_atraccions.data_inici',
+        'assign_emp_atraccions.data_fi'
 
-        $data_inici_global = $request->data_inici_assignacio_empleat;
-        $data_fi_global = $request->data_fi_assignacio_empleat;
-        
+        ]);
 
-        return view('/gestio/atraccions/crearassignaciomanteniment', compact('user', 'atraccio', 'data_inici_global'));
+
+        return view('/gestio/atraccions/crearassignaciomanteniment', compact('emp_manteniment', 'atraccio' ));
     }
+    
 
     public function crearAssignacioNeteja(Request $request, $id)
     {

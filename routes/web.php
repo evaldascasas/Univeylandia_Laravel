@@ -29,6 +29,7 @@
  //Route::get('/tendes/figures', array('as' => 'tenda_figures','uses' => 'HomeController@tenda_figures'));
  Route::get('/construccio','HomeController@construccio')->name('construccio');
  Route::get('/equipdirectiu', 'HomeController@equipdirectiu')->name('equipdirectiu');
+ Route::get('/visitadigital', 'HomeController@visitadigital')->name('visitadigital');
 
  /* RUTES GRUP 1 */
  Auth::routes(['verify' => true]);
@@ -74,12 +75,7 @@
  Route::patch('/tasques/{id}', 'IncidenciesController@conclude')->name('incidencies.conclude')->middleware(['auth','is_worker','verified']);
  
  /* RUTES GRUP 2 */
- Route::any('/gestio/atraccions/crearassignaciomantenimentdate/{id}','AtraccionsController@crearAssignacioMantenimentDate')->name('atraccions.crearassignaciomantenimentdate')->middleware(['auth','is_admin','verified']);
- 
- Route::any('/gestio/atraccions/crearassignacionetejadate/{id}','AtraccionsController@crearAssignacioNetejaDate')->name('atraccions.crearassignacionetejadate')->middleware(['auth','is_admin','verified']);
 
- Route::any('/gestio/atraccions/crearassignaciogeneraldate/{id}','AtraccionsController@crearAssignacioGeneralDate')->name('atraccions.crearassignaciogeneraldate')->middleware(['auth','is_admin','verified']);
- 
  Route::any('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment')->middleware(['auth','is_admin','verified']);
  
  Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);

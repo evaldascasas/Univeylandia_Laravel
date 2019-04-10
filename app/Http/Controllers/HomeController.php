@@ -138,6 +138,12 @@ class HomeController extends Controller
       return view('equipdirectiu');
     }
 
+    public function visitadigital()
+    {
+
+      return view('visitadigital');
+    }
+
     public function incidencia()
     {
       $prioritats = PrioritatIncidencia::all();

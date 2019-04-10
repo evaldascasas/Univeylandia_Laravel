@@ -94,7 +94,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-    
+
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>  
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc4rbBZW_EiNrWWjzcgb2NnFAeBD66cSs&callback=myMap"></script>    
         <script>
@@ -105,41 +105,26 @@
                   var mapOptions = {zoom: 7, center: myLatlng, mapTypeId: google.maps.MapTypeId.ROADMAP}
                   var map = new google.maps.Map($("#map").get(0), mapOptions);
                 
-                  $("#links a").click(function() {
-                    var address = $(this).text();
+                    var address = "Amposta";
                     if (marker) { marker.setMap(null); }
                     geocoder.geocode({address: address}, function(results) {
                         marker = new google.maps.Marker({
                           position: results[0].geometry.location,	map: map
                         });
-                        var overlay = new google.maps.OverlayView();
-                      overlay.draw = function() {
-                        var point = overlay.getProjection().fromLatLngToContainerPixel(
-                          marker.getPosition());
-                        $("#message").html(
-                          "This is: " + address + 
-                          "<br><a href=http://maps.google.com/maps?daddr=" + 
-                          address + ">Get directions to here</a>");
-                        $("#message").show().css({
-                          top: point.y + 10,
-                          left:point.x 
-                        });
-                      };
-                      overlay.setMap(map);
-                    });
-                  });
-                });
-          </script>
 
-          <div id="map" style="width:100%;height:400px;"></div>
-          <ul id="links">
-                    <li><a href="#">Univeylandia</a></li>
-                    <li><a href="#">IES Montsia</a></li>
-          </ul>
-          <div id="message" style="display:none;"></div>
-        </div>
-      </div>
+                    var infoWindow = new google.maps.InfoWindow({
+                      content: "This is: <h3>" + address + "<br><a href=http://maps.google.com/maps?daddr=" + 
+							        address + ">Com anar</a>"}
+                      );
+                      infoWindow.open(map, marker);
+                    });
+                });
+        </script>
+        <div id="map" style="width:100%;height:400px;"></div>
     </div>
+  </div>
+</div>
+
 <!-- FI LOCALITZA -->
 </div>
 
