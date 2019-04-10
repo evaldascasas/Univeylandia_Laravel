@@ -48,6 +48,9 @@
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('clients.index') ? 'active' : '' }}" href="{{route('clients.index')}}"><span data-feather="file-text"></span>Gestionar Clients</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('clients.deactivated') ? 'active' : '' }}" href="{{route('clients.deactivated')}}"><span data-feather="file-text"></span>Clients desactivats</a>
+            </li>
           </ul>
 
 

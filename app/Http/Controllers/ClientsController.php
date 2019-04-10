@@ -65,6 +65,7 @@ class ClientsController extends Controller
             'cognom1' => $request->get('cognom1'),
             'cognom2' => $request->get('cognom2'),
             'email' => $request->get('email'),
+            'email_verified_at' => Carbon\Carbon::now(),
             'password' => Hash::make($randomPass),
             'data_naixement' => $request->get('date'),
             'adreca' => $request->get('adreca'),
@@ -79,6 +80,10 @@ class ClientsController extends Controller
         ]);
         
         $usuari->save();
+
+        $token = app(\Illuminate\Auth\Passwords\PasswordBroker::class)->createToken($usuari);
+
+        $usuari->sendPasswordResetNotification($token);
         
         return redirect('/gestio/clients')->with('success', 'Client creat correctament');
     }
@@ -122,7 +127,7 @@ class ClientsController extends Controller
             'nom' => ['required', 'string', 'max:255'],
             'cognom1' => ['required', 'string', 'max:255'],
             'cognom2' => ['string', 'max:255','nullable'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'date' => ['required', 'date'],
             'adreca' => ['required', 'string'],
             'ciutat' => ['required', 'string'],
@@ -143,7 +148,11 @@ class ClientsController extends Controller
         $usuari->data_naixement = $request->get('date');
         $usuari->sexe = $request->get('sexe');
         $usuari->telefon = $request->get('telefon');
-        $usuari->email = $request->get('email');
+
+        if($usuari->email != $request->get('email')) {
+            $usuari->email = $request->get('email');
+        }
+        
         $usuari->adreca = $request->get('adreca');
         $usuari->ciutat = $request->get('ciutat');
         $usuari->provincia = $request->get('provincia');
@@ -161,24 +170,39 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-      $usuaris = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-      $usuaris->email_verified_at = null;
-
-      $usuaris->save();
-
-      return redirect('/gestio/clients')->with('success', 'Client desactivat correctament');
+        $user->delete();
+        
+        return redirect('/gestio/clients')->with('success', 'Client desactivat correctament');
     }
 
-    public function guardarClientPDF () {
+    /**
+     * List all the trashed clients.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        $users = User::onlyTrashed()
+        ->whereNotNull('email_verified_at')
+        ->where('id_rol',1)
+        ->get();
+    
+        return view('gestio/clients/deactivated', compact('users'));
+    }
+
+    public function guardarClientPDF () 
+    {
         $usuaris = User::whereNotNull('email_verified_at')
-       ->where('id_rol',1)
-       ->get();
+        ->where('id_rol',1)
+        ->get();
 
         $mytime = Carbon\Carbon::now();
         $temps = $mytime->toDateString();
 
         $pdf = PDF::loadView('/gestio/clients/pdfClient', compact('usuaris'))->setPaper('a3', 'landscape');
+
         return $pdf->download('client'.$temps.'.pdf');
     }
 }

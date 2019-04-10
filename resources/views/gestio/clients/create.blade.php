@@ -62,7 +62,7 @@
          </select>
        </div>
        <div class="col-md-3 mb-3">
-         <label for="tlf">Telèfon de contacte (opcional)</label>
+         <label for="tlf">Telèfon de contacte</label>
          <input type="text" class="form-control form-control-sm {{ $errors->has('telefon') ? ' is-invalid' : '' }}" placeholder="555 555 555" name="telefon" value="{{ old('telefon') }}">
        </div>
      </div>
