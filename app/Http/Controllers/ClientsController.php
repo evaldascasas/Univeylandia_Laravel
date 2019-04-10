@@ -219,7 +219,6 @@ class ClientsController extends Controller
     {
         $user = User::onlyTrashed()
         ->where('id',$id)
-        ->where('id_rol','!=',1)
         ->first();
 
         $user->forceDelete();
