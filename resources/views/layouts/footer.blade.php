@@ -4,6 +4,7 @@
         <div class="col-sm-2">
             <h6 class="text-uppercase">Univeylandia</h6>
             <ul class="list-inline">
+            <li><a href="{{ route('visitadigital') }}">Visita Virtual</a></li>
                 <li><a href="{{ route('equipdirectiu') }}">Sobre nosaltres</a></li>
                 <li><a href="{{ route('construccio') }}">Treballa amb nosaltres</a></li>
                 <li><a href="{{ route('construccio') }}">Partners</a></li>
