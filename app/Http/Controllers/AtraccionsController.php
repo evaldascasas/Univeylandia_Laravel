@@ -249,39 +249,46 @@ class AtraccionsController extends Controller
     }
 
 
-    public function assignaEmpleat() 
+    public function assignaEmpleat(Request $request) 
     {
-        $emp_manteniment = User::where('id_rol',3)
-        ->whereNotNull('id_dades_empleat')
-        ->leftJoin('assign_emp_atraccions','assign_emp_atraccions.id_empleat','users.id')
-        ->get([
-        'users.id as id',
-        'users.nom as nom',
-        'users.cognom1 as cognom1',
-        'users.cognom2 as cognom2' ,
-        'users.email',
-        'users.password',
-        'users.data_naixement',
-        'users.adreca',
-        'users.ciutat',
-        'users.provincia',
-        'users.codi_postal',
-        'users.tipus_document',
-        'users.numero_document as numero_document',
-        'users.sexe',
-        'users.telefon',
-        'users.id_rol',
-        'assign_emp_atraccions.id as assign_id',
-        'assign_emp_atraccions.id_empleat',
-        'assign_emp_atraccions.id_atraccio',
-        'assign_emp_atraccions.data_inici',
-        'assign_emp_atraccions.data_fi'
+        $request->validate([
+            'data_inici' => ['required','date','before:data_fi'],
+            'data_fi' => ['required','date','after:data_inici']
         ]);
+
+        $emp_manteniment = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'),$request->get('data_inici'),3);
+
+        dump($emp_manteniment);
+
+        // $emp_manteniment = User::where('id_rol',3)
+        // ->whereNotNull('id_dades_empleat')
+        // ->leftJoin('assign_emp_atraccions','assign_emp_atraccions.id_empleat','users.id')
+        // ->get([
+        //     'users.id as id',
+        //     'users.nom as nom',
+        //     'users.cognom1 as cognom1',
+        //     'users.cognom2 as cognom2' ,
+        //     'users.email',
+        //     'users.data_naixement',
+        //     'users.adreca',
+        //     'users.ciutat',
+        //     'users.provincia',
+        //     'users.codi_postal',
+        //     'users.tipus_document',
+        //     'users.numero_document as numero_document',
+        //     'users.sexe',
+        //     'users.telefon',
+        //     'users.id_rol',
+        //     'assign_emp_atraccions.id as assign_id',
+        //     'assign_emp_atraccions.id_empleat',
+        //     'assign_emp_atraccions.id_atraccio',
+        //     'assign_emp_atraccions.data_inici',
+        //     'assign_emp_atraccions.data_fi'
+        // ]);
 
         //$emp_manteniment->toJson(); DEBUG
 
         return response()->json(array('emp_manteniment' => $emp_manteniment), 200);
-
     }
     
     public function crearAssignacioManteniment(Request $request, $id)

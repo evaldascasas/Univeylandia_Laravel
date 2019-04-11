@@ -83,7 +83,7 @@ Route::get('/maps', function(){
  /* RUTES GRUP 2 */
  Route::get('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment')->middleware(['auth','is_admin','verified']);
 
- Route::get('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaempleat');
+ Route::post('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaempleat');
 
  Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);
  
