@@ -7,7 +7,7 @@
 @section("content")
 <head>
     <meta charset="UTF-8">
-    <title>Univeylandia - Visita Digital</title>
+    <title>Univeylandia - Visita </title>
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script> 
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc4rbBZW_EiNrWWjzcgb2NnFAeBD66cSs&callback=initMap"></script>
 </head>
@@ -16,7 +16,7 @@
     <div class="container" class="container jumbotron mt-3" >
     	<div class="row">
             <div class="col-sm-12">
-				<h1 class="display-4">Visita digital al parc d'Univeylandia</h1>
+				<h1 class="display-4">Visita virtual al parc d'Univeylandia</h1>
 			</div>
         </div>
 		<br>

@@ -90,27 +90,12 @@
     <!-- FI NOTICIES -->
 
     <!-- LOCALITZA -->
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="font-weight-bold text-center">ON ESTEM?</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <iframe title="Localitzacio del parc"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.4047935586386!2d0.5816534201918497!3d40.70910459358563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a0fe735557799b%3A0x3fade49ba3687306!2sInstitut+Montsi%C3%A0+i+CFA+Sebasti%C3%A0+Juan+Arb%C3%B3!5e0!3m2!1sca!2ses!4v1553034764770"
-                    width="100%" height="200px" frameborder="0" style="border:0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-    <!-- FI LOCALITZA -->
 </div>
 
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="font-weight-bold text-center">On estem 2</h1>
+            <h1 class="font-weight-bold text-center">On estem?</h1>
         </div>
     </div>
   </div>
@@ -135,7 +120,7 @@
                         });
 
                     var infoWindow = new google.maps.InfoWindow({
-                      content: "This is: <h3>" + address + "<br><a href=http://maps.google.com/maps?daddr=" + 
+                      content: "This is: <h3>" + "Univeylandia" + "<br><a href=http://maps.google.com/maps?daddr=" + 
 							        address + ">Com anar</a>"}
                       );
                       infoWindow.open(map, marker);
