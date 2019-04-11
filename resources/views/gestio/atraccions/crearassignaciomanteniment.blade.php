@@ -5,14 +5,6 @@
 @section("menuIntranet")
 @endsection
 @section("content")
-    <head> 
-    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="css/dataTables.editor.css">
-    <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
-    <script type="text/javascript" language="javascript" src="js/dataTables.tableTools.js"></script>
-    <script type="text/javascript" language="javascript" src="js/dataTables.editor.js"></script>
-    </head>
     <style>
       .uper {
         margin-top: 40px;
@@ -49,102 +41,102 @@
                         <input class="form-control" name="data_fi_assignacio_empleat"  type="date"  min="<?php echo date('Y-m-d')?>">
                       </div>
                       <div class="col-2">
-                      <br><br>
-                        <input id="submit" value="Consultar" type="button" class="btn btn-primary submit-contacte"></button>
+                      <form method="post">
+                      @csrf
+                        <button id="submit" value="Consultar" type="button" class="btn btn-primary" onclick="fetchRecords()">ASD</button>
+                      </form>
                       </div>
                     </div>
-
-      <div class="col-12">
-        <div class="col-12 table-responsive">
-            <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed" id="results_table" role="grid">
-              <br>
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Nom</th>
-                        <th>Cognom1</th>
-                        <th>Cognom2</th>
-                        <th>Num Document</th>
-                        <th>Accions</th>
-                      </tr>
-                    </thead>
-                <tbody></tbody>
-            </table>
+                    
+        <div class="col-12">
+        <div class="col-12 table-responsive" id="memes">
+            
         </div>
-       </div>
-                 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --> <!-- jQuery CDN -->
-<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>                
-                 
-<script type='text/javascript'>
-     $(document).ready(function(){
+      </div>                    
+</div>
 
-       // Fetch all records
-       $('#but_fetchall').click(function(){
-	      fetchRecords(0);
-       });
 
-       // Buscar per dates
-       $('#submit').click(function(){
-          var data_inici = $('#data_inici_assignacio_empleat').val();
-          var data_fi = $('#data_fi_assignacio_empleat').val();
+<script>
 
-	      
-	      fetchRecords(data_inici, data_fi);
-       });
-
-     });  
-     
-  function fetchRecords(data_inici, data_fi){
+  function fetchRecords() {
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
     $.ajax({
-      url: '/gestio/atraccions/crearassignaciomanteniment/+id';
       type: 'get',
-      dataType: 'json',
-      succes: function(response){
+      url: '{{ route('atraccions.assignaempleat', $atraccio->id) }}',
+      dataType: 'JSON',
+      error: function(xhr, status, error) {
+        console.log("Error:"+xhr.status+" -"+error);
+      },
+      success: function(response) {
+        $("#memes").empty();
 
-        var len=0;
-        $('#results_table tbody').empty();
-        if(response['data'] !=null){
-          len = response['data'].length;
-        }
+        var len = response['emp_manteniment'].length;
 
-        if(len >0){
-          for (var i=0; i<len; i++){
-            var nom = response['data'][i].nom;
-            var cognom1 = response['data'][i].cognom1;
-            var cognom2 = response['data'][i].cognom2;
-            var num_document = response ['data'][i].num_document;
+        var table = 
+          "<table class='table table-bordered table-hover table-sm' id='results_table' role='grid'>"+
+          " <thead class='thead-light'>"+  
+          "   <tr>"+
+          "     <th>Nom</th>"+
+          "     <th>Cognom1</th>"+
+          "     <th>Cognom2</th>"+
+          "     <th>Num Document</th>"+
+          "     <th>Accions</th>"+
+          "   </tr>"+
+          " </thead>"+
+          " <tbody>"+
+          " </tbody>"+
+          "</table>";
 
-            var tr_str = "<tr>" + 
-            "      <td align='center'>" + nom + "</td>" +
-                   "<td align='center'>" + username + "</td>" +
-                   "<td align='center'>" + name + "</td>" +
-                   "<td align='center'>" + email + "</td>" +
-               "</tr>";
+        $("#memes").append(table);
+        for (var i=0; i < len; i++) {
+          var id = response['emp_manteniment'][i].id;
+          var nom = response['emp_manteniment'][i].nom;
+          var cognom1 = response['emp_manteniment'][i].cognom1;
+          var cognom2 = response['emp_manteniment'][i].cognom2;
+          var numero_document = response['emp_manteniment'][i].numero_document;
 
-               $("#results_table tbody").append(tr_str);
-          }
-        }else if(response['data'] !=null){
-          var tr_str = "<tr>" + 
-            "<td align='center'>" + response['data'].nom + "</td>" +
-            "<td align='center'>" + response['data'].cognom1 + "</td>" +
-            "<td align='center'>" + response['data'].cognom2 + "</td>" +
-            "<td align='center'>" + response['data'].num_document + "</td>" + 
+          var tr_str = 
+            "<tr>" +
+            "<td>" + nom +"</td>" +
+            "<td>" + cognom1 +"</td>" +
+            "<td>" + cognom2 +"</td>" +
+            "<td>" + numero_document +"</td>" +
+            "<td></td>"+
             "</tr>";
-
-            $("#result_table tbody").append(tr_str);
-        }else{
-          var tr_str = "<tr>" +
-            "<td> align='center' colspans='4'> No record found.</td>" +
-            "</tr>";
-
-            $("#result_table tbody").append(tr_str);
+            $("#results_table tbody").append(tr_str); 
         }
+        
+        // DataTable
+        $('#results_table').DataTable({
+            language: {
+                "sProcessing":   "Processant...",
+                "sLengthMenu":   "Mostra _MENU_ registres",
+                "sZeroRecords":  "No s'han trobat registres.",
+                "sEmptyTable":   "No hi ha dades a mostrar.",
+                "sInfo":         "Mostrant de _START_ a _END_ de _TOTAL_ registres",
+                "sInfoEmpty":    "Mostrant de 0 a 0 de 0 registres",
+                "sInfoFiltered": "",
+                "sInfoPostFix":  "",
+                "sSearch":       "Filtrar:",
+                "sUrl":          "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Carregant...",
+                "oPaginate": {
+                    "sFirst":    "Primer",
+                    "sPrevious": "Anterior",
+                    "sNext":     "Següent",
+                    "sLast":     "Últim"
+                }
+            }
+        });
+        
       }
     });
   }
-  </script>
-                           
-</div>
-        
+</script>
 
 @endsection
