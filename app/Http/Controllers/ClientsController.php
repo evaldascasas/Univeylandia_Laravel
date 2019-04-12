@@ -80,11 +80,13 @@ class ClientsController extends Controller
         ]);
         
         $usuari->save();
-
-        $token = app(\Illuminate\Auth\Passwords\PasswordBroker::class)->createToken($usuari);
-
-        $usuari->sendPasswordResetNotification($token);
         
+        if($usuarr->save()) {
+            $token = app(\Illuminate\Auth\Passwords\PasswordBroker::class)->createToken($usuari);
+
+            $usuari->sendPasswordResetNotification($token);   
+        }
+
         return redirect('/gestio/clients')->with('success', 'Client creat correctament');
     }
 
