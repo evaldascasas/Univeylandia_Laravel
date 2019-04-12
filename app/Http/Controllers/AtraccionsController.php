@@ -256,9 +256,8 @@ class AtraccionsController extends Controller
             'data_fi' => ['required','date','after:data_inici']
         ]);
 
-        $emp_manteniment = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'),$request->get('data_inici'),3);
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'),$request->get('data_inici'),3);
 
-        dump($emp_manteniment);
 
         // $emp_manteniment = User::where('id_rol',3)
         // ->whereNotNull('id_dades_empleat')
@@ -288,7 +287,7 @@ class AtraccionsController extends Controller
 
         //$emp_manteniment->toJson(); DEBUG
 
-        return response()->json(array('emp_manteniment' => $emp_manteniment), 200);
+        return response()->json(array('empleats' => $empleats), 200);
     }
     
     public function crearAssignacioManteniment(Request $request, $id)

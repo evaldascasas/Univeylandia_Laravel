@@ -20,7 +20,7 @@ class AssignacioAtraccion extends Model
 
   public static function AssignacioFiltre($data_inici, $data_fi, $id_rol)
   {
-    $users = DB::select('SELECT * FROM users WHERE users.id_rol = '.$id_rol.' AND users.id NOT IN (
+    $empleats = DB::select('SELECT * FROM users WHERE users.id_rol = '.$id_rol.' AND users.id NOT IN (
           SELECT
              assign_emp_atraccions.id_empleat
           FROM
@@ -32,7 +32,7 @@ class AssignacioAtraccion extends Model
            )'
     );
 
-    return $users;
+    return $empleats;
   }
 
   public static function assignarMantenimentFiltro (){
