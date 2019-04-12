@@ -18,7 +18,22 @@ class AssignacioAtraccion extends Model
   ];
 
 
+  public static function AssignacioFiltre($data_inici, $data_fi, $id_rol)
+  {
+    $empleats = DB::select('SELECT * FROM users WHERE users.id_rol = '.$id_rol.' AND users.id NOT IN (
+          SELECT
+             assign_emp_atraccions.id_empleat
+          FROM
+             assign_emp_atraccions
+          WHERE
+             ( assign_emp_atraccions.data_inici <= "'.$data_inici.'" AND assign_emp_atraccions.data_fi >= "'.$data_fi.'")
+             OR
+             ( assign_emp_atraccions.data_inici >= "'.$data_inici.'" AND assign_emp_atraccions.data_fi <= "'.$data_fi.'")
+           )'
+    );
 
+    return $empleats;
+  }
 
   public static function assignarMantenimentFiltro (){
     $user = DB::select('SELECT
