@@ -11,11 +11,13 @@ window.addEventListener("load", function () {
                 "text": "#237afc"
             }
         },
+        "type": "opt-out",
         "theme": "classic",
-        "position": "bottom-right",
+        "position": "bottom-left",
         "content": {
             "message": "Aquesta pàgina web utilitza cookies per millorar l'experiència d'usuari.",
-            "dismiss": "D'acord!",
+            "allow": "D'acord!",
+            "deny": "No, gràcies.",
             "link": "Més info",
             "href": "#"
         }
