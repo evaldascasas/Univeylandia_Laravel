@@ -50,19 +50,15 @@
                         onclick="fetchRecords()">ASD</button>
                 </div>
             </div>
+        </form>
     </div>
-    </form>
 </div>
-
 
 <div class="col-12">
     <div class="col-12 table-responsive" id="memes"> </div>
 </div>
 
-
-
 <script>
-
     function fetchRecords() {
         $.ajaxSetup({
             headers: {
@@ -108,62 +104,62 @@
                     var cognom2 = response['empleats'][i].cognom2;
                     var numero_document = response['empleats'][i].numero_document;
 
-                    var id_atraccio = response['atraccio'][i].id;
-                    var nom_atraccio = response['atraccio'][i].nom_atraccio;
-
                     var tr_str =
                         "<tr>" +
                         "<td>" + nom + "</td>" +
                         "<td>" + cognom1 + "</td>" +
                         "<td>" + cognom2 + "</td>" +
                         "<td>" + numero_document + "</td>" +
-                        "<td><a class='btn btn-success btn-sm' href='#' data-toggle='modal' data-target='#ModalEmpleat"+id+">Assignar</a></td>" +
+                        "<td><a class='btn btn-success btn-sm' href='#' data-toggle='modal' data-target='#ModalEmpleat"+id+"'>Assignar</a></td>" +
                         "</tr>";
                     $("#results_table tbody").append(tr_str);
 
                     var modal =
-                        "<div class='modal fade' id='ModalEmpleat"+id+"tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>" +
-                            "<div class='modal-dialog' role='document'>" +
-                                "<div class='modal-content'> " +
-                                    "<div class='modal-header'>" +
-                                        "<h5 class='modal-title'>Assignar Empleat</h5> " + 
-                                        "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" + 
-                                        "<span aria-hidden='true'>&times;</span>" +
-                                        "</button>" +
-                                    "</div> " +
-                        "<form action='{{route('atraccions.guardarAssignacio', "+id_atraccio+") }} > " +
-                        "@csrf" +
-                        "<div class='modal-body'> " + 
-                            "<div class='row'> " + 
-                                "<div class='col-6'> " +
-                                    "<span>Atraccio:</span>" +
-                                    "<input type='text' class='form-control' name='id_atraccio' value="+id_atraccio+" hidden/> " +
-                                    "<input type='text' class='form-control' name='nom_atraccio' value="+nom_atraccio+" disabled /> " +
-                                 "</div>" +
-                                "<div class='col-6'> " +
-                                    "<span>Empleat:</span>" +
-                                    "<input type='text' class='form-control' name='id_empleat' value="+id+" hidden /> " +
-                                    "<input type='text' class='form-control' name='nom_empleat' readonly value="+nom+"/> " +
-                                "</div>" +
-                                "<div class='col-6'>" +
-                                    "<span>Data Inici:</span>" +
-                                    "<input type='date' class='form-control' name='data_inici_modal' readonly value='data_inici_assignacio_empleat'/> " +
-                                "</div>" + 
-                                "<div class='col-6'> " +
-                                    "<span>Data Fi:</span> " +
-                                    "<input type='date' class='form-control' name='data_fi_modal' readonly value='data_fi_assignacio_empleat'/> " +
-                                "</div>" +
-                                "<br> " +
-                            "</div>" +
-                                "<div class='modal-footer'> " +
-                                    "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancelar</button> " +
-                                    "<button type='submit' class='btn btn-primary'>Finalitzar assignament</button> " +
-                                 "</div> " +
-                        "</form> " + 
-                        "</div>" +
-                    "</div> " +
-            "</div>";
-                }
+                        '<div class="modal fade" id="ModalEmpleat'+id+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                                '<div class="modal-content"> ' +
+                                    '<div class="modal-header">' +
+                                        '<h5 class="modal-title">Assignar Empleat</h5> ' + 
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' + 
+                                        '<span aria-hidden="true">&times;</span>' +
+                                        '</button>' +
+                                    '</div>' +
+                                '<form action="{{route("atraccions.guardarAssignacio", "+id_atraccio+") }} > ' +
+                                '@csrf' +
+                                '<div class="modal-body"> ' + 
+                                    '<div class="row"> ' + 
+                                        '<div class="col-6"> ' +
+                                            '<span>Atraccio:</span>' +
+                                            '<input type="text" class="form-control" name="id_atraccio" value="{{$atraccio->id}}" hidden/> ' +
+                                            '<input type="text" class="form-control" name="nom_atraccio" value="{{$atraccio->nom_atraccio}}" disabled /> ' +
+                                        '</div>' +
+                                        '<div class="col-6"> ' +
+                                            '<span>Empleat:</span>' +
+                                            '<input type="text" class="form-control" name="id_empleat" value='+id+' hidden /> ' +
+                                            '<input type="text" class="form-control" name="nom_empleat" readonly value='+nom+'> ' +
+                                        '</div>' +
+                                        '<div class="col-6">' +
+                                            '<span>Data Inici:</span>' +
+                                            '<input type="date" class="form-control" name="data_inici_modal" readonly value="'+jQuery("#data_inici_assignacio_empleat").val()+'"/> ' +
+                                        '</div>' + 
+                                        '<div class="col-6"> ' +
+                                            '<span>Data Fi:</span> ' +
+                                            '<input type="date" class="form-control" name="data_fi_modal" readonly value="'+jQuery("#data_fi_assignacio_empleat").val()+'"/> ' +
+                                        '</div>' +
+                                        '<br> ' +
+                                    '</div>' +
+                                        '<div class="modal-footer"> ' +
+                                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> ' +
+                                            '<button type="submit" class="btn btn-primary">Finalitzar assignament</button> ' +
+                                        '</div> ' +
+                                    '</div> ' +
+                                '</form> ' + 
+                            '</div>' +
+                            '</div> ' +
+                        '</div>';
+
+            $("#memes").append(modal);
+            }
 
                 // DataTable
                 $('#results_table').DataTable({
