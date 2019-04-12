@@ -81,7 +81,7 @@ class ClientsController extends Controller
         
         $usuari->save();
         
-        if($usuarr->save()) {
+        if($usuari->save()) {
             $token = app(\Illuminate\Auth\Passwords\PasswordBroker::class)->createToken($usuari);
 
             $usuari->sendPasswordResetNotification($token);   
