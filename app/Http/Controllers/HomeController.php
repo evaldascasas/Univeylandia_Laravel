@@ -307,10 +307,11 @@ class HomeController extends Controller
           ->join('cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
           ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
           ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
-          ->select('cistelles.id_usuari as id_usuari', 'cistelles.id as id_cistella_orig', 'linia_cistelles.id as id_linia', 'linia_cistelles.id_cistella as id_cistella_linia', 'linia_cistelles.producte as producte', 'linia_cistelles.quantitat as quantitat', 'atributs_producte.preu as preu')
+          ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
+          ->select('cistelles.id_usuari as id_usuari', 'cistelles.id as id_cistella_orig', 'linia_cistelles.id as id_linia', 'linia_cistelles.id_cistella as id_cistella_linia', 'linia_cistelles.producte as producte', 'linia_cistelles.quantitat as quantitat', 'atributs_producte.preu as preu', 'atributs_producte.tickets_viatges as viatges', 'tipus_producte.id as tipus')
           ->where('cistelles.id_usuari', '=', Auth::id())
           ->get();
-
+      //dd($elements_cistella);
       $preu_total = 0;
 
       foreach ($elements_cistella as $element_cistella) {
@@ -328,21 +329,71 @@ class HomeController extends Controller
 
       foreach ($elements_cistella as $element_cistella) {
 
-        $linia_venta = new Linia_ventes([
-                'id_venta' => $venta->id,
-                'producte' => $element_cistella->producte,
-                'quantitat' => $element_cistella->quantitat
-        ]);
+        if ($element_cistella->tipus == 1 || $element_cistella->tipus == 2 || $element_cistella->tipus ==3 || $element_cistella->tipus == 4 || $element_cistella->tipus == 5 || $element_cistella->tipus == 6 || $element_cistella->tipus == 7) {
+          $linia_venta_original = new Linia_ventes([
+                  'id_venta' => $venta->id,
+                  'producte' => $element_cistella->producte,
+                  'quantitat' => 1
+          ]);
+          $linia_venta_original ->save();
+          for ($i=0; $i < $element_cistella->quantitat-1; $i++) {
+            $atributs_producte_ticket = new Atributs_producte([
 
-        $linia_venta ->save();
-        $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
-        $linia_cistella_element->delete();
-        /*DB::table('linia_ventes')->insert([
-            ['id_venta' => $venta->id, 'producte' => $element_cistella->producte, 'quantitat' => $element_cistella->quantitat]
-        ]);*/
+                'nom' => $element_cistella->tipus,
+                'tickets_viatges' => $element_cistella->viatges,
+                'preu' => $element_cistella->preu
+
+            ]);
+
+            $atributs_producte_ticket->save();
+
+            /*Després es guarda el producte*/
+            $producte_ticket = new producte([
+
+                'atributs' => $atributs_producte_ticket->id,
+                'estat' => 1,
+                'descripcio' => " "
+            ]);
+
+            $producte_ticket->save();
+
+            /*Generacio de la entrada en lo codi QR*/
+            $file_path_ticket = 'storage/tickets_parc';
+            $file_name_path_ticket =  $file_path_ticket . '/'. time(). $producte_ticket->id . '.png';
+            $imatge_ticket = QrCode::format('png')->size(399)->color(40,40,40)->generate($producte_ticket->id, $file_name_path_ticket);
+
+            /*Afegim el codi QR a la base de dades*/
+            DB::table('atributs_producte')
+                ->where('id', $atributs_producte_ticket->id)
+                ->update(['foto_path' => $file_name_path_ticket]);
+
+            $linia_venta = new Linia_ventes([
+                    'id_venta' => $venta->id,
+                    'producte' => $producte_ticket->id,
+                    'quantitat' => 1
+            ]);
+            $linia_venta ->save();
+          }
+          $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
+          $linia_cistella_element->delete();
+        }else {
+          $linia_venta = new Linia_ventes([
+                  'id_venta' => $venta->id,
+                  'producte' => $element_cistella->producte,
+                  'quantitat' => $element_cistella->quantitat
+          ]);
+          $linia_venta ->save();
+          $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
+          $linia_cistella_element->delete();
+        }
+
       }
 
-      return view("/compra_finalitzada");
+      /*GENERACIÓ DE FACTURA + ENVIARMENT CORREU EN SEGON PLA*/
+      $id_venta = $venta->id;
+      $usuari = Auth::user();
+      dispatch(new \App\Jobs\GenerateFacturaPDFJob($id_venta, $usuari));
+      return view('/compra_finalitzada', compact('venta'));
 
     }
 
