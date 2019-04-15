@@ -234,6 +234,12 @@ class gestioProductes extends Controller
     {
         $producte = Producte::find($id);
         $atributs_producte = Atributs_producte::find($producte->atributs);
+        if(File::exists($atributs_producte->foto_path)) {
+            File::delete($atributs_producte->foto_path);
+        }
+        if(File::exists($atributs_producte->foto_path_aigua)) {
+            File::delete($atributs_producte->foto_path_aigua);
+        }
         $producte->delete();
         $atributs_producte->delete();
         return redirect('/gestio/productes') ->with('success', 'Producte eliminat correctament');
@@ -249,8 +255,8 @@ class gestioProductes extends Controller
             ->orderBy('estat', 'DESC')
             ->orderBy('nom', 'ASC');
 
-            
-            
+
+
             $mytime = Carbon\Carbon::now();
             $temps = $mytime->toDateString();
 
