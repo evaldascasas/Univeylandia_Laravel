@@ -9,6 +9,8 @@ use Carbon\Carbon;
 
 use Auth;
 use View;
+use PDF;
+use Storage;
 
 use \App\Incidencia;
 use \App\PrioritatIncidencia;

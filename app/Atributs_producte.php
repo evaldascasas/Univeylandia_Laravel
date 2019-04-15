@@ -13,6 +13,7 @@ class Atributs_producte extends Model
     'tickets_viatges',
     'preu',
     'foto_path',
-    'foto_path_aigua'
+    'foto_path_aigua',
+    'data_entrada'
   ];
 }

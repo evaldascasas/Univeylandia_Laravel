@@ -149,10 +149,13 @@ Route::get('/compra_finalitzada', 'HomeController@compra_finalitzada')->name('co
 
 /* Tenda */
 Route::get('/tenda','TendaController@indexTenda')->name('tenda');
-Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos');
-Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos');
-Route::get('/comprarFotos/{id}','TendaController@afegir_Foto');
+Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos')->middleware(['auth','verified']);
+Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos')->middleware(['auth','verified']);
+Route::get('/comprarFotos/{id}','TendaController@afegir_Foto')->middleware(['auth','verified']);
 
+/* VALIDACIO ENTRADES */
+Route::get('/validacio',"gestioProductes@validacio")->name('validacio')->middleware(['auth','is_admin','verified']); //
+Route::post('/validacio', 'gestioProductes@validar')->name('validacio_accio')->middleware(['auth','is_admin','verified']); //
 
 /* PAYPAL */
 Route::post('paypal', 'PaymentController@payWithpaypal');
