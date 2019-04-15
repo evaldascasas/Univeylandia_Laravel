@@ -87,8 +87,7 @@ class HomeController extends Controller
 
     public function entrades()
     {
-      $tipus_producte = Tipus_producte::all();
-
+      $tipus_producte = Tipus_producte::whereIn('id', [1, 2, 3, 4, 5, 6, 7])->get();
       return view("entrades", compact('tipus_producte'));
     }
 
