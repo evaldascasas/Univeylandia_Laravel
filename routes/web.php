@@ -52,7 +52,7 @@ Route::resource('gestio/incidencies', 'IncidenciesController')->middleware(['aut
 Route::get('gestio/empleats/deactivated', 'EmpleatsController@trashed')->name('empleats.deactivated')->middleware(['auth','is_admin','verified']);
 
 Route::patch('gestio/empleats/deactivated/{user}/reactivate', 'EmpleatsController@reactivate')->name('empleats.reactivate')->middleware(['auth','is_admin','verified']);
- 
+
 Route::delete('gestio/empleats/deactivated/{user}', 'EmpleatsController@annihilate')->name('empleats.annihilate')->middleware(['auth','is_admin','verified']);
 
 Route::get('gestio/empleats/admins', 'EmpleatsController@admins')->name('empleats.admins')->middleware(['auth','is_admin','verified']);
@@ -62,7 +62,7 @@ Route::resource('gestio/empleats', 'EmpleatsController')->middleware(['auth','is
 Route::resource('gestio/zones', 'ZonesController')->middleware(['auth','is_admin','verified']);
 
 Route::resource('gestio/AssignEmpZona', 'AssignEmpZonaController')->middleware(['auth','is_admin','verified']);
- 
+
 Route::resource('gestio/GestioServeis', 'GestioServeisController')->middleware(['auth','is_admin','verified']);
 
 Route::resource('gestio/serveis', 'ServeisController')->middleware(['auth','is_admin','verified']);
@@ -80,42 +80,42 @@ Route::post('/votacions',"HomeController@votacio_accio")->name('votacio_accio');
 Route::get('/tasques','HomeController@tasques')->name('tasques')->middleware(['auth','is_worker','verified']);
 
 Route::patch('/tasques/{id}', 'IncidenciesController@conclude')->name('incidencies.conclude')->middleware(['auth','is_worker','verified']);
- 
+
 /* RUTES GRUP 2 */
 Route::get('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment')->middleware(['auth','is_admin','verified']);
 
 Route::post('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaempleat');
 
 Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);
- 
+
 Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral')->middleware(['auth','is_admin','verified']);
- 
+
 Route::any('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio')->middleware(['auth','is_admin','verified']);
 
 Route::any('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna')->middleware(['auth','is_admin','verified']);
- 
+
 Route::any('/gestio/atraccions/assignacions', 'AtraccionsController@assignacions')->name('atraccions.assignacions')->middleware(['auth','is_admin','verified']);
- 
+
 Route::any('/gestio/atraccions/assignacions/editAssignacions/{id}', 'AtraccionsController@editAssignacions')->name('atraccions.assignacions.editAssignacions')->middleware(['auth','is_admin','verified']);
- 
+
 Route::any('/gestio/atraccions/assignacions/updateAssignacions/{id}', 'AtraccionsController@updateAssignacions')->name('atraccions.assignacions.updateAssignacions')->middleware(['auth','is_admin','verified']);
- 
+
 Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy')->middleware(['auth','is_admin','verified']);
- 
+
 Route::resource('/gestio/atraccions', 'AtraccionsController')->middleware(['auth','is_admin','verified']);
- 
+
 // Route::get('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload')->middleware(['auth','is_admin','verified']);
- 
+
 // Route::post('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload.post')->middleware(['auth','is_admin','verified']);
 
 Route::get('gestio/clients/deactivated', 'ClientsController@trashed')->name('clients.deactivated')->middleware(['auth','is_admin','verified']);
 
 Route::patch('gestio/clients/deactivated/{user}/reactivate', 'ClientsController@reactivate')->name('clients.reactivate')->middleware(['auth','is_admin','verified']);
- 
+
 Route::delete('gestio/clients/deactivated/{user}', 'ClientsController@annihilate')->name('clients.annihilate')->middleware(['auth','is_admin','verified']);
 
 Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
- 
+
 /* Guardar PDF */
 Route::get('/view/atraccions/index', 'AtraccionsController@guardarPDF')->middleware(['auth','is_admin','verified']);
 
@@ -129,12 +129,12 @@ Route::get('/view/clients/index', 'ClientsController@guardarClientPDF')->middlew
 
 
 
- 
+
 /* Gestio imatges */
 Route::get("/gestio/productes/imatges", "ImageController@index")->name('imatges.index')->middleware(['auth','is_admin','verified']);
 Route::get("/gestio/productes/imatges/upload", "ImageController@save")->name('imatges.upload')->middleware(['auth','is_admin','verified']);
 Route::post("/gestio/productes/imatges/upload", "ImageController@upload")->middleware(['auth','is_admin','verified']);
- 
+
 /* Entrades */
 Route::post('/entrades', array('as' => 'entrades','uses' => 'HomeController@parc_afegir_cistella'));
 Route::resource('/gestio/productes', 'gestioProductes')->middleware(['auth','is_admin','verified']);
@@ -142,6 +142,8 @@ Route::resource('/gestio/ventes', 'VentesController')->middleware(['auth','is_ad
 
 Route::get('/cistella','HomeController@cistella')->name('cistella')->middleware(['auth','verified']);
 Route::delete('/cistella', 'HomeController@cistella_delete')->name('cistella')->middleware(['auth','verified']);
+Route::post('/cistella/update',"HomeController@modificar_element_cistella_ajax")->name('cistellaUpdate');
+Route::post('/cistella/updateV',"HomeController@modificar_element_cistella_ajaxV")->name('cistellaUpdateV');
 Route::get('/compra', 'HomeController@compra')->name('compra')->middleware(['auth','verified']);
 Route::get('/compra_finalitzada', 'HomeController@compra_finalitzada')->name('compra_finalitzada')->middleware(['auth','verified']);
 

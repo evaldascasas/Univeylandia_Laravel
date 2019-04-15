@@ -301,7 +301,7 @@ class HomeController extends Controller
     }
 
     public function compra_finalitzada(){
-      
+
       $elements_cistella = DB::table('linia_cistelles')
           ->join('cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
           ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
@@ -351,37 +351,38 @@ class HomeController extends Controller
           ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
           ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
           ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
-          ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat')
+          ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat', 'tipus_producte.id as tipus')
           ->where('cistelles.id_usuari', '=', Auth::id())
-          ->where('atributs_producte.foto_path_aigua','=', null)
+          ->whereIn('tipus_producte.id', [1, 2, 3, 4, 5, 6, 7])
           ->orderBy('nom', 'ASC')
-          ->paginate(100);
-
-          $numeroTickets = $linia_cistella->count();
-
+          ->get([
+            'linia_cistelles.id as id',
+            'atributs_producte.id as id_atributs',
+            'tipus_producte.nom as nom',
+            'atributs_producte.tickets_viatges as tickets_viatges',
+            'atributs_producte.mida as mida',
+            'atributs_producte.preu as preu',
+            'linia_cistelles.quantitat as quantitat',
+            'tipus_producte.id as tipus'
+          ]);
       $total = 0;
       $total2=0;
       $compteTotal=0;
-
       $fotos = DB::table('cistelles')
-
           ->join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
           ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
           ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
           ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
-          ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu','atributs_producte.foto_path_aigua as fotoaigua', 'linia_cistelles.quantitat as quantitat')
+          ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu','atributs_producte.foto_path_aigua as fotoaigua', 'atributs_producte.thumbnail as thumbnail' ,'linia_cistelles.quantitat as quantitat')
           ->where('cistelles.id_usuari', '=', Auth::id())
-          ->where('atributs_producte.foto_path_aigua','!=', null)
+          ->where('tipus_producte.id','=', 8)
           ->orderBy('nom', 'ASC')
-          ->paginate(100);
+          ->get();
 
-      $numeroFotos = $fotos->count();
 
       $user = Auth::user();
 
-      $usuari = User::where('id', '=', Auth::id());
-
-          return view('/cistella', compact('linia_cistella', 'total','fotos','total2','compteTotal','numeroFotos','numeroTickets','user'));
+      return view('/cistella', compact('linia_cistella', 'total','fotos','total2','compteTotal','user'));
 
 
     }
@@ -567,6 +568,27 @@ class HomeController extends Controller
     public function construccio()
     {
       return view('construccio');
+    }
+    public function modificar_element_cistella_ajax()
+    {
+      $update_linia_cistella = Linia_cistella::where('id', request('id_linia_cistella'))->update(['quantitat' => request('quantitat_mod')]);
+      return 'El buen update gente';
+    }
+
+    public function modificar_element_cistella_ajaxV()
+    {
+      $numviatges = request('quantitat_mod');
+      $linea_cistella = Linia_cistella::find(request('id_atributs'));
+      $producte = Producte::find($linea_cistella->producte);
+      $atributs = Atributs_producte::find($producte->atributs);
+      $update_atributs_viatges = Atributs_producte::where('id', $producte->atributs)->update(['tickets_viatges' => request('quantitat_mod')]);
+      if ($numviatges == 3) {
+        $update_atributs_preu = Atributs_producte::where('id', $producte->atributs)->update(['preu' => $atributs->preu - 5]);
+      }else{
+        $update_atributs_preu = Atributs_producte::where('id', $producte->atributs)->update(['preu' => $atributs->preu + 5]);
+      }
+
+      return 'El buen update de viages gente';
     }
 
 }
