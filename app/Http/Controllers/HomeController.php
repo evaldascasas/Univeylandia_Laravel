@@ -392,10 +392,14 @@ class HomeController extends Controller
       $linia_cistella = Linia_cistella::find($request->get('id_linia_producte'));
       $producte = producte::find($linia_cistella->producte);
       $atributs_producte = Atributs_producte::find($producte->atributs);
+      $tipus_producte = Tipus_producte::find($atributs_producte->nom);
 
       $linia_cistella->delete();
-      //$producte->delete();
-      //$atributs_producte->delete();
+      if ($tipus_producte->id == 1 || $tipus_producte->id == 2 || $tipus_producte->id ==3 || $tipus_producte->id == 4 || $tipus_producte->id == 5 || $tipus_producte->id == 6 || $tipus_producte->id == 7) {
+        $producte->delete();
+        $atributs_producte->delete();
+      }
+
 
       return redirect('/cistella')->with('success', 'Producte eliminat correctament');
     }
