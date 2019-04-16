@@ -148,10 +148,10 @@ Route::get('/compra', 'HomeController@compra')->name('compra')->middleware(['aut
 Route::get('/compra_finalitzada', 'HomeController@compra_finalitzada')->name('compra_finalitzada')->middleware(['auth','verified']);
 
 /* Tenda */
-Route::get('/tenda','TendaController@indexTenda')->name('tenda');
-Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos')->middleware(['auth','verified']);
-Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos')->middleware(['auth','verified']);
-Route::get('/comprarFotos/{id}','TendaController@afegir_Foto')->middleware(['auth','verified']);
+Route::get('/botiga','TendaController@indexTenda')->name('tenda');
+Route::get('/botiga/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos')->middleware(['auth','verified']);
+Route::get('/botiga/atraccions/{id}/fotos','TendaController@imprimirFotos')->name('atraccions.fotos')->middleware(['auth','verified']);
+Route::get('/comprarFotos/{id}','TendaController@afegir_Foto')->name('fotos.comprar')->middleware(['auth','verified']);
 
 /* VALIDACIO ENTRADES */
 Route::get('/validacio',"gestioProductes@validacio")->name('validacio')->middleware(['auth','is_admin','verified']); //

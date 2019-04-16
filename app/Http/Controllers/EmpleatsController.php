@@ -81,7 +81,7 @@ class EmpleatsController extends Controller
      */
     public function store(Request $request)
     {
-        $randomPass = str_random(8);
+        $randomPass = str_random(16);
 
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
@@ -171,8 +171,6 @@ class EmpleatsController extends Controller
         //     'id_dades_empleat' => $dades->id,
         // ]);
 
-        $token = app(\Illuminate\Auth\Passwords\PasswordBroker::class)->createToken($usuari);
-
         // if($dades->save()) {
         //     $usuari->save();
         //     if($usuari->save()) {
@@ -187,7 +185,7 @@ class EmpleatsController extends Controller
         // }
 
         //use a transaction so IF the query fails it does not insert nor update the resources
-        DB::transaction(function () use ($dades, $usuari, $token) {
+        DB::transaction(function () use ($dades, $usuari) {
 
             $dades->save();
 
@@ -195,8 +193,9 @@ class EmpleatsController extends Controller
 
             $usuari->save();
 
-            $usuari->sendPasswordResetNotification($token);
-
+            if($usuari->save()) {
+                dispatch(new \App\Jobs\SendEmailOnUserCreationJob($usuari));
+            }
         });
 
         return redirect('/gestio/empleats')->with('success', 'Empleat creat correctament');
