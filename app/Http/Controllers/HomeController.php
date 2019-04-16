@@ -67,8 +67,7 @@ class HomeController extends Controller
 
     public function atraccions()
     {
-        $atraccionetes = DB::table('tipus_atraccions')
-        ->join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
+        $atraccionetes = TipusAtraccions::join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
         ->get([
             'tipus_atraccions.tipus as nom',
             'tipus_atraccions.id as id_tipus',
@@ -214,18 +213,14 @@ class HomeController extends Controller
 
             }
             elseif ($request->get('num_viatges') == 6) {
-
                 $preu_base = Tipus_producte::find($request->get('tipus_select'))->preu_base;
                 $preu_final = $preu_base + 10;
                 $viatges = $request->get('num_viatges');
-
             }
             /*Si no es 6 o 7 tindra 100 viatges*/
-            }else {
-
-            $preu_final = Tipus_producte::find($request->get('tipus_select'))->preu_base;
-            $viatges = 100;
-
+            } else {
+                $preu_final = Tipus_producte::find($request->get('tipus_select'))->preu_base;
+                $viatges = 100;
             }
 
             /*devolucio no funciona estat defecte*/
@@ -233,7 +228,6 @@ class HomeController extends Controller
 
             /*insert taula atributs*/
             $atributs_producte = new Atributs_producte([
-
                 'nom' => $request->get('tipus_select'),
                 'tickets_viatges' => $viatges,
                 'preu' => $preu_final
@@ -244,7 +238,6 @@ class HomeController extends Controller
 
             /*Després es guarda el producte*/
             $producte = new producte([
-
                 'atributs' => $atributs_producte->id,
                 'estat' => $estat_defecte,
                 'descripcio' => " "
@@ -317,12 +310,12 @@ class HomeController extends Controller
         }
 
         $venta = new Venta_productes([
-                'id_usuari' => Auth::id(),
-                'preu_total' => $preu_total,
-                'estat' => 1
+            'id_usuari' => Auth::id(),
+            'preu_total' => $preu_total,
+            'estat' => 1
         ]);
 
-        $venta ->save();
+        $venta->save();
 
         foreach ($elements_cistella as $element_cistella) {
 
@@ -335,18 +328,15 @@ class HomeController extends Controller
             $linia_venta_original ->save();
             for ($i=0; $i < $element_cistella->quantitat-1; $i++) {
                 $atributs_producte_ticket = new Atributs_producte([
-
                     'nom' => $element_cistella->tipus,
                     'tickets_viatges' => $element_cistella->viatges,
                     'preu' => $element_cistella->preu
-
                 ]);
 
                 $atributs_producte_ticket->save();
 
                 /*Després es guarda el producte*/
                 $producte_ticket = new producte([
-
                     'atributs' => $atributs_producte_ticket->id,
                     'estat' => 1,
                     'descripcio' => " "
@@ -365,19 +355,19 @@ class HomeController extends Controller
                     ->update(['foto_path' => $file_name_path_ticket]);
 
                 $linia_venta = new Linia_ventes([
-                        'id_venta' => $venta->id,
-                        'producte' => $producte_ticket->id,
-                        'quantitat' => 1
+                    'id_venta' => $venta->id,
+                    'producte' => $producte_ticket->id,
+                    'quantitat' => 1
                 ]);
-                $linia_venta ->save();
+                $linia_venta->save();
             }
             $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
             $linia_cistella_element->delete();
             }else {
             $linia_venta = new Linia_ventes([
-                    'id_venta' => $venta->id,
-                    'producte' => $element_cistella->producte,
-                    'quantitat' => $element_cistella->quantitat
+                'id_venta' => $venta->id,
+                'producte' => $element_cistella->producte,
+                'quantitat' => $element_cistella->quantitat
             ]);
             $linia_venta ->save();
             $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
@@ -418,8 +408,9 @@ class HomeController extends Controller
             ]);
 
         $total = 0;
-        $total2=0;
-        $compteTotal=0;
+        $total2 = 0;
+        $compteTotal = 0;
+
         $fotos = DB::table('cistelles')
             ->join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
             ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
@@ -430,7 +421,6 @@ class HomeController extends Controller
             ->where('tipus_producte.id','=', 8)
             ->orderBy('nom', 'ASC')
             ->get();
-
 
         $user = Auth::user();
 
@@ -445,11 +435,11 @@ class HomeController extends Controller
         $tipus_producte = Tipus_producte::find($atributs_producte->nom);
 
         $linia_cistella->delete();
+
         if ($tipus_producte->id == 1 || $tipus_producte->id == 2 || $tipus_producte->id ==3 || $tipus_producte->id == 4 || $tipus_producte->id == 5 || $tipus_producte->id == 6 || $tipus_producte->id == 7) {
             $producte->delete();
             $atributs_producte->delete();
         }
-
 
         return redirect('/cistella')->with('success', 'Producte eliminat correctament');
     }
@@ -546,6 +536,7 @@ class HomeController extends Controller
 
             //$noticies->where('categories.id', '=', $cat);
             ->paginate(8);
+            
         return view('noticies', compact('noticies'));
     }
 
