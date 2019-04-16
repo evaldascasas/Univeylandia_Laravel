@@ -46,17 +46,17 @@
               <td>
                 <select class="form-control viatges_input" name="num_viatges_mod" style="width:60px;" id_atributs = "{{$cistella->id}}">
                   @if ($cistella->tickets_viatges == 3)
-                  <option selected value=3>3</option>
-                  <option value=6>6</option>
+                  <option selected value="3">3</option>
+                  <option value="6">6</option>
                   @else
-                  <option selected value=6>6</option>
-                  <option value=3>3</option>
+                  <option selected value="6">6</option>
+                  <option value="3">3</option>
                   @endif
-              </select>
+                </select>
               </td>
               @endif
               <td>
-                <input class="form-control quantitat_input" style="width:50%;" class="quantitat_valor" type="number" min="1" max=6 value="{{$cistella->quantitat}}" id_linia_cistella = "{{$cistella->id}}">
+                <input class="form-control quantitat_input" style="width:50%;" class="quantitat_valor" type="number" min="1" max="6" value="{{$cistella->quantitat}}" id_linia_cistella = "{{$cistella->id}}">
               </td>
               <td>
                 {{$cistella->preu * $cistella->quantitat}}€

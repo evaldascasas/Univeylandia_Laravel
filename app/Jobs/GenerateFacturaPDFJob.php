@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use \App\Venta_productes;
 use Auth;
 use PDF;
+use File;
 
 class GenerateFacturaPDFJob implements ShouldQueue
 {
@@ -51,16 +52,30 @@ class GenerateFacturaPDFJob implements ShouldQueue
         'venta_productes.preu_total as preu_total',
         'venta_productes.created_at as created_at'
       ]);
+
       $user_vista = $this->usuari;
+
       $temps = Carbon::now()->toDateString();
-      $ruta_factura_pdf_update = 'storage/factures_compra/univeylandia_compra_'.time().'.pdf';
+      
+      $factures_dir = 'storage/factures_compra/';
+
+      if( ! File::exists($factures_dir)) {
+          File::makeDirectory($factures_dir, 0777, true);
+      }
+
+      $ruta_factura_pdf_update = $factures_dir.'univeylandia_compra_'.time().'.pdf';
+
       $ruta_factura_pdf_final = public_path().'/'.$ruta_factura_pdf_update;
+
       $pdf = PDF::loadView('/factura_pdf', compact('venta_pdf', 'user_vista'))->save($ruta_factura_pdf_final);
+
       DB::table('venta_productes')
           ->where('id', $this->id_venta)
           ->update(['factura_pdf_path' => $ruta_factura_pdf_update]);
+          
       //'univeylandia_compra'.$temps.'.pdf'
       /*FI GENERACIO FACTURA*/
+
       //Enviament del correu utilitzant un job en segón pla
       $details['email'] = $this->usuari->email;
       $details['factura_pdf'] = $ruta_factura_pdf_final;
