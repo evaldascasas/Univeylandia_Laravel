@@ -125,7 +125,7 @@ Route::get('/view/gestioProductes/index', 'gestioProductes@guardarProductePDF')-
 
 Route::get('/view/clients/index', 'ClientsController@guardarClientPDF')->middleware(['auth','is_admin','verified']);
 
-
+Route::get('/sala_chat',"HomeController@sala_chat")->name('sala_chat'); //Sala chat
 
 
 

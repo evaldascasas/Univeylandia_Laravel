@@ -646,5 +646,10 @@ class HomeController extends Controller
 
       return 'El buen update de viages gente';
     }
+    
+    public function sala_chat()
+    {
+      return view('sala_chat');
+    }
 
 }
