@@ -11,7 +11,7 @@
   </head>
   <body>
       <div>
-        <img margin="0px" src="img/univeylandia_logo_petit_blanc.png">
+        <img margin="0px" src="http://i68.tinypic.com/mrwxa1.png">
       </div>
     <br>
     <div style="height:200px;">
