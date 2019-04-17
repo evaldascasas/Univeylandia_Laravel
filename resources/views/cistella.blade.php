@@ -144,8 +144,8 @@ $(".quantitat_input").each(function() {
 $(".quantitat_input" ).keyup(function() {
   if($(this).val() <= 0){
       this.value = 1;
-  }else{
-    this.value = 6;
+  }else if ($(this).val() >= 6) {
+      this.value = 6;
   }
 });
 
