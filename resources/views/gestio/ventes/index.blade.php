@@ -55,7 +55,7 @@
 <div class="table-responsive">
     <table
         class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
-        id="results_table" role="grid">
+        id="results_table_ordenats_id_desc" role="grid">
         <thead class="thead-light">
             <tr>
                 <td>#</td>
