@@ -14,12 +14,15 @@
       <div class="col-md-6 mb-6">
           <img margin="0px" src="http://i68.tinypic.com/mrwxa1.png">
       </div>
-      <div style="height:20px;">
+      <!-- <h3>Llistat de ventes</h3> -->
+      <div style="height:50px;">
         <div style="float: left;">
-          <h3>Llistat de ventes</h3>
+          <p><b>Número de ventes:</b> {{$numero_ventes}} </p>
+          <p><b>Número productes venuts:</b> {{$productes_venuts}} </p>
         </div>
         <div style="float: right;">
           <p><b>Total:</b> {{$total}}€</p>
+          <p><b>Dates exportació:</b> {{$dates[0]}} - {{$dates[1]}}</p>
         </div>
       </div>
       <br>

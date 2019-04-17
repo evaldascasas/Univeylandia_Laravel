@@ -134,7 +134,14 @@ class VentesController extends Controller
         foreach ($ventes as $venta) {
           $total = $total + $venta->preu;
         }
-        $pdf = PDF::loadView('/gestio/ventes/exportPDF', compact('ventes', 'total'));
-        return $pdf->download('ventes_'.$dates[0].'-'.$dates[1].'.pdf');
+        $numero_ventes = $ventes->count();
+        if($numero_ventes == 0){
+          return redirect('/gestio/ventes')->with('error', 'No hi han productes a exportar en aquest rang.');
+        }else{
+          $ids_ventes = $ventes->pluck('id')->toArray();
+          $productes_venuts = Linia_ventes::whereIn('id_venta', $ids_ventes)->get()->count();
+          $pdf = PDF::loadView('/gestio/ventes/exportPDF', compact('ventes', 'total', 'dates', 'numero_ventes', 'productes_venuts'));
+          return $pdf->download('ventes_'.$dates[0].'-'.$dates[1].'.pdf');
+        }
     }
 }
