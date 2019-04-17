@@ -150,7 +150,7 @@ $(".quantitat_input" ).keyup(function() {
 });
 
 $(".quantitat_input").focusout(function() {
-    if (this.value != $(this).data("lastValue")) {
+    if (this.value != $(this).data("lastValue") && this.value > 0 && this.value <=6) {
         //alert($(this).data("lastValue") + this.value + "id_cistella: " + this.getAttribute("id_linia_cistella"));
         $(this).data("lastValue", this.value)
         $.ajaxSetup({
@@ -179,6 +179,10 @@ $(".quantitat_input").focusout(function() {
             }, 500);
           }
         });
+    }else if ($(this).val() <= 0){
+        this.value = 1;
+    }else if ($(this).val() >= 6) {
+        this.value = 6;
     }
 });
 
