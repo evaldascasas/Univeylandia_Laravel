@@ -139,6 +139,7 @@ Route::post("/gestio/productes/imatges/upload", "ImageController@upload")->middl
 Route::post('/entrades', array('as' => 'entrades','uses' => 'HomeController@parc_afegir_cistella'));
 Route::resource('/gestio/productes', 'gestioProductes')->middleware(['auth','is_admin','verified']);
 Route::resource('/gestio/ventes', 'VentesController')->middleware(['auth','is_admin','verified']);
+Route::post('/gestio/ventes', 'VentesController@export_pdf')->middleware(['auth','is_admin','verified']);
 
 Route::get('/cistella','HomeController@cistella')->name('cistella')->middleware(['auth','verified']);
 Route::delete('/cistella', 'HomeController@cistella_delete')->name('cistella')->middleware(['auth','verified']);
