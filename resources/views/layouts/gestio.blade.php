@@ -46,6 +46,11 @@
   <!-- Icon -->
   <link rel="icon" href="{{ asset('img/icon.png') }}" type="image/gif">
 
+  <!-- DATAPICKER -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 </head>
 <body>
     @include("layouts.navbarIntranet")
@@ -66,7 +71,7 @@
   <script>
       $('div.alert').not('.alert-important').delay(3000).slideUp(350);
   </script>
-    
+
 
 </body>
 </html>

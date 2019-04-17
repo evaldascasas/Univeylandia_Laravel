@@ -22,13 +22,35 @@
     <h1 class="h2">Ventes</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary" value="Exportar">
+            <button class="btn btn-sm btn-outline-secondary" value="Exportar" data-toggle="modal" data-target="#exampleModal">
                 <span data-feather="save"></span>
                 Exportar PDF
             </button>
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Exportar ventes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <input class="form-control" style="width:80%;display: inline-block;text-align: center;" type="text" name="daterange" value="{{$primer_dia_mes}} - {{$data_actual}}" />
+          @csrf
+          @method('POST')
+          <button style="float: right;" class="btn btn-primary" type="submit">Exportar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fi Modal -->
 
 <div class="table-responsive">
     <table
@@ -66,5 +88,48 @@
         </tbody>
     </table>
 </div>
+<script>
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left',
+    "locale": {
+       "format": "DD/MM/YYYY",
+       "separator": " - ",
+       "applyLabel": "Aplicar",
+       "cancelLabel": "Cancelar",
+       "fromLabel": "De",
+       "toLabel": "A",
+       "customRangeLabel": "Custom",
+       "daysOfWeek": [
+           "",
+           "Lu",
+           "Ma",
+           "Mi",
+           "Ju",
+           "Vi",
+           "Sa",
+           "Do"
+       ],
+       "monthNames": [
+           "Gener",
+           "Febrer",
+           "Març",
+           "Abril",
+           "Maig",
+           "Juny",
+           "Juliol",
+           "Agost",
+           "Septembre",
+           "Octubre",
+           "Novembre",
+           "Decembre"
+       ],
+       "firstDay": 1
+   }
+  }, function(start, end, label) {
+    console.log("Nova selecció de data: " + start.format('DD-MM-YYYY') + ' a ' + end.format('DD-MM-YYYY'));
+  });
+});
 
+</script>
 @endsection
