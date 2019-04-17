@@ -10,6 +10,11 @@
     {{ session()->get('success') }}
   </div>
 @endif
+@if(session()->get('error'))
+  <div class="alert alert-danger">
+    {{ session()->get('error') }}
+  </div>
+@endif
 <style>
 .disabled {
   pointer-events: none;

@@ -55,13 +55,13 @@ class HomeController extends Controller
         ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria', 'categories.id as catId')
         ->orderBy('id', 'DESC')
         ->paginate(2);
-            
+
         // $promocions = DB::table('promocions')
         // ->join('users', 'users.id', '=', 'promocions.id_usuari')
         // ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img')
         // ->orderBy('id', 'DESC')
         // ->paginate(2);
-        
+
         return view('index', compact('noticies'));
     }
 
@@ -145,7 +145,7 @@ class HomeController extends Controller
     public function incidencia()
     {
         $prioritats = PrioritatIncidencia::all();
-        
+
         return view('incidencia', compact('prioritats'));
     }
 
@@ -293,6 +293,9 @@ class HomeController extends Controller
 
     public function compra_finalitzada()
     {
+      $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
+                  ->where('cistelles.id_usuari', '=', Auth::id())->count();
+      if ($quantitat_cistella > 0) {
         $elements_cistella = DB::table('linia_cistelles')
             ->join('cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
             ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
@@ -384,6 +387,9 @@ class HomeController extends Controller
         dispatch(new \App\Jobs\GenerateFacturaPDFJob($id_venta, $usuari));
 
         return view('/compra_finalitzada', compact('venta'));
+        }else{
+          return redirect('/cistella')->with('error', 'No tens cap producte a la cistella.');
+        }
     }
 
     public function cistella()
@@ -446,6 +452,9 @@ class HomeController extends Controller
 
     public function compra()
     {
+      $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
+                  ->where('cistelles.id_usuari', '=', Auth::id())->count();
+      if ($quantitat_cistella > 0) {
         $linia_cistella = Cistella::join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
         ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
         ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
@@ -481,6 +490,9 @@ class HomeController extends Controller
         $usuari = User::where('id', '=', Auth::id());
 
         return view('/compra', compact('linia_cistella', 'total','fotos','total2','compteTotal','numeroFotos','numeroTickets','user'));
+      }else{
+        return redirect('/cistella')->with('error', 'No tens cap producte a la cistella.');
+      }
     }
 
     public function llistarAtraccionsPublic($id)
@@ -488,7 +500,7 @@ class HomeController extends Controller
         $atraccions = Atraccion::findOrFail($id);
 
         $tipus_atraccio = TipusAtraccions::findOrFail($atraccions->tipus_atraccio);
-        
+
         return view('/atraccions_generades', compact('atraccions', 'tipus_atraccio'));
     }
 
@@ -536,7 +548,7 @@ class HomeController extends Controller
 
             //$noticies->where('categories.id', '=', $cat);
             ->paginate(8);
-            
+
         return view('noticies', compact('noticies'));
     }
 
@@ -624,7 +636,7 @@ class HomeController extends Controller
     public function modificar_element_cistella_ajax()
     {
         $update_linia_cistella = Linia_cistella::where('id', request('id_linia_cistella'))->update(['quantitat' => request('quantitat_mod')]);
-        
+
         return 'El buen update gente';
     }
 
@@ -635,16 +647,16 @@ class HomeController extends Controller
         $producte = Producte::find($linea_cistella->producte);
         $atributs = Atributs_producte::find($producte->atributs);
         $update_atributs_viatges = Atributs_producte::where('id', $producte->atributs)->update(['tickets_viatges' => request('quantitat_mod')]);
-        
+
         if ($numviatges == 3) {
             $update_atributs_preu = Atributs_producte::where('id', $producte->atributs)->update(['preu' => $atributs->preu - 5]);
         } else {
             $update_atributs_preu = Atributs_producte::where('id', $producte->atributs)->update(['preu' => $atributs->preu + 5]);
         }
-        
+
         return 'El buen update de viages gente';
     }
-    
+
     public function sala_chat()
     {
         return view('sala_chat');
