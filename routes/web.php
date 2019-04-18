@@ -85,10 +85,19 @@ Route::get('/maps', function(){
 
  Route::post('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaempleat');
 
+
  Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);
  
+ Route::post('/gestio/atraccions/crearassignacioneteja/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaEmpleatNeteja');
+
+
+
  Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral')->middleware(['auth','is_admin','verified']);
  
+ Route::post('/gestio/atraccions/crearassignaciogeneral/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaEmpleatGeneral');
+
+
+
  Route::any('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio')->middleware(['auth','is_admin','verified']);
 
  Route::any('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna')->middleware(['auth','is_admin','verified']);
