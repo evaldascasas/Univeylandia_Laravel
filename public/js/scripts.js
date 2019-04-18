@@ -23,6 +23,32 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    $('#results_table_ordenats_id_desc').DataTable({
+      "order": [[ 0, "desc" ]],
+        language: {
+            "sProcessing":   "Processant...",
+            "sLengthMenu":   "Mostra _MENU_ registres",
+            "sZeroRecords":  "No s'han trobat registres.",
+            "sEmptyTable":   "No hi ha dades a mostrar.",
+            "sInfo":         "Mostrant de _START_ a _END_ de _TOTAL_ registres",
+            "sInfoEmpty":    "Mostrant de 0 a 0 de 0 registres",
+            "sInfoFiltered": "",
+            "sInfoPostFix":  "",
+            "sSearch":       "Filtrar:",
+            "sUrl":          "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Carregant...",
+            "oPaginate": {
+                "sFirst":    "Primer",
+                "sPrevious": "Anterior",
+                "sNext":     "Següent",
+                "sLast":     "Últim"
+            }
+        }
+    });
+});
+
 $(document).on('click','#confirm_delete', function(e) {
     e.preventDefault();
     var form = $(this).parents('form');

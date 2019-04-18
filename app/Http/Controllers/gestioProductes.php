@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
+use Carbon\Carbon;
 //use Illuminate\Support\Facades\Storage;
 use Storage;
 use File;
@@ -13,6 +14,10 @@ use File;
 use \App\Producte;
 use \App\Tipus_producte;
 use \App\Atributs_producte;
+use \App\Atraccion;
+use \App\User_entra_atraccio;
+use \App\Linia_ventes;
+use \App\Venta_productes;
 
 class gestioProductes extends Controller
 {
@@ -234,6 +239,12 @@ class gestioProductes extends Controller
     {
         $producte = Producte::find($id);
         $atributs_producte = Atributs_producte::find($producte->atributs);
+        if(File::exists($atributs_producte->foto_path)) {
+            File::delete($atributs_producte->foto_path);
+        }
+        if(File::exists($atributs_producte->foto_path_aigua)) {
+            File::delete($atributs_producte->foto_path_aigua);
+        }
         $producte->delete();
         $atributs_producte->delete();
         return redirect('/gestio/productes') ->with('success', 'Producte eliminat correctament');
@@ -249,8 +260,8 @@ class gestioProductes extends Controller
             ->orderBy('estat', 'DESC')
             ->orderBy('nom', 'ASC');
 
-            
-            
+
+
             $mytime = Carbon\Carbon::now();
             $temps = $mytime->toDateString();
 
@@ -259,6 +270,122 @@ class gestioProductes extends Controller
             return $pdf->download('productes'.$temps.'.pdf');
 
 
+    }
+    public function validacio(){
+      $atraccions = Atraccion::all();
+      return view('validacio', compact('atraccions'));
+    }
+
+    public function validar(Request $request){
+      if (Producte::find($request->get('ticket')) != null) {
+      $valid = false;
+      $user_venta_ticket = null;
+      $ticket = Producte::find($request->get('ticket'));
+      $ticket_atributs = Atributs_producte::find($ticket->atributs);
+      $tipus_ticket = Tipus_producte::find($ticket_atributs->nom);
+
+      $localitzacio_validacio = $request->get('atraccio_selector'); //Únicament s'utilitza per a comprovar si la validació es a una atracció o a la entrada del parc.
+      $tipus_cua = $request->get('tipus_cua_selector'); // 0 == Normal | 1 == Express
+      $error = 'Ticket invalid';
+      $success = 'Ticket valid';
+      $data_validacio_ticket = new Carbon($ticket_atributs->data_entrada);
+      $data_validacio_ticket->hour(0)->minute(0)->second(0);
+      $data_actual = Carbon::now(new \DateTimeZone('Europe/Madrid'));
+      $data_actual->hour(0)->minute(0)->second(0);
+      $data_actual_update = Carbon::now(new \DateTimeZone('Europe/Madrid'));
+      $atraccio_seleccionada = null;
+
+      //Si es un ticket
+      if ($ticket_atributs->nom == 1 || $ticket_atributs->nom == 2 || $ticket_atributs->nom ==3 || $ticket_atributs->nom == 4 || $ticket_atributs->nom == 5 || $ticket_atributs->nom == 6 || $ticket_atributs->nom == 7) {
+        //Si es la entrada al parc
+        if ($localitzacio_validacio == -1) {
+          //Si la data de validació es superior o igual a 1 día a la data actual
+          if ($data_validacio_ticket->diff($data_actual)->days > 0){
+            if (($ticket_atributs->nom == 6 || $ticket_atributs->nom == 7) && $ticket->estat == 1 && $ticket_atributs->tickets_viatges <=0) { //ticket viatges a la entrada
+              $error = "T'has quedat sense viatges i la data d'entrada ha superat un día.";
+            }else{
+              $error = 'Un ticket general o express unicament es valid per a un día';
+            }
+          }else { //Es crea el registre d'entrada amb la data actual
+            DB::table('atributs_producte')
+                ->where('id', $ticket_atributs->id)
+                ->update(['data_entrada' => $data_actual_update->toDateTimeString()]);
+            $valid = true;
+          }
+        }else{//Si es la validació a una atracció
+          if (($ticket_atributs->data_entrada == null || $data_validacio_ticket->diff($data_actual)->days > 0) && ($ticket_atributs->nom != 6 || $ticket_atributs->nom != 7)) { //comprova que s'haigue validat a la entrada del parc i que no s'intente colar una entrada ja utilitzada anteriorment. La regla del temps no s'aplica als tickets de viatges
+            if ($ticket_atributs->data_entrada == null) {
+              $error = 'La validació del ticket es te que realitzar primerament a la entrada del parc.';
+            }else{
+              $error = 'Que fas intentant colar un ticket ja utilitzat?';
+            }
+          }else{
+            //Si es express
+            if (($ticket_atributs->nom == 4 || $ticket_atributs->nom == 5) && $ticket->estat == 1) {
+              $valid = true;
+            }
+            //Si es de viatges
+            elseif (($ticket_atributs->nom == 6 || $ticket_atributs->nom == 7) && $ticket->estat == 1) {
+              if ($tipus_cua == 0 && $ticket_atributs->tickets_viatges > 0) {
+                DB::table('atributs_producte')
+                    ->where('id', $ticket_atributs->id)
+                    ->update(['tickets_viatges' => $ticket_atributs->tickets_viatges - 1]);
+                $valid = true;
+              }
+              else{
+                if ($ticket_atributs->tickets_viatges <= 0) {
+                  $error = "T'has quedat sense viatges, a pagar";
+                }else{
+                  $error = "Els tickets de viatges no poden accedir a la cua express";
+                }
+              }
+            }
+            //Si es general
+            elseif(($ticket_atributs->nom == 1 || $ticket_atributs->nom == 2) && $ticket->estat == 1){
+              if ($tipus_cua == 0) {
+                $valid = true;
+              }else{
+                $error = "Els tickets generals no poden accedir a la cua express";
+              }
+            }
+            //Si es un ticket de nado, no es pot validar a les atraccions. Mostrar missatge d'error informatiu
+            else {
+              $error = 'Un nado pot muntar sense validació. La validació es fa a la entrade del pare/mare que munti amb ell.';
+            }
+          }
+        }
+      }
+      if ($localitzacio_validacio != -1) { //si la validació no es a la entrada del parc, retornem la atraccio.
+        $atraccio_seleccionada = Atraccion::find($localitzacio_validacio);
+      }
+      if ($valid) {
+        if ($localitzacio_validacio != -1) { //Si la validacio no ha sigut a la entrada del parc, es fa un insert en user_entra_atraccio
+          if ($linia_venta = Linia_ventes::where('producte', $ticket->id)->first()) { //Si el ticket pertany a un usuari (no s'ha venut a la taquilla)
+            $venta = Venta_productes::find($linia_venta->id_venta);
+            $user_venta_ticket = $venta->id_usuari;
+          }
+
+          $user_atraccio = new User_entra_atraccio([
+              'id_usuari' => $user_venta_ticket,
+              'id_atraccio' => $localitzacio_validacio,
+              'id_ticket' => $ticket->id
+          ]);
+          $user_atraccio->save();
+        }
+        return redirect('/validacio')->with(compact('success', 'ticket', 'ticket_atributs', 'tipus_ticket', 'atraccio_seleccionada', 'tipus_cua'));
+      }else{
+        return redirect('/validacio')->with(compact('error', 'ticket', 'ticket_atributs', 'tipus_ticket', 'atraccio_seleccionada', 'tipus_cua'));
+      }
+    }else{
+      $error = 'Ticket no trobat';
+      $localitzacio_validacio = $request->get('atraccio_selector');
+      $atraccio_seleccionada = null;
+      $tipus_cua = $request->get('tipus_cua_selector');
+      if ($localitzacio_validacio != -1) { //si la validació no es a la entrada del parc, retornem la atraccio.
+        $atraccio_seleccionada = Atraccion::find($localitzacio_validacio);
+      }
+      return redirect('/validacio')->with(compact('error', 'atraccio_seleccionada', 'tipus_cua'));
+    }
     }
 
 }

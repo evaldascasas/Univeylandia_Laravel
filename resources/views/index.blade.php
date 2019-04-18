@@ -42,12 +42,12 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="font-weight-bold text-center">PROMOCIONS NADAL 2019</h1>
+            <h1 class="font-weight-bold text-center">Promocions Nadal 2019</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <a href="{{route('promocions')}}"><img src="/img/promocions/promocio1.jpg" class="img-fluid"
+            <a href="{{route('promocions')}}"><img src="{{ asset('/img/promocions/promocio1.jpg') }}" class="img-fluid"
                     alt="imatge promoció 1"></a>
         </div>
     </div>
@@ -58,7 +58,7 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="font-weight-bold text-center text-uppercase">noticies</h1>
+            <h1 class="font-weight-bold text-center">Notícies</h1>
         </div>
     </div>
     <div class="row">
@@ -90,46 +90,46 @@
     <!-- FI NOTICIES -->
 
     <!-- LOCALITZA -->
-</div>
-
-<div class="container mt-3">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="font-weight-bold text-center">On estem?</h1>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="font-weight-bold text-center">On estem?</h1>
+            </div>
         </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
+    <div class="row">
+        <div class="col-sm-12">
 
-        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>  
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc4rbBZW_EiNrWWjzcgb2NnFAeBD66cSs&callback=myMap"></script>    
-        <script>
-               $(document).ready(function(){
-                  var marker;
-                  var geocoder = new google.maps.Geocoder();
-                  var myLatlng = new google.maps.LatLng(40.7160476, 0.5648026);
-                  var mapOptions = {zoom: 7, center: myLatlng, mapTypeId: google.maps.MapTypeId.ROADMAP}
-                  var map = new google.maps.Map($("#map").get(0), mapOptions);
-                
+            <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc4rbBZW_EiNrWWjzcgb2NnFAeBD66cSs&callback=myMap"></script>
+            <script>
+                $(document).ready(function () {
+                    var marker;
+                    var geocoder = new google.maps.Geocoder();
+                    var myLatlng = new google.maps.LatLng(40.7160476, 0.5648026);
+                    var mapOptions = { zoom: 7, center: myLatlng, mapTypeId: google.maps.MapTypeId.ROADMAP }
+                    var map = new google.maps.Map($("#map").get(0), mapOptions);
+
                     var address = "Amposta";
                     if (marker) { marker.setMap(null); }
-                    geocoder.geocode({address: address}, function(results) {
+                    geocoder.geocode({ address: address }, function (results) {
                         marker = new google.maps.Marker({
-                          position: results[0].geometry.location,	map: map
+                            position: results[0].geometry.location, map: map
                         });
 
-                    var infoWindow = new google.maps.InfoWindow({
-                      content: "This is: <h3>" + "Univeylandia" + "<br><a href=http://maps.google.com/maps?daddr=" + 
-							        address + ">Com anar</a>"}
-                      );
-                      infoWindow.open(map, marker);
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: "This is: <h3>" + "Univeylandia" + "<br><a href=http://maps.google.com/maps?daddr=" +
+                                address + ">Com anar</a>"
+                        }
+                        );
+                        infoWindow.open(map, marker);
                     });
                 });
-        </script>
-        <div id="map" style="width:100%;height:400px;"></div>
+            </script>
+            <div id="map" style="width:100%;height:400px;"></div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- FI LOCALITZA -->

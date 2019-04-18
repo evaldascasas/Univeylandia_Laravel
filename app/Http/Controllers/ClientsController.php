@@ -42,7 +42,7 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        $randomPass = str_random(8);
+        $randomPass = str_random(16);
 
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
@@ -81,10 +81,11 @@ class ClientsController extends Controller
         
         $usuari->save();
         
-        if($usuarr->save()) {
-            $token = app(\Illuminate\Auth\Passwords\PasswordBroker::class)->createToken($usuari);
+        if($usuari->save()) {
+            // $token = app(\Illuminate\Auth\Passwords\PasswordBroker::class)->createToken($usuari);
 
-            $usuari->sendPasswordResetNotification($token);   
+            // $usuari->sendPasswordResetNotification($token);   
+            dispatch(new \App\Jobs\SendEmailOnUserCreationJob($usuari));
         }
 
         return redirect('/gestio/clients')->with('success', 'Client creat correctament');
