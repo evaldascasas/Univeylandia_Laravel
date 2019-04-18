@@ -276,27 +276,19 @@ class ClientsController extends Controller
      */
     public function importCSV(Request $request)
     {
-        // $ext = $request('csv')->getClientOriginalExtension();
+        $file = $request->file('file');
 
-        // dd($request->file('file'));
-
+        $ext = $file->getClientOriginalExtension();
+        
         $request->validate([
-            'file' => ['file','required'],
+            'file' => ['file','required','mimetypes:text/plain,text/csv,csv,application/csv'],
         ]);
 
         if($request->hasFile('file')) {
-            try {
-                Excel::import(new ClientsImport, $request->file('file'));
-            
-                return redirect('/gestio/clients')->with('success', 'Clients importats de forma correcta');
-            }
-            catch(Exception $e) {
-                return redirect()->back()->with('errors', 'Error: '.$e);
-            }
-            
-        }
-
+            Excel::import(new ClientsImport, $request->file('file'));
         
+            return redirect('/gestio/clients')->with('success', 'Clients importats de forma correcta');
+        }
     }
 
 }
