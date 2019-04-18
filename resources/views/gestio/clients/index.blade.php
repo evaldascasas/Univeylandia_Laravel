@@ -6,20 +6,34 @@
 @endsection
 @section("content")
 
-
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">{{ __('Clients') }}</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <form action="{{action('ClientsController@guardarClientPDF')}}">
-                    <button class="btn btn-sm btn-outline-secondary">
-                        <span data-feather="save"></span>
-                        {{ __('Exportar') }}
-                    </button>
+    <h1 class="h2">{{ __('Clients') }}</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <div class="btn-group dropleft">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span data-feather="save"></span>
+                    {{ __('Exportar') }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ route('clients.pdf') }}">{{ __('PDF') }}</a>
+                    <a class="dropdown-item" href="{{ route('clients.csv') }}">{{ __('CSV') }}</a>
+                    {{-- <form action="{{ route('clients.pdf') }}">
+                        <button class="btn dropdown-item">
+                            {{ __('PDF') }}
+                        </button>
+                    </form> --}}
+                    {{-- <form action="{{ route('clients.csv') }}">
+                        <button class="btn dropdown-item">
+                            {{ __('CSV') }}
+                        </button>
+                    </form> --}}                    
                 </div>
-            </form>
+            </div>
         </div>
     </div>
+</div>
 
 <div class="table-responsive">
     <table

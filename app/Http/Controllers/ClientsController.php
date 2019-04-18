@@ -1,9 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use \App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+use App\Exports\ClientsExport;
+use App\Imports\ClientsImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use Image;
 use PDF;
 use Carbon;
@@ -234,7 +240,7 @@ class ClientsController extends Controller
      * 
      * @return PDF
      */
-    public function guardarClientPDF () 
+    public function guardarClientPDF() 
     {
         $usuaris = User::whereNotNull('email_verified_at')
         ->where('id_rol',1)
@@ -247,4 +253,50 @@ class ClientsController extends Controller
 
         return $pdf->download('client'.$temps.'.pdf');
     }
+
+    /**
+     * Generate a CSV file with client data
+     * 
+     * @return CSV
+     */
+    public function exportCSV()
+    {
+        $mytime = Carbon\Carbon::now();
+
+        $temps = $mytime->toDateString();
+
+        return Excel::download(new ClientsExport, 'clients'.$temps.'.csv');
+    }
+
+    /**
+     * Import client data with a CSV file
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importCSV(Request $request)
+    {
+        // $ext = $request('csv')->getClientOriginalExtension();
+
+        // dd($request->file('file'));
+
+        $request->validate([
+            'file' => ['file','required'],
+        ]);
+
+        if($request->hasFile('file')) {
+            try {
+                Excel::import(new ClientsImport, $request->file('file'));
+            
+                return redirect('/gestio/clients')->with('success', 'Clients importats de forma correcta');
+            }
+            catch(Exception $e) {
+                return redirect()->back()->with('errors', 'Error: '.$e);
+            }
+            
+        }
+
+        
+    }
+
 }

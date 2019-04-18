@@ -107,6 +107,9 @@ Route::resource('/gestio/atraccions', 'AtraccionsController')->middleware(['auth
 // Route::get('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload')->middleware(['auth','is_admin','verified']);
 
 // Route::post('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload.post')->middleware(['auth','is_admin','verified']);
+Route::get('/gestio/clients/index/csv', 'ClientsController@exportCSV')->name('clients.csv')->middleware(['auth','is_admin','verified']);
+
+Route::post('/gestio/clients/create/csv', 'ClientsController@importCSV')->name('clients.import')->middleware(['auth','is_admin','verified']);
 
 Route::get('gestio/clients/deactivated', 'ClientsController@trashed')->name('clients.deactivated')->middleware(['auth','is_admin','verified']);
 
@@ -123,7 +126,7 @@ Route::get('/view/atraccions/assigna', 'AtraccionsController@guardarAssignacions
 
 Route::get('/view/gestioProductes/index', 'gestioProductes@guardarProductePDF')->middleware(['auth','is_admin','verified']);
 
-Route::get('/view/clients/index', 'ClientsController@guardarClientPDF')->middleware(['auth','is_admin','verified']);
+Route::get('/view/clients/index', 'ClientsController@guardarClientPDF')->name('clients.pdf')->middleware(['auth','is_admin','verified']);
 
 Route::get('/sala_chat',"HomeController@sala_chat")->name('sala_chat'); //Sala chat
 

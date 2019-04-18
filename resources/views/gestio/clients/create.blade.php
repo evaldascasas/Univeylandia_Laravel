@@ -94,5 +94,23 @@
      <button class="btn btn-outline-success" type="submit" value="Guardar">Crear</button>
      <a href="{{ URL::previous() }}" class="btn btn-outline-secondary">Cancel·lar</a>
    </form>
+
+   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Crear clients de forma massiva</h1>
+    </div>
+ 
+    <form action="{{ route('clients.import') }}" method="post" enctype="multipart/form-data">
+      @csrf
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-md-3 mb-3">
+            <label for="file">Pujar arxiu .CSV amb dades de clients</label>
+            <input type="file" class="form-control-file" name="file">
+          </div>
+        </div>
+        <button class="btn btn-outline-success" type="submit" value="Pujar">Pujar</button>
+      </div>
+    </form>
+ 
  
  @endsection
