@@ -123,25 +123,19 @@ class VentesController extends Controller
         $dates = explode(' - ', $request->get('daterange'));
         $start_date = Carbon::createFromFormat('d/m/Y', $dates[0])->hour(0)->minute(0)->second(0)->format('Y-m-d H:i:s');
         $end_date = Carbon::createFromFormat('d/m/Y', $dates[1])->hour(23)->minute(59)->second(59)->format('Y-m-d H:i:s');
-        $total = 0;
-        //dd($start_date, $end_date);
         $ventes = DB::table('venta_productes')
-            ->join('users', 'users.id', '=', 'venta_productes.id_usuari')
-            ->select('venta_productes.id as id', 'venta_productes.id_usuari as id_usuari' ,'venta_productes.preu_total as preu', 'venta_productes.estat as estat', 'venta_productes.created_at as temps_compra', 'users.nom as nom', 'users.cognom1 as cognom1', 'users.cognom2 as cognom2', 'users.email as email', 'users.numero_document as numero_document')
-            ->whereBetween('venta_productes.created_at',[$start_date,$end_date])
-            ->orderBy('id', 'ASC')
-            ->get();
-        foreach ($ventes as $venta) {
-          $total = $total + $venta->preu;
-        }
+          ->join('users', 'users.id', '=', 'venta_productes.id_usuari')
+          ->select('venta_productes.id as id', 'venta_productes.id_usuari as id_usuari' ,'venta_productes.preu_total as preu', 'venta_productes.estat as estat', 'venta_productes.created_at as temps_compra', 'users.nom as nom', 'users.cognom1 as cognom1', 'users.cognom2 as cognom2', 'users.email as email', 'users.numero_document as numero_document')
+          ->whereBetween('venta_productes.created_at',[$start_date,$end_date])
+          ->orderBy('id', 'ASC')
+          ->get();
         $numero_ventes = $ventes->count();
         if($numero_ventes == 0){
           return redirect('/gestio/ventes')->with('error', 'No hi han productes a exportar en aquest rang.');
         }else{
-          $ids_ventes = $ventes->pluck('id')->toArray();
-          $productes_venuts = Linia_ventes::whereIn('id_venta', $ids_ventes)->get()->count();
-          $pdf = PDF::loadView('/gestio/ventes/exportPDF', compact('ventes', 'total', 'dates', 'numero_ventes', 'productes_venuts'));
-          return $pdf->download('ventes_'.$dates[0].'-'.$dates[1].'.pdf');
+          $usuari = Auth::user();
+          dispatch(new \App\Jobs\GenerateExportacioPDFVentesJob($usuari, $dates));
+          return redirect('/gestio/ventes')->with('success', 'Rebràs la exportació al teu correu.');
         }
     }
 }
