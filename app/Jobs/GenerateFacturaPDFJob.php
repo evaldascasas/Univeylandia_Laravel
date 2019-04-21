@@ -56,11 +56,13 @@ class GenerateFacturaPDFJob implements ShouldQueue
       $user_vista = $this->usuari;
 
       $temps = Carbon::now()->toDateString();
-      
+
+      $factures_dir_creacio = public_path().'/storage/factures_compra/';
+
       $factures_dir = 'storage/factures_compra/';
 
-      if( ! File::exists($factures_dir)) {
-          File::makeDirectory($factures_dir, 0777, true);
+      if( ! File::exists($factures_dir_creacio)) {
+          File::makeDirectory($factures_dir_creacio, 0777, true);
       }
 
       $ruta_factura_pdf_update = $factures_dir.'univeylandia_compra_'.time().'.pdf';
@@ -72,7 +74,7 @@ class GenerateFacturaPDFJob implements ShouldQueue
       DB::table('venta_productes')
           ->where('id', $this->id_venta)
           ->update(['factura_pdf_path' => $ruta_factura_pdf_update]);
-          
+
       //'univeylandia_compra'.$temps.'.pdf'
       /*FI GENERACIO FACTURA*/
 
