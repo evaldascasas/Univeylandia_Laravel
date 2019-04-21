@@ -6,8 +6,24 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use Carbon;
+
 class ClientsModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
+    /** @setUp for database seeding */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('migrate:fresh');
+        // $this->artisan('db:seed');
+        $this->seed('RolsTableSeeder');
+        $this->seed('HorarisTableSeeder');
+        $this->seed('DadesEmpleatSeeder');
+        $this->seed('UsersTableSeeder');
+    }
+
     /** @test */
     function it_loads_the_client_list_page_if_user_not_authenticated()
     {
@@ -30,10 +46,17 @@ class ClientsModuleTest extends TestCase
     {
         $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
 
+        factory(\App\User::class)->create([
+            'nom' => 'Evaldas',
+            'id_rol' => 1,
+            'email_verified_at' => Carbon\Carbon::now(),
+        ]);
+
         $this->actingAs($user)
             ->get('/gestio/clients')
             ->assertStatus(200)
-            ->assertSee('Clients');
+            ->assertSee('Clients')
+            ->assertSee('Evaldas');
     }
 
     /** @test */
@@ -94,9 +117,18 @@ class ClientsModuleTest extends TestCase
     {
         $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
 
+        $new_user = factory(\App\User::class)->create([
+            'nom' => 'Evaldas',
+            'id_rol' => 1,
+            'email_verified_at' => Carbon\Carbon::now(),
+        ]);
+
+        $new_user->delete();
+
         $this->actingAs($user)
             ->get('/gestio/clients/deactivated')
             ->assertStatus(200)
-            ->assertSee('Clients desactivats');
+            ->assertSee('Clients desactivats')
+            ->assertSee('Evaldas');
     }
 }
