@@ -23,7 +23,7 @@
             @endif
 
             @elseif(Auth::user()->id_rol !== 1 && Auth::user()->id_rol !== 2)
-            
+
             <li class="nav-item dropdown">
                 @if(Auth::user()->unreadNotifications->count() !== 0)
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -42,7 +42,7 @@
                         </form>
                     </li>
                     @endforeach
-                    
+
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Mostrar notificacions</a>
                 </ul>
@@ -57,7 +57,7 @@
                 </ul>
                 @endif
             </li>
-            
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">{{ Auth::user()->nom }} {{ Auth::user()->cognom1 }}</a>
@@ -97,7 +97,7 @@
                         </form>
                     </li>
                     @endforeach
-                    
+
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Mostrar notificacions</a>
                 </ul>
@@ -120,6 +120,7 @@
                     <li><a class="dropdown-item" href="{{ route('perfil') }}">{{ __('Perfil') }}</a></li>
                     <li><a class="dropdown-item" href="{{ route('incidencia') }}">{{ __('Incidències') }}</a></li>
                     <li><a class="dropdown-item" href="{{ route('gestio') }}">{{ __('Gestió') }}</a></li>
+                    <li><a class="dropdown-item" href="{{ route('validacio') }}">{{ __('Validació') }}</a></li>
                     <li><a class="dropdown-item" href="{{ route('tasques') }}">{{ __('Tasques') }}</a></li>
 
                     <li>
@@ -134,7 +135,7 @@
                     </li>
                 </ul>
             </li>
-            
+
             @elseif(Auth::user()->id_rol == 1)
             <li class="nav-item dropdown">
                 @if(Auth::user()->unreadNotifications->count() !== 0)
@@ -154,7 +155,7 @@
                         </form>
                     </li>
                     @endforeach
-                    
+
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Mostrar notificacions</a>
                 </ul>
@@ -169,7 +170,7 @@
                 </ul>
                 @endif
             </li>
-            
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">{{ Auth::user()->nom }} {{ Auth::user()->cognom1 }}</a>
