@@ -102,3 +102,4 @@ class ProductesModuleTest extends TestCase
              ->get('/gestio/clients/9999999/edit')
              ->assertStatus(404);
      }
+}
