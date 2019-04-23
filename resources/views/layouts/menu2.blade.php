@@ -33,6 +33,7 @@
                     aria-haspopup="true" aria-expanded="false">Ajuda</a>
                 <ul class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink2">
                     <li><a class="dropdown-item {{ request()->routeIs('contacte') ? 'active' : '' }}" href="{{ route('contacte')}}">Contacte</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('sala_chat') ? 'active' : '' }}" href="{{ route('sala_chat')}}">Sala xat</a></li>
                     <li><a class="dropdown-item {{ request()->routeIs('faq') ? 'active' : '' }}" href="{{ route('faq')}}">Preguntes freqüents</a></li>
                 </ul>
             </li>
