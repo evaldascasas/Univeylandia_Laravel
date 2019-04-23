@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             TipusProducteSeeder::class,
             AtributsProducteSeeder::class,
             ProducteSeeder::class,
+            VentaProductesTableSeeder::class,
+            LiniaVentesTableSeeder::class,
 			NoticiesSeeder::class,
         ]);
     }
