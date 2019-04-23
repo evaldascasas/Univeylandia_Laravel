@@ -137,4 +137,13 @@ class ProductesModuleTest extends TestCase
         $this->actingAs($user);
         $this->json('DELETE', '/gestio/productes/'.$producte->id, [])->assertStatus(302);
      }
+     /** @test */
+     function create_foto_producte(){
+        $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
+        $this->actingAs($user);
+        $this->json('POST', '/gestio/productes/imatges/upload', [
+          'attraction' => '1',
+          'image[]' => UploadedFile::fake()->image('muntar_imatge_test.jpg'),
+          ])->assertStatus(302);
+     }
 }
