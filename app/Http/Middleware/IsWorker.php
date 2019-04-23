@@ -29,7 +29,7 @@ class IsWorker
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->to('/home');
+                return redirect()->to('/');
             }
         }
 

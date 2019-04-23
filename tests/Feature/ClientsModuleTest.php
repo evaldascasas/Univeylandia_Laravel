@@ -25,14 +25,14 @@ class ClientsModuleTest extends TestCase
     }
 
     /** @test */
-    function it_loads_the_client_list_page_if_user_not_authenticated()
+    function it_will_not_load_the_client_list_page_if_user_not_authenticated()
     {
         $this->get('/gestio/clients')
             ->assertStatus(302);
     }
 
     /** @test */
-    function it_loads_the_client_list_page_if_user_is_not_admin()
+    function it_will_not_load_the_client_list_page_if_user_is_not_admin()
     {
         $user = \App\User::where('email','dalasito@univeylandia-parc.cat')->first();
 
@@ -82,7 +82,7 @@ class ClientsModuleTest extends TestCase
     }
 
     /** @test */
-    function it_loads_the_client_show_page_if_user_is_admin_and_client_does_not_exist()
+    function it_fails_to_load_the_client_show_page_if_user_is_admin_and_client_does_not_exist()
     {
         $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
 
@@ -103,7 +103,7 @@ class ClientsModuleTest extends TestCase
     }
 
     /** @test */
-    function it_loads_the_client_edit_page_if_user_is_admin_and_client_does_not_exist()
+    function it_fails_to_load_the_client_edit_page_if_user_is_admin_and_client_does_not_exist()
     {
         $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
 
