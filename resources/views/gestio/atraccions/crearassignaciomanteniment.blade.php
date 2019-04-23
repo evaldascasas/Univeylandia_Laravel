@@ -124,7 +124,7 @@
                                         '<span aria-hidden="true">&times;</span>' +
                                         '</button>' +
                                     '</div>' +
-                                '<form action="{{route("atraccions.guardarAssignacio", "+id_atraccio+") }} > ' +
+                                '<form action="{{route("atraccions.guardarAssignacio", "$atraccio->id") }}" > ' +
                                 '@csrf' +
                                 '<div class="modal-body"> ' + 
                                     '<div class="row"> ' + 
