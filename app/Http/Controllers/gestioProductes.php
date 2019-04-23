@@ -116,48 +116,51 @@ class gestioProductes extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-      request()->validate([
+     public function store(Request $request)
+     {
+       $imatge_producte = '';
+       if ($request->has('image')) {
+         request()->validate([
 
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+               'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
-        ]);
-      $file = $request->file('image');
-      $file_name = time() . $file->getClientOriginalName();
-      $file_path = 'storage/productes';
-      $file->move($file_path, $file_name);
+           ]);
+         $file = $request->file('image');
+         $file_name = time() . $file->getClientOriginalName();
+         $file_path = 'storage/productes';
+         $file->move($file_path, $file_name);
+         $imatge_producte = "/".$file_path."/".$file_name;
+       }
+       $preu_base = Tipus_producte::find($request->get('tipus'))->preu_base;
+       $preu_final = $request->get('preu') +$preu_base;
 
-      $preu_base = Tipus_producte::find($request->get('tipus'))->preu_base;
-      $preu_final = $request->get('preu') +$preu_base;
+       $atributs_producte = new Atributs_producte([
+           'nom' => $request->get('tipus'),
+           'mida' => $request->get('mida'),
+           'tickets_viatges' => $request->get('tickets_viatges'),
+           'preu' => $preu_final,
+           'foto_path' => $imatge_producte
+       ]);
+       $atributs_producte->save();
+       //dd($Tipus_producte->id);
+       //$id = DB::table('tipus_productes')->lastInsertId();;
+       $producte = new producte([
+           'atributs' => $atributs_producte->id,
+           'descripcio' => $request->get('descripcio'),
+           'estat' => $request->get('estat')
+       ]);
+       //dd($request->file('image'));
+       /*$uploadedFile = $request->file('image');
+       $filename = $uploadedFile->getClientOriginalName();
 
-      $atributs_producte = new Atributs_producte([
-          'nom' => $request->get('tipus'),
-          'mida' => $request->get('mida'),
-          'tickets_viatges' => $request->get('tickets_viatges'),
-          'preu' => $preu_final,
-          'foto_path' => "/".$file_path."/".$file_name
-      ]);
-      $atributs_producte->save();
-      //dd($Tipus_producte->id);
-      //$id = DB::table('tipus_productes')->lastInsertId();;
-      $producte = new producte([
-          'atributs' => $atributs_producte->id,
-          'descripcio' => $request->get('descripcio'),
-          'estat' => $request->get('estat')
-      ]);
-      //dd($request->file('image'));
-      /*$uploadedFile = $request->file('image');
-      $filename = $uploadedFile->getClientOriginalName();
+       Storage::disk('local')->putFile(
+         'productes/'.$filename
+         $uploadedFile
+       );*/
 
-      Storage::disk('local')->putFile(
-        'productes/'.$filename
-        $uploadedFile
-      );*/
-
-      $producte ->save();
-      return redirect('/gestio/productes')->with('success', 'Producte registrat');
-    }
+       $producte ->save();
+       return redirect('/gestio/productes')->with('success', 'Producte registrat');
+     }
 
     /**
      * Display the specified resource.
@@ -277,7 +280,7 @@ class gestioProductes extends Controller
     }
 
     public function validar(Request $request){
-      if (Producte::find($request->get('ticket')) != null) {
+      if (Producte::find($request->get('ticket')) != null && Linia_ventes::where('producte', $request->get('ticket'))->first() != null) {
       $valid = false;
       $user_venta_ticket = null;
       $ticket = Producte::find($request->get('ticket'));

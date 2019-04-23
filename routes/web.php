@@ -93,7 +93,7 @@ Route::post('/gestio/atraccions/crearassignacioneteja/{id}/empleats', 'Atraccion
 
 
 Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral')->middleware(['auth','is_admin','verified']);
- 
+
 Route::post('/gestio/atraccions/crearassignaciogeneral/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaEmpleatGeneral');
 
 
@@ -167,8 +167,8 @@ Route::get('/botiga/atraccions/{id}/fotos','TendaController@imprimirFotos')->nam
 Route::get('/comprarFotos/{id}','TendaController@afegir_Foto')->name('fotos.comprar')->middleware(['auth','verified']);
 
 /* VALIDACIO ENTRADES */
-Route::get('/validacio',"gestioProductes@validacio")->name('validacio')->middleware(['auth','is_admin','verified']); //
-Route::post('/validacio', 'gestioProductes@validar')->name('validacio_accio')->middleware(['auth','is_admin','verified']); //
+Route::get('/validacio',"gestioProductes@validacio")->name('validacio')->middleware(['auth','is_worker','verified']); //
+Route::post('/validacio', 'gestioProductes@validar')->name('validacio_accio')->middleware(['auth','is_worker','verified']); //
 
 /* PAYPAL */
 Route::post('paypal', 'PaymentController@payWithpaypal');
