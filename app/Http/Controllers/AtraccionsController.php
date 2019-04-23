@@ -246,7 +246,9 @@ class AtraccionsController extends Controller
             'data_fi' => ['required','date','after:data_inici']
         ]);
 
-        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'),$request->get('data_inici'),3);
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici,$request->data_inici,3);
+
+        dump($empleats);
 
         return response()->json(array('empleats' => $empleats), 200);
     }
@@ -255,7 +257,7 @@ class AtraccionsController extends Controller
     {
         $atraccio = Atraccion::find($id);
 
-        return view('/gestio/atraccions/crearassignaciomanteniment', compact('atraccio' ));
+        return view('/gestio/atraccions/crearassignaciomanteniment', compact('atraccio'));
     }
 
     public function assignaEmpleatNeteja(Request $request) 
@@ -265,8 +267,10 @@ class AtraccionsController extends Controller
             'data_fi' => ['required','date','after:data_inici']
         ]);
 
-        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'),$request->get('data_inici'),4);
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici,$request->data_inici,4);
 
+        dump($empleats);
+        
         return response()->json(array('empleats' => $empleats), 200);
     }
     
@@ -309,7 +313,7 @@ class AtraccionsController extends Controller
 
         $assignacio->save();
 
-        return redirect('/gestio/atraccions/assigna')->with('success', 'OK bro :)');
+        return redirect('/gestio/atraccions/assigna')->with('success', 'Empleat assignat correctament');
     }
     
     public function assignacions()
@@ -345,6 +349,11 @@ class AtraccionsController extends Controller
 
     public function updateAssignacions(Request $request, $id)
     {
+        $request->validate([
+            'data_inici' => ['required','date','before:data_fi'],
+            'data_fi' => ['required','date','after:data_inici']
+        ]);
+        
         $assignacio = AssignacioAtraccion::findOrFail($id);
 
         $assignacio->data_inici = $request->get('data_inici');

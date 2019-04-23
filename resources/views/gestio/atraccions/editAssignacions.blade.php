@@ -46,12 +46,12 @@
                 <input type="text" class="form-control form-control-sm" name="nom_atraccio" value="{{ $dades_atraccio->nom_atraccio }}" readonly>
             </div>
             <div class="col-md-6 mb-6">
-              <label for="quantity">Data d'inici:</label>
-              <input type="date" class="form-control" name="data_inici" value="{{ $assignacio->data_inici }}">
+              <label for="data_inici">Data d'inici:</label>
+              <input type="date" class="form-control" name="data_inici" value="{{ $assignacio->data_inici }}" min="<?php echo date('Y-m-d')?>">
             </div>
             <div class="col-md-6 mb-6">
-              <label for="quantity">Data fi:</label>
-              <input type="date" class="form-control" name="data_fi" value="{{ $assignacio->data_fi }}">
+              <label for="data_fi">Data fi:</label>
+              <input type="date" class="form-control" name="data_fi" value="{{ $assignacio->data_fi }}" min="<?php echo date('Y-m-d')?>">
             </div>
         </div>
 

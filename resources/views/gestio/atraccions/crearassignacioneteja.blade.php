@@ -11,13 +11,6 @@
     }
 </style>
 
-@if(session()->get('success'))
-<div class="uper">
-    <div class="alert alert-success">
-        {{ session()->get('success') }}
-    </div>
-</div>
-@endif
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Neteja: Assignar Empleats a Atraccio</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
@@ -47,7 +40,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <button id="submit" value="Consultar" type="button" class="btn btn-primary"
-                        onclick="fetchRecords()">ASD</button>
+                        onclick="fetchRecords()">Consultar</button>
                 </div>
             </div>
         </form>

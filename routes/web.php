@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/maps', function(){
-    return View::make("maps");
-});
+// Route::get('/maps', function(){
+//     return View::make("maps");
+// });
 
 Route::get('/',"HomeController@index")->name('home');
 Route::get('/contacte','HomeController@contacte')->name('contacte');
@@ -89,12 +89,12 @@ Route::post('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'Atra
 
 Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);
 
-Route::post('/gestio/atraccions/crearassignacioneteja/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaEmpleatNeteja');
+Route::post('/gestio/atraccions/crearassignacioneteja/{id}/empleats', 'AtraccionsController@assignaEmpleatNeteja')->name('atraccions.assignaEmpleatNeteja');
 
 
 Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral')->middleware(['auth','is_admin','verified']);
 
-Route::post('/gestio/atraccions/crearassignaciogeneral/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaEmpleatGeneral');
+Route::post('/gestio/atraccions/crearassignaciogeneral/{id}/empleats', 'AtraccionsController@assignaEmpleatGeneral')->name('atraccions.assignaEmpleatGeneral');
 
 
 Route::any('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio')->middleware(['auth','is_admin','verified']);
