@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class ProductesModuleTest extends TestCase
 {
@@ -84,7 +86,7 @@ class ProductesModuleTest extends TestCase
              ->assertSee('Registrar producte');
      }
      /** @test */
-     function it_loads_the_productes_edit_page_if_user_is_admin_and_client_exists()
+     function it_loads_the_productes_edit_page_if_user_is_admin_and_producte_exists()
      {
          $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
 
@@ -94,12 +96,24 @@ class ProductesModuleTest extends TestCase
              ->assertSee('Editar producte');
      }
      /** @test */
-     function it_loads_the_productes_edit_page_if_user_is_admin_and_client_does_not_exist()
+     function it_loads_the_productes_edit_page_if_user_is_admin_and_producte_does_not_exist()
      {
          $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
 
          $this->actingAs($user)
              ->get('/gestio/clients/9999999/edit')
              ->assertStatus(404);
+     }
+     /** @test */
+     function create_producte(){
+        $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
+        $this->actingAs($user);
+        $this->json('POST', '/gestio/productes', [
+          'tipus' => '1',
+          'tickets_viatges' => '100',
+          'descripcio' => 'Test ticket general adult',
+          'preu' => '666',
+          'estat' => '1',
+          ])->assertStatus(302);
      }
 }
