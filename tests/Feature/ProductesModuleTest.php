@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use \App\Producte;
 
 class ProductesModuleTest extends TestCase
 {
@@ -115,5 +116,25 @@ class ProductesModuleTest extends TestCase
           'preu' => '666',
           'estat' => '1',
           ])->assertStatus(302);
+     }
+     /** @test */
+     function update_producte(){
+        $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
+        $producte = Producte::orderBy('id', 'desc')->first();
+        $this->actingAs($user);
+        $this->json('PUT', '/gestio/productes/'.$producte->id, [
+          'tipus' => '1',
+          'tickets_viatges' => '100',
+          'descripcio' => 'Test ticket general adult update',
+          'preu' => '333',
+          'estat' => '1',
+          ])->assertStatus(302);
+     }
+     /** @test */
+     function delete_producte(){
+        $user = \App\User::where('email','pacoramon@univeylandia-parc.cat')->first();
+        $producte = Producte::orderBy('id', 'desc')->first();
+        $this->actingAs($user);
+        $this->json('DELETE', '/gestio/productes/'.$producte->id, [])->assertStatus(302);
      }
 }
