@@ -23,7 +23,7 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
-use App\Http\Controllers\HomeController;                                                //IMPORTS PER LES VENTES
+use \App\Http\Controllers\HomeController;                                                //IMPORTS PER LES VENTES
 use \App\Producte;
 use \App\Tipus_producte;
 use \App\Atributs_producte;
@@ -86,6 +86,8 @@ class PaymentController extends Controller
             ->setRedirectUrls($redirect_urls)
             ->setTransactions(array($transaction));
 
+            
+        
         try {                                                                                           //Afegir el pagament al context de la API
             $payment->create($this->_api_context);
         } catch (\PayPal\Exception\PPConnectionException $ex) {                                         //Errors de temps de conexio i errors desconeguts

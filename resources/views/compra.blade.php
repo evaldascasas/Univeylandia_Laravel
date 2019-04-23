@@ -11,7 +11,7 @@
   background: #F3F3F3;
 }
 </style>
-{{-- <div class="column col-7">
+   <div class="column col-7">
             @if($numeroTickets > 0)
                     @forelse($linia_cistella as $cistella)
                     <p style="display:none"> {{$total = $total + ($cistella->preu* $cistella->quantitat)}} </p>
@@ -25,7 +25,7 @@
                     @endforeach
                     @endif
                         <p style="display:none"> {{$compteTotal = $total + $total2}} </p>
-</div> --}}
+</div> 
 <div class="container jumbotron mt-3">
   <div class="row">
       <div class="col-sm-12">
