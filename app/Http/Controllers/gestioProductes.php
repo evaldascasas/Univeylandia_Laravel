@@ -280,7 +280,7 @@ class gestioProductes extends Controller
     }
 
     public function validar(Request $request){
-      if (Producte::find($request->get('ticket')) != null) {
+      if (Producte::find($request->get('ticket')) != null && Linia_ventes::where('producte', $request->get('ticket'))->first() != null) {
       $valid = false;
       $user_venta_ticket = null;
       $ticket = Producte::find($request->get('ticket'));
