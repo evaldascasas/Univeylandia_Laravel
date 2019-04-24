@@ -248,7 +248,7 @@ class AtraccionsController extends Controller
 
         $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici,$request->data_inici,3);
 
-        dump($empleats);
+        // dump($empleats);
 
         return response()->json(array('empleats' => $empleats), 200);
     }
@@ -267,9 +267,9 @@ class AtraccionsController extends Controller
             'data_fi' => ['required','date','after:data_inici']
         ]);
 
-        $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici,$request->data_inici,4);
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'),$request->get('data_inici'),4);
 
-        dump($empleats);
+        // dump($empleats);
         
         return response()->json(array('empleats' => $empleats), 200);
     }

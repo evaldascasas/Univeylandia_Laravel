@@ -119,7 +119,7 @@
                         });
 
                         var infoWindow = new google.maps.InfoWindow({
-                            content: "This is: <h3>" + "Univeylandia" + "<br><a href=http://maps.google.com/maps?daddr=" +
+                            content: "<h3>" + "Univeylandia" + "<br><a href=http://maps.google.com/maps?daddr=" +
                                 address + ">Com anar</a>"
                         }
                         );
