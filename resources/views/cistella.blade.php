@@ -54,14 +54,23 @@
                   <option selected value=3>3</option>
                   <option value=6>6</option>
                   @else
-                  <option selected value=6>6</option>
                   <option value=3>3</option>
+                  <option selected value=6>6</option>
                   @endif
               </select>
               </td>
               @endif
               <td>
-                <input id="quantitat_ticket" class="form-control quantitat_input" style="width:50%;" class="quantitat_valor" type="number" min="1" max=6 value="{{$cistella->quantitat}}" id_linia_cistella = "{{$cistella->id}}">
+                {{-- <input id="quantitat_ticket" class="form-control quantitat_input" style="width:50%;" class="quantitat_valor" type="number" min="1" max=6 value="{{$cistella->quantitat}}" id_linia_cistella = "{{$cistella->id}}"> --}}
+                <select class="form-control quantitat_input" style="width:50%;" id_linia_cistella = "{{$cistella->id}}">
+                    @for($i=1; $i<=6; $i++)
+                    @if($cistella->quantitat == $i)
+                    <option value="{{ $cistella->quantitat }}" id_linia_cistella="{{ $cistella->id }}" selected>{{ $cistella->quantitat }}</option>
+                    @else
+                    <option value="{{ $i }}">{{ $i }}</option>
+                    @endif
+                    @endfor
+                </select>
               </td>
               <td>
                 {{$cistella->preu * $cistella->quantitat}}€
@@ -123,7 +132,7 @@
           </tr>
 
           <tr>
-                  <p style="display:none"> {{$total2 = $total2 + ($cistellafoto->preu * $cistellafoto->quantitat)}} </p>
+              <p style="display:none"> {{$total2 = $total2 + ($cistellafoto->preu * $cistellafoto->quantitat)}} </p>
           </tr>
 
           @endforeach
@@ -154,17 +163,18 @@ $(".quantitat_input" ).keyup(function() {
   }
 });
 
-$(".quantitat_input").focusout(function() {
-    if (this.value != $(this).data("lastValue") && this.value > 0 && this.value <=6) {
+$(".quantitat_input").change(function() {
+    if (this.options[this.selectedIndex].value != $(this).data("lastValue")) {
         //alert($(this).data("lastValue") + this.value + "id_cistella: " + this.getAttribute("id_linia_cistella"));
-        $(this).data("lastValue", this.value)
+        // $(this).data("lastValue", this.value)
+        $(this).data("lastValue", this.options[this.selectedIndex].value)
         $.ajaxSetup({
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
         var id_linia_cistella = this.getAttribute("id_linia_cistella");
-        var quantitat_mod = this.value;
+        var quantitat_mod = this.options[this.selectedIndex].value;
         $("#loading").show();
         document.getElementById("compraButton").classList.add("disabled");
         $.ajax({
@@ -195,7 +205,7 @@ $(".viatges_input").each(function() {
     $(this).data("lastValue", this.options[this.selectedIndex].value);
 })
 
-$(".viatges_input").focusout(function() {
+$(".viatges_input").change(function() {
     if (this.options[this.selectedIndex].value != $(this).data("lastValue")) {
         //alert($(this).data("lastValue") + this.value + "id_cistella: " + this.getAttribute("id_linia_cistella"));
         $(this).data("lastValue", this.options[this.selectedIndex].value)
