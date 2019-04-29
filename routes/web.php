@@ -71,6 +71,7 @@ Route::resource('/gestio/noticies', 'NoticiesController')->middleware(['auth','i
 
 Route::resource('/gestio/promocions', 'PromocionsController')->middleware(['auth','is_admin','verified']);
 
+
 Route::get('/view/incidencies/assign', 'IncidenciesController@assignadesGuardarPDF')->middleware(['auth','is_admin','verified']);
 
 Route::get('/votacions',"HomeController@votacions")->name('votacions');
@@ -173,3 +174,6 @@ Route::post('/validacio', 'gestioProductes@validar')->name('validacio_accio')->m
 /* PAYPAL */
 Route::post('paypal', 'PaymentController@payWithpaypal');
 Route::get('status', 'PaymentController@getPaymentStatus');
+
+/* GRAFIQUES */
+Route::get('/gestio/grafiques', 'GrafiquesController@graficaregistres')->name('graficaregistres')->middleware(['auth','is_admin','verified']);
