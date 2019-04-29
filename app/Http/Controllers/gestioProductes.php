@@ -116,51 +116,48 @@ class gestioProductes extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-     public function store(Request $request)
-     {
-       $imatge_producte = '';
-       if ($request->has('image')) {
-         request()->validate([
+    public function store(Request $request)
+    {
+      request()->validate([
 
-               'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
-           ]);
-         $file = $request->file('image');
-         $file_name = time() . $file->getClientOriginalName();
-         $file_path = 'storage/productes';
-         $file->move($file_path, $file_name);
-         $imatge_producte = "/".$file_path."/".$file_name;
-       }
-       $preu_base = Tipus_producte::find($request->get('tipus'))->preu_base;
-       $preu_final = $request->get('preu') +$preu_base;
+        ]);
+      $file = $request->file('image');
+      $file_name = time() . $file->getClientOriginalName();
+      $file_path = 'storage/productes';
+      $file->move($file_path, $file_name);
 
-       $atributs_producte = new Atributs_producte([
-           'nom' => $request->get('tipus'),
-           'mida' => $request->get('mida'),
-           'tickets_viatges' => $request->get('tickets_viatges'),
-           'preu' => $preu_final,
-           'foto_path' => $imatge_producte
-       ]);
-       $atributs_producte->save();
-       //dd($Tipus_producte->id);
-       //$id = DB::table('tipus_productes')->lastInsertId();;
-       $producte = new producte([
-           'atributs' => $atributs_producte->id,
-           'descripcio' => $request->get('descripcio'),
-           'estat' => $request->get('estat')
-       ]);
-       //dd($request->file('image'));
-       /*$uploadedFile = $request->file('image');
-       $filename = $uploadedFile->getClientOriginalName();
+      $preu_base = Tipus_producte::find($request->get('tipus'))->preu_base;
+      $preu_final = $request->get('preu') +$preu_base;
 
-       Storage::disk('local')->putFile(
-         'productes/'.$filename
-         $uploadedFile
-       );*/
+      $atributs_producte = new Atributs_producte([
+          'nom' => $request->get('tipus'),
+          'mida' => $request->get('mida'),
+          'tickets_viatges' => $request->get('tickets_viatges'),
+          'preu' => $preu_final,
+          'foto_path' => "/".$file_path."/".$file_name
+      ]);
+      $atributs_producte->save();
+      //dd($Tipus_producte->id);
+      //$id = DB::table('tipus_productes')->lastInsertId();;
+      $producte = new producte([
+          'atributs' => $atributs_producte->id,
+          'descripcio' => $request->get('descripcio'),
+          'estat' => $request->get('estat')
+      ]);
+      //dd($request->file('image'));
+      /*$uploadedFile = $request->file('image');
+      $filename = $uploadedFile->getClientOriginalName();
 
-       $producte ->save();
-       return redirect('/gestio/productes')->with('success', 'Producte registrat');
-     }
+      Storage::disk('local')->putFile(
+        'productes/'.$filename
+        $uploadedFile
+      );*/
+
+      $producte ->save();
+      return redirect('/gestio/productes')->with('success', 'Producte registrat');
+    }
 
     /**
      * Display the specified resource.
@@ -314,6 +311,7 @@ class gestioProductes extends Controller
                 ->where('id', $ticket_atributs->id)
                 ->update(['data_entrada' => $data_actual_update->toDateTimeString()]);
             $valid = true;
+            $ticket_atributs = Atributs_producte::find($ticket->atributs);
           }
         }else{//Si es la validació a una atracció
           if (($ticket_atributs->data_entrada == null || $data_validacio_ticket->diff($data_actual)->days > 0) && ($ticket_atributs->nom != 6 || $ticket_atributs->nom != 7)) { //comprova que s'haigue validat a la entrada del parc i que no s'intente colar una entrada ja utilitzada anteriorment. La regla del temps no s'aplica als tickets de viatges
@@ -334,6 +332,7 @@ class gestioProductes extends Controller
                     ->where('id', $ticket_atributs->id)
                     ->update(['tickets_viatges' => $ticket_atributs->tickets_viatges - 1]);
                 $valid = true;
+                $ticket_atributs = Atributs_producte::find($ticket->atributs);
               }
               else{
                 if ($ticket_atributs->tickets_viatges <= 0) {
