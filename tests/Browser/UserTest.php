@@ -13,11 +13,26 @@ class UserTest extends DuskTestCase
      *
      * @return void
      */
-    public function mapa()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('http://localhost:8000/')
-                    ->assertSee('estem');
+    
+    public function accedirAdministrador(){
+        $user = $this->makeUser('Administrador');
+        $this->browser(function($browser) use ($user) {
+            $browser
+            -> loginAs($user)
+            -> visit(route('gestio'));
         });
+
+        $this->removeEntries($user);
+    }
+
+    public function accedirClient(){
+        $user = $this->makeUser('Client');
+        $this->browser(function($browser) use ($user) {
+            $browser
+            -> loginAs($user)
+            -> visit(route('gestio'));
+        });
+
+        $this->removeEntries($user);
     }
 }
