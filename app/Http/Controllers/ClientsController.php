@@ -218,22 +218,22 @@ class ClientsController extends Controller
         return redirect('/gestio/clients')->with('success', 'Client restaurat correctament.');
     }
 
-    /**
-     * Permanently delete a client.
-     * 
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function annihilate($id)
-    {
-        $user = User::onlyTrashed()
-        ->where('id',$id)
-        ->first();
+    // /**
+    //  * Permanently delete a client.
+    //  * 
+    //  * @param int $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function annihilate($id)
+    // {
+    //     $user = User::onlyTrashed()
+    //     ->where('id',$id)
+    //     ->first();
 
-        $user->forceDelete();
+    //     $user->forceDelete();
 
-        return redirect('/gestio/clients/deactivated')->with('success', 'Client eliminat de la base de dades correctament.');
-    }
+    //     return redirect('/gestio/clients/deactivated')->with('success', 'Client eliminat de la base de dades correctament.');
+    // }
 
     /**
      * Generate a PDF with client data.

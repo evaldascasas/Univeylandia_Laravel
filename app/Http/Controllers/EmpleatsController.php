@@ -412,30 +412,30 @@ class EmpleatsController extends Controller
     }
     
 
-    /**
-     * Permanently delete an employee.
-     * 
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function annihilate($id)
-    {
-        $user = User::onlyTrashed()
-        ->where('id',$id)
-        ->where('id_rol','!=',1)
-        ->first();
+    // /**
+    //  * Permanently delete an employee.
+    //  * 
+    //  * @param int $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function annihilate($id)
+    // {
+    //     $user = User::onlyTrashed()
+    //     ->where('id',$id)
+    //     ->where('id_rol','!=',1)
+    //     ->first();
 
-        $dades_id = $user->id_dades_empleat;
+    //     $dades_id = $user->id_dades_empleat;
 
-        $dades = DadesEmpleat::onlyTrashed()
-        ->where('id',$dades_id)
-        ->first();
+    //     $dades = DadesEmpleat::onlyTrashed()
+    //     ->where('id',$dades_id)
+    //     ->first();
 
-        $user->forceDelete();
-        $dades->forceDelete();
+    //     $user->forceDelete();
+    //     $dades->forceDelete();
 
-        return redirect('/gestio/empleats/deactivated')->with('success', 'Empleat eliminat de la base de dades correctament.');
-    }
+    //     return redirect('/gestio/empleats/deactivated')->with('success', 'Empleat eliminat de la base de dades correctament.');
+    // }
 
     /**
      * Display a listing of the admin users.

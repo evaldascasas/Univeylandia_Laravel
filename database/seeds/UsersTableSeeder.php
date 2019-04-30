@@ -14,12 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //Create clients
-        factory(\App\User::class, 20)->create([
-            'id_rol' => 1,
-            'id_dades_empleat' => null
-        ]);
-
         //Create Admin
         factory(\App\User::class)->create([
             'nom' => 'Paco',
@@ -36,6 +30,12 @@ class UsersTableSeeder extends Seeder
             'id_rol' => 2,
             'id_dades_empleat' => 1,
             'remember_token' => null
+        ]);
+        
+        //Create clients
+        factory(\App\User::class, 20)->create([
+            'id_rol' => 1,
+            'id_dades_empleat' => null
         ]);
 
         //Create employees
