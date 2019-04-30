@@ -24,8 +24,8 @@ use \App\User;
 class AtraccionsController extends Controller
 {
     private $data_inici_global;
-
     private $data_fi_global;
+    private $rol_treballador;
 
     /**
      * Display a listing of the resource.
@@ -243,12 +243,11 @@ class AtraccionsController extends Controller
     {
         $request->validate([
             'data_inici' => ['required','date','before:data_fi'],
-            'data_fi' => ['required','date','after:data_inici']
+            'data_fi' => ['required','date','after:data_inici'],
+            'id_rol' => ['required','integer']
         ]);
 
-        $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici,$request->data_inici,3);
-
-        // dump($empleats);
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici,$request->data_inici,$request->id_rol);
 
         return response()->json(array('empleats' => $empleats), 200);
     }
@@ -256,8 +255,9 @@ class AtraccionsController extends Controller
     public function crearAssignacioManteniment(Request $request, $id)
     {
         $atraccio = Atraccion::find($id);
+        $rols = Rol::where('id','!=',1)->where('id','!=',2)->orderBy('id','DESC')->get();
 
-        return view('/gestio/atraccions/crearassignaciomanteniment', compact('atraccio'));
+        return view('/gestio/atraccions/crearassignaciomanteniment', compact('atraccio','rols'));
     }
 
     public function assignaEmpleatNeteja(Request $request) 

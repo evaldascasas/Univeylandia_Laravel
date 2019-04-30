@@ -19,7 +19,7 @@
 </div>
 @endif
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Manteniment: Assignar Empleats a Atraccio</h1>
+    <h1 class="h2">Assignar empleats a atraccio</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-secondary" value="Exportar">
@@ -38,16 +38,24 @@
                 <div class="col-md-3 mb-3">
                     <label for="data_inici_assignacio_empleat">Data inici</label>
                     <input class="form-control" id="data_inici_assignacio_empleat" name="data_inici_assignacio_empleat"
-                        type="date" min="<?php echo date('Y-m-d')?>">
+                        type="date" min="<?php echo date('Y-m-d')?>" required>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="data_fi_assignacio_empleat">Data fi</label>
                     <input class="form-control" id="data_fi_assignacio_empleat" name="data_fi_assignacio_empleat"
-                        type="date" min="<?php echo date('Y-m-d')?>">
+                        type="date" min="<?php echo date('Y-m-d')?>" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="id_rol">Rol</label>
+                    <select class="form-control form-control-sm" id="id_rols">
+                        @foreach($rols as $rol)
+                        <option value="{{ $rol->id }}">{{ $rol->nom_rol }}</option>
+                         @endforeach
+                    </select>
                 </div>
                 <div class="col-md-3 mb-3">
                     <button id="submit" value="Consultar" type="button" class="btn btn-primary"
-                        onclick="fetchRecords()">ASD</button>
+                        onclick="fetchRecords()">Consultar</button>
                 </div>
             </div>
         </form>
@@ -71,7 +79,9 @@
             dataType: 'JSON',
             data: {
                 data_inici: jQuery('#data_inici_assignacio_empleat').val(),
-                data_fi: jQuery('#data_fi_assignacio_empleat').val()
+                data_fi: jQuery('#data_fi_assignacio_empleat').val(),
+                id_rol: jQuery('#id_rols').val()
+
             },            
             error: function (xhr, status, error) {
                 console.log("Error:" + xhr.status + " -" + error);

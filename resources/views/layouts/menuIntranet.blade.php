@@ -249,6 +249,19 @@
             </li>
           </ul>
 
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu13">
+              <span data-feather="trending-down"></span>
+                Grafiques
+              <span data-feather="chevron-right"></span>
+            </a>
+          </li>
+          <ul class="nav flex-column collapse {{ request()->routeIs('promocions*') ? 'show' : '' }}" id="submenu13" data-parent="#sidebar">
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('graficaregistres') ? 'active' : '' }}" href="{{  route('graficaregistres')  }}"><span data-feather="user-plus"></span>Grafica registres</a>
+            </li>
+          </ul>
+
 
         </ul>
       </div>

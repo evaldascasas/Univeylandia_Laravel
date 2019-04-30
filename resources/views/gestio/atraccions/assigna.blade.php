@@ -52,9 +52,7 @@
 
             <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="{{ route('atraccions.crearassignaciomanteniment', $atraccio->id)}}" class="btn btn-primary btn-sm">Manteniment</a>
-            <a href="{{ route('atraccions.crearassignacioneteja',$atraccio->id)}}" class="btn btn-primary btn-sm">Neteja</a>
-            <a href="{{ route('atraccions.crearassignaciogeneral',$atraccio->id)}}" class="btn btn-primary btn-sm">Treballador</a>
+              <a href="{{ route('atraccions.crearassignaciomanteniment', $atraccio->id)}}" class="btn btn-primary btn-sm">Assignar empleat</a>
 </div>
           </td>
 

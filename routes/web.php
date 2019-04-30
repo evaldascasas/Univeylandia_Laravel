@@ -71,6 +71,7 @@ Route::resource('/gestio/noticies', 'NoticiesController')->middleware(['auth','i
 
 Route::resource('/gestio/promocions', 'PromocionsController')->middleware(['auth','is_admin','verified']);
 
+
 Route::get('/view/incidencies/assign', 'IncidenciesController@assignadesGuardarPDF')->middleware(['auth','is_admin','verified']);
 
 Route::get('/votacions',"HomeController@votacions")->name('votacions');
@@ -82,19 +83,19 @@ Route::get('/tasques','HomeController@tasques')->name('tasques')->middleware(['a
 Route::patch('/tasques/{id}', 'IncidenciesController@conclude')->name('incidencies.conclude')->middleware(['auth','is_worker','verified']);
 
 /* RUTES GRUP 2 */
-Route::get('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment')->middleware(['auth','is_admin','verified']);
+Route::get('/gestio/atraccions/crearassignacio/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment')->middleware(['auth','is_admin','verified']);
 
 Route::post('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaempleat');
 
 
-Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);
+//Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);
 
-Route::post('/gestio/atraccions/crearassignacioneteja/{id}/empleats', 'AtraccionsController@assignaEmpleatNeteja')->name('atraccions.assignaEmpleatNeteja');
+//Route::post('/gestio/atraccions/crearassignacioneteja/{id}/empleats', 'AtraccionsController@assignaEmpleatNeteja')->name('atraccions.assignaEmpleatNeteja');
 
 
-Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral')->middleware(['auth','is_admin','verified']);
+//Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral')->middleware(['auth','is_admin','verified']);
 
-Route::post('/gestio/atraccions/crearassignaciogeneral/{id}/empleats', 'AtraccionsController@assignaEmpleatGeneral')->name('atraccions.assignaEmpleatGeneral');
+//Route::post('/gestio/atraccions/crearassignaciogeneral/{id}/empleats', 'AtraccionsController@assignaEmpleatGeneral')->name('atraccions.assignaEmpleatGeneral');
 
 
 Route::any('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio')->middleware(['auth','is_admin','verified']);
@@ -173,3 +174,6 @@ Route::post('/validacio', 'gestioProductes@validar')->name('validacio_accio')->m
 /* PAYPAL */
 Route::post('paypal', 'PaymentController@payWithpaypal');
 Route::get('status', 'PaymentController@getPaymentStatus');
+
+/* GRAFIQUES */
+Route::get('/gestio/grafiques', 'GrafiquesController@graficaregistres')->name('graficaregistres')->middleware(['auth','is_admin','verified']);
