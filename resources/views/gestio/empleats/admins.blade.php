@@ -58,12 +58,6 @@
                             href="{{ route('empleats.show', $user->id) }}">{{ __('Mostrar') }}</a>
                         <a class="btn btn-outline-primary btn-sm"
                             href="{{ route('empleats.edit', $user->id) }}">{{ __('Modificar') }}</a>
-                        <form action="{{ route('empleats.annihilate', $user->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button id="confirm_delete" class="btn btn-outline-danger btn-sm" type="submit"
-                                value="Desactivar">{{ __('Desactivar') }}</button>
-                        </form>
                     </div>
                 </td>
             </tr>

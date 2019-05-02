@@ -64,19 +64,11 @@
                 <td>{{$user->telefon}}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Accions">
-                        {{-- <a class="btn btn-outline-success btn-sm"
-                            href="{{ route('empleats.reactivate', $user->id) }}">{{ __('Reactivar') }}</a> --}}
                         <form action="{{ route('clients.reactivate', $user->id) }}" method="post">
                             @csrf
                             @method('PATCH')
                             <button id="confirm_reactivation" class="btn btn-outline-success btn-sm" type="submit"
                                 value="Reactivar">{{ __('Reactivar') }}</button>
-                        </form>
-                        <form action="{{ route('clients.annihilate', $user->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button id="confirm_delete" class="btn btn-outline-danger btn-sm" type="submit"
-                                value="Eliminar">{{ __('Eliminar definitivament') }}</button>
                         </form>
                     </div>
                 </td>

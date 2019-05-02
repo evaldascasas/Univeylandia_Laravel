@@ -53,7 +53,7 @@ Route::get('gestio/empleats/deactivated', 'EmpleatsController@trashed')->name('e
 
 Route::patch('gestio/empleats/deactivated/{user}/reactivate', 'EmpleatsController@reactivate')->name('empleats.reactivate')->middleware(['auth','is_admin','verified']);
 
-Route::delete('gestio/empleats/deactivated/{user}', 'EmpleatsController@annihilate')->name('empleats.annihilate')->middleware(['auth','is_admin','verified']);
+// Route::delete('gestio/empleats/deactivated/{user}', 'EmpleatsController@annihilate')->name('empleats.annihilate')->middleware(['auth','is_admin','verified']);
 
 Route::get('gestio/empleats/admins', 'EmpleatsController@admins')->name('empleats.admins')->middleware(['auth','is_admin','verified']);
 
@@ -124,7 +124,7 @@ Route::get('gestio/clients/deactivated', 'ClientsController@trashed')->name('cli
 
 Route::patch('gestio/clients/deactivated/{user}/reactivate', 'ClientsController@reactivate')->name('clients.reactivate')->middleware(['auth','is_admin','verified']);
 
-Route::delete('gestio/clients/deactivated/{user}', 'ClientsController@annihilate')->name('clients.annihilate')->middleware(['auth','is_admin','verified']);
+// Route::delete('gestio/clients/deactivated/{user}', 'ClientsController@annihilate')->name('clients.annihilate')->middleware(['auth','is_admin','verified']);
 
 Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
 
