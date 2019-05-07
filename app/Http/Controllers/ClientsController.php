@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use \App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 use App\Exports\ClientsExport;
 use App\Imports\ClientsImport;
@@ -27,7 +28,7 @@ class ClientsController extends Controller
        ->where('id_rol',1)
        ->get();
 
-       return view("gestio/clients/index", compact("usuaris"));
+       return view("gestio.clients.index", compact("usuaris"));
     }
 
     /**
@@ -37,7 +38,7 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        return view('gestio/clients/create');
+        return view('gestio.clients.create');
     }
 
     /**
@@ -107,7 +108,7 @@ class ClientsController extends Controller
     {
        $usuari = User::findOrFail($id);
 
-       return view('gestio/clients/show', compact('usuari'));
+       return view('gestio.clients.show', compact('usuari'));
     }
 
     /**
@@ -120,7 +121,7 @@ class ClientsController extends Controller
     {
        $usuari = User::findOrFail($id);
 
-       return view('gestio/clients/edit', compact('usuari'));
+       return view('gestio.clients.edit', compact('usuari'));
     }
 
     /**
@@ -198,7 +199,7 @@ class ClientsController extends Controller
         ->where('id_rol',1)
         ->get();
     
-        return view('gestio/clients/deactivated', compact('users'));
+        return view('gestio.clients.deactivated', compact('users'));
     }
 
     /**
@@ -265,7 +266,12 @@ class ClientsController extends Controller
 
         $temps = $mytime->toDateString();
 
-        return Excel::download(new ClientsExport, 'clients'.$temps.'.csv');
+        try {
+            return Excel::download(new ClientsExport, 'clients'.$temps.'.csv');
+        } catch (\Exception $e) {
+            Log::error($e);
+            return redirect('/gestio/clients')->with('error', 'Ha fallat la exportació dels registres');
+        }
     }
 
     /**
@@ -277,16 +283,19 @@ class ClientsController extends Controller
     public function importCSV(Request $request)
     {
         $file = $request->file('file');
-
         $ext = $file->getClientOriginalExtension();
         
         $request->validate([
             'file' => ['file','required','mimetypes:text/plain,text/csv,csv,application/csv'],
         ]);
-
-        if($request->hasFile('file')) {
-            Excel::import(new ClientsImport, $request->file('file'));
         
+        if($request->hasFile('file')) {
+            try {
+                Excel::import(new ClientsImport, $request->file('file'));
+            } catch (\Exception $e) {
+                Log::error($e);
+                return back()->with('error', 'Ha fallat la importació dels registres');
+            }
             return redirect('/gestio/clients')->with('success', 'Clients importats de forma correcta');
         }
     }

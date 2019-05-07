@@ -42,6 +42,10 @@
   <!-- Styles -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ asset('css/styleGestio.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}" type="text/css">
+
+  <!-- DropZone -->
+  <script src="{{ asset('js/dropzone.js') }}"></script>
 
   <!-- Icon -->
   <link rel="icon" href="{{ asset('img/icon.png') }}" type="image/gif">

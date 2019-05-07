@@ -153,6 +153,7 @@ class AtraccionsController extends Controller
 
         if ($request->has('image')) {
             $image_path = public_path().$atraccio->path;
+
             if(File::exists($image_path)) {
                 File::delete($image_path);
             }
@@ -160,6 +161,11 @@ class AtraccionsController extends Controller
             $file = $request->file('image');
             $file_name = time() . $file->getClientOriginalName();
             $file_path = 'storage/atraccions';
+
+            if(!File::exists($file_path)) {
+                File::makeDirectory($file_path, 0777, true);
+            }
+
             $img = Image::make($file->getRealPath())->resize(1280, 720)
             ->save($file_path."/".$file_name);
 
@@ -168,7 +174,7 @@ class AtraccionsController extends Controller
 
         $atraccio->save();
 
-        return redirect('/gestio/atraccions')->with('success', 'atraccio modificada');
+        return redirect('/gestio/atraccions')->with('success', 'Atracció modificada correctament');
     }
 
     /**

@@ -66,11 +66,24 @@ class ImageController extends Controller
 		$preu = Tipus_producte::where('id',8)
 		->first();
 
-		$request->validate([
-			'image' => 'required',
+		$validator = \Validator::make($request->all(), [
+            'image' => 'required',
 			'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
 			'attraction' => 'required|numeric'
-		]);
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json([
+                'errors' => $validator->errors()->all()
+            ]);
+        }
+
+		// $request->validate([
+		// 	'image' => 'required',
+		// 	'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+		// 	'attraction' => 'required|numeric'
+		// ]);
 
 		// comprovar si hi ha imatges en el form
 		if($request->hasFile('image')) {
@@ -142,6 +155,8 @@ class ImageController extends Controller
 			
 		}
 
-	   	return redirect('gestio/productes/imatges')->with('success','Imatges pujades correctament!');
+		return response()->json(['status' => true]);
+
+		// return redirect('gestio/productes/imatges')->with('success','Imatges pujades correctament!');
 	}
 }
