@@ -1,57 +1,6 @@
 @extends("layouts.plantilla")
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <style>
 
-
-.full-width-image img {
-  width: 100%;
-  height: 70%;
-  position: relative;
-  display: inline-block;
-  text-align: center;
-}
-
-.centrado {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.ml1 {
-  font-weight: 900;
-  font-size: 3.5em;
-}
-
-.ml1 .letter {
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ml1 .text-wrapper {
-  position: relative;
-  display: inline-block;
-  padding-top: 0.1em;
-  padding-right: 0.05em;
-  padding-bottom: 0.15em;
-}
-
-.ml1 .line {
-  opacity: 0;
-  position: absolute;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  background-color: black;
-  transform-origin: 0 0;
-}
-
-.ml1 .line1 { top: 0; }
-.ml1 .line2 { bottom: 0; }
-
-.letters {
-  color: black;
-}
 </style>
 
 @section("menu1")
@@ -78,39 +27,37 @@
       <div class="col-sm-12">
           <div class="jumbotron">
               <div class="card-body d-flex flex-column align-items-start">
-                  <h3>Descripcio</h3>
+                  <h3>{{ __('Descripció') }}</h3>
                   <p class="card-text">{!! $atraccions->descripcio !!}</p>
               </div>
               <div class="col-sm-6 offset-md-3">
                   <table id="t01" class="table table-striped">
                       <tr>
-                          <th><span><i class="fas fa-dice"></i></span> &nbsp;&nbsp;Tipus atraccio: </th>
+                          <th><span><i class="fas fa-dice"></i></span>{{ __('  Tipus atracció:') }}</th>
                           <td style="height:30px">{{ $tipus_atraccio->tipus }}</td>
                       </tr>
                       <tr>
-                          <th><span><i class="fas fa-user"></i></span> &nbsp;&nbsp;Altura minima:
-                              &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                          <th><span><i class="fas fa-user"></i></span>{{ __('  Altura minima:') }}</th>
                           <td style="height:30px">{{ $atraccions->altura_min }}</td>
                       </tr>
                       <tr>
-                          <th><span><i class="fas fa-user"></i></span> &nbsp;&nbsp;Altura maxima: </th>
+                          <th><span><i class="fas fa-user"></i></span>{{ __('  Altura màxima:') }}</th>
                           <td style="height:30px">{{ $atraccions->altura_max }}</td>
                       </tr>
                       <tr>
-                          <th><span><i class="fas fa-wheelchair"></i></span> &nbsp;&nbsp;Accés per a minusvàlids:
-                              &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                          <th><span><i class="fas fa-wheelchair"></i></span>{{ __('  Accés per a minusvàlids:') }}</th>
                           @if($atraccions->accessibilitat == 1)
-                          <td style="height:30px">Si</td>
+                          <td style="height:30px">{{ __('Si') }}</td>
                           @else
-                          <td style="height:30px">No</td>
+                          <td style="height:30px">{{ __('No') }}</td>
                           @endif
                       </tr>
                       <tr>
-                          <th><span><i class="fas fa-running"></i></span> &nbsp;&nbsp;Acces Express: </th>
+                          <th><span><i class="fas fa-running"></i></span>{{ __('  Accés Exprès:') }}</th>
                           @if($atraccions->acces_express == 1)
-                          <td style="height:30px">Si</td>
+                          <td style="height:30px">{{ __('Si') }}</td>
                           @else
-                          <td style="height:30px">No</td>
+                          <td style="height:30px">{{ __('No') }}</td>
                           @endif
                       </tr>
                       </tr>
@@ -124,9 +71,8 @@
   </div>
 </div>
 
-
-
 @endsection
+
 @section("footer")
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script>

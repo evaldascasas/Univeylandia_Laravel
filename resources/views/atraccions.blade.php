@@ -9,7 +9,7 @@
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="font-weight-bold text-center text-uppercase">Atraccions </1>
+      <h1 class="font-weight-bold text-center">Atraccions</h1>
     </div>
   </div>
 
@@ -17,7 +17,7 @@
   @foreach($atraccionetes as $atraccio)
       <div class="col-sm-4 mb-3">
         <div class="card">
-           <img class="card-img-top" width="100px" src="{{ $atraccio->path }}" alt="Card image" style="width:100%" >
+           <img class="card-img-top" width="100px" src="{{ asset($atraccio->path) }}" alt="Card image" style="width:100%" >
            <div class="card-body d-flex flex-column align-items-start">
              <h4 class="card-title">{{ $atraccio->nom_atraccio }}</h4></a>
              <p class="card-text" id="descripcio">{!! html_entity_decode(str_limit($atraccio->descripcio, $limit = 200, $end = '...')) !!}</p>

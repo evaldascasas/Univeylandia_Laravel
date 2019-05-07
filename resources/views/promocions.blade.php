@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-12">
             <a href="/promocions" style="text-decoration: none;color:black;">
-                <h1 class="font-weight-bold text-center text-uppercase">promocions</h1>
+                <h1 class="font-weight-bold text-center">Promocions</h1>
             </a>
         </div>
     </div>

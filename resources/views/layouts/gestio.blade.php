@@ -76,6 +76,5 @@
       $('div.alert').not('.alert-important').delay(3000).slideUp(350);
   </script>
 
-
 </body>
 </html>

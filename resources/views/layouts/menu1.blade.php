@@ -1,17 +1,6 @@
 <nav class="navbar navbar-expand-sm py-0">
     <div class="collapse navbar-collapse flex-row-reverse" id="collapsibleNavbar">
         <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">{{ __('Idioma') }}</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">{{ __('ES') }}</a></li>
-                    <li><a class="dropdown-item" href="#">{{ __('CA') }}</a></li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">{{ __('Mapa') }}</a>
-            </li>
             @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -44,7 +33,7 @@
                     @endforeach
 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Mostrar notificacions</a>
+                    <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
                 </ul>
                 @else
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -53,7 +42,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Mostrar notificacions</a>
+                    <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
                 </ul>
                 @endif
             </li>
@@ -99,7 +88,7 @@
                     @endforeach
 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Mostrar notificacions</a>
+                    <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
                 </ul>
                 @else
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -108,7 +97,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Mostrar notificacions</a>
+                    <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
                 </ul>
                 @endif
             </li>
@@ -157,7 +146,7 @@
                     @endforeach
 
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Mostrar notificacions</a>
+                    <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
                 </ul>
                 @else
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -166,7 +155,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Mostrar notificacions</a>
+                    <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
                 </ul>
                 @endif
             </li>

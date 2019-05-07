@@ -16,7 +16,7 @@
 
     <div class="row">
         @foreach($atraccions as $atraccio)
-        <div class="col-sm-4">
+        <div class="col-sm-4 mb-2">
             <div class="card">
                 <img class="card-img-top" src="{{ $atraccio->path }}" style="width:100%">
                 <div class="card-body align-self-center">

@@ -10,31 +10,31 @@
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item dropdown {{ request()->routeIs('home') || request()->routeIs('noticies') || request()->routeIs('promocions') ? 'active' : '' }}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Parc</a>
+                    aria-haspopup="true" aria-expanded="false">{{ __('Parc') }}</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item {{ request()->routeIs('noticies') ? 'active' : '' }}" href="{{ route('noticies') }}">Noticies</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('promocions') ? 'active' : '' }}" href="{{ route('promocions') }}">Promocions</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('noticies') ? 'active' : '' }}" href="{{ route('noticies') }}">{{ __('Notícies') }}</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('promocions') ? 'active' : '' }}" href="{{ route('promocions') }}">{{ __('Promocions')}}</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('atraccions') ? 'active' : '' }}" href="{{ route('atraccions') }}">Atraccions</a>
+                <a class="nav-link {{ request()->routeIs('atraccions') ? 'active' : '' }}" href="{{ route('atraccions') }}">{{ __('Atraccions') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('votacions') ? 'active' : '' }}" href="{{ route('votacions')}}">Top atraccions</a>
+                <a class="nav-link {{ request()->routeIs('votacions') ? 'active' : '' }}" href="{{ route('votacions')}}">{{ __('Top atraccions') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('entrades') ? 'active' : '' }}" href="{{ route('entrades') }}">Compra entrades</a>
+                <a class="nav-link {{ request()->routeIs('entrades') ? 'active' : '' }}" href="{{ route('entrades') }}">{{ __('Compra entrades') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('tenda*') ? 'active' : '' }}" href="{{ route('tenda') }}">Botiga</a>
+                <a class="nav-link {{ request()->routeIs('tenda*') ? 'active' : '' }}" href="{{ route('tenda') }}">{{ __('Botiga') }}</a>
             </li>
             <li class="nav-item dropdown {{ request()->routeIs('contacte') || request()->routeIs('faq') ? 'active' : '' }}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Ajuda</a>
+                    aria-haspopup="true" aria-expanded="false">{{ __('Ajuda') }}</a>
                 <ul class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink2">
-                    <li><a class="dropdown-item {{ request()->routeIs('contacte') ? 'active' : '' }}" href="{{ route('contacte')}}">Contacte</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('sala_chat') ? 'active' : '' }}" href="{{ route('sala_chat')}}">Sala xat</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('faq') ? 'active' : '' }}" href="{{ route('faq')}}">Preguntes freqüents</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('contacte') ? 'active' : '' }}" href="{{ route('contacte')}}">{{ __('Contacte') }}</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('sala_chat') ? 'active' : '' }}" href="{{ route('sala_chat')}}">{{ __('Sala xat') }}</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('faq') ? 'active' : '' }}" href="{{ route('faq')}}">{{ __('Preguntes freqüents') }}</a></li>
                 </ul>
             </li>
         </ul>

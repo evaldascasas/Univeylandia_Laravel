@@ -67,7 +67,7 @@ class ImageController extends Controller
 		->first();
 
 		$validator = \Validator::make($request->all(), [
-            'image' => 'required',
+            //'image' => 'required',
 			'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
 			'attraction' => 'required|numeric'
         ]);
@@ -97,7 +97,7 @@ class ImageController extends Controller
 			}
 			if ( ! File::exists($thumb_dir)) {
 				File::makeDirectory($thumb_dir, 0777, true);
-		   }
+			}
 
 			$images = $request->file('image');
 

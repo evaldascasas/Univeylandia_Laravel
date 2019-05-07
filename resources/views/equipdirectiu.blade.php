@@ -8,7 +8,7 @@
 <div class="container jumbotron mt-3">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="font-weight-bold text-center">Equip directiu d'Univeylandia</h1>
+            <h1 class="font-weight-bold text-center">{{ __('Equip directiu d\'Univeylandia') }}</h1>
         </div>
     </div>
 
@@ -58,5 +58,6 @@
     });
 </script>
 @endsection
+
 @section("footer")
 @endsection

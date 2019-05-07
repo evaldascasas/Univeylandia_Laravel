@@ -10,7 +10,7 @@
 <div class="container" style="margin-top:30px">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="font-weight-bold text-center text-uppercase">Botiga</h1>
+            <h1 class="font-weight-bold text-center">Botiga</h1>
         </div>
     </div>
     <div class="row">

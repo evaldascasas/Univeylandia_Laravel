@@ -23,3 +23,6 @@ window.addEventListener("load", function () {
         }
     })
 });
+
+// Flash-messages all alerts but important ones dissappear
+$('div.alert').not('.alert-important').delay(3000).slideUp(350);

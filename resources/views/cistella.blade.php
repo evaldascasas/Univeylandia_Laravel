@@ -23,143 +23,155 @@
     </style>
 
     <div class="container" style=" margin-top: 40px; margin-bottom: 40px">
-        <h1 style="">Carret de la compra</h1>
-    </div>
+        {{-- <div class="row"> --}}
+            <div class="col-sm-12">
+              <h1 class="font-weight-bold text-center text-uppercase">Cistella</h1>
+            </div>
+          </div>
+        {{-- </div> --}}
     <div class="container" style="height:auto;position:relative;">
         @if(!$linia_cistella->isEmpty())
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <td style="font-weight: bold;">Producte</td>
-                    <td style="font-weight: bold;">Viatges</td>
-                    <td style="font-weight: bold;">Quantitat</td>
-                    <td style="font-weight: bold;">Preu</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                <div class="container" id="loading"
-                    style="position: absolute;background-color: rgba(255, 255, 255, 0.5);overflow: hidden;height:100%;display:none;">
-                    <img src="https://html5.dcatalog.com/images/ajax_loader2.gif"
-                        style="margin: 0 auto;display: block;width:5%;position: absolute;top: 50%;left: 50%;">
-                </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td style="font-weight: bold;">Producte</td>
+                        <td style="font-weight: bold;">Viatges</td>
+                        <td style="font-weight: bold;">Quantitat</td>
+                        <td style="font-weight: bold;">Preu</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div class="container" id="loading"
+                        style="position: absolute;background-color: rgba(255, 255, 255, 0.5);overflow: hidden;height:100%;display:none;">
+                        <img src="https://html5.dcatalog.com/images/ajax_loader2.gif"
+                            style="margin: 0 auto;display: block;width:5%;position: absolute;top: 50%;left: 50%;">
+                    </div>
 
-                @forelse($linia_cistella as $cistella)
-                <tr>
-                    <td>{{$cistella->nom}} </td>
-                    @if ($cistella->tickets_viatges == 100)
-                    <td>Indefinits</td>
-                    @else
-                    <td>
-                        <select class="form-control viatges_input" name="num_viatges_mod" style="width:60px;"
-                            id_atributs="{{$cistella->id}}">
-                            @if ($cistella->tickets_viatges == 3)
-                            <option selected value=3>3</option>
-                            <option value=6>6</option>
-                            @else
-                            <option value=3>3</option>
-                            <option selected value=6>6</option>
-                            @endif
-                        </select>
-                    </td>
-                    @endif
-                    <td>
-                        {{-- <input id="quantitat_ticket" class="form-control quantitat_input" style="width:50%;" class="quantitat_valor" type="number" min="1" max=6 value="{{$cistella->quantitat}}"
-                        id_linia_cistella = "{{$cistella->id}}"> --}}
-                        <select class="form-control quantitat_input" style="width:50%;"
-                            id_linia_cistella="{{$cistella->id}}">
-                            @for($i=1; $i<=6; $i++) @if($cistella->quantitat == $i)
-                                <option value="{{ $cistella->quantitat }}" id_linia_cistella="{{ $cistella->id }}"
-                                    selected>{{ $cistella->quantitat }}</option>
+                    @forelse($linia_cistella as $cistella)
+                    <tr>
+                        <td>{{$cistella->nom}} </td>
+                        @if ($cistella->tickets_viatges == 100)
+                        <td>Indefinits</td>
+                        @else
+                        <td>
+                            <select class="form-control viatges_input" name="num_viatges_mod" style="width:60px;"
+                                id_atributs="{{$cistella->id}}">
+                                @if ($cistella->tickets_viatges == 3)
+                                <option selected value=3>3</option>
+                                <option value=6>6</option>
                                 @else
-                                <option value="{{ $i }}">{{ $i }}</option>
+                                <option value=3>3</option>
+                                <option selected value=6>6</option>
                                 @endif
-                                @endfor
-                        </select>
-                    </td>
-                    <td>
-                        {{$cistella->preu * $cistella->quantitat}}€
-                    </td>
-                    <td>
-                        <form action="{{ route('cistella',$cistella->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="id_linia_producte" value="{{$cistella->id}}">
-                            <button id='confirm_delete' class="btn btn-danger" type="submit">X</button>
-                        </form>
-                    </td>
-                </tr>
-                <p style="display:none"> {{$total = $total + ($cistella->preu* $cistella->quantitat)}} </p>
-                @empty
-                <p style="background-color: #e05e5e;text-align: center;font-weight: bold;"> No hi han productes a
-                    llistar</p>
-                @endforelse
-                @if($fotos->isEmpty())
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> <b> TOTAL:</b> </td>
-                    <td> {{$compteTotal = $total + $total2}}€ </td>
-                    <td style="width:140px;"> <a href="/compra" style="text-decoration: none;" class="btn btn-success"
-                            id="compraButton">Comprar</a> </td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
-        @endif
-        @if(!$fotos->isEmpty())
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <td id="producte" style="font-weight: bold;">Producte</td>
-                    <td id=fototitol style="font-weight: bold;">Foto</td>
-                    <td><span id="quantitattitol" style="font-weight: bold;">Quantitat</span></td>
-                    <td><span id="preutitol" style="font-weight: bold;">Preu</span></td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($fotos as $cistellafoto)
-                <tr>
-                    <td id="nom">{{$cistellafoto->nom}}</td>
-                    <td><span id="imatge"><img class="card-img-top" src="{{ asset($cistellafoto->thumbnail)}}"
-                                alt="Card image" style="max-width: 60px;"></span></td>
-                    <td><span id=quantitat style="">{{$cistellafoto->quantitat}}</span></td>
-                    <td><span id="preu" style="">{{$cistellafoto->preu}}&nbsp;€</span></td>
-                    <td>
-                        <div id="eliminarP">
-                            <form id="eliminar" style="" action="{{ route('cistella',$cistellafoto->id)}}"
-                                method="post">
+                            </select>
+                        </td>
+                        @endif
+                        <td>
+                            {{-- <input id="quantitat_ticket" class="form-control quantitat_input" style="width:50%;" class="quantitat_valor" type="number" min="1" max=6 value="{{$cistella->quantitat}}"
+                            id_linia_cistella = "{{$cistella->id}}"> --}}
+                            <select class="form-control quantitat_input" style="width:50%;"
+                                id_linia_cistella="{{$cistella->id}}">
+                                @for($i=1; $i<=6; $i++) @if($cistella->quantitat == $i)
+                                    <option value="{{ $cistella->quantitat }}" id_linia_cistella="{{ $cistella->id }}"
+                                        selected>{{ $cistella->quantitat }}</option>
+                                    @else
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                    @endif
+                                    @endfor
+                            </select>
+                        </td>
+                        <td>
+                            {{$cistella->preu * $cistella->quantitat}}€
+                        </td>
+                        <td>
+                            <form action="{{ route('cistella',$cistella->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <input type="hidden" name="id_linia_producte" value="{{$cistellafoto->id}}">
-                                <button id="confirm_delete" class="btn btn-danger" type="submit">X</button>
+                                <input type="hidden" name="id_linia_producte" value="{{$cistella->id}}">
+                                <button id='confirm_delete' class="btn btn-danger" type="submit">X</button>
                             </form>
-                        </div>
+                        </td>
+                    </tr>
+                    <p style="display:none"> {{$total = $total + ($cistella->preu* $cistella->quantitat)}} </p>
+                    @empty
+                    <p style="background-color: #e05e5e;text-align: center;font-weight: bold;"> No hi han productes a
+                        llistar</p>
+                    @endforelse
+                    @if($fotos->isEmpty())
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> <b> TOTAL:</b> </td>
+                        <td> {{$compteTotal = $total + $total2}}€ </td>
+                        <td style="width:140px;"> <a href="/compra" style="text-decoration: none;" class="btn btn-success"
+                                id="compraButton">Comprar</a> </td>
+                    </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+        @endif
+        @if(!$fotos->isEmpty())
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td id="producte" style="font-weight: bold;">Producte</td>
+                        <td id=fototitol style="font-weight: bold;">Foto</td>
+                        <td><span id="quantitattitol" style="font-weight: bold;">Quantitat</span></td>
+                        <td><span id="preutitol" style="font-weight: bold;">Preu</span></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($fotos as $cistellafoto)
+                    <tr>
+                        <td id="nom">{{$cistellafoto->nom}}</td>
+                        <td><span id="imatge"><img class="card-img-top" src="{{ asset($cistellafoto->thumbnail)}}"
+                                    alt="Card image" style="max-width: 60px;"></span></td>
+                        <td><span id=quantitat style="">{{$cistellafoto->quantitat}}</span></td>
+                        <td><span id="preu" style="">{{$cistellafoto->preu}}&nbsp;€</span></td>
+                        <td>
+                            <div id="eliminarP">
+                                <form id="eliminar" style="" action="{{ route('cistella',$cistellafoto->id)}}"
+                                    method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="id_linia_producte" value="{{$cistellafoto->id}}">
+                                    <button id="confirm_delete" class="btn btn-danger" type="submit">X</button>
+                                </form>
+                            </div>
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <p style="display:none"> {{$total2 = $total2 + ($cistellafoto->preu * $cistellafoto->quantitat)}}
-                    </p>
-                </tr>
+                    <tr>
+                        <p style="display:none"> {{$total2 = $total2 + ($cistellafoto->preu * $cistellafoto->quantitat)}}
+                        </p>
+                    </tr>
 
-                @endforeach
-                <tr>
-                    <td> </td>
-                    <td> </td>
-                    <td> <b> TOTAL:</b> </td>
-                    <td> {{$compteTotal = $total + $total2}}€ </td>
-                    <td style="width:140px;"> <a href="/compra" style="text-decoration: none;" class="btn btn-success"
-                            id="compraButton">Comprar</a> </td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
+                    @endforeach
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> <b> TOTAL:</b> </td>
+                        <td> {{$compteTotal = $total + $total2}}€ </td>
+                        <td style="width:140px;"> <a href="/compra" style="text-decoration: none;" class="btn btn-success"
+                                id="compraButton">Comprar</a> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        @endif
     </div>
     @endsection
+
     @section("footer")
+    @endsection
+
+    @section("js")
 
     <script>
         $(".quantitat_input").each(function () {
@@ -272,4 +284,4 @@
         });
     </script>
 </div>
-@endsection
+    @endsection

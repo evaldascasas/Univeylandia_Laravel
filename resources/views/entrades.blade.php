@@ -11,6 +11,11 @@
 @section("content")
 <!-- ENTRADES -->
 <div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="font-weight-bold text-center">{{ __('Compra d\'entrades') }}</h1>
+        </div>
+    </div>
     <form class="needs-validation" method="POST" action="{{ action('HomeController@parc_afegir_cistella') }}" id="form_ticket">
         @method('POST')
         @csrf
@@ -26,13 +31,13 @@
             <div class="form-group">
                 <label for="nom">Viatges</label>
                 <select class="form-control" name="num_viatges">
-                    <option value=3>3 || Preu base + 5€</option>
-                    <option value=6>6 || Preu base + 10€</option>
+                    <option value=3>{{ __('3 || Preu base + 5€') }}</option>
+                    <option value=6>{{ __('6 || Preu base + 10€') }}</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label for="nom">Quantitat</label>
+            <label for="nom">{{ __('Quantitat') }}</label>
             <select class="form-control" name="quantitat">
                 <option value=1>1</option>
                 <option value=2>2</option>
@@ -42,8 +47,8 @@
                 <option value=6>6</option>
             </select>
         </div>
-        <button class="btn btn-success" type="submit">Comprar</button>
-        <a href="{{ URL::previous() }}" class="btn btn-secondary">Cancel·lar</a>
+        <button class="btn btn-success" type="submit">{{ __('Comprar' )}}</button>
+        <a href="{{ URL::previous() }}" class="btn btn-secondary">{{ __('Cancel·lar') }}</a>
     </form>
 </div>
 <script>

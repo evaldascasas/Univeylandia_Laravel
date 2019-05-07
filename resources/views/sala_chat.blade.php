@@ -18,7 +18,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                    <h1 class="font-weight-bold text-center text-uppercase">sala de xat</h1>
+                    <h1 class="font-weight-bold text-center">Sala de xat</h1>
             </div>
         </div>
         <div id="content" style="display: table;margin: 0 auto;">

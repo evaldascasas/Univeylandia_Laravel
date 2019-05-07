@@ -19,8 +19,8 @@ class AtraccionsSeeder extends Seeder
             'altura_max' => '300',
             'accessibilitat' => '1',
             'acces_express' => '1',
-            'descripcio' => "L'atraccio mes espectacular de tot el parc d'Univeylandia, un montanya russa amb tres loops que et deixaran una experiencia per a tota vida.",
-            'path' => '/public/img/atraccions/atraccio1.jpg',
+            'descripcio' => "L'atracció més espectacular de tot el parc d'Univeylandia, un montanya russa amb tres loops que et deixaran una experiència per a tota la vida.",
+            'path' => '/img/atraccions/atraccio1.jpg',
             'votacions' => 20,
         ]);
 
@@ -32,21 +32,21 @@ class AtraccionsSeeder extends Seeder
             'altura_max' => '200',
             'accessibilitat' => '1',
             'acces_express' => '0',
-            'descripcio' => "El Tornado es una atraccio que et fa sentir la sensacio d'estar dins d'un tornado de el Oest del continent America.",
-            'path' => '/public/img/atraccions/atraccio2.jpg',
+            'descripcio' => "El Tornado és una atracció que et fa sentir la sensació d'estar dins d'un tornado de l'Oest del continent Americà.",
+            'path' => '/img/atraccions/atraccio2.jpg',
             'votacions' => 20,
         ]);
         
         DB::table('atraccions')->insert([
-            'nom_atraccio' => 'Cañon V',
+            'nom_atraccio' => 'West Canyon',
             'tipus_atraccio' => '3',
             'data_inauguracio' => '2019-03-22',
             'altura_min' => '90',
             'altura_max' => '300',
             'accessibilitat' => '0',
             'acces_express' => '1',
-            'descripcio' => " El Cañon V es la unica atraccio d'aigua del nostr parc, aquesta atraccio et porta per dins dels cañons del Oest.",
-            'path' => '/public/img/atraccions/atraccio3.jpg',
+            'descripcio' => "És la unica atraccio d'aigua del nostre parc, aquesta atracció et porta per dins dels canyons de l'Oest.",
+            'path' => '/img/atraccions/atraccio3.jpg',
             'votacions' => 8,
         ]);
 
@@ -58,8 +58,8 @@ class AtraccionsSeeder extends Seeder
             'altura_max' => '300',
             'accessibilitat' => '0',
             'acces_express' => '1',
-            'descripcio' => " El Vasin es l'atraccio per als nens mes petits que ens visitin en el parc, es una atraccio apta per a tota la familia.",
-            'path' => '/public/img/atraccions/atraccio4.jpg',
+            'descripcio' => " L'atracció per als nens més petits que vinguin al parc, és una atracció apta per a tota la familia.",
+            'path' => '/img/atraccions/atraccio4.jpg',
             'votacions' => 8,
         ]);
      }
