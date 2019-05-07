@@ -260,6 +260,9 @@
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('graficaregistres') ? 'active' : '' }}" href="{{  route('graficaregistres')  }}"><span data-feather="user-plus"></span>Grafica registres</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('graficavendes') ? 'active' : '' }}" href="{{  route('graficavendes')  }}"><span data-feather="truck"></span>Grafica vendes</a>
+            </li>
           </ul>
 
 

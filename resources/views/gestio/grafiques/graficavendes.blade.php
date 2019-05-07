@@ -57,7 +57,7 @@
             <div class="box-header">
 		    </div>
 
-	        <div class="box-body" id="div_grafica_lineas">
+	        <div class="box-body" id="div_grafica_vendes">
             </div>
 	    
              <div class="box-footer">
@@ -67,7 +67,7 @@
 </div>
 
 <script>
-    cargar_grafica_lineas(<?= $anio; ?>,<?= intval($mes); ?>);
+    cargar_grafica_vendes(<?= $anio; ?>,<?= intval($mes); ?>);
 </script>
 
 @endsection

@@ -177,3 +177,9 @@ Route::get('status', 'PaymentController@getPaymentStatus');
 
 /* GRAFIQUES */
 Route::get('/gestio/grafiques', 'GrafiquesController@graficaregistres')->name('graficaregistres')->middleware(['auth','is_admin','verified']);
+Route::get('/gestio/grafiques/grafica_registros/{anio}/{mes}', 'GrafiquesController@registros_mes');
+Route::get('/gestio/grafiques1', 'GrafiquesController@graficavendes')->name('graficavendes')->middleware(['auth','is_admin','verified']);
+Route::get('/gestio/grafiques1/grafica_registros/{anio}/{mes}', 'GrafiquesController@vendes_mes');
+
+
+

@@ -4,87 +4,9 @@ function cambiar_fecha_grafica(){
     var anio_sel=$("#anio_sel").val();
     var mes_sel=$("#mes_sel").val();
 
-    cargar_grafica_barras(anio_sel,mes_sel);
     cargar_grafica_lineas(anio_sel,mes_sel);
+    cargar_grafica_vendes(anio_sel,mes_sel);
 }
-
-
-
-function cargar_grafica_barras(anio,mes){
-
-var options={
-	 chart: {
-	 	    renderTo: 'div_grafica_barras',
-            type: 'column'
-        },
-        title: {
-            text: 'Numero de Registros en el Mes'
-        },
-        subtitle: {
-            text: 'Source: plusis.net'
-        },
-        xAxis: {
-            categories: [],
-             title: {
-                text: 'dias del mes'
-            },
-            crosshair: true
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'REGISTROS AL DIA'
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y} </b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series: [{
-            name: 'registros',
-            data: []
-
-        }]
-}
-
-$("#div_grafica_barras").html( $("#cargador_empresa").html() );
-
-var url = "grafica_registros/"+anio+"/"+mes+"";
-
-
-$.get(url,function(resul){
-var datos= jQuery.parseJSON(resul);
-var totaldias=datos.totaldias;
-var registrosdia=datos.registrosdia;
-var i=0;
-	for(i=1;i<=totaldias;i++){
-	
-	options.series[0].data.push( registrosdia[i] );
-	options.xAxis.categories.push(i);
-
-
-	}
-
-
- //options.title.text="aqui e podria cambiar el titulo dinamicamente";
- chart = new Highcharts.Chart(options);
-
-})
-
-
-}
-
-
 
 function cargar_grafica_lineas(anio,mes){
 
@@ -94,11 +16,11 @@ var options={
            
         },
           title: {
-            text: 'Numero de Registros en el Mes',
+            text: 'Registres en el Mes',
             x: -20 //center
         },
         subtitle: {
-            text: 'Source: Plusis.net',
+            text: 'Parc Univeylandia',
             x: -20
         },
         xAxis: {
@@ -106,7 +28,7 @@ var options={
         },
         yAxis: {
             title: {
-                text: 'REGISTROS POR DIA'
+                text: 'Registres per dia'
             },
             plotLines: [{
                 value: 0,
@@ -115,7 +37,7 @@ var options={
             }]
         },
         tooltip: {
-            valueSuffix: ' registros'
+            valueSuffix: ' Registres'
         },
         legend: {
             layout: 'vertical',
@@ -124,13 +46,13 @@ var options={
             borderWidth: 0
         },
         series: [{
-            name: 'registros',
+            name: ' Registres',
             data: []
         }]
 }
 
 $("#div_grafica_lineas").html( $("#cargador_empresa").html() );
-var url = "grafica_registros/"+anio+"/"+mes+"";
+var url = "grafiques/grafica_registros/"+anio+"/"+mes+"";
 $.get(url,function(resul){
 var datos= jQuery.parseJSON(resul);
 var totaldias=datos.totaldias;
@@ -151,71 +73,67 @@ var i=0;
 
 }
 
+function cargar_grafica_vendes(anio,mes){
 
-
-
-function cargar_grafica_pie(){
-
-var options={
-     // Build the chart
-     
-            chart: {
-                renderTo: 'div_grafica_pie',
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
+    var options={
+         chart: {
+                renderTo: 'div_grafica_vendes',
+               
             },
-            title: {
-                text: 'Grafica publicaciones'
+              title: {
+                text: 'Vendes del parc Univeylandia',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Parc Univeylandia',
+                x: -20
+            },
+            xAxis: {
+                categories: []
+            },
+            yAxis: {
+                title: {
+                    text: 'Vendes per dia'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                valueSuffix: ' Vendes'
             },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
-                }
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
             },
             series: [{
-                name: 'Brands',
-                colorByPoint: true,
+                name: ' Vendes',
                 data: []
             }]
-     
-}
-
-$("#div_grafica_pie").html( $("#cargador_empresa").html() );
-
-var url = "grafica_publicaciones";
-
-
-$.get(url,function(resul){
-var datos= jQuery.parseJSON(resul);
-var tipos=datos.tipos;
-var totattipos=datos.totaltipos;
-var numeropublicaciones=datos.numerodepubli;
-
-    for(i=0;i<=totattipos-1;i++){  
-    var idTP=parseInt(tipos[i].id);
-    var objeto= {name: tipos[i].titulo, y:numeropublicaciones[idTP] };     
-    options.series[0].data.push( objeto );  
     }
- //options.title.text="aqui e podria cambiar el titulo dinamicamente";
- chart = new Highcharts.Chart(options);
-
-})
-
-
-
-
-
-
-
-
-}
+    
+    $("#div_grafica_vendes").html( $("#cargador_empresa").html() );
+    var url = "grafiques1/grafica_registros/"+anio+"/"+mes+"";
+    $.get(url,function(resul){
+    var datos= jQuery.parseJSON(resul);
+    var totaldias=datos.totaldias;
+    var registrosdia=datos.registrosdia;
+    var i=0;
+        for(i=1;i<=totaldias;i++){
+        
+        options.series[0].data.push( registrosdia[i] );
+        options.xAxis.categories.push(i);
+    
+    
+        }
+     //options.title.text="aqui e podria cambiar el titulo dinamicamente";
+     chart = new Highcharts.Chart(options);
+    
+    })
+    
+    
+    }

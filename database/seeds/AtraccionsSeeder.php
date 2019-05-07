@@ -12,15 +12,15 @@ class AtraccionsSeeder extends Seeder
      public function run()
      {
         DB::table('atraccions')->insert([
-            'nom_atraccio' => 'Dragon Khan',
+            'nom_atraccio' => 'Dragon Stratus',
             'tipus_atraccio' => '1',
             'data_inauguracio' => '2019-03-12',
             'altura_min' => '130',
             'altura_max' => '300',
             'accessibilitat' => '1',
             'acces_express' => '1',
-            'descripcio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec ligula est. Sed vitae ligula finibus, euismod odio sed, volutpat sem. Proin tincidunt nunc nisl, sit amet aliquam leo elementum ac. Maecenas eros mauris, posuere id faucibus id, elementum tincidunt enim.',
-            'path' => '/storage/atraccions/atraccio_general.jpg',
+            'descripcio' => "L'atraccio mes espectacular de tot el parc d'Univeylandia, un montanya russa amb tres loops que et deixaran una experiencia per a tota vida.",
+            'path' => '/public/img/atraccions/atraccio1.jpg',
             'votacions' => 20,
         ]);
 
@@ -32,8 +32,8 @@ class AtraccionsSeeder extends Seeder
             'altura_max' => '200',
             'accessibilitat' => '1',
             'acces_express' => '0',
-            'descripcio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec ligula est. Sed vitae ligula finibus, euismod odio sed, volutpat sem. Proin tincidunt nunc nisl, sit amet aliquam leo elementum ac. Maecenas eros mauris, posuere id faucibus id, elementum tincidunt enim.',
-            'path' => '/storage/atraccions/atraccio_general.jpg',
+            'descripcio' => "El Tornado es una atraccio que et fa sentir la sensacio d'estar dins d'un tornado de el Oest del continent America.",
+            'path' => '/public/img/atraccions/atraccio2.jpg',
             'votacions' => 20,
         ]);
         
@@ -45,8 +45,21 @@ class AtraccionsSeeder extends Seeder
             'altura_max' => '300',
             'accessibilitat' => '0',
             'acces_express' => '1',
-            'descripcio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec ligula est. Sed vitae ligula finibus, euismod odio sed, volutpat sem. Proin tincidunt nunc nisl, sit amet aliquam leo elementum ac. Maecenas eros mauris, posuere id faucibus id, elementum tincidunt enim.',
-            'path' => '/storage/atraccions/atraccio_general.jpg',
+            'descripcio' => " El Cañon V es la unica atraccio d'aigua del nostr parc, aquesta atraccio et porta per dins dels cañons del Oest.",
+            'path' => '/public/img/atraccions/atraccio3.jpg',
+            'votacions' => 8,
+        ]);
+
+        DB::table('atraccions')->insert([
+            'nom_atraccio' => 'Vasin',
+            'tipus_atraccio' => '3',
+            'data_inauguracio' => '2019-03-23',
+            'altura_min' => '50',
+            'altura_max' => '300',
+            'accessibilitat' => '0',
+            'acces_express' => '1',
+            'descripcio' => " El Vasin es l'atraccio per als nens mes petits que ens visitin en el parc, es una atraccio apta per a tota la familia.",
+            'path' => '/public/img/atraccions/atraccio4.jpg',
             'votacions' => 8,
         ]);
      }
