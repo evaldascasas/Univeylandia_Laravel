@@ -43,9 +43,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ asset('css/styleGestio.css') }}" type="text/css">
   <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
 
   <!-- DropZone -->
   <script src="{{ asset('js/dropzone.js') }}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
 
   <!-- Icon -->
   <link rel="icon" href="{{ asset('img/icon.png') }}" type="image/gif">
@@ -75,6 +78,20 @@
   <script>
       $('div.alert').not('.alert-important').delay(3000).slideUp(350);
   </script>
+
+<script>
+
+  $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+          alwaysShowClose: true,
+          showArrows: false,
+      });
+  });
+
+</script>
+
+
 
 </body>
 </html>

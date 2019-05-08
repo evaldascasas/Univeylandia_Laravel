@@ -43,9 +43,9 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Mostra la pàgina inicial de l'aplicatiu i hi carrega notícies.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -56,15 +56,12 @@ class HomeController extends Controller
         ->orderBy('id', 'DESC')
         ->paginate(2);
 
-        // $promocions = DB::table('promocions')
-        // ->join('users', 'users.id', '=', 'promocions.id_usuari')
-        // ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img')
-        // ->orderBy('id', 'DESC')
-        // ->paginate(2);
-
         return view('index', compact('noticies'));
     }
 
+    /**
+     * Mostra la pàgina pública d'atraccions amb les dades de les atraccions de la base de dades.
+     */
     public function atraccions()
     {
         $atraccionetes = TipusAtraccions::join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
@@ -86,62 +83,90 @@ class HomeController extends Controller
         return view("atraccions", compact('atraccionetes'));
     }
 
+    /**
+     * Retorna la vista entrades de la pàgina pública (/entrades).
+     */
     public function entrades()
     {
         $tipus_producte = Tipus_producte::whereIn('id', [1, 2, 3, 4, 5, 6, 7])->get();
+
         return view("entrades", compact('tipus_producte'));
     }
 
+    /**
+     * Retorna la vista del login de la pàgina pública (/login).
+     */
     public function login()
     {
         return view("login");
     }
 
+    /**
+     * Retorna la vista del contacte de la pàgina pública (/contacte).
+     */
     public function contacte()
     {
         return view("contacte");
     }
 
+    /**
+     * Retorna la vista inicial de la gestió pàgina interna (/gestio).
+     */
     public function gestio()
     {
         return view("gestio/index");
     }
 
+    /**
+     * Retorna la vista del perfil de l'usuari de la pàgina pública (/perfil).
+     */
     public function perfil()
     {
         return view('perfil');
     }
 
-    public function mes()
-    {
-        return view('mes');
-    }
+    // public function mes()
+    // {
+    //     return view('mes');
+    // }
 
-    public function pizzeria()
-    {
-        return view('pizzeria');
-    }
+    // public function pizzeria()
+    // {
+    //     return view('pizzeria');
+    // }
 
+    /**
+     * Retorna la vista de les Frequently Asked Questions de la pàgina pública (/faq).
+     */
     public function faq()
     {
         return view('faq');
     }
 
-    public function multimedia()
-    {
-        return view('multimedia');
-    }
+    // public function multimedia()
+    // {
+    //     return view('multimedia');
+    // }
 
+    /**
+     * Retorna la vista de Qui Som de la pàgina pública (/qui-som).
+     */
     public function equipdirectiu()
     {
         return view('equipdirectiu');
     }
 
+    /**
+     * Retorna la vista de la visita digital de la pàgina pública (/visita-digital).
+     */
     public function visitadigital()
     {
         return view('visitadigital');
     }
 
+    /**
+     * Retorna la vista per reportar una incidència de la pàgina pública - només usuaris autentificats (/incidencia).
+     */
     public function incidencia()
     {
         $prioritats = PrioritatIncidencia::all();
@@ -149,6 +174,9 @@ class HomeController extends Controller
         return view('incidencia', compact('prioritats'));
     }
 
+    /**
+     * Retorna la vista de les tasques dels treballadors de la pàgina interna (/tasques).
+     */
     public function tasques()
     {
         $user = Auth::user();
@@ -198,7 +226,9 @@ class HomeController extends Controller
         return view('tasques', compact(['incidencies_per_fer','assignacio']));
     }
 
-    /*Funcio que rep*/
+    /**
+     * 
+     */
     public function parc_afegir_cistella(Request $request)
     {
         if (Auth::check() == true) {

@@ -18,7 +18,7 @@ use Carbon;
 class ClientsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostra un llistat de clients.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +32,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostra el formulari de creació d'usuaris client.
      *
      * @return \Illuminate\Http\Response
      */
@@ -42,7 +42,8 @@ class ClientsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Emmagatzema un usuari client en la base de dades. Si l'usuari s'emmagatzema de forma correcta, 
+     * s'envia un correu electrònic amb un enllaç per restablir la contrasenya.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -88,10 +89,7 @@ class ClientsController extends Controller
         
         $usuari->save();
         
-        if($usuari->save()) {
-            // $token = app(\Illuminate\Auth\Passwords\PasswordBroker::class)->createToken($usuari);
-
-            // $usuari->sendPasswordResetNotification($token);   
+        if($usuari->save()) { 
             dispatch(new \App\Jobs\SendEmailOnUserCreationJob($usuari));
         }
 
@@ -99,7 +97,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostra les dades de l'usuari client especificat.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -112,7 +110,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostra el formulari per editar l'usuari client especificat.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -125,7 +123,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualitza la informació de l'usuari client especificat.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -172,8 +170,9 @@ class ClientsController extends Controller
         
         return redirect('/gestio/clients')->with('success', 'Client modificat correctament');
     }
+
     /**
-     * Remove the specified resource from storage.
+     * Desactiva l'usuari client especificat.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -188,7 +187,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * List all the trashed clients.
+     * Mostra un llistat dels usuaris client desactivats.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -203,7 +202,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Reactivate a trashed employee.
+     * Reactiva l'usuari especificat.
      * 
      * @param int $id
      * @return \Illuminate\Http\Response
@@ -219,44 +218,33 @@ class ClientsController extends Controller
         return redirect('/gestio/clients')->with('success', 'Client restaurat correctament.');
     }
 
-    // /**
-    //  * Permanently delete a client.
-    //  * 
-    //  * @param int $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function annihilate($id)
-    // {
-    //     $user = User::onlyTrashed()
-    //     ->where('id',$id)
-    //     ->first();
-
-    //     $user->forceDelete();
-
-    //     return redirect('/gestio/clients/deactivated')->with('success', 'Client eliminat de la base de dades correctament.');
-    // }
-
     /**
-     * Generate a PDF with client data.
+     * Genera un arxiu PDF amb les dades de tots els usuaris client.
      * 
      * @return PDF
      */
     public function guardarClientPDF() 
     {
-        $usuaris = User::whereNotNull('email_verified_at')
-        ->where('id_rol',1)
-        ->get();
+        try {
+            $usuaris = User::whereNotNull('email_verified_at')
+            ->where('id_rol',1)
+            ->get();
 
-        $mytime = Carbon\Carbon::now();
-        $temps = $mytime->toDateString();
+            $mytime = Carbon\Carbon::now();
+            $temps = $mytime->toDateString();
 
-        $pdf = PDF::loadView('/gestio/clients/pdfClient', compact('usuaris'))->setPaper('a3', 'landscape');
+            $pdf = PDF::loadView('/gestio/clients/pdfClient', compact('usuaris'))->setPaper('a3', 'landscape');
 
-        return $pdf->download('client'.$temps.'.pdf');
+            return $pdf->download('client'.$temps.'.pdf');
+        } catch (\Exception $e) {
+            Log::error($e);
+            return redirect('/gestio/clients')->with('error', 'Ha fallat la exportació en PDF.');
+        }
+        
     }
 
     /**
-     * Generate a CSV file with client data
+     * Genera un arxiu CSV amb les dades importants dels usuaris client.
      * 
      * @return CSV
      */
@@ -270,7 +258,7 @@ class ClientsController extends Controller
             return Excel::download(new ClientsExport, 'clients'.$temps.'.csv');
         } catch (\Exception $e) {
             Log::error($e);
-            return redirect('/gestio/clients')->with('error', 'Ha fallat la exportació dels registres');
+            return redirect('/gestio/clients')->with('error', 'Ha fallat la exportació dels registres.');
         }
     }
 

@@ -15,12 +15,11 @@ use \App\Producte;
 use Image;
 use File;
 
-//use Illuminate\Http\Request;
-
 class ImageController extends Controller
 {
 	/**
-     * Display a listing of the images.
+	 * Retorna les dades necessàries per crear la galeria de fotos.
+     * Retorna una col·lecció amb les imatges pujades al servidor, amb el thumbnail i la foto amb marca d'aigua.
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,13 +35,11 @@ class ImageController extends Controller
 			'atraccions.nom_atraccio as nom_atraccio',
 		]);
 
-		//dd($images);
-
 		return view('gestio/imatges/index', compact('images'));
 	}
 
 	/**
-     * Show the form for uploading a new set of images.
+	 * Mostra el formulari per pujar imatges.
      *
      * @return \Illuminate\Http\Response
      */
@@ -54,7 +51,11 @@ class ImageController extends Controller
 	}
 
 	/**
+	 * Guarda les imatges rebudes d'un formulari, genera un thumbnail i una imatge amb marca d'aigua per cada imatge rebuda.
+	 * Crea un producte de tipus foto i els seus atributs.
 	 * 
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
 	 */
    	public function upload(Request $request)
    	{
@@ -67,7 +68,7 @@ class ImageController extends Controller
 		->first();
 
 		$validator = \Validator::make($request->all(), [
-            //'image' => 'required',
+            'image' => 'required',
 			'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
 			'attraction' => 'required|numeric'
         ]);
@@ -78,12 +79,6 @@ class ImageController extends Controller
                 'errors' => $validator->errors()->all()
             ]);
         }
-
-		// $request->validate([
-		// 	'image' => 'required',
-		// 	'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
-		// 	'attraction' => 'required|numeric'
-		// ]);
 
 		// comprovar si hi ha imatges en el form
 		if($request->hasFile('image')) {
@@ -156,7 +151,5 @@ class ImageController extends Controller
 		}
 
 		return response()->json(['status' => true]);
-
-		// return redirect('gestio/productes/imatges')->with('success','Imatges pujades correctament!');
 	}
 }

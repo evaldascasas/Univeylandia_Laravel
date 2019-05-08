@@ -19,7 +19,7 @@ Route::get('/contacte','HomeController@contacte')->name('contacte');
 Route::get('/noticies',"HomeController@noticies")->name('noticies');
 Route::get('/noticies/n',"HomeController@noticia")->name('noticia');
 Route::get('/atraccions',"HomeController@atraccions")->name('atraccions');
-Route::get('/atraccions/{id}',"HomeController@llistarAtraccionsPublic")->name('atraccions_generades');
+Route::get('/atraccions/{atraccio}',"HomeController@llistarAtraccionsPublic")->name('atraccions_generades');
 Route::get('/entrades',"HomeController@entrades")->name('entrades');
 Route::get('/gestio',"HomeController@gestio")->name('gestio')->middleware(['auth','is_admin','verified']);
 Route::get('/perfil',"PerfilController@index")->name('perfil')->middleware(['auth','verified']);
@@ -33,8 +33,8 @@ Route::get('/promocions',"HomeController@promocions")->name('promocions');
 Route::get('/promocions/n',"HomeController@promocio")->name('promocio');
 //Route::get('/tendes/figures', array('as' => 'tenda_figures','uses' => 'HomeController@tenda_figures'));
 Route::get('/construccio','HomeController@construccio')->name('construccio');
-Route::get('/equipdirectiu', 'HomeController@equipdirectiu')->name('equipdirectiu');
-Route::get('/visitadigital', 'HomeController@visitadigital')->name('visitadigital');
+Route::get('/qui-som', 'HomeController@equipdirectiu')->name('equipdirectiu');
+Route::get('/visita-digital', 'HomeController@visitadigital')->name('visitadigital');
 
 /* RUTES GRUP 1 */
 Auth::routes(['verify' => true]);

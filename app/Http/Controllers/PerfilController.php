@@ -79,10 +79,15 @@ class PerfilController extends Controller
       //return Response::download('storage/tickets_parc/15544714436.png');
       return view('perfil', compact('tickets', 'fotos'));
     }
+
+    /**
+     * 
+     */
     public function imgDownload($id)
     {
-      $foto = Atributs_producte::find($id);
-      return Response::download($foto->foto_path);
+        $foto = Atributs_producte::find($id);
+
+        return Response::download($foto->foto_path);
     }
 
 }
