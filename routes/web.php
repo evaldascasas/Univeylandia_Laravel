@@ -35,9 +35,9 @@ Route::get('/promocions/{promocio}',"HomeController@promocio")->name('promocio')
 Route::get('/construccio','HomeController@construccio')->name('construccio');
 Route::get('/qui-som', 'HomeController@equipdirectiu')->name('equipdirectiu');
 Route::get('/visita-digital', 'HomeController@visitadigital')->name('visitadigital');
-Route::get('/condicionsgenerals', 'HomeController@condicionsgenerals')->name('condicionsgenerals');
-Route::get('/politicaprivacitat', 'HomeController@politicaprivacitat')->name('politicaprivacitat');
-Route::get('/politicacookies', 'HomeController@politicacookies')->name('politicacookies');
+Route::get('/condicions-generals', 'HomeController@condicionsgenerals')->name('condicionsgenerals');
+Route::get('/politica-privacitat', 'HomeController@politicaprivacitat')->name('politicaprivacitat');
+Route::get('/politica-cookies', 'HomeController@politicacookies')->name('politicacookies');
 
 /* RUTES GRUP 1 */
 Auth::routes(['verify' => true]);
