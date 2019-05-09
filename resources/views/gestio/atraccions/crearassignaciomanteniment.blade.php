@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="id_rol">Rol</label>
-                    <select class="form-control form-control-sm" id="id_rols">
+                    <select class="form-control" id="id_rols">
                         @foreach($rols as $rol)
                         <option value="{{ $rol->id }}">{{ $rol->nom_rol }}</option>
                          @endforeach
