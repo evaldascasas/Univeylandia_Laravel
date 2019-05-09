@@ -6,8 +6,6 @@
             <ul class="list-inline">
             <li><a href="{{ route('visitadigital') }}">Visita Virtual</a></li>
                 <li><a href="{{ route('equipdirectiu') }}">Sobre nosaltres</a></li>
-                <li><a href="{{ route('construccio') }}">Treballa amb nosaltres</a></li>
-                <li><a href="{{ route('construccio') }}">Partners</a></li>
                 <li><a href="{{ route('contacte') }}">Contacte</a></li>
                 <li><a href="{{ route('tenda') }}">Botiga online</a></li>
             </ul>
@@ -16,9 +14,9 @@
         <div class="col-sm-2">
             <h6 class="text-uppercase">Condicions</h6>
             <ul class="list-inline">
-                <li><a href="{{ route('construccio') }}">Condicions generals</a></li>
-                <li><a href="{{ route('construccio') }}">Política de privacitat</a></li>
-                <li><a href="{{ route('construccio') }}">Politica de cookies</a></li>
+                <li><a href="{{ route('condicionsgenerals') }}">Condicions generals</a></li>
+                <li><a href="{{ route('politicaprivacitat') }}">Política de privacitat</a></li>
+                <li><a href="{{ route('politicacookies') }}">Politica de cookies</a></li>
             </ul>
         </div>
 
