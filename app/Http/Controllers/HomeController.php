@@ -582,7 +582,7 @@ class HomeController extends Controller
         return view('noticies', compact('noticies'));
     }
 
-    public function promocio(Request $request)
+    public function promocio($id)
     {
         $valid = 0;
         if (Auth::check()) {
@@ -592,7 +592,7 @@ class HomeController extends Controller
           }
         }
 
-        $promocio = promocions::find($request->get('id'));
+        $promocio = promocions::find($id);
 
         return view("/promocio", compact('promocio', 'valid'));
     }

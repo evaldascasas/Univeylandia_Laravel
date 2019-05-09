@@ -30,7 +30,7 @@ Route::get('/incidencia',"HomeController@incidencia")->name('incidencia')->middl
 Route::get('/faq',"HomeController@faq")->name('faq');
 //Route::get('/multimedia',"HomeController@multimedia")->name('multimedia');
 Route::get('/promocions',"HomeController@promocions")->name('promocions');
-Route::get('/promocions/n',"HomeController@promocio")->name('promocio');
+Route::get('/promocions/{promocio}',"HomeController@promocio")->name('promocio');
 //Route::get('/tendes/figures', array('as' => 'tenda_figures','uses' => 'HomeController@tenda_figures'));
 Route::get('/construccio','HomeController@construccio')->name('construccio');
 Route::get('/qui-som', 'HomeController@equipdirectiu')->name('equipdirectiu');
