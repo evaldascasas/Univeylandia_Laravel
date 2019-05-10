@@ -149,6 +149,30 @@ class HomeController extends Controller
     // }
 
     /**
+     * Retorna la vista de les Condicions Generals de la pàgina pública (/condicionsgenerals).
+     */
+    public function condicionsgenerals()
+    {
+        return view('condicionsgenerals');
+    }
+
+    /**
+     * Retorna la vista de Politica de privacitat de la pàgina pública (/politicaprivacitat).
+     */
+    public function politicaprivacitat()
+    {
+        return view('politicaprivacitat');
+    }
+
+        /**
+     * Retorna la vista de Politica de cookies de la pàgina pública (/politicacookies).
+     */
+    public function politicacookies()
+    {
+        return view('politicacookies');
+    }
+
+        /**
      * Retorna la vista de Qui Som de la pàgina pública (/qui-som).
      */
     public function equipdirectiu()
