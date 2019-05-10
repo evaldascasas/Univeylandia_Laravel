@@ -1,22 +1,22 @@
 
-function cambiar_fecha_grafica(){
+function cambiar_fecha_grafica() {
 
-    var anio_sel=$("#anio_sel").val();
-    var mes_sel=$("#mes_sel").val();
+    var anio_sel = $("#anio_sel").val();
+    var mes_sel = $("#mes_sel").val();
 
-    cargar_grafica_lineas(anio_sel,mes_sel);
-    cargar_grafica_vendes(anio_sel,mes_sel);
+    cargar_grafica_registres(anio_sel, mes_sel);
+    cargar_grafica_vendes(anio_sel, mes_sel);
 }
 
-function cargar_grafica_lineas(anio,mes){
+function cargar_grafica_registres(anio, mes) {
 
-var options={
-     chart: {
+    var options = {
+        chart: {
             renderTo: 'div_grafica_lineas',
-           
+
         },
-          title: {
-            text: 'Registres en el Mes',
+        title: {
+            text: 'Registres d\'usuaris',
             x: -20 //center
         },
         subtitle: {
@@ -49,91 +49,91 @@ var options={
             name: ' Registres',
             data: []
         }]
-}
-
-$("#div_grafica_lineas").html( $("#cargador_empresa").html() );
-var url = "grafiques/grafica_registros/"+anio+"/"+mes+"";
-$.get(url,function(resul){
-var datos= jQuery.parseJSON(resul);
-var totaldias=datos.totaldias;
-var registrosdia=datos.registrosdia;
-var i=0;
-    for(i=1;i<=totaldias;i++){
-    
-    options.series[0].data.push( registrosdia[i] );
-    options.xAxis.categories.push(i);
-
-
     }
- //options.title.text="aqui e podria cambiar el titulo dinamicamente";
- chart = new Highcharts.Chart(options);
 
-})
+    $("#div_grafica_lineas").html($("#cargador_empresa").html());
+    var url = "registres/" + anio + "/" + mes + "";
+    $.get(url, function (resul) {
+        var datos = jQuery.parseJSON(resul);
+        var totaldias = datos.totaldias;
+        var registrosdia = datos.registrosdia;
+        var i = 0;
+        for (i = 1; i <= totaldias; i++) {
+
+            options.series[0].data.push(registrosdia[i]);
+            options.xAxis.categories.push(i);
 
 
-}
-
-function cargar_grafica_vendes(anio,mes){
-
-    var options={
-         chart: {
-                renderTo: 'div_grafica_vendes',
-               
-            },
-              title: {
-                text: 'Vendes del parc Univeylandia',
-                x: -20 //center
-            },
-            subtitle: {
-                text: 'Parc Univeylandia',
-                x: -20
-            },
-            xAxis: {
-                categories: []
-            },
-            yAxis: {
-                title: {
-                    text: 'Vendes per dia'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                valueSuffix: ' Vendes'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: [{
-                name: ' Vendes',
-                data: []
-            }]
-    }
-    
-    $("#div_grafica_vendes").html( $("#cargador_empresa").html() );
-    var url = "grafiques1/grafica_registros/"+anio+"/"+mes+"";
-    $.get(url,function(resul){
-    var datos= jQuery.parseJSON(resul);
-    var totaldias=datos.totaldias;
-    var registrosdia=datos.registrosdia;
-    var i=0;
-        for(i=1;i<=totaldias;i++){
-        
-        options.series[0].data.push( registrosdia[i] );
-        options.xAxis.categories.push(i);
-    
-    
         }
-     //options.title.text="aqui e podria cambiar el titulo dinamicamente";
-     chart = new Highcharts.Chart(options);
-    
+        //options.title.text="aqui e podria cambiar el titulo dinamicamente";
+        chart = new Highcharts.Chart(options);
+
     })
-    
-    
+
+
+}
+
+function cargar_grafica_vendes(anio, mes) {
+
+    var options = {
+        chart: {
+            renderTo: 'div_grafica_vendes',
+
+        },
+        title: {
+            text: 'Vendes',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Parc Univeylandia',
+            x: -20
+        },
+        xAxis: {
+            categories: []
+        },
+        yAxis: {
+            title: {
+                text: 'Vendes per dia'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' Vendes'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: ' Vendes',
+            data: []
+        }]
     }
+
+    $("#div_grafica_vendes").html($("#cargador_empresa").html());
+    var url = "ventes/" + anio + "/" + mes + "";
+    $.get(url, function (resul) {
+        var datos = jQuery.parseJSON(resul);
+        var totaldias = datos.totaldias;
+        var registrosdia = datos.registrosdia;
+        var i = 0;
+        for (i = 1; i <= totaldias; i++) {
+
+            options.series[0].data.push(registrosdia[i]);
+            options.xAxis.categories.push(i);
+
+
+        }
+        //options.title.text="aqui e podria cambiar el titulo dinamicamente";
+        chart = new Highcharts.Chart(options);
+
+    })
+
+
+}

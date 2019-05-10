@@ -9,74 +9,81 @@ use App\Venta_productes;
 
 class GrafiquesController extends Controller
 {
-
-  public function getUltimoDiaMes($elAnio,$elMes) {
-
-    return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
-  }
-
-  public function registros_mes($anio,$mes)
+    public function getUltimoDiaMes($elAnio,$elMes)
     {
-        $primer_dia=1;
-        $ultimo_dia=$this->getUltimoDiaMes($anio,$mes);
+        return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
+    }
 
-        $fecha_inicial=date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$primer_dia) );
-        $fecha_final=date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$ultimo_dia) );
-
-        $usuarios=User::whereBetween('created_at', [$fecha_inicial,  $fecha_final])->get();
-        $ct=count($usuarios);
+    public function registros_mes($anio,$mes)
+    {
+        $primer_dia = 1;
+        $ultimo_dia = $this->getUltimoDiaMes($anio,$mes);
+        
+        $fecha_inicial = date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$primer_dia) );
+        $fecha_final = date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$ultimo_dia) );
+        
+        $usuarios = User::whereBetween('created_at', [$fecha_inicial,  $fecha_final])->get();
+        $ct = count($usuarios);
 
         for($d=1;$d<=$ultimo_dia;$d++){
             $registros[$d]=0;     
         }
 
         foreach($usuarios as $usuario){
-        $diasel=intval(date("d",strtotime($usuario->created_at) ) );
-        $registros[$diasel]++;    
+            $diasel = intval(date("d",strtotime($usuario->created_at) ) );
+            $registros[$diasel]++;    
         }
 
-        $data=array("totaldias"=>$ultimo_dia, "registrosdia" =>$registros);
-        return   json_encode($data);
-  }
+        $data = array("totaldias" => $ultimo_dia, "registrosdia" => $registros);
 
-  public function vendes_mes($anio,$mes)
+        return json_encode($data);
+    }
+
+    public function vendes_mes($anio,$mes)
     {
-        $primer_dia=1;
-        $ultimo_dia=$this->getUltimoDiaMes($anio,$mes);
+        $primer_dia = 1;
+        $ultimo_dia = $this->getUltimoDiaMes($anio,$mes);
 
-        $fecha_inicial=date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$primer_dia) );
-        $fecha_final=date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$ultimo_dia) );
+        $fecha_inicial = date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$primer_dia) );
+        $fecha_final = date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$ultimo_dia) );
 
-        $usuarios=Venta_productes::whereBetween('created_at', [$fecha_inicial,  $fecha_final])->get();
-        $ct=count($usuarios);
+        $usuarios = Venta_productes::whereBetween('created_at', [$fecha_inicial,  $fecha_final])->get();
+        $ct = count($usuarios);
 
         for($d=1;$d<=$ultimo_dia;$d++){
-            $registros[$d]=0;     
+            $registros[$d]=0;
         }
 
         foreach($usuarios as $usuario){
-        $diasel=intval(date("d",strtotime($usuario->created_at) ) );
-        $registros[$diasel]++;    
+            $diasel = intval(date("d",strtotime($usuario->created_at) ) );
+            $registros[$diasel]++;
         }
 
-        $data=array("totaldias"=>$ultimo_dia, "registrosdia" =>$registros);
-        return   json_encode($data);
-  }
+        $data = array("totaldias"=>$ultimo_dia, "registrosdia" => $registros);
+        
+        return json_encode($data);
+    }
 
-  public function graficaregistres() {
-    $anio=date("Y");
-    $mes=date("m");
+    public function graficaregistres()
+    {
+        $anio = date("Y");
 
-    return view('gestio.grafiques.graficaregistres')->with("anio",$anio)->with("mes",$mes);
+        $mes = date("n");
 
-  }
+        // $nombremes = array("","Gener","Febrer","Març","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Novembre","Desembre");
 
-  public function graficavendes() {
-    $anio=date("Y");
-    $mes=date("m");
+        return view('gestio.grafiques.graficaregistres', compact(['anio','mes']));
+    }
 
-    return view('gestio.grafiques.graficavendes')->with("anio",$anio)->with("mes",$mes);
+    public function graficavendes()
+    {
+        $anio = date("Y");
 
-  }
+        $mes = date("n");
+
+        // $nombremes = array("","Gener","Febrer","Març","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Novembre","Desembre");
+
+        return view('gestio.grafiques.graficavendes', compact(['anio','mes']));
+    }
 
 }

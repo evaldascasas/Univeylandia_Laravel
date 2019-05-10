@@ -234,7 +234,7 @@
 
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu12">
+            <a class="nav-link {{ request()->routeIs('promocions*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="false" href="#submenu12">
               <span data-feather="alert-triangle"></span>
               Promocions
               <span data-feather="chevron-right"></span>
@@ -250,18 +250,18 @@
           </ul>
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" aria-expanded="false" href="#submenu13">
+            <a class="nav-link {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="false" href="#submenu13">
               <span data-feather="trending-down"></span>
-                Grafiques
+                Estadísitques
               <span data-feather="chevron-right"></span>
             </a>
           </li>
-          <ul class="nav flex-column collapse {{ request()->routeIs('promocions*') ? 'show' : '' }}" id="submenu13" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') ? 'show' : '' }}" id="submenu13" data-parent="#sidebar">
             <li class="nav-item">
-              <a class="nav-link nav-interior {{ request()->routeIs('graficaregistres') ? 'active' : '' }}" href="{{  route('graficaregistres')  }}"><span data-feather="user-plus"></span>Grafica registres</a>
+              <a class="nav-link nav-interior {{ request()->routeIs('graficaregistres') ? 'active' : '' }}" href="{{  route('graficaregistres')  }}"><span data-feather="users"></span>Usuaris registrats</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-interior {{ request()->routeIs('graficavendes') ? 'active' : '' }}" href="{{  route('graficavendes')  }}"><span data-feather="truck"></span>Grafica vendes</a>
+              <a class="nav-link nav-interior {{ request()->routeIs('graficavendes') ? 'active' : '' }}" href="{{  route('graficavendes')  }}"><span data-feather="truck"></span>Vendes realitzades</a>
             </li>
           </ul>
 
