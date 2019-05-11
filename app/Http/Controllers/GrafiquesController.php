@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Venta_productes;
+use App\Incidencia;
 
 class GrafiquesController extends Controller
 {
@@ -84,6 +85,24 @@ class GrafiquesController extends Controller
         // $nombremes = array("","Gener","Febrer","Març","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Novembre","Desembre");
 
         return view('gestio.grafiques.graficavendes', compact(['anio','mes']));
+    }
+
+    public function grafica_incidencies()
+    {
+        $gener = Incidencia::whereMonth('created_at', 1)->count();
+        $febrer = Incidencia::whereMonth('created_at', 2)->count();
+        $març = Incidencia::whereMonth('created_at', 3)->count();
+        $abril = Incidencia::whereMonth('created_at', 4)->count();
+        $maig = Incidencia::whereMonth('created_at', 5)->count();
+        $juny = Incidencia::whereMonth('created_at', 6)->count();
+        $juliol = Incidencia::whereMonth('created_at', 7)->count();
+        $agost = Incidencia::whereMonth('created_at', 8)->count();
+        $setembre = Incidencia::whereMonth('created_at', 9)->count();
+        $octubre = Incidencia::whereMonth('created_at', 10)->count();
+        $novembre = Incidencia::whereMonth('created_at', 11)->count();
+        $desembre = Incidencia::whereMonth('created_at', 12)->count();
+        
+        return view('gestio.grafiques.grafica_incidencies', compact('gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'));
     }
 
 }
