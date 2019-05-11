@@ -50,11 +50,11 @@ class HomeController extends Controller
     public function index()
     {
         $noticies = DB::table('noticies')
-        ->join('users', 'users.id', '=', 'noticies.id_usuari')
-        ->join('categories', 'categories.id', '=', 'noticies.categoria')
-        ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria', 'categories.id as catId')
-        ->orderBy('id', 'DESC')
-        ->paginate(2);
+            ->join('users', 'users.id', '=', 'noticies.id_usuari')
+            ->join('categories', 'categories.id', '=', 'noticies.categoria')
+            ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria', 'categories.id as catId')
+            ->orderBy('id', 'DESC')
+            ->paginate(2);
 
         return view('index', compact('noticies'));
     }
@@ -65,20 +65,20 @@ class HomeController extends Controller
     public function atraccions()
     {
         $atraccionetes = TipusAtraccions::join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
-        ->get([
-            'tipus_atraccions.tipus as nom',
-            'tipus_atraccions.id as id_tipus',
-            'atraccions.nom_atraccio',
-            'atraccions.tipus_atraccio',
-            'atraccions.data_inauguracio',
-            'atraccions.altura_min',
-            'atraccions.altura_max',
-            'atraccions.accessibilitat',
-            'atraccions.acces_express',
-            'atraccions.id',
-            'atraccions.path',
-            'atraccions.descripcio'
-        ]);
+            ->get([
+                'tipus_atraccions.tipus as nom',
+                'tipus_atraccions.id as id_tipus',
+                'atraccions.nom_atraccio',
+                'atraccions.tipus_atraccio',
+                'atraccions.data_inauguracio',
+                'atraccions.altura_min',
+                'atraccions.altura_max',
+                'atraccions.accessibilitat',
+                'atraccions.acces_express',
+                'atraccions.id',
+                'atraccions.path',
+                'atraccions.descripcio'
+            ]);
 
         return view("atraccions", compact('atraccionetes'));
     }
@@ -164,7 +164,7 @@ class HomeController extends Controller
         return view('politicaprivacitat');
     }
 
-        /**
+    /**
      * Retorna la vista de Politica de cookies de la pàgina pública (/politicacookies).
      */
     public function politicacookies()
@@ -172,7 +172,7 @@ class HomeController extends Controller
         return view('politicacookies');
     }
 
-        /**
+    /**
      * Retorna la vista de Qui Som de la pàgina pública (/qui-som).
      */
     public function equipdirectiu()
@@ -206,34 +206,34 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $incidencies_per_fer = Incidencia::where('id_usuari_assignat', $user->id)
-        ->where('id_estat',2)
-        ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
-        ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
-        ->get([
-            'incidencies.id as id',
-            'incidencies.titol as titol',
-            'incidencies.descripcio as descripcio',
-            'tipus_prioritat.nom_prioritat as nom_prioritat',
-            'estat_incidencies.nom_estat as nom_estat',
-        ]);
+            ->where('id_estat', 2)
+            ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
+            ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
+            ->get([
+                'incidencies.id as id',
+                'incidencies.titol as titol',
+                'incidencies.descripcio as descripcio',
+                'tipus_prioritat.nom_prioritat as nom_prioritat',
+                'estat_incidencies.nom_estat as nom_estat',
+            ]);
 
         $assignacio = DB::table('assign_emp_atraccions')
-            ->leftJoin('users','users.id', 'assign_emp_atraccions.id_empleat')
-            ->leftJoin('atraccions','atraccions.id', 'assign_emp_atraccions.id_atraccio')
-            ->leftJoin('rols','rols.id', 'users.id')
-            ->where('users.id',$user->id)
-                    ->get([
-                    'assign_emp_atraccions.id as id',
-                    'assign_emp_atraccions.id_empleat as id_empleat',
-                    'assign_emp_atraccions.id_atraccio as id_atraccio',
-                    'assign_emp_atraccions.data_inici as data_inici',
-                    'assign_emp_atraccions.data_fi as data_fi',
-                    'users.nom as nom_empleat',
-                    'users.cognom1 as cognom_empleat',
-                    'atraccions.nom_atraccio as nom_atraccio',
-                    'rols.nom_rol as nom_rol',
-                    'atraccions.id as id_atra'
-                ]);
+            ->leftJoin('users', 'users.id', 'assign_emp_atraccions.id_empleat')
+            ->leftJoin('atraccions', 'atraccions.id', 'assign_emp_atraccions.id_atraccio')
+            ->leftJoin('rols', 'rols.id', 'users.id')
+            ->where('users.id', $user->id)
+            ->get([
+                'assign_emp_atraccions.id as id',
+                'assign_emp_atraccions.id_empleat as id_empleat',
+                'assign_emp_atraccions.id_atraccio as id_atraccio',
+                'assign_emp_atraccions.data_inici as data_inici',
+                'assign_emp_atraccions.data_fi as data_fi',
+                'users.nom as nom_empleat',
+                'users.cognom1 as cognom_empleat',
+                'atraccions.nom_atraccio as nom_atraccio',
+                'rols.nom_rol as nom_rol',
+                'atraccions.id as id_atra'
+            ]);
 
         /*$incidencies_fetes = Incidencia::where('id_usuari_assignat', $user->id)
         ->where('id_estat',3)
@@ -247,7 +247,7 @@ class HomeController extends Controller
             'estat_incidencies.nom_estat as nom_estat',
         ]);*/
 
-        return view('tasques', compact(['incidencies_per_fer','assignacio']));
+        return view('tasques', compact(['incidencies_per_fer', 'assignacio']));
     }
 
     /**
@@ -258,20 +258,18 @@ class HomeController extends Controller
         if (Auth::check() == true) {
             /*si el tipus 6 o 7 rep tiquet numero de viatges*/
             if ($request->get('tipus_select') == 6 || $request->get('tipus_select') == 7) {
-            /*Si es 3 te 3 viatges si no es 6 o 7 e*/
-            if ($request->get('num_viatges') == 3) {
+                /*Si es 3 te 3 viatges si no es 6 o 7 e*/
+                if ($request->get('num_viatges') == 3) {
 
-                $preu_base = Tipus_producte::find($request->get('tipus_select'))->preu_base;
-                $preu_final = $preu_base + 5;
-                $viatges = $request->get('num_viatges');
-
-            }
-            elseif ($request->get('num_viatges') == 6) {
-                $preu_base = Tipus_producte::find($request->get('tipus_select'))->preu_base;
-                $preu_final = $preu_base + 10;
-                $viatges = $request->get('num_viatges');
-            }
-            /*Si no es 6 o 7 tindra 100 viatges*/
+                    $preu_base = Tipus_producte::find($request->get('tipus_select'))->preu_base;
+                    $preu_final = $preu_base + 5;
+                    $viatges = $request->get('num_viatges');
+                } elseif ($request->get('num_viatges') == 6) {
+                    $preu_base = Tipus_producte::find($request->get('tipus_select'))->preu_base;
+                    $preu_final = $preu_base + 10;
+                    $viatges = $request->get('num_viatges');
+                }
+                /*Si no es 6 o 7 tindra 100 viatges*/
             } else {
                 $preu_final = Tipus_producte::find($request->get('tipus_select'))->preu_base;
                 $viatges = 100;
@@ -301,8 +299,8 @@ class HomeController extends Controller
 
             /*Generacio de la entrada en lo codi QR*/
             $file_path = 'storage/tickets_parc';
-            $file_name_path =  $file_path . '/'. time(). $producte->id . '.png';
-            $imatge = QrCode::format('png')->size(399)->color(40,40,40)->generate($producte->id, $file_name_path);
+            $file_name_path =  $file_path . '/' . time() . $producte->id . '.png';
+            $imatge = QrCode::format('png')->size(399)->color(40, 40, 40)->generate($producte->id, $file_name_path);
             //$imatge = QrCode::format('png')->size(399)->color(40,40,40)->generate('a', 'storage/tickets_parc/a.png');
 
             /*Afegim el codi QR a la base de dades*/
@@ -310,36 +308,35 @@ class HomeController extends Controller
                 ->where('id', $atributs_producte->id)
                 ->update(['foto_path' => $file_name_path]);
 
-                /*Afegir producte a la cistella*/
-                /*Comprovem si existeix la cistella i si no existeix la creem*/
+            /*Afegir producte a la cistella*/
+            /*Comprovem si existeix la cistella i si no existeix la creem*/
             if (Cistella::where('id_usuari', '=', Auth::id())->count() > 0) {
 
-            $cistella = DB::table('cistelles')
-                            ->where('id_usuari', '=', Auth::id())
-                            ->first();
-            $linia_cistella = new Linia_cistella([
-                'id_cistella' => $cistella->id,
-                'producte' => $producte->id,
-                'quantitat' => $request->get('quantitat')
-            ]);
-            $linia_cistella ->save();
+                $cistella = DB::table('cistelles')
+                    ->where('id_usuari', '=', Auth::id())
+                    ->first();
+                $linia_cistella = new Linia_cistella([
+                    'id_cistella' => $cistella->id,
+                    'producte' => $producte->id,
+                    'quantitat' => $request->get('quantitat')
+                ]);
+                $linia_cistella->save();
 
-            /*Creem la cistella si no existeix*/
-            }else {
+                /*Creem la cistella si no existeix*/
+            } else {
 
-            $cistella = new Cistella([
-                'id_usuari' => Auth::id()
-            ]);
-            $cistella ->save();
+                $cistella = new Cistella([
+                    'id_usuari' => Auth::id()
+                ]);
+                $cistella->save();
 
-            $linia_cistella = new Linia_cistella([
-                'id_cistella' => $cistella->id,
-                'producte' => $producte->id,
-                'quantitat' => $request->get('quantitat')
-            ]);
-            $linia_cistella ->save();
+                $linia_cistella = new Linia_cistella([
+                    'id_cistella' => $cistella->id,
+                    'producte' => $producte->id,
+                    'quantitat' => $request->get('quantitat')
+                ]);
+                $linia_cistella->save();
             }
-
         }
 
         return redirect('/cistella')->with('success', 'Ticket afegit a la cistella correctament');
@@ -347,102 +344,101 @@ class HomeController extends Controller
 
     public function compra_finalitzada()
     {
-      $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
-                  ->where('cistelles.id_usuari', '=', Auth::id())->count();
-      if ($quantitat_cistella > 0) {
-        $elements_cistella = DB::table('linia_cistelles')
-            ->join('cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
-            ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
-            ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
-            ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
-            ->select('cistelles.id_usuari as id_usuari', 'cistelles.id as id_cistella_orig', 'linia_cistelles.id as id_linia', 'linia_cistelles.id_cistella as id_cistella_linia', 'linia_cistelles.producte as producte', 'linia_cistelles.quantitat as quantitat', 'atributs_producte.preu as preu', 'atributs_producte.tickets_viatges as viatges', 'tipus_producte.id as tipus')
-            ->where('cistelles.id_usuari', '=', Auth::id())
-            ->get();
-        //dd($elements_cistella);
-        $preu_total = 0;
+        $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
+            ->where('cistelles.id_usuari', '=', Auth::id())->count();
+        if ($quantitat_cistella > 0) {
+            $elements_cistella = DB::table('linia_cistelles')
+                ->join('cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
+                ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
+                ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
+                ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
+                ->select('cistelles.id_usuari as id_usuari', 'cistelles.id as id_cistella_orig', 'linia_cistelles.id as id_linia', 'linia_cistelles.id_cistella as id_cistella_linia', 'linia_cistelles.producte as producte', 'linia_cistelles.quantitat as quantitat', 'atributs_producte.preu as preu', 'atributs_producte.tickets_viatges as viatges', 'tipus_producte.id as tipus')
+                ->where('cistelles.id_usuari', '=', Auth::id())
+                ->get();
+            //dd($elements_cistella);
+            $preu_total = 0;
 
-        foreach ($elements_cistella as $element_cistella) {
-            //dd($element_cistella->preu);
-            $preu_total = $preu_total + ($element_cistella->preu * $element_cistella->quantitat);
-        }
-
-        $venta = new Venta_productes([
-            'id_usuari' => Auth::id(),
-            'preu_total' => $preu_total,
-            'estat' => 1
-        ]);
-
-        $venta->save();
-
-        foreach ($elements_cistella as $element_cistella) {
-
-            if ($element_cistella->tipus == 1 || $element_cistella->tipus == 2 || $element_cistella->tipus ==3 || $element_cistella->tipus == 4 || $element_cistella->tipus == 5 || $element_cistella->tipus == 6 || $element_cistella->tipus == 7) {
-            $linia_venta_original = new Linia_ventes([
-                    'id_venta' => $venta->id,
-                    'producte' => $element_cistella->producte,
-                    'quantitat' => 1
-            ]);
-            $linia_venta_original ->save();
-            for ($i=0; $i < $element_cistella->quantitat-1; $i++) {
-                $atributs_producte_ticket = new Atributs_producte([
-                    'nom' => $element_cistella->tipus,
-                    'tickets_viatges' => $element_cistella->viatges,
-                    'preu' => $element_cistella->preu
-                ]);
-
-                $atributs_producte_ticket->save();
-
-                /*Després es guarda el producte*/
-                $producte_ticket = new producte([
-                    'atributs' => $atributs_producte_ticket->id,
-                    'estat' => 1,
-                    'descripcio' => " "
-                ]);
-
-                $producte_ticket->save();
-
-                /*Generacio de la entrada en lo codi QR*/
-                $file_path_ticket = 'storage/tickets_parc';
-                $file_name_path_ticket =  $file_path_ticket . '/'. time(). $producte_ticket->id . '.png';
-                $imatge_ticket = QrCode::format('png')->size(399)->color(40,40,40)->generate($producte_ticket->id, $file_name_path_ticket);
-
-                /*Afegim el codi QR a la base de dades*/
-                DB::table('atributs_producte')
-                    ->where('id', $atributs_producte_ticket->id)
-                    ->update(['foto_path' => $file_name_path_ticket]);
-
-                $linia_venta = new Linia_ventes([
-                    'id_venta' => $venta->id,
-                    'producte' => $producte_ticket->id,
-                    'quantitat' => 1
-                ]);
-                $linia_venta->save();
-            }
-            $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
-            $linia_cistella_element->delete();
-            }else {
-            $linia_venta = new Linia_ventes([
-                'id_venta' => $venta->id,
-                'producte' => $element_cistella->producte,
-                'quantitat' => $element_cistella->quantitat
-            ]);
-            $linia_venta ->save();
-            $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
-            $linia_cistella_element->delete();
+            foreach ($elements_cistella as $element_cistella) {
+                //dd($element_cistella->preu);
+                $preu_total = $preu_total + ($element_cistella->preu * $element_cistella->quantitat);
             }
 
-        }
+            $venta = new Venta_productes([
+                'id_usuari' => Auth::id(),
+                'preu_total' => $preu_total,
+                'estat' => 1
+            ]);
 
-        /*GENERACIÓ DE FACTURA + ENVIARMENT CORREU EN SEGON PLA*/
-        $id_venta = $venta->id;
+            $venta->save();
 
-        $usuari = Auth::user();
+            foreach ($elements_cistella as $element_cistella) {
 
-        dispatch(new \App\Jobs\GenerateFacturaPDFJob($id_venta, $usuari));
+                if ($element_cistella->tipus == 1 || $element_cistella->tipus == 2 || $element_cistella->tipus == 3 || $element_cistella->tipus == 4 || $element_cistella->tipus == 5 || $element_cistella->tipus == 6 || $element_cistella->tipus == 7) {
+                    $linia_venta_original = new Linia_ventes([
+                        'id_venta' => $venta->id,
+                        'producte' => $element_cistella->producte,
+                        'quantitat' => 1
+                    ]);
+                    $linia_venta_original->save();
+                    for ($i = 0; $i < $element_cistella->quantitat - 1; $i++) {
+                        $atributs_producte_ticket = new Atributs_producte([
+                            'nom' => $element_cistella->tipus,
+                            'tickets_viatges' => $element_cistella->viatges,
+                            'preu' => $element_cistella->preu
+                        ]);
 
-        return view('/compra_finalitzada', compact('venta'));
-        }else{
-          return redirect('/cistella')->with('error', 'No tens cap producte a la cistella.');
+                        $atributs_producte_ticket->save();
+
+                        /*Després es guarda el producte*/
+                        $producte_ticket = new producte([
+                            'atributs' => $atributs_producte_ticket->id,
+                            'estat' => 1,
+                            'descripcio' => " "
+                        ]);
+
+                        $producte_ticket->save();
+
+                        /*Generacio de la entrada en lo codi QR*/
+                        $file_path_ticket = 'storage/tickets_parc';
+                        $file_name_path_ticket =  $file_path_ticket . '/' . time() . $producte_ticket->id . '.png';
+                        $imatge_ticket = QrCode::format('png')->size(399)->color(40, 40, 40)->generate($producte_ticket->id, $file_name_path_ticket);
+
+                        /*Afegim el codi QR a la base de dades*/
+                        DB::table('atributs_producte')
+                            ->where('id', $atributs_producte_ticket->id)
+                            ->update(['foto_path' => $file_name_path_ticket]);
+
+                        $linia_venta = new Linia_ventes([
+                            'id_venta' => $venta->id,
+                            'producte' => $producte_ticket->id,
+                            'quantitat' => 1
+                        ]);
+                        $linia_venta->save();
+                    }
+                    $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
+                    $linia_cistella_element->delete();
+                } else {
+                    $linia_venta = new Linia_ventes([
+                        'id_venta' => $venta->id,
+                        'producte' => $element_cistella->producte,
+                        'quantitat' => $element_cistella->quantitat
+                    ]);
+                    $linia_venta->save();
+                    $linia_cistella_element = Linia_cistella::find($element_cistella->id_linia);
+                    $linia_cistella_element->delete();
+                }
+            }
+
+            /*GENERACIÓ DE FACTURA + ENVIARMENT CORREU EN SEGON PLA*/
+            $id_venta = $venta->id;
+
+            $usuari = Auth::user();
+
+            dispatch(new \App\Jobs\GenerateFacturaPDFJob($id_venta, $usuari));
+
+            return view('/compra_finalitzada', compact('venta'));
+        } else {
+            return redirect('/cistella')->with('error', 'No tens cap producte a la cistella.');
         }
     }
 
@@ -452,7 +448,7 @@ class HomeController extends Controller
             ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
             ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
             ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
-            ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat', 'tipus_producte.id as tipus')
+            ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom', 'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat', 'tipus_producte.id as tipus')
             ->where('cistelles.id_usuari', '=', Auth::id())
             ->whereIn('tipus_producte.id', [1, 2, 3, 4, 5, 6, 7])
             ->orderBy('nom', 'ASC')
@@ -476,15 +472,15 @@ class HomeController extends Controller
             ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
             ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
             ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
-            ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu','atributs_producte.foto_path_aigua as fotoaigua', 'atributs_producte.thumbnail as thumbnail' ,'linia_cistelles.quantitat as quantitat')
+            ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom', 'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'atributs_producte.foto_path_aigua as fotoaigua', 'atributs_producte.thumbnail as thumbnail', 'linia_cistelles.quantitat as quantitat')
             ->where('cistelles.id_usuari', '=', Auth::id())
-            ->where('tipus_producte.id','=', 8)
+            ->where('tipus_producte.id', '=', 8)
             ->orderBy('nom', 'ASC')
             ->get();
 
         $user = Auth::user();
 
-        return view('/cistella', compact('linia_cistella', 'total','fotos','total2','compteTotal','user'));
+        return view('/cistella', compact('linia_cistella', 'total', 'fotos', 'total2', 'compteTotal', 'user'));
     }
 
     public function cistella_delete(Request $request)
@@ -496,7 +492,7 @@ class HomeController extends Controller
 
         $linia_cistella->delete();
 
-        if ($tipus_producte->id == 1 || $tipus_producte->id == 2 || $tipus_producte->id ==3 || $tipus_producte->id == 4 || $tipus_producte->id == 5 || $tipus_producte->id == 6 || $tipus_producte->id == 7) {
+        if ($tipus_producte->id == 1 || $tipus_producte->id == 2 || $tipus_producte->id == 3 || $tipus_producte->id == 4 || $tipus_producte->id == 5 || $tipus_producte->id == 6 || $tipus_producte->id == 7) {
             $producte->delete();
             $atributs_producte->delete();
         }
@@ -506,47 +502,47 @@ class HomeController extends Controller
 
     public function compra()
     {
-      $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
-                  ->where('cistelles.id_usuari', '=', Auth::id())->count();
-      if ($quantitat_cistella > 0) {
-        $linia_cistella = Cistella::join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
-        ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
-        ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
-        ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
-        ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat')
-        ->where('cistelles.id_usuari', '=', Auth::id())
-        ->where('atributs_producte.foto_path_aigua','=', null)
-        ->orderBy('nom', 'ASC')
-        ->paginate(100);
+        $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
+            ->where('cistelles.id_usuari', '=', Auth::id())->count();
+        if ($quantitat_cistella > 0) {
+            $linia_cistella = Cistella::join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
+                ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
+                ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
+                ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
+                ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom', 'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat')
+                ->where('cistelles.id_usuari', '=', Auth::id())
+                ->where('atributs_producte.foto_path_aigua', '=', null)
+                ->orderBy('nom', 'ASC')
+                ->paginate(100);
 
-        $numeroTickets = $linia_cistella->count();
+            $numeroTickets = $linia_cistella->count();
 
-        $total = 0;
-        $total2=0;
-        $compteTotal=0;
+            $total = 0;
+            $total2 = 0;
+            $compteTotal = 0;
 
-        $fotos = DB::table('cistelles')
+            $fotos = DB::table('cistelles')
 
-        ->join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
-        ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
-        ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
-        ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
-        ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu','atributs_producte.foto_path_aigua as fotoaigua', 'linia_cistelles.quantitat as quantitat')
-        ->where('cistelles.id_usuari', '=', Auth::id())
-        ->where('atributs_producte.foto_path_aigua','!=', null)
-        ->orderBy('nom', 'ASC')
-        ->paginate(100);
+                ->join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
+                ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
+                ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
+                ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
+                ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom', 'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'atributs_producte.foto_path_aigua as fotoaigua', 'linia_cistelles.quantitat as quantitat')
+                ->where('cistelles.id_usuari', '=', Auth::id())
+                ->where('atributs_producte.foto_path_aigua', '!=', null)
+                ->orderBy('nom', 'ASC')
+                ->paginate(100);
 
-        $numeroFotos = $fotos->count();
+            $numeroFotos = $fotos->count();
 
-        $user = Auth::user();
+            $user = Auth::user();
 
-        $usuari = User::where('id', '=', Auth::id());
+            $usuari = User::where('id', '=', Auth::id());
 
-        return view('/compra', compact('linia_cistella', 'total','fotos','total2','compteTotal','numeroFotos','numeroTickets','user'));
-      }else{
-        return redirect('/cistella')->with('error', 'No tens cap producte a la cistella.');
-      }
+            return view('/compra', compact('linia_cistella', 'total', 'fotos', 'total2', 'compteTotal', 'numeroFotos', 'numeroTickets', 'user'));
+        } else {
+            return redirect('/cistella')->with('error', 'No tens cap producte a la cistella.');
+        }
     }
 
     public function llistarAtraccionsPublic($id)
@@ -572,10 +568,10 @@ class HomeController extends Controller
     {
         $valid = 0;
         if (Auth::check()) {
-          $user = Auth::user();
-          if ($user->id_rol == 2) {
-            $valid = 1;
-          }
+            $user = Auth::user();
+            if ($user->id_rol == 2) {
+                $valid = 1;
+            }
         }
 
         $noticia = noticies::find($request->get('id'));
@@ -592,12 +588,12 @@ class HomeController extends Controller
             ->orderBy('id', 'DESC')
 
             ->where(function ($noticies) use ($request) {
-            if ($request->has('catId')) {
-                $cat = $request->get('catId');
-                $noticies->where('categories.id', '=', $cat);
-            }else {
-                $cat = "";
-            }
+                if ($request->has('catId')) {
+                    $cat = $request->get('catId');
+                    $noticies->where('categories.id', '=', $cat);
+                } else {
+                    $cat = "";
+                }
             })
 
             //$noticies->where('categories.id', '=', $cat);
@@ -610,10 +606,10 @@ class HomeController extends Controller
     {
         $valid = 0;
         if (Auth::check()) {
-          $user = Auth::user();
-          if ($user->id_rol == 2) {
-            $valid = 1;
-          }
+            $user = Auth::user();
+            if ($user->id_rol == 2) {
+                $valid = 1;
+            }
         }
 
         $promocio = promocions::find($id);
@@ -647,8 +643,8 @@ class HomeController extends Controller
         if (Auth::check()) {
 
             $votacions_user = Votacio_user_atraccio::where('id_usuari', Auth::id())
-            ->whereBetween('created_at', array(Carbon::now()->subDays(365)->toDateTimeString(), Carbon::now()->toDateTimeString()))
-            ->count();
+                ->whereBetween('created_at', array(Carbon::now()->subDays(365)->toDateTimeString(), Carbon::now()->toDateTimeString()))
+                ->count();
 
             if ($votacions_user > 0) {
                 return redirect('/votacions')->with('error', 'Les votacions son anuals.');
@@ -676,16 +672,15 @@ class HomeController extends Controller
                     ->get());
                     return view('votacions', compact('atraccions'));*/
             }
-
         } else {
             return redirect('/votacions')->with('error', 'És necessari iniciar sessió per votar.');
         }
     }
 
-    public function construccio()
-    {
-        return view('construccio');
-    }
+    // public function construccio()
+    // {
+    //     return view('construccio');
+    // }
 
     public function modificar_element_cistella_ajax()
     {
@@ -715,5 +710,4 @@ class HomeController extends Controller
     {
         return view('sala_chat');
     }
-
 }
