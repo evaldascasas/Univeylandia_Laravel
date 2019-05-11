@@ -138,7 +138,7 @@
           <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('zones*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('zones*') ? 'true' : 'false' }}" href="#submenu7">
               <span data-feather="truck"></span>
-              Zones
+              {{ __('Zones') }}
               <span data-feather="chevron-right"></span>
             </a>
           </li>
@@ -250,18 +250,21 @@
           </ul>
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="false" href="#submenu13">
+            <a class="nav-link {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') || request()->routeIs('graficaincidencies') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="false" href="#submenu13">
               <span data-feather="trending-down"></span>
                 Estadísitques
               <span data-feather="chevron-right"></span>
             </a>
           </li>
-          <ul class="nav flex-column collapse {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') ? 'show' : '' }}" id="submenu13" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') || request()->routeIs('graficaincidencies') ? 'show' : '' }}" id="submenu13" data-parent="#sidebar">
             <li class="nav-item">
-              <a class="nav-link nav-interior {{ request()->routeIs('graficaregistres') ? 'active' : '' }}" href="{{  route('graficaregistres')  }}"><span data-feather="users"></span>Usuaris registrats</a>
+              <a class="nav-link nav-interior {{ request()->routeIs('graficaregistres') ? 'active' : '' }}" href="{{  route('graficaregistres')  }}"><span data-feather="users"></span>Usuaris</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-interior {{ request()->routeIs('graficavendes') ? 'active' : '' }}" href="{{  route('graficavendes')  }}"><span data-feather="truck"></span>Vendes realitzades</a>
+              <a class="nav-link nav-interior {{ request()->routeIs('graficavendes') ? 'active' : '' }}" href="{{  route('graficavendes')  }}"><span data-feather="truck"></span>{{ __('Vendes') }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('graficaincidencies') ? 'active' : '' }}" href="{{  route('graficaincidencies')  }}"><span data-feather="bell"></span>{{ __('Incidències') }}</a>
             </li>
           </ul>
 

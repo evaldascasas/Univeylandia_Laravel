@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-between">
-    <a class="navbar-brand col-sm-4 col-md-2 mr-0" href="{{ route('home')}}">Univeylandia - Gestió</a>
+    <a class="navbar-brand col-sm-4 col-md-2 mr-0" href="{{ route('home')}}">{{ __('Univeylandia - Gestió') }}</a>
 
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
                 @endforeach
 
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Mostrar notificacions</a>
+                <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
             </ul>
             @else
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -35,7 +35,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Mostrar notificacions</a>
+                <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
             </ul>
             @endif
         </li>
@@ -47,6 +47,7 @@
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{{ route('perfil') }}">{{ __('Perfil') }}</a>
+          <a class="dropdown-item" href="{{ route('downloads.index') }}">{{ __('Programari') }}</a>
           <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
 
