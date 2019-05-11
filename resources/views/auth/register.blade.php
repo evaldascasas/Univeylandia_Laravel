@@ -283,7 +283,7 @@
 
 </html>
 
-<script>
+{{-- <script>
   function nif(dni) {
     numero = dni.substr(0,dni.length-1);
     let = dni.substr(dni.length-1,1);
@@ -294,4 +294,4 @@
       alert('Dni erroneo');
   }
 
-</script>
+</script> --}}
