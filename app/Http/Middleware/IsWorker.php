@@ -24,12 +24,17 @@ class IsWorker
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->user()->id_rol === 1) {
-            //$this->auth->logout();
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->to('/');
+        if (!$this->auth->check()) {
+            return abort(404);
+        } else {
+            if ($this->auth->user()->id_rol === 1) {
+                //$this->auth->logout();
+                if ($request->ajax()) {
+                    return response('Unauthorized.', 401);
+                } else {
+                    // return redirect()->to('/');
+                    return abort(404);
+                }
             }
         }
 
