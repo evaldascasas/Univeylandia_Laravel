@@ -165,6 +165,13 @@
             </table>
         </div>
         @endif
+        @if($linia_cistella->isEmpty() && $fotos->isEmpty())
+        <div class="col-12">
+            <div class="alert alert-info alert-important">
+                <strong>{{ __('La cistella és buida.') }}</strong>
+            </div>
+        </div>
+        @endif
     </div>
     @endsection
 
