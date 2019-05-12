@@ -7,19 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendEmailVentes extends Mailable
+class SendEmailNovaNoticia extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $factura;
-
+    private $noticia;
+    private $url;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($adjunt_factura)
+    public function __construct($noticia, $url)
     {
-        $this->factura = $adjunt_factura;
+        $this->noticia = $noticia;
+        $this->url = $url;
     }
 
     /**
@@ -29,8 +30,7 @@ class SendEmailVentes extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.exportacio_ventes')
-            ->attach($this->factura)
-            ->subject('Univeylandia: Exportacio ventes');
+        return $this->view('emails.nova_noticia')->with('noticia', $this->noticia)->with('url', $this->url)
+            ->subject("Univeylandia: " . $this->noticia->titol);
     }
 }

@@ -19,7 +19,7 @@ class SendEmailFactura extends Mailable
      */
     public function __construct($adjunt_factura)
     {
-      $this->factura = $adjunt_factura;
+        $this->factura = $adjunt_factura;
     }
 
     /**
@@ -30,7 +30,7 @@ class SendEmailFactura extends Mailable
     public function build()
     {
         return $this->view('emails.compra_finalitzada')
-        ->attach($this->factura)
-        ->subject('Compra univeylandia');
+            ->attach($this->factura)
+            ->subject('Compra univeylandia');
     }
 }
