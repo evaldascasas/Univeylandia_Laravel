@@ -38,7 +38,7 @@ class ClientsModuleTest extends TestCase
 
         $this->actingAs($user)
             ->get('/gestio/clients')
-            ->assertStatus(302);
+            ->assertStatus(404);
     }
 
     /** @test */

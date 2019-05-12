@@ -23,11 +23,11 @@ class incidenciaTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->clickLink('Login')
+                ->clickLink('Entrar')
                 ->assertSee('Iniciar sessió')
                 ->value('input[name="email"]', 'pacoramon@univeylandia-parc.cat')
                 ->value('input[name="password"]', 'Alumne123')
-                ->click('button[type="submit"]')
+                ->press('button[type="submit"]')
                 ->visit('/gestio/incidencies/create')
                 ->assertSee('Crear')
                 ->type('input[name="title"]', 'Lavabos trencats')
@@ -36,7 +36,7 @@ class incidenciaTest extends DuskTestCase
                 ->press('button[type="submit"]')
                 ->visit('/')
                 ->clickLink('Paco Ramon')
-                ->clickLink('Logout');
+                ->clickLink('Sortir');
         });
     }
 
@@ -50,11 +50,11 @@ class incidenciaTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->clickLink('Login')
+                ->clickLink('Entrar')
                 ->assertSee('Iniciar sessió')
                 ->value('input[name="email"]', 'pacoramon@univeylandia-parc.cat')
                 ->value('input[name="password"]', 'Alumne123')
-                ->click('button[type="submit"]')
+                ->press('button[type="submit"]')
                 ->visit('/gestio/incidencies/create')
                 ->assertSee('Crear')
                 ->type('textarea[name="description"]', 'Hi ha una fuga als lavabos collons')
