@@ -26,7 +26,7 @@
                 @endforeach
 
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
+                <a class="dropdown-item" href="{{ route('notificacions') }}">{{ __('Mostrar notificacions') }}</a>
             </ul>
             @else
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -35,7 +35,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">{{ __('Mostrar notificacions') }}</a>
+                <a class="dropdown-item" href="{{ route('notificacions') }}">{{ __('Mostrar notificacions') }}</a>
             </ul>
             @endif
         </li>

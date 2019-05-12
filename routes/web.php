@@ -17,7 +17,7 @@
 Route::get('/',"HomeController@index")->name('home');
 Route::get('/contacte','HomeController@contacte')->name('contacte');
 Route::get('/noticies',"HomeController@noticies")->name('noticies');
-Route::get('/noticies/n',"HomeController@noticia")->name('noticia');
+Route::get('/noticies/{str_slug}',"HomeController@noticia")->name('noticia');
 Route::get('/atraccions',"HomeController@atraccions")->name('atraccions');
 Route::get('/atraccions/{atraccio}',"HomeController@llistarAtraccionsPublic")->name('atraccions_generades');
 Route::get('/entrades',"HomeController@entrades")->name('entrades');
