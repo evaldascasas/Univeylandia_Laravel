@@ -10,6 +10,17 @@
           <h1 class="h2">Registrar producte</h1>
         </div>
 
+        @if ($errors->any())
+        <div class="alert alert-danger alert-important">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <form class="needs-validation" method="post" action="{{ route('productes.store')}}" enctype="multipart/form-data">
           @csrf
             <div class="form-group">

@@ -42,7 +42,7 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="font-weight-bold text-center">Promocions Nadal 2019</h1>
+            <h1 class="font-weight-bold text-center">Promocions</h1>
         </div>
     </div>
     <div class="row">
@@ -78,7 +78,7 @@
                         = "..."))!!}</p>
                     <form action="{{ route('noticia',$noticia->id)}}" method="get">
                         <input type="hidden" name="id" value="{{$noticia->id}}">
-                        <button type="submit" class="btn btn-outline-info">Continuar llegint</button>
+                        <button type="submit" class="btn btn-primary">Continuar llegint</button>
                     </form>
                 </div>
             </div>

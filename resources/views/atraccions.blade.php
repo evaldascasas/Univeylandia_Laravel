@@ -21,7 +21,7 @@
            <div class="card-body d-flex flex-column align-items-start">
              <h4 class="card-title">{{ $atraccio->nom_atraccio }}</h4></a>
              <p class="card-text" id="descripcio">{!! html_entity_decode(str_limit($atraccio->descripcio, $limit = 200, $end = '...')) !!}</p>
-             <h4 class="card-title">   <a href="{{ route('atraccions_generades', $atraccio->id)}}" class="btn btn-primary btn-sm">Més informació</h4></a>
+             <h4 class="card-title">   <a href="{{ route('atraccions_generades', $atraccio->id)}}" class="btn btn-primary">Més informació</h4></a>
 
            </div>
         </div>

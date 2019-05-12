@@ -10,15 +10,6 @@
     <h2>Consultar Incidència: {{ $incidencia->titol }}</h2>
 </div>
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
 <form method="#" action="#">
     <div class="form-group">
         <div class="col-md-6 mb-3">
@@ -43,7 +34,9 @@
             @endforeach
         </div>
         <div class="col-md-6 mb-3">
+            @if($incidencia->id_usuari_assignat !== null)
             <label for="assigned-employee">Assignada a:</label>
+            @endif
             @foreach ($treballadors as $treballador)
             @if ($incidencia->id_usuari_assignat == $treballador->id)
             <input list="employees" name="assigned-employee" class="form-control form-control-sm"

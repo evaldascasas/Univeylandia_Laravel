@@ -5,19 +5,6 @@
 @section("menuIntranet")
 @endsection
 @section("content")
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-    </style>
-    
-    @if(session()->get('success'))
-    <div class="uper">
-        <div class="alert alert-success">
-            {{ session()->get('success') }}
-        </div>
-    </div>
-    @endif
 
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

@@ -18,17 +18,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{{ route('clients.pdf') }}">{{ __('PDF') }}</a>
-                    <a class="dropdown-item" href="{{ route('clients.csv') }}">{{ __('CSV') }}</a>
-                    {{-- <form action="{{ route('clients.pdf') }}">
-                        <button class="btn dropdown-item">
-                            {{ __('PDF') }}
-                        </button>
-                    </form> --}}
-                    {{-- <form action="{{ route('clients.csv') }}">
-                        <button class="btn dropdown-item">
-                            {{ __('CSV') }}
-                        </button>
-                    </form> --}}                    
+                    <a class="dropdown-item" href="{{ route('clients.csv') }}">{{ __('CSV') }}</a>                  
                 </div>
             </div>
         </div>

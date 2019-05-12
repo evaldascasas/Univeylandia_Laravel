@@ -5,11 +5,16 @@
 @section("menuIntranet")
 @endsection
 @section("content")
-<style>
-  .uper {
-    margin-top: 40px;
-  }
-</style>
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
 <div class="card uper">
   <div class="card-header">

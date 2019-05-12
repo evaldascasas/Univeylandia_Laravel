@@ -6,8 +6,9 @@
 @endsection
 @section("content")
 
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Administrar Zones</h1>
+    <h1 class="h2">Llistar tickets actius</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-secondary" value="Exportar">
@@ -24,27 +25,25 @@
         id="results_table" role="grid">
         <thead class="thead-light">
             <tr>
-                <th>#</th>
                 <th>Nom</th>
+                <th>Email</th>
+                <th>Tipus pregutna</th>
+                <th>Misssatge</th>
+                <th>Estat</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach($zones as $zona)
+
+            @foreach ($ticket as $tickets)
             <tr>
-                <td>{{ $zona->id }}</td>
-                <td>{{ $zona->nom }}</td>
+                <td>{{$tickets->nom}}</td>
+                <td>{{$tickets->email}}</td>
+                <td>{{$tickets->pregunta}}</td>
+                <td>{{$tickets->missatge}}</td>
+                <td>{{$tickets->nom_estat}}</td>
                 <td>
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Accions">
-                        <a class="btn btn-outline-primary btn-sm"
-                            href="{{ route('zones.edit', $zona->id) }}">Modificar</a>
-                        <form action="{{ route('zones.destroy', $zona->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button id="confirm_delete" class="btn btn-outline-danger btn-sm" type="submit"
-                                value="Eliminar">Eliminar</button>
-                        </form>
-                    </div>
+                    <a href="{{ route('ticket.assign', $tickets->id) }}" class="btn btn-primary btn-sm">Assignar</a>
                 </td>
             </tr>
             @endforeach

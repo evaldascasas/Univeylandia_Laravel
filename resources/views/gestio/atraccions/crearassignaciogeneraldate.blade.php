@@ -6,21 +6,6 @@
   @endsection
   @section("content")
   
-      <style>
-        .uper {
-          margin-top: 40px;
-        }
-      </style>
-
-      @if(session()->get('success'))
-      <div class="uper">
-          <div class="alert alert-success">
-            {{ session()->get('success') }}
-          </div>
-      </div>
-      @endif
-
-
       @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

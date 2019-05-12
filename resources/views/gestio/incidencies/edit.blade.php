@@ -19,6 +19,7 @@
     </ul>
 </div>
 @endif
+
 <form method="post" action="{{ route('incidencies.update', $incidencia->id) }}">
     @method('PATCH')
     @csrf

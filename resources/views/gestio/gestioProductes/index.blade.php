@@ -6,12 +6,6 @@
 @endsection
 @section("content")
 
-<div class="uper">
-  @if(session()->get('success'))
-    <div class="alert alert-success">
-      {{ session()->get('success') }}
-    </div><br />
-  @endif
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Productes </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -60,7 +54,7 @@
               @endif
             </select>
             <span class="input-group-btn">
-            <button type="submit" class="btn btn-default">
+            <button type="submit" class="btn btn-info">
                 BUSCAR
             </button>
         </span>

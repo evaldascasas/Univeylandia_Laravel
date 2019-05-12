@@ -250,15 +250,32 @@
           </ul>
 
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') || request()->routeIs('graficaincidencies') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="false" href="#submenu13">
+            <a class="nav-link {{ request()->routeIs('ticket*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('ticket*') ? 'true' : 'false' }}" href="#submenu13">
               <span data-feather="trending-down"></span>
-                Estadísitques
+              Tickets/Consultes
               <span data-feather="chevron-right"></span>
             </a>
           </li>
-          <ul class="nav flex-column collapse {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') || request()->routeIs('graficaincidencies') ? 'show' : '' }}" id="submenu13" data-parent="#sidebar">
+          <ul class="nav flex-column collapse {{ request()->routeIs('ticket*') ? 'show' : '' }}" id="submenu13" data-parent="#sidebar">
             <li class="nav-item">
-              <a class="nav-link nav-interior {{ request()->routeIs('graficaregistres') ? 'active' : '' }}" href="{{  route('graficaregistres')  }}"><span data-feather="users"></span>Usuaris</a>
+              <a class="nav-link nav-interior {{ request()->routeIs('ticket.index') ? 'active' : '' }}" href="{{ route('ticket.index') }}"><span data-feather="file-text"></span>Llistar Tickets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('ticket.list') ? 'active' : '' }}" href="{{ route('ticket.list') }}"><span data-feather="file-text"></span>Llistar Tickets Assignats</a>
+            </li>
+          </ul>
+        </li>
+
+          <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') || request()->routeIs('graficaincidencies') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="false" href="#submenu14">
+              <span data-feather="trending-down"></span>
+                Estadístiques
+              <span data-feather="chevron-right"></span>
+            </a>
+          </li>
+          <ul class="nav flex-column collapse {{ request()->routeIs('graficaregistres') || request()->routeIs('graficavendes') || request()->routeIs('graficaincidencies') ? 'show' : '' }}" id="submenu14" data-parent="#sidebar">
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('graficaregistres') ? 'active' : '' }}" href="{{  route('graficaregistres')  }}"><span data-feather="users"></span>{{ __('Usuaris') }}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('graficavendes') ? 'active' : '' }}" href="{{  route('graficavendes')  }}"><span data-feather="truck"></span>{{ __('Vendes') }}</a>
