@@ -26,20 +26,20 @@ class VentesController extends Controller
      */
     public function index()
     {
-      $ventes = DB::table('venta_productes')
-          ->join('users', 'users.id', '=', 'venta_productes.id_usuari')
-          ->select('venta_productes.id as id', 'venta_productes.id_usuari as id_usuari' ,'venta_productes.preu_total as preu', 'venta_productes.estat as estat', 'venta_productes.created_at as temps_compra', 'users.nom as nom', 'users.cognom1 as cognom1', 'users.cognom2 as cognom2', 'users.email as email', 'users.numero_document as numero_document')
-          ->orderBy('id', 'DESC')
-          ->paginate(10);
+        $ventes = DB::table('venta_productes')
+            ->join('users', 'users.id', '=', 'venta_productes.id_usuari')
+            ->select('venta_productes.id as id', 'venta_productes.id_usuari as id_usuari', 'venta_productes.preu_total as preu', 'venta_productes.estat as estat', 'venta_productes.created_at as temps_compra', 'users.nom as nom', 'users.cognom1 as cognom1', 'users.cognom2 as cognom2', 'users.email as email', 'users.numero_document as numero_document')
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
 
-          //$start_date = Carbon::createFromFormat('d/m/Y', $dates[0])->hour(0)->minute(0)->second(0)->format('Y-m-d H:i:s');
-      //$primer_dia_mes_form = Carbon::now()->startOfMonth()->toDateString();
-      //dd($primer_dia_mes_form);
-      $primer_dia_mes = Carbon::createFromFormat('Y-m-d', Carbon::now()->startOfMonth()->toDateString())->format('d-m-Y');
-      $data_actual = Carbon::createFromFormat('Y-m-d', Carbon::now()->toDateString())->format('d-m-Y');
-    //  $primer_dia_mes = Carbon::now()->startOfMonth();
-      //$primer_dia_mes->format('d/m/Y');
-      //dd($primer_dia_mes);
+        //$start_date = Carbon::createFromFormat('d/m/Y', $dates[0])->hour(0)->minute(0)->second(0)->format('Y-m-d H:i:s');
+        //$primer_dia_mes_form = Carbon::now()->startOfMonth()->toDateString();
+        //dd($primer_dia_mes_form);
+        $primer_dia_mes = Carbon::createFromFormat('Y-m-d', Carbon::now()->startOfMonth()->toDateString())->format('d-m-Y');
+        $data_actual = Carbon::createFromFormat('Y-m-d', Carbon::now()->toDateString())->format('d-m-Y');
+        //  $primer_dia_mes = Carbon::now()->startOfMonth();
+        //$primer_dia_mes->format('d/m/Y');
+        //dd($primer_dia_mes);
         return view('gestio/ventes/index', compact('ventes', 'primer_dia_mes', 'data_actual'));
     }
 
@@ -83,16 +83,16 @@ class VentesController extends Controller
      */
     public function edit($id)
     {
-      //$venta_producte = Venta_productes::find($id);
-      $preu_linia = 0;
-      $ventes = DB::table('venta_productes')
-          ->join('linia_ventes', 'linia_ventes.id_venta', '=', 'venta_productes.id')
-          ->join('productes', 'productes.id', '=', 'linia_ventes.producte')
-          ->join('atributs_producte', 'atributs_producte.id', '=', 'productes.atributs')
-          ->join('tipus_producte', 'tipus_producte.id', '=', 'atributs_producte.nom')
-          ->select('productes.id as id' ,'tipus_producte.nom as nom', 'tipus_producte.id as tid', 'atributs_producte.mida as mida','atributs_producte.tickets_viatges as tickets_viatges','atributs_producte.foto_path as foto_path','atributs_producte.foto_path_aigua as foto_path_aigua','atributs_producte.preu as preu','productes.descripcio as descripcio','productes.estat as estat', 'tipus_producte.preu_base as preu_base', 'linia_ventes.quantitat as quantitat', 'venta_productes.preu_total as preu_total')
-          ->where('linia_ventes.id_venta', '=', $id)
-          ->get();
+        //$venta_producte = Venta_productes::find($id);
+        $preu_linia = 0;
+        $ventes = DB::table('venta_productes')
+            ->join('linia_ventes', 'linia_ventes.id_venta', '=', 'venta_productes.id')
+            ->join('productes', 'productes.id', '=', 'linia_ventes.producte')
+            ->join('atributs_producte', 'atributs_producte.id', '=', 'productes.atributs')
+            ->join('tipus_producte', 'tipus_producte.id', '=', 'atributs_producte.nom')
+            ->select('productes.id as id', 'tipus_producte.nom as nom', 'tipus_producte.id as tid', 'atributs_producte.mida as mida', 'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.foto_path as foto_path', 'atributs_producte.foto_path_aigua as foto_path_aigua', 'atributs_producte.preu as preu', 'productes.descripcio as descripcio', 'productes.estat as estat', 'tipus_producte.preu_base as preu_base', 'linia_ventes.quantitat as quantitat', 'venta_productes.preu_total as preu_total')
+            ->where('linia_ventes.id_venta', '=', $id)
+            ->get();
         return view('gestio.ventes.edit', compact('ventes', 'preu_linia'));
     }
 
@@ -124,18 +124,18 @@ class VentesController extends Controller
         $start_date = Carbon::createFromFormat('d/m/Y', $dates[0])->hour(0)->minute(0)->second(0)->format('Y-m-d H:i:s');
         $end_date = Carbon::createFromFormat('d/m/Y', $dates[1])->hour(23)->minute(59)->second(59)->format('Y-m-d H:i:s');
         $ventes = DB::table('venta_productes')
-          ->join('users', 'users.id', '=', 'venta_productes.id_usuari')
-          ->select('venta_productes.id as id', 'venta_productes.id_usuari as id_usuari' ,'venta_productes.preu_total as preu', 'venta_productes.estat as estat', 'venta_productes.created_at as temps_compra', 'users.nom as nom', 'users.cognom1 as cognom1', 'users.cognom2 as cognom2', 'users.email as email', 'users.numero_document as numero_document')
-          ->whereBetween('venta_productes.created_at',[$start_date,$end_date])
-          ->orderBy('id', 'ASC')
-          ->get();
+            ->join('users', 'users.id', '=', 'venta_productes.id_usuari')
+            ->select('venta_productes.id as id', 'venta_productes.id_usuari as id_usuari', 'venta_productes.preu_total as preu', 'venta_productes.estat as estat', 'venta_productes.created_at as temps_compra', 'users.nom as nom', 'users.cognom1 as cognom1', 'users.cognom2 as cognom2', 'users.email as email', 'users.numero_document as numero_document')
+            ->whereBetween('venta_productes.created_at', [$start_date, $end_date])
+            ->orderBy('id', 'ASC')
+            ->get();
         $numero_ventes = $ventes->count();
-        if($numero_ventes == 0){
-          return redirect('/gestio/ventes')->with('error', 'No hi han productes a exportar en aquest rang.');
-        }else{
-          $usuari = Auth::user();
-          dispatch(new \App\Jobs\GenerateExportacioPDFVentesJob($usuari, $dates));
-          return redirect('/gestio/ventes')->with('success', 'Rebràs la exportació al teu correu.');
+        if ($numero_ventes == 0) {
+            return redirect('/gestio/ventes')->with('error', 'No hi han productes a exportar en aquest rang.');
+        } else {
+            $usuari = Auth::user();
+            dispatch(new \App\Jobs\GenerateExportacioPDFVentesJob($usuari, $dates));
+            return redirect('/gestio/ventes')->with('success', 'Rebràs la exportació al teu correu.');
         }
     }
 }

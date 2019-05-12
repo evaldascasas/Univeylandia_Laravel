@@ -10,29 +10,29 @@ use App\Incidencia;
 
 class GrafiquesController extends Controller
 {
-    public function getUltimoDiaMes($elAnio,$elMes)
+    public function getUltimoDiaMes($elAnio, $elMes)
     {
-        return date("d",(mktime(0,0,0,$elMes+1,1,$elAnio)-1));
+        return date("d", (mktime(0, 0, 0, $elMes + 1, 1, $elAnio) - 1));
     }
 
-    public function registros_mes($anio,$mes)
+    public function registros_mes($anio, $mes)
     {
         $primer_dia = 1;
-        $ultimo_dia = $this->getUltimoDiaMes($anio,$mes);
-        
-        $fecha_inicial = date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$primer_dia) );
-        $fecha_final = date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$ultimo_dia) );
-        
+        $ultimo_dia = $this->getUltimoDiaMes($anio, $mes);
+
+        $fecha_inicial = date("Y-m-d H:i:s", strtotime($anio . "-" . $mes . "-" . $primer_dia));
+        $fecha_final = date("Y-m-d H:i:s", strtotime($anio . "-" . $mes . "-" . $ultimo_dia));
+
         $usuarios = User::whereBetween('created_at', [$fecha_inicial,  $fecha_final])->get();
         $ct = count($usuarios);
 
-        for($d=1;$d<=$ultimo_dia;$d++){
-            $registros[$d]=0;     
+        for ($d = 1; $d <= $ultimo_dia; $d++) {
+            $registros[$d] = 0;
         }
 
-        foreach($usuarios as $usuario){
-            $diasel = intval(date("d",strtotime($usuario->created_at) ) );
-            $registros[$diasel]++;    
+        foreach ($usuarios as $usuario) {
+            $diasel = intval(date("d", strtotime($usuario->created_at)));
+            $registros[$diasel]++;
         }
 
         $data = array("totaldias" => $ultimo_dia, "registrosdia" => $registros);
@@ -40,28 +40,28 @@ class GrafiquesController extends Controller
         return json_encode($data);
     }
 
-    public function vendes_mes($anio,$mes)
+    public function vendes_mes($anio, $mes)
     {
         $primer_dia = 1;
-        $ultimo_dia = $this->getUltimoDiaMes($anio,$mes);
+        $ultimo_dia = $this->getUltimoDiaMes($anio, $mes);
 
-        $fecha_inicial = date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$primer_dia) );
-        $fecha_final = date("Y-m-d H:i:s", strtotime($anio."-".$mes."-".$ultimo_dia) );
+        $fecha_inicial = date("Y-m-d H:i:s", strtotime($anio . "-" . $mes . "-" . $primer_dia));
+        $fecha_final = date("Y-m-d H:i:s", strtotime($anio . "-" . $mes . "-" . $ultimo_dia));
 
         $usuarios = Venta_productes::whereBetween('created_at', [$fecha_inicial,  $fecha_final])->get();
         $ct = count($usuarios);
 
-        for($d=1;$d<=$ultimo_dia;$d++){
-            $registros[$d]=0;
+        for ($d = 1; $d <= $ultimo_dia; $d++) {
+            $registros[$d] = 0;
         }
 
-        foreach($usuarios as $usuario){
-            $diasel = intval(date("d",strtotime($usuario->created_at) ) );
+        foreach ($usuarios as $usuario) {
+            $diasel = intval(date("d", strtotime($usuario->created_at)));
             $registros[$diasel]++;
         }
 
-        $data = array("totaldias"=>$ultimo_dia, "registrosdia" => $registros);
-        
+        $data = array("totaldias" => $ultimo_dia, "registrosdia" => $registros);
+
         return json_encode($data);
     }
 
@@ -73,7 +73,7 @@ class GrafiquesController extends Controller
 
         // $nombremes = array("","Gener","Febrer","Març","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Novembre","Desembre");
 
-        return view('gestio.grafiques.graficaregistres', compact(['anio','mes']));
+        return view('gestio.grafiques.graficaregistres', compact(['anio', 'mes']));
     }
 
     public function graficavendes()
@@ -84,7 +84,7 @@ class GrafiquesController extends Controller
 
         // $nombremes = array("","Gener","Febrer","Març","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Novembre","Desembre");
 
-        return view('gestio.grafiques.graficavendes', compact(['anio','mes']));
+        return view('gestio.grafiques.graficavendes', compact(['anio', 'mes']));
     }
 
     public function grafica_incidencies()
@@ -101,8 +101,7 @@ class GrafiquesController extends Controller
         $octubre = Incidencia::whereMonth('created_at', 10)->count();
         $novembre = Incidencia::whereMonth('created_at', 11)->count();
         $desembre = Incidencia::whereMonth('created_at', 12)->count();
-        
-        return view('gestio.grafiques.grafica_incidencies', compact('gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'));
-    }
 
+        return view('gestio.grafiques.grafica_incidencies', compact('gener', 'febrer', 'març', 'abril', 'maig', 'juny', 'juliol', 'agost', 'setembre', 'octubre', 'novembre', 'desembre'));
+    }
 }

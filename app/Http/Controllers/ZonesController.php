@@ -15,10 +15,9 @@ class ZonesController extends Controller
      */
     public function index()
     {
-      $zones = Zona::withoutGlobalScopes(['zones.id','zones.nom'])
-          ->get();
+        $zones = Zona::withoutGlobalScopes(['zones.id', 'zones.nom'])->get();
 
-      return view('gestio/zones/index', compact('zones'));
+        return view('gestio/zones/index', compact('zones'));
     }
 
     /**
@@ -39,17 +38,17 @@ class ZonesController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
-          'nom' => 'required'
-      ]);
+        $request->validate([
+            'nom' => 'required'
+        ]);
 
-      $user = Auth::user();
+        $zona = new Zona([
+            'nom' => $request->get('nom'),
+        ]);
 
-      $zona = new Zona([
-          'nom' => $request->get('nom'),
-      ]);
-      $zona->save();
-      return redirect('/gestio/zones')->with('success', 'Zona creada correctament');
+        $zona->save();
+
+        return redirect('/gestio/zones')->with('success', 'Zona creada correctament');
     }
 
     /**
@@ -71,9 +70,9 @@ class ZonesController extends Controller
      */
     public function edit($id)
     {
-      $zona = Zona::find($id);
+        $zona = Zona::findOrFail($id);
 
-      return view('gestio/zones/edit',compact('zona'));
+        return view('gestio/zones/edit', compact('zona'));
     }
 
     /**
@@ -85,15 +84,17 @@ class ZonesController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $request->validate([
-        'zona_nom'=>'required'
-      ]);
+        $request->validate([
+            'zona_nom' => 'required'
+        ]);
 
-      $zona = Zona::find($id);
-      $zona->nom = $request->get('zona_nom');
-      $zona->save();
+        $zona = Zona::findOrFail($id);
 
-      return redirect('/gestio/zones')->with('success', 'Zona actualitzada');
+        $zona->nom = $request->get('zona_nom');
+
+        $zona->save();
+
+        return redirect('/gestio/zones')->with('success', 'Zona actualitzada');
     }
 
     /**
@@ -104,9 +105,10 @@ class ZonesController extends Controller
      */
     public function destroy($id)
     {
-      $zona = Zona::find($id);
-      $zona->delete();
+        $zona = Zona::findOrFail($id);
+        
+        $zona->delete();
 
-      return redirect('/gestio/zones')->with('success', 'Zona eliminada.');
+        return redirect('/gestio/zones')->with('success', 'Zona eliminada.');
     }
 }

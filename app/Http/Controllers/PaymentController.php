@@ -44,28 +44,32 @@ class PaymentController extends Controller
     {
         /** PayPal api context **/
         $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential(
-            $paypal_conf['client_id'],
-            $paypal_conf['secret'])
+        $this->_api_context = new ApiContext(
+            new OAuthTokenCredential(
+                $paypal_conf['client_id'],
+                $paypal_conf['secret']
+            )
         );
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
+
     public function index()
     {
         return view('/cistella');
     }
+
     public function payWithpaypal(Request $request)
     {
         $payer = new Payer();                                                                         //Crear un nou usuari per el  pagament
         $payer->setPaymentMethod('paypal');
 
         $item_1 = new Item();                                                                           //Crear un nou item amb els seus atributs
-        $item_1->setName('Item 1') 
+        $item_1->setName('Item 1')
             ->setCurrency('EUR')
             ->setQuantity(1)
-            ->setPrice($request->get('amount')); 
-            
-        $item_list = new ItemList();    
+            ->setPrice($request->get('amount'));
+
+        $item_list = new ItemList();
         $item_list->setItems(array($item_1));                                                           //Afegir-ho a la llista d'items
         $amount = new Amount();
         $amount->setCurrency('EUR')                                                                     //Amontonar els items
@@ -75,7 +79,7 @@ class PaymentController extends Controller
         $transaction->setAmount($amount)
             ->setItemList($item_list)
             ->setDescription('Your transaction description');
-            
+
         $redirect_urls = new RedirectUrls();
         $redirect_urls->setReturnUrl(URL::to('status'))                                                 //Crear una nova URL i mostrar el estat
             ->setCancelUrl(URL::to('status'));
@@ -86,8 +90,8 @@ class PaymentController extends Controller
             ->setRedirectUrls($redirect_urls)
             ->setTransactions(array($transaction));
 
-            
-        
+
+
         try {                                                                                           //Afegir el pagament al context de la API
             $payment->create($this->_api_context);
         } catch (\PayPal\Exception\PPConnectionException $ex) {                                         //Errors de temps de conexio i errors desconeguts
@@ -114,6 +118,7 @@ class PaymentController extends Controller
         \Session::put('error', 'Error desconegut');                                                     //Error desconegut 
         return Redirect::to('/compra');
     }
+    
     public function getPaymentStatus()                                                                  //Actio del pagament
     {
         $payment_id = Session::get('paypal_payment_id');                                                //ID del pagment a la sessio
@@ -130,7 +135,7 @@ class PaymentController extends Controller
         if ($result->getState() == 'approved') {                                                        //Si esta aprovat executar la funcio de compra_finalitzada();
 
             $prova = (new HomeController)->compra_finalitzada();
-            
+
             \Session::put('success', 'Compra realitzada correctament');
             return Redirect::to('/cistella');
         }

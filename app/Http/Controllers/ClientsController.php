@@ -24,11 +24,11 @@ class ClientsController extends Controller
      */
     public function index()
     {
-       $usuaris = User::whereNotNull('email_verified_at')
-       ->where('id_rol',1)
-       ->get();
+        $usuaris = User::whereNotNull('email_verified_at')
+            ->where('id_rol', 1)
+            ->get();
 
-       return view("gestio.clients.index", compact("usuaris"));
+        return view("gestio.clients.index", compact("usuaris"));
     }
 
     /**
@@ -55,20 +55,20 @@ class ClientsController extends Controller
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
             'cognom1' => ['required', 'string', 'max:255'],
-            'cognom2' => ['string', 'max:255','nullable'],
+            'cognom2' => ['string', 'max:255', 'nullable'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'date' => ['required', 'date'],
             'adreca' => ['required', 'string'],
             'ciutat' => ['required', 'string'],
             'provincia' => ['required', 'string'],
             'cp' => ['required', 'string'],
-            'tipus_document' => ['required','in:DNI,NIE'],
+            'tipus_document' => ['required', 'in:DNI,NIE'],
             'numero_document' => ['required'],
-            'sexe' => ['required','in:Home,Dona'],
-            'telefon' => ['required','numeric','min:9'],
+            'sexe' => ['required', 'in:Home,Dona'],
+            'telefon' => ['required', 'numeric', 'min:9'],
         ]);
 
-        $usuari = new User ([
+        $usuari = new User([
             'nom' => $request->get('nom'),
             'cognom1' => $request->get('cognom1'),
             'cognom2' => $request->get('cognom2'),
@@ -86,10 +86,10 @@ class ClientsController extends Controller
             'telefon' => $request->get('telefon'),
             'id_rol' => 1,
         ]);
-        
+
         $usuari->save();
-        
-        if($usuari->save()) { 
+
+        if ($usuari->save()) {
             dispatch(new \App\Jobs\SendEmailOnUserCreationJob($usuari));
         }
 
@@ -104,9 +104,9 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-       $usuari = User::findOrFail($id);
+        $usuari = User::findOrFail($id);
 
-       return view('gestio.clients.show', compact('usuari'));
+        return view('gestio.clients.show', compact('usuari'));
     }
 
     /**
@@ -117,9 +117,9 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-       $usuari = User::findOrFail($id);
+        $usuari = User::findOrFail($id);
 
-       return view('gestio.clients.edit', compact('usuari'));
+        return view('gestio.clients.edit', compact('usuari'));
     }
 
     /**
@@ -134,19 +134,19 @@ class ClientsController extends Controller
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
             'cognom1' => ['required', 'string', 'max:255'],
-            'cognom2' => ['string', 'max:255','nullable'],
+            'cognom2' => ['string', 'max:255', 'nullable'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'date' => ['required', 'date'],
             'adreca' => ['required', 'string'],
             'ciutat' => ['required', 'string'],
             'provincia' => ['required', 'string'],
             'cp' => ['required', 'string'],
-            'tipus_document' => ['required','in:DNI,NIE'],
+            'tipus_document' => ['required', 'in:DNI,NIE'],
             'numero_document' => ['required'],
-            'sexe' => ['required','in:Home,Dona'],
-            'telefon' => ['required','numeric','min:9'],
+            'sexe' => ['required', 'in:Home,Dona'],
+            'telefon' => ['required', 'numeric', 'min:9'],
         ]);
-        
+
         $usuari = User::findOrFail($id);
         $usuari->nom = $request->get('nom');
         $usuari->cognom1 = $request->get('cognom1');
@@ -157,17 +157,17 @@ class ClientsController extends Controller
         $usuari->sexe = $request->get('sexe');
         $usuari->telefon = $request->get('telefon');
 
-        if($usuari->email != $request->get('email')) {
+        if ($usuari->email != $request->get('email')) {
             $usuari->email = $request->get('email');
         }
-        
+
         $usuari->adreca = $request->get('adreca');
         $usuari->ciutat = $request->get('ciutat');
         $usuari->provincia = $request->get('provincia');
         $usuari->codi_postal = $request->get('cp');
-        
+
         $usuari->save();
-        
+
         return redirect('/gestio/clients')->with('success', 'Client modificat correctament');
     }
 
@@ -182,7 +182,7 @@ class ClientsController extends Controller
         $user = User::findOrFail($id);
 
         $user->delete();
-        
+
         return redirect('/gestio/clients')->with('success', 'Client desactivat correctament');
     }
 
@@ -194,10 +194,10 @@ class ClientsController extends Controller
     public function trashed()
     {
         $users = User::onlyTrashed()
-        ->whereNotNull('email_verified_at')
-        ->where('id_rol',1)
-        ->get();
-    
+            ->whereNotNull('email_verified_at')
+            ->where('id_rol', 1)
+            ->get();
+
         return view('gestio.clients.deactivated', compact('users'));
     }
 
@@ -210,8 +210,8 @@ class ClientsController extends Controller
     public function reactivate($id)
     {
         $user = User::onlyTrashed()
-        ->where('id',$id)
-        ->first();
+            ->where('id', $id)
+            ->first();
 
         $user->restore();
 
@@ -223,24 +223,23 @@ class ClientsController extends Controller
      * 
      * @return PDF
      */
-    public function guardarClientPDF() 
+    public function guardarClientPDF()
     {
         try {
             $usuaris = User::whereNotNull('email_verified_at')
-            ->where('id_rol',1)
-            ->get();
+                ->where('id_rol', 1)
+                ->get();
 
             $mytime = Carbon\Carbon::now();
             $temps = $mytime->toDateString();
 
             $pdf = PDF::loadView('/gestio/clients/pdfClient', compact('usuaris'))->setPaper('a3', 'landscape');
 
-            return $pdf->download('client'.$temps.'.pdf');
+            return $pdf->download('client' . $temps . '.pdf');
         } catch (\Exception $e) {
             Log::error($e);
             return redirect('/gestio/clients')->with('error', 'Ha fallat la exportació en PDF.');
         }
-        
     }
 
     /**
@@ -255,7 +254,7 @@ class ClientsController extends Controller
         $temps = $mytime->toDateString();
 
         try {
-            return Excel::download(new ClientsExport, 'clients'.$temps.'.csv');
+            return Excel::download(new ClientsExport, 'clients' . $temps . '.csv');
         } catch (\Exception $e) {
             Log::error($e);
             return redirect('/gestio/clients')->with('error', 'Ha fallat la exportació dels registres.');
@@ -272,12 +271,12 @@ class ClientsController extends Controller
     {
         $file = $request->file('file');
         $ext = $file->getClientOriginalExtension();
-        
+
         $request->validate([
-            'file' => ['file','required','mimetypes:text/plain,text/csv,csv,application/csv'],
+            'file' => ['file', 'required', 'mimetypes:text/plain,text/csv,csv,application/csv'],
         ]);
-        
-        if($request->hasFile('file')) {
+
+        if ($request->hasFile('file')) {
             try {
                 Excel::import(new ClientsImport, $request->file('file'));
             } catch (\Exception $e) {
@@ -287,5 +286,4 @@ class ClientsController extends Controller
             return redirect('/gestio/clients')->with('success', 'Clients importats de forma correcta');
         }
     }
-
 }

@@ -19,8 +19,8 @@ class GestioServeisController extends Controller
      */
     public function index()
     {
-      $serveis = GestioServei::all();
-      return view('gestio/GestioServeis/index', compact('serveis'));
+        $serveis = GestioServei::all();
+        return view('gestio/GestioServeis/index', compact('serveis'));
     }
 
     /**
@@ -30,7 +30,7 @@ class GestioServeisController extends Controller
      */
     public function create()
     {
-      return view('gestio/GestioServeis/create');
+        return view('gestio/GestioServeis/create');
     }
 
     /**
@@ -41,15 +41,15 @@ class GestioServeisController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
-          'nom' => 'required'
-      ]);
+        $request->validate([
+            'nom' => 'required'
+        ]);
 
-      $servei = new GestioServei([
-          'nom' => $request->get('nom'),
-      ]);
-      $servei->save();
-      return redirect('gestio/GestioServeis')->with('success', 'Servei creat correctament');
+        $servei = new GestioServei([
+            'nom' => $request->get('nom'),
+        ]);
+        $servei->save();
+        return redirect('gestio/GestioServeis')->with('success', 'Servei creat correctament');
     }
 
     /**
@@ -59,9 +59,7 @@ class GestioServeisController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-
-    }
+    { }
 
     /**
      * Show the form for editing the specified resource.
@@ -71,9 +69,9 @@ class GestioServeisController extends Controller
      */
     public function edit($id)
     {
-      $servei = GestioServei::find($id);
+        $servei = GestioServei::find($id);
 
-      return view('gestio/GestioServeis/edit',compact('servei'));
+        return view('gestio/GestioServeis/edit', compact('servei'));
     }
 
     /**
@@ -85,15 +83,15 @@ class GestioServeisController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $request->validate([
-        'nom'=>'required'
-      ]);
+        $request->validate([
+            'nom' => 'required'
+        ]);
 
-      $servei = GestioServei::find($id);
-      $servei->nom = $request->get('nom');
-      $servei->save();
+        $servei = GestioServei::find($id);
+        $servei->nom = $request->get('nom');
+        $servei->save();
 
-      return redirect('/gestio/GestioServeis')->with('success', 'Servei actualitzat');
+        return redirect('/gestio/GestioServeis')->with('success', 'Servei actualitzat');
     }
 
     /**
@@ -104,9 +102,9 @@ class GestioServeisController extends Controller
      */
     public function destroy($id)
     {
-      $servei = GestioServei::find($id);
-      $servei->delete();
+        $servei = GestioServei::find($id);
+        $servei->delete();
 
-      return redirect('/gestio/GestioServeis')->with('success', 'Servei eliminat.');
+        return redirect('/gestio/GestioServeis')->with('success', 'Servei eliminat.');
     }
 }

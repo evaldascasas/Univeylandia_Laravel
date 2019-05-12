@@ -25,18 +25,18 @@ class IncidenciesController extends Controller
     public function index()
     {
         $incidencies = Incidencia::where('id_estat', 1)
-        ->orderBy('id_prioritat', 'DESC')
-        ->join('users AS u1','incidencies.id_usuari_reportador','u1.id')
-        ->join('tipus_prioritat','incidencies.id_prioritat','tipus_prioritat.id')
-        ->join('estat_incidencies','estat_incidencies.id','incidencies.id_estat')
-        ->get([
-            'incidencies.id as id',
-            'incidencies.titol as titol',
-            'incidencies.descripcio as descripcio',
-            'u1.nom as nom_usuari_reportador',
-            'tipus_prioritat.nom_prioritat as nom_prioritat',
-            'estat_incidencies.nom_estat as nom_estat'
-        ]);
+            ->orderBy('id_prioritat', 'DESC')
+            ->join('users AS u1', 'incidencies.id_usuari_reportador', 'u1.id')
+            ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
+            ->join('estat_incidencies', 'estat_incidencies.id', 'incidencies.id_estat')
+            ->get([
+                'incidencies.id as id',
+                'incidencies.titol as titol',
+                'incidencies.descripcio as descripcio',
+                'u1.nom as nom_usuari_reportador',
+                'tipus_prioritat.nom_prioritat as nom_prioritat',
+                'estat_incidencies.nom_estat as nom_estat'
+            ]);
 
         return view('gestio/incidencies/index', compact('incidencies'));
     }
@@ -49,20 +49,20 @@ class IncidenciesController extends Controller
     public function assigned()
     {
         $incidencies = Incidencia::where('id_estat', 2)
-        ->orderBy('id_prioritat', 'DESC')
-        ->join('users AS u1', 'incidencies.id_usuari_reportador', 'u1.id')
-        ->join('users AS u2', 'incidencies.id_usuari_assignat', 'u2.id')
-        ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
-        ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
-        ->get([
-            'incidencies.id as id',
-            'incidencies.titol as titol',
-            'incidencies.descripcio as descripcio',
-            'u1.nom as nom_usuari_reportador',
-            'u2.nom as nom_usuari_assignat',
-            'tipus_prioritat.nom_prioritat as nom_prioritat',
-            'estat_incidencies.nom_estat as nom_estat'
-        ]);
+            ->orderBy('id_prioritat', 'DESC')
+            ->join('users AS u1', 'incidencies.id_usuari_reportador', 'u1.id')
+            ->join('users AS u2', 'incidencies.id_usuari_assignat', 'u2.id')
+            ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
+            ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
+            ->get([
+                'incidencies.id as id',
+                'incidencies.titol as titol',
+                'incidencies.descripcio as descripcio',
+                'u1.nom as nom_usuari_reportador',
+                'u2.nom as nom_usuari_assignat',
+                'tipus_prioritat.nom_prioritat as nom_prioritat',
+                'estat_incidencies.nom_estat as nom_estat'
+            ]);
 
         return view('gestio/incidencies/assign', compact('incidencies'));
     }
@@ -75,20 +75,20 @@ class IncidenciesController extends Controller
     public function done()
     {
         $incidencies = Incidencia::where('id_estat', 3)
-        ->orderBy('id_prioritat', 'DESC')
-        ->join('users AS u1', 'incidencies.id_usuari_reportador', 'u1.id')
-        ->join('users AS u2', 'incidencies.id_usuari_assignat', 'u2.id')
-        ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
-        ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
-        ->get([
-            'incidencies.id as id',
-            'incidencies.titol as titol',
-            'incidencies.descripcio as descripcio',
-            'u1.nom as nom_usuari_reportador',
-            'u2.nom as nom_usuari_assignat',
-            'tipus_prioritat.nom_prioritat as nom_prioritat',
-            'estat_incidencies.nom_estat as nom_estat'
-        ]);
+            ->orderBy('id_prioritat', 'DESC')
+            ->join('users AS u1', 'incidencies.id_usuari_reportador', 'u1.id')
+            ->join('users AS u2', 'incidencies.id_usuari_assignat', 'u2.id')
+            ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
+            ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
+            ->get([
+                'incidencies.id as id',
+                'incidencies.titol as titol',
+                'incidencies.descripcio as descripcio',
+                'u1.nom as nom_usuari_reportador',
+                'u2.nom as nom_usuari_assignat',
+                'tipus_prioritat.nom_prioritat as nom_prioritat',
+                'estat_incidencies.nom_estat as nom_estat'
+            ]);
 
         return view('gestio/incidencies/done', compact('incidencies'));
     }
@@ -178,10 +178,10 @@ class IncidenciesController extends Controller
         $prioritats = PrioritatIncidencia::all();
 
         $treballadors = User::where('id_rol', 3)
-        ->orWhere('id_rol', 4)
-        ->orWhere('id_rol', 5)
-        ->whereNotNull('email_verified_at')
-        ->get();
+            ->orWhere('id_rol', 4)
+            ->orWhere('id_rol', 5)
+            ->whereNotNull('email_verified_at')
+            ->get();
 
         return view('gestio/incidencies/show', compact(['incidencia', 'prioritats', 'treballadors']));
     }
@@ -201,8 +201,8 @@ class IncidenciesController extends Controller
         $treballador_assignat = User::find($incidencia->id_usuari_assignat);
 
         $treballadors = User::where('id_rol', 5)
-        ->whereNotNull('email_verified_at')
-        ->get();
+            ->whereNotNull('email_verified_at')
+            ->get();
 
         return view('gestio/incidencies/edit', compact(['incidencia', 'prioritats', 'treballadors', 'treballador_assignat']));
     }
@@ -217,8 +217,8 @@ class IncidenciesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'=>'required',
-            'description'=> 'required',
+            'title' => 'required',
+            'description' => 'required',
             'priority' => 'required',
             'assigned-employee' => 'required'
         ]);
@@ -280,27 +280,26 @@ class IncidenciesController extends Controller
     public function assignadesGuardarPDF()
     {
         $incidencies = Incidencia::where('id_estat', 2)
-        ->orderBy('id_prioritat', 'DESC')
-        ->join('users AS u1', 'incidencies.id_usuari_reportador', 'u1.id')
-        ->join('users AS u2', 'incidencies.id_usuari_assignat', 'u2.id')
-        ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
-        ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
-        ->get([
-            'incidencies.id as id',
-            'incidencies.titol as titol',
-            'incidencies.descripcio as descripcio',
-            'u1.nom as nom_usuari_reportador',
-            'u2.nom as nom_usuari_assignat',
-            'tipus_prioritat.nom_prioritat as nom_prioritat',
-            'estat_incidencies.nom_estat as nom_estat'
-        ]);
+            ->orderBy('id_prioritat', 'DESC')
+            ->join('users AS u1', 'incidencies.id_usuari_reportador', 'u1.id')
+            ->join('users AS u2', 'incidencies.id_usuari_assignat', 'u2.id')
+            ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
+            ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
+            ->get([
+                'incidencies.id as id',
+                'incidencies.titol as titol',
+                'incidencies.descripcio as descripcio',
+                'u1.nom as nom_usuari_reportador',
+                'u2.nom as nom_usuari_assignat',
+                'tipus_prioritat.nom_prioritat as nom_prioritat',
+                'estat_incidencies.nom_estat as nom_estat'
+            ]);
 
         $temps = Carbon\Carbon::now();
         $temps = $temps->toDateString();
 
         $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
 
-        return $pdf->download('incidencies_assignades_'.$temps.'.pdf');
+        return $pdf->download('incidencies_assignades_' . $temps . '.pdf');
     }
-
 }
