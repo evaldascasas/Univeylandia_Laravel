@@ -29,26 +29,26 @@ class ClientsExport implements FromCollection, WithHeadings
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return User::whereNotNull('email_verified_at')
-        ->where('id_rol',1)
-        ->get([
-            'nom',
-            'cognom1',
-            'cognom2',
-            'email',
-            'data_naixement',
-            'adreca',
-            'ciutat',
-            'provincia',
-            'codi_postal',
-            'tipus_document',
-            'numero_document',
-            'sexe',
-            'telefon'
-        ]);
+            ->where('id_rol', 1)
+            ->get([
+                'nom',
+                'cognom1',
+                'cognom2',
+                'email',
+                'data_naixement',
+                'adreca',
+                'ciutat',
+                'provincia',
+                'codi_postal',
+                'tipus_document',
+                'numero_document',
+                'sexe',
+                'telefon'
+            ]);
     }
 }
