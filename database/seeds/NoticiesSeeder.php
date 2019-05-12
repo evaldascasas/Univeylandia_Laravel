@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class NoticiesSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class NoticiesSeeder extends Seeder
             'id_usuari' => 10,
             'categoria' => 1,
             'path_img' => '/storage/noticies/tancat.jpg',
+            'str_slug' => Str::slug('Tancament 20/03/2019'),
         ]);
 
         DB::table('noticies')->insert([
@@ -25,6 +27,7 @@ class NoticiesSeeder extends Seeder
             'id_usuari' => 10,
             'categoria' => 2,
             'path_img' => '/storage/noticies/atraccio.jpg',
+            'str_slug' => Str::slug('Nova atracció'),
         ]);
 
         DB::table('noticies')->insert([
@@ -33,6 +36,7 @@ class NoticiesSeeder extends Seeder
             'id_usuari' => 10,
             'categoria' => 1,
             'path_img' => '/storage/noticies/nadal.jpg',
+            'str_slug' => Str::slug('Decoració de nadal'),
         ]);
     }
 }
