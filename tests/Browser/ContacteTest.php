@@ -14,18 +14,18 @@ class ContacteTest extends DuskTestCase
      * @test
      * @return void
      */
-     public function usuari_envia_contacte()
-     {
-         $this->browse(function (Browser $browser) {
-             $browser->visit('/contacte')
-                     ->assertSee('Contacta')
-                     ->type('nom', 'Paco')
-                     ->type('email', 'ivanmorte3@iesmontsia.org')
-                     ->select('tipus_pregunta', 'Botiga')
-                     ->type('consulta', 'hola, no entenc el funcionament')
-                     ->check('checkE')
-                     ->press('Submit');
-         });
+    public function usuari_envia_contacte()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/contacte')
+                ->assertSee('Contacta')
+                ->type('nom', 'Paco')
+                ->type('email', 'ivanmorte3@iesmontsia.org')
+                ->select('tipus_pregunta', 'Botiga')
+                ->type('consulta', 'hola, no entenc el funcionament')
+                ->check('checkE')
+                ->press('Submit');
+        });
     }
 
     /**
@@ -34,17 +34,16 @@ class ContacteTest extends DuskTestCase
      * @return [type] [description]
      */
 
-     public function usuari_envia_contacte_falla()
-     {
-         $this->browse(function (Browser $browser) {
-             $browser->visit('/contacte')
-                     ->assertSee('Contacta')
-                     ->type('email', 'ivanmorte3@iesmontsia.org')
-                     ->select('tipus_pregunta', 'Botiga')
-                     ->type('consulta', 'hola, no entenc el funcionament')
-                     ->check('checkE')
-                     ->press('Submit');
-
-         });
+    public function usuari_envia_contacte_falla()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/contacte')
+                ->assertSee('Contacta')
+                ->type('email', 'ivanmorte3@iesmontsia.org')
+                ->select('tipus_pregunta', 'Botiga')
+                ->type('consulta', 'hola, no entenc el funcionament')
+                ->check('checkE')
+                ->press('Submit');
+        });
     }
 }

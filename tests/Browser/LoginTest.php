@@ -31,20 +31,21 @@ class LoginTest extends DuskTestCase
     //     });
     // }
 
-    public function testLogin()
+    /**
+     * Test de Login amb usuari gestor
+     */
+    public function testLoginAdminUser()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->clickLink('Entrar') //Click the Register link
-                    ->assertSee('Iniciar sessió') //Make sure the phrase in the arguement is on the page
-                    //Fill the form with these values
-                    ->value('input[name="email"]', 'pacoramon@univeylandia-parc.cat')
-                    ->value('input[name="password"]', 'Alumne123')
-                    ->click('button[type="submit"]') //Click the submit button on the page
-                    ->assertPathIs('/') //Make sure you are in the home page
-                    ->visit('/perfil')
-                    //Make sure you see the phrase in the arguement
-                    ->assertSee("Paco"); 
+                ->clickLink('Entrar')
+                ->assertSee('Iniciar sessió')
+                ->value('input[name="email"]', 'pacoramon@univeylandia-parc.cat')
+                ->value('input[name="password"]', 'Alumne123')
+                ->click('button[type="submit"]')
+                ->assertPathIs('/')
+                ->visit('/gestio')
+                ->assertSee("Benvingut a la gestió del Parc d'Atraccions Univeylandia");
         });
     }
 }
