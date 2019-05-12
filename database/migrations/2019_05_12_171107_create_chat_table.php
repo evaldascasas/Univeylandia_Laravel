@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNoticiaTable extends Migration
+class CreateChatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,10 @@ class CreateNoticiaTable extends Migration
      */
     public function up()
     {
-        Schema::create('noticies', function (Blueprint $table) {
+        Schema::create('chat', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titol')->unique();
-            $table->text('descripcio');
-            $table->unsignedInteger('id_usuari');
-            $table->unsignedInteger('categoria');
-            $table->string('path_img');
-            $table->string('str_slug')->unique();
-            $table->foreign('id_usuari')->references('id')->on('users');
-            $table->foreign('categoria')->references('id')->on('categories');
+            $table->text('missatge');
+            $table->boolean('check');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
@@ -35,6 +29,6 @@ class CreateNoticiaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('noticies');
+        Schema::dropIfExists('chat');
     }
 }

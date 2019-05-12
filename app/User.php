@@ -8,8 +8,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-// use Illuminate\Auth\Notifications\ResetPassword;
-
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -21,23 +19,25 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'nom', 
-        'cognom1', 
-        'cognom2', 
+        'nom',
+        'cognom1',
+        'cognom2',
         'email',
         'email_verified_at',
-        'password', 
-        'data_naixement', 
-        'adreca', 
-        'ciutat', 
-        'provincia', 
-        'codi_postal', 
-        'tipus_document', 
-        'numero_document', 
-        'sexe', 
-        'telefon', 
+        'password',
+        'data_naixement',
+        'adreca',
+        'ciutat',
+        'provincia',
+        'codi_postal',
+        'tipus_document',
+        'numero_document',
+        'sexe',
+        'telefon',
         'id_rol',
         'id_dades_empleat',
+        'provider',
+        'provider_id'
     ];
 
     /**
@@ -48,16 +48,5 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'remember_token',
     ];
-
-    // /**
-    //  * Send the password reset notification.
-    //  *
-    //  * @param  string  $token
-    //  * @return void
-    //  */
-    // public function sendPasswordResetNotification($token)
-    // {
-    //     $this->notify(new ResetPassword($token));
-    // }
 
 }

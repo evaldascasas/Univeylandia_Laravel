@@ -15,14 +15,14 @@ class CreatePromocionsTable extends Migration
     {
         Schema::create('promocions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titol');
+            $table->string('titol')->unique();
             $table->text('descripcio');
             $table->unsignedInteger('id_usuari');
             $table->string('path_img');
+            $table->string('slug')->unique();
             $table->foreign('id_usuari')->references('id')->on('users');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-
         });
     }
 

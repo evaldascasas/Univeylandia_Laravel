@@ -8,35 +8,37 @@ use Illuminate\Support\Facades\DB;
 
 class AssignacioAtraccion extends Model
 {
-  protected $table = "assign_emp_atraccions";
+   protected $table = "assign_emp_atraccions";
 
-  protected $fillable = [
-    'id_empleat',
-    'id_atraccio',
-    'data_inici',
-    'data_fi'
-  ];
+   protected $fillable = [
+      'id_empleat',
+      'id_atraccio',
+      'data_inici',
+      'data_fi'
+   ];
 
 
-  public static function AssignacioFiltre($data_inici, $data_fi, $id_rol)
-  {
-    $empleats = DB::select('SELECT * FROM users WHERE users.id_rol = '.$id_rol.' AND users.id NOT IN (
+   public static function AssignacioFiltre($data_inici, $data_fi, $id_rol)
+   {
+      $empleats = DB::select(
+         'SELECT * FROM users WHERE users.id_rol = ' . $id_rol . ' AND users.id NOT IN (
           SELECT
              assign_emp_atraccions.id_empleat
           FROM
              assign_emp_atraccions
           WHERE
-             ( assign_emp_atraccions.data_inici <= "'.$data_inici.'" AND assign_emp_atraccions.data_fi >= "'.$data_fi.'")
+             ( assign_emp_atraccions.data_inici <= "' . $data_inici . '" AND assign_emp_atraccions.data_fi >= "' . $data_fi . '")
              OR
-             ( assign_emp_atraccions.data_inici >= "'.$data_inici.'" AND assign_emp_atraccions.data_fi <= "'.$data_fi.'")
+             ( assign_emp_atraccions.data_inici >= "' . $data_inici . '" AND assign_emp_atraccions.data_fi <= "' . $data_fi . '")
            )'
-    );
+      );
 
-    return $empleats;
-  }
+      return $empleats;
+   }
 
-  public static function assignarMantenimentFiltro (){
-    $user = DB::select('SELECT
+   public static function assignarMantenimentFiltro()
+   {
+      $user = DB::select('SELECT
     *
     FROM
        users
@@ -54,11 +56,12 @@ class AssignacioAtraccion extends Model
              OR
              ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
            )');
-           return $user;
-  }
+      return $user;
+   }
 
-  public static function assignarNetejaFiltro (){
-    $user = DB::select('SELECT
+   public static function assignarNetejaFiltro()
+   {
+      $user = DB::select('SELECT
     *
     FROM
        users
@@ -76,11 +79,12 @@ class AssignacioAtraccion extends Model
              OR
              ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
            )');
-           return $user;
-  }
+      return $user;
+   }
 
-  public static function assignarGeneralFiltro (){
-    $user = DB::select('SELECT
+   public static function assignarGeneralFiltro()
+   {
+      $user = DB::select('SELECT
     *
     FROM
        users
@@ -98,6 +102,6 @@ class AssignacioAtraccion extends Model
              OR
              ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
            )');
-           return $user;
-  }
+      return $user;
+   }
 }

@@ -12,15 +12,27 @@ class ZonesSeeder extends Seeder
     public function run()
     {
         DB::table('zones')->insert([
-            'nom' => 'Mediterrania',
+            'nom' => 'Españita',
         ]);
 
         DB::table('zones')->insert([
-            'nom' => 'Mexico',
+            'nom' => 'Mèxic',
         ]);
 
         DB::table('zones')->insert([
-            'nom' => 'Jamaica',
+            'nom' => 'Polinesia',
+        ]);
+
+        DB::table('zones')->insert([
+            'nom' => 'Xina',
+        ]);
+
+        DB::table('zones')->insert([
+            'nom' => 'Otaku',
+        ]);
+
+        DB::table('zones')->insert([
+            'nom' => 'Far West',
         ]);
     }
 }
