@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class GestioServei extends Model
 {
-  protected $table = 'serveis';
+    protected $table = 'serveis';
 
-  protected $fillable = [
-      'nom'
-  ];
-
-
+    protected $fillable = [
+        'nom'
+    ];
 }

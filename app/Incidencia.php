@@ -16,5 +16,4 @@ class Incidencia extends Model
         'id_usuari_reportador',
         'id_usuari_assignat'
     ];
-
 }

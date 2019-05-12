@@ -11,5 +11,4 @@ class Imatge extends Model
 	protected $fillable = [
 		'nom', 'mida', 'foto_path', 'foto_path_aigua', 'thumbnail', 'preu', 'id_atraccio'
 	];
-
 }

@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cistella extends Model
+class Chat extends Model
 {
-    //
-    protected $table = 'cistelles';
+    protected $table = 'chat';
 
     protected $fillable = [
-        'id_usuari'
+        'msg',
+        'check'
     ];
 }
