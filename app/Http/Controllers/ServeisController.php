@@ -13,14 +13,13 @@ use \App\ServeisZones;
 class ServeisController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Acció que s'encarrega de llistar els serveis del parc.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $assignacions = Zona::where('id_estat', 2)
-            ->join('serveis_zones', 'serveis_zones.id_zona', '=', 'zones.id')
+        $assignacions = Zona::join('serveis_zones', 'serveis_zones.id_zona', '=', 'zones.id')
             ->join('users', 'serveis_zones.id_empleat', '=', 'users.id')
             ->join('serveis', 'serveis_zones.id_servei', '=', 'serveis.id')
             ->get([
@@ -34,7 +33,7 @@ class ServeisController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Acció que s'encarrega de retornar la vista per a crear un servei.
      *
      * @return \Illuminate\Http\Response
      */
@@ -50,7 +49,7 @@ class ServeisController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Acció que guarda el servei creat a la base de dades.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -71,7 +70,6 @@ class ServeisController extends Controller
             'id_empleat' => $request->get('seleccio_empleat'),
             'data_inici' => $request->get('data_inici_assign'),
             'data_fi' => $request->get('data_fi_assign'),
-            'id_estat' => 2
         ]);
 
         $servei_zona->save();
@@ -89,7 +87,7 @@ class ServeisController extends Controller
     { }
 
     /**
-     * Show the form for editing the specified resource.
+     * Acció que s'encarrega de mostrar les dades del servei per a modificarles.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -108,7 +106,7 @@ class ServeisController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Acció que s'encarrega d'actualitzar les dades a la base de dades.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -131,7 +129,6 @@ class ServeisController extends Controller
         $servei->id_empleat = $request->get('seleccio_empleat');
         $servei->data_inici = $request->get('data_inici_assign');
         $servei->data_fi = $request->get('data_fi_assign');
-        $servei->id_estat = 2;
 
         $servei->save();
 
@@ -139,7 +136,7 @@ class ServeisController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Acció que s'encarrega de canviar l'estat del servei a finalitzat
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -148,9 +145,7 @@ class ServeisController extends Controller
     {
         $servei = ServeisZones::findOrFail($id);
 
-        $servei->id_estat = 3;
-
-        $servei->save();
+        $servei->delete();
 
         return redirect('gestio/serveis')->with('success', 'Servei eliminat correctament');
     }

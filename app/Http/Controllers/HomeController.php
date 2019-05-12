@@ -28,6 +28,9 @@ use \App\Atraccion;
 use \App\Promocions;
 use \App\User;
 use \App\TipusAtraccions;
+use \App\Contacte;
+use \App\Linia_contacte;
+use \App\Chat;
 
 class HomeController extends Controller
 {
@@ -38,8 +41,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //Add Verified middleware
-        //$this->middleware(['auth', 'verified']);
+        // 
     }
 
     /**
@@ -106,7 +108,9 @@ class HomeController extends Controller
      */
     public function contacte()
     {
-        return view("contacte");
+        $chat = Chat::all();
+
+        return view("contacte", compact('chat'));
     }
 
     /**
@@ -235,19 +239,18 @@ class HomeController extends Controller
                 'atraccions.id as id_atra'
             ]);
 
-        /*$incidencies_fetes = Incidencia::where('id_usuari_assignat', $user->id)
-        ->where('id_estat',3)
-        ->join('tipus_prioritat', 'incidencies.id_prioritat', 'tipus_prioritat.id')
-        ->join('estat_incidencies', 'incidencies.id_estat', 'estat_incidencies.id')
-        ->get([
-            'incidencies.id as id',
-            'incidencies.titol as titol',
-            'incidencies.descripcio as descripcio',
-            'tipus_prioritat.nom_prioritat as nom_prioritat',
-            'estat_incidencies.nom_estat as nom_estat',
-        ]);*/
+        $tiquets = Linia_Contacte::where('id_empleat', $user->id)
+            ->where('id_estat', 2)
+            ->leftJoin('contacte', 'contacte.id', 'linia_contacte.id_ticket_contacte')
+            ->get([
+                'contacte.id as id',
+                'contacte.nom as nom',
+                'contacte.email as email',
+                'contacte.tipus_pregunta as tipus_pregunta',
+                'contacte.missatge as missatge'
+            ]);
 
-        return view('tasques', compact(['incidencies_per_fer', 'assignacio']));
+        return view('tasques', compact(['incidencies_per_fer', 'assignacio', 'tiquets']));
     }
 
     /**
@@ -564,7 +567,7 @@ class HomeController extends Controller
         return view("/tenda_figures");
     }
 
-    public function noticia(Request $request)
+    public function noticia($str_slug)
     {
         $valid = 0;
         if (Auth::check()) {
@@ -574,8 +577,10 @@ class HomeController extends Controller
             }
         }
 
-        $noticia = noticies::find($request->get('id'));
+        $noticia = noticies::where('str_slug', $str_slug)->first();
+
         $categoria = categories::find($noticia->categoria);
+
         return view("/noticia", compact('noticia', 'categoria', 'valid'));
     }
 
@@ -584,7 +589,7 @@ class HomeController extends Controller
         $noticies = DB::table('noticies')
             ->join('users', 'users.id', '=', 'noticies.id_usuari')
             ->join('categories', 'categories.id', '=', 'noticies.categoria')
-            ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria', 'categories.id as catId')
+            ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'str_slug', 'categories.nom as categoria', 'categories.id as catId')
             ->orderBy('id', 'DESC')
 
             ->where(function ($noticies) use ($request) {
@@ -602,7 +607,7 @@ class HomeController extends Controller
         return view('noticies', compact('noticies'));
     }
 
-    public function promocio($id)
+    public function promocio($slug)
     {
         $valid = 0;
         if (Auth::check()) {
@@ -612,7 +617,7 @@ class HomeController extends Controller
             }
         }
 
-        $promocio = promocions::find($id);
+        $promocio = promocions::where('slug', '=', $slug)->firstOrFail();;
 
         return view("/promocio", compact('promocio', 'valid'));
     }
@@ -621,7 +626,7 @@ class HomeController extends Controller
     {
         $promocions = DB::table('promocions')
             ->join('users', 'users.id', '=', 'promocions.id_usuari')
-            ->select('promocions.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img')
+            ->select('promocions.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'slug')
             ->orderBy('id', 'DESC')
             ->paginate(8);
 
@@ -709,5 +714,49 @@ class HomeController extends Controller
     public function sala_chat()
     {
         return view('sala_chat');
+    }
+
+    public function notificacionsGeneral()
+    {
+        $user = Auth::user();
+
+        /**
+         *     $incidencies = json_decode(DB::table('notifications')->where('Type', 'AppNotificationsIncidenceAssigned')
+         *  ->where('notifiable_id', $user->id)
+         *  ->get());
+         */
+
+        $incidencies = array();
+
+        foreach ($user->notifications as $notification) {
+            //$user->notification->map(function($n){
+            if ($notification->type === 'App\Notifications\IncidenceAssigned') {
+                $incidencies[] = $notification->data['titol'];
+            }
+        };
+
+        return view('notificacions', compact('incidencies'));
+    }
+
+    public function ajaxChat()
+    {
+        ini_set('max_execution_time', 7000);
+
+        while (Chat::where('check', 0)->count() < 1) {
+            usleep(1000);
+        }
+
+        if (Chat::where('check', 0)->count() > 0) {
+            $message = Chat::where('check', 0)->first();
+            $id = $message->id;
+            $update = Chat::find($id);
+            $update->check = 1;
+            $update->save();
+
+
+            return response()->json([
+                'msg' => $message->name,
+            ]);
+        }
     }
 }

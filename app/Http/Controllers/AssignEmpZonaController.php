@@ -8,141 +8,336 @@ use App\Http\Controllers\Controller;
 use \App\User;
 use \App\Zona;
 use \App\AssignEmpZona;
+use \App\ServeisZones;
 
+/**
+ * Classe per assignar empleat a zona
+ */
 class AssignEmpZonaController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-    $assignacions = AssignEmpZona::join ('zones','empleat_zona.id_zona', '=', 'zones.id')
-    ->join('users', 'empleat_zona.id_empleat', '=', 'users.id')
-    ->get ([
-      'empleat_zona.id as id',
-      'zones.nom as nom_zona',
-      'users.nom as nom_empleat',
-      'empleat_zona.data_inici as data_inici',
-      'empleat_zona.data_fi as data_fi'
-    ]);
+    /**
+     * Selecciona totes les zona i les retorna a la vista indez
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $assignacions = Zona::all();
 
-    return view('gestio/AssignEmpZona/index', compact('assignacions'));
-  }
+        return view('gestio/AssignEmpZona/index', compact('assignacions'));
+    }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-      $treballadors = User::where('id_rol',5)
-      ->whereNotNull('email_verified_at')
-      ->whereNotNull('id_dades_empleat')
-      ->get();
+    /**
+     * Busca una Zona en concret i retorna la zona a la vista
+     *
+     * 
+     * @param zona
+     */
+    public function viewData(Request $request, $id)
+    {
 
-      $zones = Zona::all();
+        $zona = Zona::find($id);
+        return view('gestio/AssignEmpZona/date', compact('zona'));
+    }
 
-      return view('gestio/AssignEmpZona/create', compact('zones','treballadors'));
-  }
+    /**
+     * Busca els empleats lliures i els retorna a la vista
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filterEmploye(Request $request, $id)
+    {
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store(Request $request)
-  {
-    $request->validate([
-        'seleccio_zona' => 'required',
-        'data_inici_assign' => 'required',
-        'data_fi_assign' => 'required',
-        'seleccio_empleat' => 'required'
-    ]);
+        $data_inici = $request->get('data_inici_assignacio_empleat');
+        $data_fi = $request->get('data_fi_assignacio_empleat');
 
-    $assignEmpZona = new AssignEmpZona([
-        'id_zona' => $request->get('seleccio_zona'),
-        'id_empleat' => $request->get('seleccio_empleat'),
-        'data_inici'=> $request->get('data_inici_assign'),
-        'data_fi'=> $request->get('data_fi_assign')
-    ]);
+        $user = AssignEmpZona::assignarMantenimentFiltro($data_inici, $data_fi);
+        $id_zona = Zona::find($id);
 
-    $assignEmpZona->save();
+        return view('gestio/AssignEmpZona/freeEmploye', compact('user', 'data_inici', 'data_fi', 'id_zona'));
+    }
 
-    return redirect('/gestio/AssignEmpZona')->with('success', 'Assignació creada correctament');
-  }
+    /**
+     * Guarda els empleats assignats
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveAssign(Request $request, $id)
+    {
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
+        $request->validate([
+            'id_zona' => 'required',
+            'id_empleat' => 'required',
+            'data_inici_modal' => 'required',
+            'data_fi_modal' => 'required'
+        ]);
 
-  }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-    $treballadors = User::where('id_rol',5)
-    ->whereNotNull('email_verified_at')
-    ->whereNotNull('id_dades_empleat')
-    ->get();
+        $AssignEmpZona = new ServeisZones([
+            'id_zona' => $request->get('id_zona'),
+            'id_servei' => 2,
+            'id_empleat' => $request->get('id_empleat'),
+            'data_inici' => $request->get('data_inici_modal'),
+            'data_fi' => $request->get('data_fi_modal'),
+        ]);
 
-    $zones = Zona::all();
-    $assign = AssignEmpZona::find($id);
+        $AssignEmpZona->save();
+        return redirect('gestio/AssignEmpZona')->with('success', 'Assignacio creada correctament');
+    }
 
-    return view('gestio/AssignEmpZona/edit', compact(['assign','zones','treballadors']));
-  }
+    /**
+     * Llista els empleats assignats
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listAssign()
+    {
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    $request->validate([
-      'seleccio_zona' => 'required',
-      'data_inici_assign'=>'required',
-      'data_fi_assign'=>'required',
-      'seleccio_empleat' => 'required'
-    ]);
+        $assign = AssignEmpZona::llistarEmpassign();
+        return view('gestio/AssignEmpZona/llistarAssign', compact('assign'));
+    }
 
-    $assign = AssignEmpZona::findOrFail($id);
+    /**
+     * Borra les assignacions
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAssign($id)
+    {
 
-    $assign->id_zona = $request->get('seleccio_zona');
-    $assign->id_empleat = $request->get('seleccio_empleat');
-    $assign->data_inici = $request->get('data_inici_assign');
-    $assign->data_fi = $request->get('data_fi_assign');
-    $assign->save();
 
-    return redirect('gestio/AssignEmpZona')->with('success', 'Assignació editada correctament');
-  }
+        $assignacio = AssignEmpZona::find($id);
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy($id)
-  {
-    $assig = AssignEmpZona::findOrFail($id);
-    $assig->delete();
+        $assignacio->delete();
 
-    return redirect('gestio/AssignEmpZona')->with('success', 'Assignació eliminada correctament');
-  }
+        $assign = AssignEmpZona::llistarEmpassign();
+
+        return view('gestio/AssignEmpZona/llistarAssign', compact('assign'));
+    }
+
+    /**
+     * Busca les sones i retorna la vista date
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewDataNeteja(Request $request, $id)
+    {
+
+        $zona = Zona::find($id);
+        return view('gestio/AssignEmpZona/dateNeteja', compact('zona'));
+    }
+
+    /**
+     * Filtra els empleats per rol
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filterEmployeNeteja(Request $request, $id)
+    {
+
+        $data_inici = $request->get('data_inici_assignacio_empleat');
+        $data_fi = $request->get('data_fi_assignacio_empleat');
+
+        $user = AssignEmpZona::assignarNetejaFiltro($data_inici, $data_fi);
+        $id_zona = Zona::find($id);
+
+        return view('gestio/AssignEmpZona/freeEmployeNeteja', compact('user', 'data_inici', 'data_fi', 'id_zona'));
+    }
+
+    /**
+     * Guarda l'assignacio
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveAssignNeteja(Request $request, $id)
+    {
+
+        $request->validate([
+            'id_zona' => 'required',
+            'id_empleat' => 'required',
+            'data_inici_modal' => 'required',
+            'data_fi_modal' => 'required'
+        ]);
+
+        $AssignEmpZona = new ServeisZones([
+            'id_zona' => $request->get('id_zona'),
+            'id_servei' => 1,
+            'id_empleat' => $request->get('id_empleat'),
+            'data_inici' => $request->get('data_inici_modal'),
+            'data_fi' => $request->get('data_fi_modal'),
+        ]);
+
+        $AssignEmpZona->save();
+        return redirect('gestio/AssignEmpZona')->with('success', 'Assignacio creada correctament');
+    }
+
+    /**
+     * Busca les zones amb el mateix id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewDataAtencio(Request $request, $id)
+    {
+
+        $zona = Zona::find($id);
+        return view('gestio/AssignEmpZona/dateAtencio', compact('zona'));
+    }
+
+    /**
+     * Filtra els empleats per rol i retorna una llista de empleats amb el rol seleccionat
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filterEmployeAtencio(Request $request, $id)
+    {
+
+        $data_inici = $request->get('data_inici_assignacio_empleat');
+        $data_fi = $request->get('data_fi_assignacio_empleat');
+
+        $user = AssignEmpZona::assignarAtencioFiltro($data_inici, $data_fi);
+        $id_zona = Zona::find($id);
+
+        return view('gestio/AssignEmpZona/freeEmployeAtencio', compact('user', 'data_inici', 'data_fi', 'id_zona'));
+    }
+
+    /**
+     * Guarda l'assignacio del empleat
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveAssignAtencio(Request $request, $id)
+    {
+
+        $request->validate([
+            'id_zona' => 'required',
+            'id_empleat' => 'required',
+            'data_inici_modal' => 'required',
+            'data_fi_modal' => 'required'
+        ]);
+
+        $AssignEmpZona = new ServeisZones([
+            'id_zona' => $request->get('id_zona'),
+            'id_servei' => 3,
+            'id_empleat' => $request->get('id_empleat'),
+            'data_inici' => $request->get('data_inici_modal'),
+            'data_fi' => $request->get('data_fi_modal'),
+        ]);
+
+        $AssignEmpZona->save();
+        return redirect('gestio/AssignEmpZona')->with('success', 'Assignacio creada correctament');
+    }
+
+    /**
+     * Retorna la vista per a les dates
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewDataShow(Request $request, $id)
+    {
+
+        $zona = Zona::find($id);
+        return view('gestio/AssignEmpZona/dateShow', compact('zona'));
+    }
+
+    /**
+     * Filtra els empleats per rol
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filterEmployeShow(Request $request, $id)
+    {
+
+        $data_inici = $request->get('data_inici_assignacio_empleat');
+        $data_fi = $request->get('data_fi_assignacio_empleat');
+
+        $user = AssignEmpZona::assignarShowFiltro($data_inici, $data_fi);
+        $id_zona = Zona::find($id);
+
+        return view('gestio/AssignEmpZona/freeEmployeShow', compact('user', 'data_inici', 'data_fi', 'id_zona'));
+    }
+
+    /**
+     * Guarda les assignacions
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveAssignShow(Request $request, $id)
+    {
+
+        $request->validate([
+            'id_zona' => 'required',
+            'id_empleat' => 'required',
+            'data_inici_modal' => 'required',
+            'data_fi_modal' => 'required'
+        ]);
+
+        $AssignEmpZona = new ServeisZones([
+            'id_zona' => $request->get('id_zona'),
+            'id_servei' => 4,
+            'id_empleat' => $request->get('id_empleat'),
+            'data_inici' => $request->get('data_inici_modal'),
+            'data_fi' => $request->get('data_fi_modal'),
+        ]);
+
+        $AssignEmpZona->save();
+        return redirect('gestio/AssignEmpZona')->with('success', 'Assignacio creada correctament');
+    }
+
+    /**
+     * Retorna la vista de les dates 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewDataSeguretat(Request $request, $id)
+    {
+
+        $zona = Zona::find($id);
+        return view('gestio/AssignEmpZona/dateSeg', compact('zona'));
+    }
+
+    /**
+     * Filtra els empleats de seguretat
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filterEmployeSeguretat(Request $request, $id)
+    {
+
+        $data_inici = $request->get('data_inici_assignacio_empleat');
+        $data_fi = $request->get('data_fi_assignacio_empleat');
+
+        $user = AssignEmpZona::assignarSeguretatFiltro($data_inici, $data_fi);
+
+        $id_zona = Zona::find($id);
+
+        return view('gestio/AssignEmpZona/freeEmployeSeg', compact('user', 'data_inici', 'data_fi', 'id_zona'));
+    }
+
+    /**
+     * Guarda les assignacions
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveAssignSeguretat(Request $request, $id)
+    {
+
+        $request->validate([
+            'id_zona' => 'required',
+            'id_empleat' => 'required',
+            'data_inici_modal' => 'required',
+            'data_fi_modal' => 'required'
+        ]);
+
+        $AssignEmpZona = new ServeisZones([
+            'id_zona' => $request->get('id_zona'),
+            'id_servei' => 5,
+            'id_empleat' => $request->get('id_empleat'),
+            'data_inici' => $request->get('data_inici_modal'),
+            'data_fi' => $request->get('data_fi_modal'),
+        ]);
+
+        $AssignEmpZona->save();
+
+        return redirect('gestio/AssignEmpZona')->with('success', 'Assignacio creada correctament');
+    }
 }

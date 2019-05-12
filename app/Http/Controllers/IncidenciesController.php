@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use \App\Incidencia;
 use \App\PrioritatIncidencia;
 use \App\User;
@@ -18,7 +19,7 @@ class IncidenciesController extends Controller
 {
 
     /**
-     * Display a listing of the incidences to assign.
+     * Acció que s'encarrega de mostrar una llista d'incidencies per a assignar.
      *
      * @return \Illuminate\Http\Response
      */
@@ -42,8 +43,8 @@ class IncidenciesController extends Controller
     }
 
     /**
-     * Display the assigned incidences
-     * 
+     * Acció que s'encarrega de mostrar les incidencies assignades.
+     *
      * @return \Illuminate\Http\Response
      */
     public function assigned()
@@ -68,8 +69,8 @@ class IncidenciesController extends Controller
     }
 
     /**
-     * Display the done incidences
-     * 
+     * Acció que s'encarrega de mostrar les incidencies finalitzades.
+     *
      * @return \Illuminate\Http\Response
      */
     public function done()
@@ -95,7 +96,7 @@ class IncidenciesController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
+     * Acció que s'encarrega de retornar la vista per a crear una incidencia.
      *
      * @return \Illuminate\Http\Response
      */
@@ -108,7 +109,7 @@ class IncidenciesController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Acció que s'encarrega de guardar una incidencia.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -137,7 +138,7 @@ class IncidenciesController extends Controller
     }
 
     /**
-     * Store a newly created client resource in storage.
+     * Acció que s'encarrega de guardar les incidencies reportades.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -166,7 +167,7 @@ class IncidenciesController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Acció que s'encarrega de mostrar totes les dades d'una incidencia.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -187,7 +188,7 @@ class IncidenciesController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Acció que s'encarrega de carregar les dades a l'hora de modificar una incidencia.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -200,7 +201,8 @@ class IncidenciesController extends Controller
 
         $treballador_assignat = User::find($incidencia->id_usuari_assignat);
 
-        $treballadors = User::where('id_rol', 5)
+        $treballadors = User::where('id_rol', '!=', 1)
+            ->where('id_rol', '!=', 2)
             ->whereNotNull('email_verified_at')
             ->get();
 
@@ -208,7 +210,7 @@ class IncidenciesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Accio que s'encarrega de actualizar les dades modificades d'una incidencia.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -223,9 +225,14 @@ class IncidenciesController extends Controller
             'assigned-employee' => 'required'
         ]);
 
+        $user_diferent = false;
         $incidencia = Incidencia::findOrFail($id);
 
         $user = User::find($request->get('assigned-employee'));
+
+        if ($user->id != $incidencia->id_usuari_assignat) {
+            $user_diferent = true;
+        }
 
         $incidencia->titol = $request->get('title');
         $incidencia->descripcio = $request->get('description');
@@ -235,13 +242,21 @@ class IncidenciesController extends Controller
         $incidencia->save();
 
         //Enviar notificacio - guardar notificacio en la taula 'notifications'
-        $user->notify(new IncidenceAssigned($incidencia));
+        if ($user_diferent) {
+            $notificacio = ([
+                'id' => $incidencia->id,
+                'titol' => "Nova incidencia: " . $incidencia->titol,
+                'descripcio' => $incidencia->descripcio
+            ]);
+            $notificacio_enviar = collect($notificacio);
+            $user->notify(new IncidenceAssigned($notificacio_enviar));
+        }
 
         return redirect('gestio/incidencies/assign')->with('success', 'Incidència assignada correctament');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Acció que s'encarrega de borrar la incidencia especificada.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -256,7 +271,7 @@ class IncidenciesController extends Controller
     }
 
     /**
-     * Change the status of the specified resource to 'Done'.
+     * Acció que s'encarrega de canviar l'estat de la incidencia a finalitzada/done.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -273,7 +288,7 @@ class IncidenciesController extends Controller
     }
 
     /**
-     * Generate a PDF.
+     * Acció encarregada de generar el PDF.
      *
      * @return \Illuminate\Http\Response
      */
@@ -298,7 +313,13 @@ class IncidenciesController extends Controller
         $temps = Carbon\Carbon::now();
         $temps = $temps->toDateString();
 
-        $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
+        try {
+            $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
+        } catch (\Exception $e) {
+            Log::error($e);
+            // return back()->with('error', 'Ha fallat la exportació en PDF.');
+            return abort(500);
+        }
 
         return $pdf->download('incidencies_assignades_' . $temps . '.pdf');
     }
