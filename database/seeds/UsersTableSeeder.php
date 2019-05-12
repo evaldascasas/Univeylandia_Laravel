@@ -26,12 +26,13 @@ class UsersTableSeeder extends Seeder
             'ciutat' => 'Amposta',
             'provincia' => 'Tarragona',
             'codi_postal' => '43870',
+            'tipus_document' => 'DNI',
             'sexe' => 'Home',
             'id_rol' => 2,
             'id_dades_empleat' => 1,
             'remember_token' => null
         ]);
-        
+
         //Create clients
         factory(\App\User::class, 20)->create([
             'id_rol' => 1,
@@ -50,12 +51,13 @@ class UsersTableSeeder extends Seeder
             'ciutat' => 'Amposta',
             'provincia' => 'Tarragona',
             'codi_postal' => '43870',
+            'tipus_document' => 'DNI',
             'sexe' => 'Home',
             'id_rol' => 5,
             'id_dades_empleat' => 2,
             'remember_token' => null
         ]);
-    
+
         factory(\App\User::class)->create([
             'nom' => 'Miare',
             'cognom1' => 'Pambisita',
@@ -68,6 +70,8 @@ class UsersTableSeeder extends Seeder
             'ciutat' => 'Amposta',
             'provincia' => 'Tarragona',
             'codi_postal' => '43870',
+            'tipus_document' => 'DNI',
+            'sexe' => 'Dona',
             'id_rol' => 3,
             'id_dades_empleat' => 3,
             'remember_token' => null
@@ -85,10 +89,32 @@ class UsersTableSeeder extends Seeder
             'ciutat' => 'Amposta',
             'provincia' => 'Tarragona',
             'codi_postal' => '43870',
+            'tipus_document' => 'DNI',
             'sexe' => 'Home',
             'id_rol' => 4,
             'id_dades_empleat' => 4,
             'remember_token' => null
         ]);
+
+        for ($i = 5; $i <= 34; $i++) {
+            factory(\App\User::class)->create([
+                'email_verified_at' => now(),
+                'password' => Hash::make('alumne'),
+                'tipus_document' => 'DNI',
+                'id_dades_empleat' => $i,
+                'remember_token' => null
+            ]);
+        }
+
+        for ($i = 35; $i <= 44; $i++) {
+            factory(\App\User::class)->create([
+                'email_verified_at' => now(),
+                'password' => Hash::make(str_random(16)),
+                'tipus_document' => 'DNI',
+                'id_rol' => 2,
+                'id_dades_empleat' => $i,
+                'remember_token' => null
+            ]);
+        }
     }
 }

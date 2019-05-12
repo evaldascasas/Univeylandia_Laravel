@@ -11,7 +11,7 @@ class DadesEmpleatSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('dades_empleats')->insert([
+        factory(\App\DadesEmpleat::class)->create([
             'codi_seg_social' => 'CODISS123456789',
             'num_nomina' => 'N123465789',
             'IBAN' => 'IBAN123456789',
@@ -22,37 +22,36 @@ class DadesEmpleatSeeder extends Seeder
             'id_horari' => 1,
         ]);
 
-        DB::table('dades_empleats')->insert([
-            'codi_seg_social' => 'codi2',
-            'num_nomina' => 'num2',
-            'IBAN' => 'IBAN12345a89',
+        factory(\App\DadesEmpleat::class)->create([
             'especialitat' => 'General',
             'carrec' => 'General',
             'data_inici_contracte' => '2019-09-06',
             'data_fi_contracte' => '2020-09-06',
-            'id_horari' => 1,
+            'id_horari' => 3,
         ]);
 
-        DB::table('dades_empleats')->insert([
-            'codi_seg_social' => 'codi3',
-            'num_nomina' => 'num3',
-            'IBAN' => 'IBAN12345a89',
+        factory(\App\DadesEmpleat::class)->create([
             'especialitat' => 'Manteniment',
             'carrec' => 'Manteniment',
             'data_inici_contracte' => '2019-09-06',
             'data_fi_contracte' => '2020-09-06',
-            'id_horari' => 1,
+            'id_horari' => 2,
         ]);
 
-        DB::table('dades_empleats')->insert([
-            'codi_seg_social' => 'codi4',
-            'num_nomina' => 'num4',
-            'IBAN' => 'IBAN12345sdsda89',
+        factory(\App\DadesEmpleat::class)->create([
             'especialitat' => 'Neteja',
             'carrec' => 'Neteja',
             'data_inici_contracte' => '2019-09-06',
             'data_fi_contracte' => '2020-09-06',
             'id_horari' => 1,
+        ]);
+
+        // Create employees
+        factory(\App\DadesEmpleat::class, 30)->create([]);
+
+        // Create admins
+        factory(\App\DadesEmpleat::class, 10)->create([
+            'carrec' => 'Administrador',
         ]);
         
     }

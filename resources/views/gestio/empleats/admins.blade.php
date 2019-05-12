@@ -29,7 +29,6 @@
                 <th>{{ __('Cognom2') }}</th>
                 <th>{{ __('Num Document') }}</th>
                 <th>{{ __('Codi SS') }}</th>
-                <th>{{ __('Especialitat') }}</th>
                 <th>{{ __('Càrrec') }}</th>
                 <th>{{ __('Horari') }}</th>
                 <th></th>
@@ -43,7 +42,6 @@
                 <td>{{ $user->cognom2 }}</td>
                 <td>{{ $user->numero_document }}</td>
                 <td>{{ $user->codi_seg_social }}</td>
-                <td>{{ $user->especialitat }}</td>
                 <td>{{ $user->carrec }}</td>
                 <td>{{ $user->id_horari }}</td>
                 <td>
@@ -52,6 +50,12 @@
                             href="{{ route('empleats.show', $user->id) }}">{{ __('Mostrar') }}</a>
                         <a class="btn btn-outline-primary btn-sm"
                             href="{{ route('empleats.edit', $user->id) }}">{{ __('Modificar') }}</a>
+                        <form action="{{ route('empleats.destroy', $user->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button id="confirm_delete" class="btn btn-outline-danger btn-sm" type="submit"
+                            value="Desactivar">{{ __('Desactivar') }}</button>
+                        </form>
                     </div>
                 </td>
             </tr>

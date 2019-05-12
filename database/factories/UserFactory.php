@@ -30,7 +30,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'numero_document' => $faker->dni,
         'sexe' => $faker->randomElement(['Home' ,'Dona']),
         'telefon' => $faker->phoneNumber,
-        'id_rol' => 1,
+        'id_rol' => $faker->numberBetween(3, 8),
         'id_dades_empleat' => null,
         'remember_token' => str_random(10)
     ];

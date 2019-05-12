@@ -28,8 +28,8 @@
                 <th>Cognom1</th>
                 <th>Cognom2</th>
                 <th>Num Document</th>
+                <th>Sexe</th>
                 <th>Codi Seg Social</th>
-                <th>Especialitat</th>
                 <th>Càrrec</th>
                 <th>Horari</th>
                 <th></th>
@@ -42,8 +42,8 @@
                 <td>{{ $user->cognom1 }}</td>
                 <td>{{ $user->cognom2 }}</td>
                 <td>{{ $user->numero_document }}</td>
+                <td>{{ $user->sexe }}</td>
                 <td>{{ $user->codi_seg_social }}</td>
-                <td>{{ $user->especialitat }}</td>
                 <td>{{ $user->carrec }}</td>
                 <td>{{ $user->id_horari }}</td>
                 <td>
