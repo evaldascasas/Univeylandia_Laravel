@@ -1,5 +1,5 @@
 const InputForm = {
-  template:`
+    template: `
     <div class="input-form">
       <form @submit="submitForm">
         <div class="form-group">
@@ -39,66 +39,66 @@ const InputForm = {
       </form>
     </div>
   `,
-  methods: {
-    submitForm(evt) {
-      evt.preventDefault();
-      
-      this.fieldErrors = this.validateForm(this.fields);
-      if (Object.keys(this.fieldErrors).length) return;
+    methods: {
+        submitForm(evt) {
+            evt.preventDefault();
 
-      this.items.push(this.fields.name);
+            this.fieldErrors = this.validateForm(this.fields);
+            if (Object.keys(this.fieldErrors).length) return;
 
-      this.fields.name = '';
-      this.fields.email = '';
-      this.fields.urgency = '';
-      this.fields.message = '';
-      this.fields.termsAndConditions = false;
+            this.items.push(this.fields.name);
+
+            this.fields.name = '';
+            this.fields.email = '';
+            this.fields.urgency = '';
+            this.fields.message = '';
+            this.fields.termsAndConditions = false;
+        },
+        validateForm(fields) {
+            const errors = {};
+            if (!fields.name) errors.name = "Nom requerit";
+            if (!fields.email) errors.email = "Email requerit";
+            if (!fields.urgency) errors.urgency = "Urgència requerit";
+            if (!fields.message) errors.message = "Missatge requerit";
+            if (!fields.termsAndConditions) errors.termsAndConditions = "Termes i condicions requerits";
+
+            if (fields.email && !this.isEmail(fields.email)) {
+                errors.email = "Email no vàlid";
+            }
+
+            return errors;
+        },
+        isEmail(email) {
+            const re = /\S+@\S+\.\S/;
+
+            return re.test(email);
+        }
     },
-    validateForm(fields) {
-      const errors = {};
-      if (!fields.name) errors.name = "Nom requerit";
-      if (!fields.email) errors.email = "Email requerit";
-      if (!fields.urgency) errors.urgency = "Urgència requerit";
-      if (!fields.message) errors.message = "Missatge requerit";
-      if (!fields.termsAndConditions) errors.termsAndConditions = "Termes i condicions requerits";
-
-      if(fields.email && !this.isEmail(fields.email)) {
-        errors.email = "Email no vàlid";
-      }
-
-      return errors;
-    },
-    isEmail(email) {
-      const re = /\S+@\S+\.\S/;
-
-      return re.test(email);
+    data() {
+        return {
+            fields: {
+                name: '',
+                email: '',
+                urgency: '',
+                message: '',
+                termsAndConditions: false,
+            },
+            fieldErrors: {
+                name: undefined,
+                email: undefined,
+                urgency: undefined,
+                message: undefined,
+                termsAndConditions: undefined,
+            },
+            items: []
+        }
     }
-  },
-  data() {
-    return {
-      fields: {
-        name: '',
-        email: '',
-        urgency: '',
-        message: '',
-        termsAndConditions: false,
-      },
-      fieldErrors: {
-        name: undefined,
-        email: undefined,
-        urgency: undefined,
-        message: undefined,
-        termsAndConditions: undefined,
-      },
-      items: []
-    }
-  }
 
 }
 
 new Vue({
-  el: '#app',
-  components: {
-    'input-form': InputForm
-  }
+    el: '#app',
+    components: {
+        'input-form': InputForm
+    }
 })
