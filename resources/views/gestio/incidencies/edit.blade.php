@@ -50,31 +50,34 @@
         </div>
         <div class="col-md-6 mb-3">
             <label for="assigned-employee">Assignar a:</label>
-            <select id="employees" name="assigned-employee" class="form-control form-control-sm">
-                @if($treballador_assignat != null)
+            <select id="employees" name="assigned-employee" class="chosen-select form-control form-control-sm form-control-chosen" data-placeholder="Selecciona un treballador">
+              <option> </option>
+              @foreach ($rols as $rol)
+              <optgroup label="{{ $rol->nom_rol }}">
                 @foreach ($treballadors as $treballador)
-                
-                @if($treballador->id == $treballador_assignat->id)
-                <option selected value="{{ $treballador_assignat->id }}"> {{ $treballador_assignat->nom }}
-                    {{ $treballador_assignat->cognom1 }} {{ $treballador_assignat->cognom2 }}
-                    {{ $treballador_assignat->numero_document }}</option>
-                @else
-                <option value="{{ $treballador->id }}">{{ $treballador->nom }} {{ $treballador->cognom1 }}
-                    {{ $treballador->cognom2 }} {{ $treballador->numero_document }}</option>
-                @endif
-                @endforeach
-
-                @else
-                @foreach ($treballadors as $treballador)
-                <option value="{{ $treballador->id }}">{{ $treballador->nom }} {{ $treballador->cognom1 }}
-                    {{ $treballador->cognom2 }} {{ $treballador->numero_document }}</option>
-                @endforeach
-                @endif
+                    @if ($treballador->id_rol == $rol->id)
+                      @if ($treballador_assignat != null && $treballador_assignat->id == $treballador->id)
+                      <option selected value="{{ $treballador->id }}">{{ $treballador->nom }} {{ $treballador->cognom1 }} {{ $treballador->cognom2 }} {{ $treballador->numero_document }}</option>
+                      @else
+                      <option value="{{ $treballador->id }}">{{ $treballador->nom }} {{ $treballador->cognom1 }} {{ $treballador->cognom2 }} {{ $treballador->numero_document }}</option>
+                      @endif
+                    @endif
+                  @endforeach
+              </optgroup>
+              @endforeach
             </select>
         </div>
     </div>
     <button class="btn btn-outline-success" type="submit" value="Assignar">Assignar</button>
     <a href="{{ URL::previous() }}" class="btn btn-outline-secondary">Cancel·lar</a>
 </form>
+
+<script>
+$(document).ready(function() {
+    $(".chosen-select").chosen({
+      no_results_text: "No hem trobat al treballador:"
+    })
+});
+</script>
 
 @endsection

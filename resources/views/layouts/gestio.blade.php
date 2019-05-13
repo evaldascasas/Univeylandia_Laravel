@@ -39,6 +39,10 @@
   <!-- CKEditor -->
   <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 
+  <!-- chosen -->
+  <script type="text/javascript" src="{{ asset('js/chosen.jquery.js') }}"></script>
+  <link href="{{ asset('css/component-chosen.css') }}" rel="stylesheet">
+
   <!-- Styles -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ asset('css/styleGestio.css') }}" type="text/css">
