@@ -264,7 +264,7 @@ class AtraccionsController extends Controller
             'id_rol' => ['required', 'integer']
         ]);
 
-        $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici, $request->data_inici, $request->id_rol);
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici, $request->data_fi, $request->id_rol);
 
         return response()->json(array('empleats' => $empleats), 200);
     }
@@ -284,7 +284,7 @@ class AtraccionsController extends Controller
             'data_fi' => ['required', 'date', 'after:data_inici']
         ]);
 
-        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'), $request->get('data_inici'), 4);
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'), $request->get('data_fi'), 4);
 
         return response()->json(array('empleats' => $empleats), 200);
     }
@@ -303,7 +303,7 @@ class AtraccionsController extends Controller
             'data_fi' => ['required', 'date', 'after:data_inici']
         ]);
 
-        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'), $request->get('data_inici'), 5);
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'), $request->get('data_fi'), 5);
 
         return response()->json(array('empleats' => $empleats), 200);
     }
