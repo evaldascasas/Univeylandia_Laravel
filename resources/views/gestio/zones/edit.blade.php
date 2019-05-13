@@ -6,20 +6,23 @@
 @endsection
 @section("content")
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
 
 <div class="card uper">
   <div class="card-header">
     Editar Zona: {{ $zona->nom }}
   </div>
+
+  @if ($errors->any())
+  <div class="alert alert-danger alert-important">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <ul>
+          @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
+  @endif
+
   <div class="card-body">
     @if ($errors->any())
       <div class="alert alert-danger">

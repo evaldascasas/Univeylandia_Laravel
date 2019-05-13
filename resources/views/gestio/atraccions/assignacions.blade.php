@@ -6,7 +6,7 @@
 @endsection
 @section("content")
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Assignacions d'empleats a les Atraccions </h1>
+        <h1 class="h2">Assignacions d'empleats a les atraccions</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <form action="{{action('AtraccionsController@guardarAssignacionsPDF')}}">
@@ -44,8 +44,6 @@
 
                         <td>
                         <div class="btn-group btn-sm" role="group" aria-label="Basic example">
-                          <a href="{{ route('atraccions.assignacions.editAssignacions',$assigna->id)}}" class="btn btn-primary btn-sm">Modificar</a>
-
                             <form action="{{ route('atraccions.assignacions.destroy', $assigna->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')

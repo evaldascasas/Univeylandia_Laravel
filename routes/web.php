@@ -120,9 +120,9 @@ Route::get('/tasques', 'HomeController@tasques')->name('tasques')->middleware(['
 Route::patch('/tasques/{id}', 'IncidenciesController@conclude')->name('incidencies.conclude')->middleware(['is_worker', 'verified']);
 
 /* RUTES GRUP 2 */
-Route::get('/gestio/atraccions/crearassignacio/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment')->middleware(['is_admin', 'verified']);
+Route::get('/gestio/atraccions/crearassignacio/{id}', 'AtraccionsController@createAssignacio')->name('atraccions.crearassignaciomanteniment')->middleware(['is_admin', 'verified']);
 
-Route::post('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaempleat')->middleware(['is_admin', 'verified']);
+Route::post('/gestio/atraccions/crearassignacio/{id}/empleats', 'AtraccionsController@filterEmpleats')->name('atraccions.assignaempleat')->middleware(['is_admin', 'verified']);
 
 
 //Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);
@@ -135,16 +135,15 @@ Route::post('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'Atra
 //Route::post('/gestio/atraccions/crearassignaciogeneral/{id}/empleats', 'AtraccionsController@assignaEmpleatGeneral')->name('atraccions.assignaEmpleatGeneral');
 
 
-Route::any('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio')->middleware(['is_admin', 'verified']);
-
+Route::any('/gestio/atraccions/crearassignacio/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio')->middleware(['is_admin', 'verified']);
 
 Route::any('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna')->middleware(['is_admin', 'verified']);
 
 Route::any('/gestio/atraccions/assignacions', 'AtraccionsController@assignacions')->name('atraccions.assignacions')->middleware(['is_admin', 'verified']);
 
-Route::any('/gestio/atraccions/assignacions/editAssignacions/{id}', 'AtraccionsController@editAssignacions')->name('atraccions.assignacions.editAssignacions')->middleware(['is_admin', 'verified']);
+// Route::any('/gestio/atraccions/assignacions/editAssignacions/{id}', 'AtraccionsController@editAssignacions')->name('atraccions.assignacions.editAssignacions')->middleware(['is_admin', 'verified']);
 
-Route::any('/gestio/atraccions/assignacions/updateAssignacions/{id}', 'AtraccionsController@updateAssignacions')->name('atraccions.assignacions.updateAssignacions')->middleware(['is_admin', 'verified']);
+// Route::any('/gestio/atraccions/assignacions/updateAssignacions/{id}', 'AtraccionsController@updateAssignacions')->name('atraccions.assignacions.updateAssignacions')->middleware(['is_admin', 'verified']);
 
 Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy')->middleware(['is_admin', 'verified']);
 

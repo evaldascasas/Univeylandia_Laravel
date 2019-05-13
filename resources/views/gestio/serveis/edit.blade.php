@@ -6,8 +6,13 @@
 @endsection
 @section("content")
 
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h2>Registrar Assignacions de Serveis Atraccio-Empleat</h2>
+</div>
+
 @if ($errors->any())
-<div class="alert alert-danger">
+<div class="alert alert-danger alert-important">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -15,10 +20,6 @@
     </ul>
 </div>
 @endif
-
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2>Registrar Assignacions de Serveis Atraccio-Empleat</h2>
-</div>
 
 <div class="row">
     <div class="col-md-5">

@@ -11,13 +11,14 @@
   </div>
 
   @if ($errors->any())
-  <div class="alert alert-danger">
-    <ul>
-      @foreach ($errors->all() as $error)
-      <li>{{ $error }}</li>
-      @endforeach
-     </ul>
-   </div>
+  <div class="alert alert-danger alert-important">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <ul>
+          @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
   @endif
 
    <form class="needs-validation" method="post" action="{{ route('clients.store')}}">

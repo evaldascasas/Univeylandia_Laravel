@@ -7,16 +7,19 @@
 @section("content")
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Assignar empleats a atraccio</h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary" value="Exportar">
-                <span data-feather="save"></span>
-                Exportar
-            </button>
-        </div>
-    </div>
+    <h1 class="h2">Assignar empleat a atracció: {{ $atraccio->nom_atraccio }}</h1>
 </div>
+
+@if ($errors->any())
+        <div class="alert alert-danger alert-important">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
 <div class="row">
     <div class="col-12">
@@ -84,8 +87,7 @@
                     " <thead class='thead-light'>" +
                     "   <tr>" +
                     "     <th>Nom</th>" +
-                    "     <th>Cognom1</th>" +
-                    "     <th>Cognom2</th>" +
+                    "     <th>Cognom</th>" +
                     "     <th>Num Document</th>" +
                     "     <th>Accions</th>" +
                     "   </tr>" +
@@ -99,14 +101,12 @@
                     var id = response['empleats'][i].id;
                     var nom = response['empleats'][i].nom;
                     var cognom1 = response['empleats'][i].cognom1;
-                    var cognom2 = response['empleats'][i].cognom2;
                     var numero_document = response['empleats'][i].numero_document;
 
                     var tr_str =
                         "<tr>" +
                         "<td>" + nom + "</td>" +
                         "<td>" + cognom1 + "</td>" +
-                        "<td>" + cognom2 + "</td>" +
                         "<td>" + numero_document + "</td>" +
                         "<td><a class='btn btn-success btn-sm' href='#' data-toggle='modal' data-target='#ModalEmpleat"+id+"'>Assignar</a></td>" +
                         "</tr>";
@@ -148,7 +148,7 @@
                                     '</div>' +
                                         '<div class="modal-footer"> ' +
                                             '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> ' +
-                                            '<button type="submit" class="btn btn-primary">Finalitzar assignament</button> ' +
+                                            '<button type="submit" class="btn btn-primary">Finalitzar assignació</button> ' +
                                         '</div> ' +
                                     '</div> ' +
                                 '</form> ' + 
