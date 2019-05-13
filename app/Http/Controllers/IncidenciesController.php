@@ -199,6 +199,8 @@ class IncidenciesController extends Controller
 
         $prioritats = PrioritatIncidencia::all();
 
+        $rols = Rol::all();
+
         $treballador_assignat = User::find($incidencia->id_usuari_assignat);
 
         $treballadors = User::where('id_rol', '!=', 1)
@@ -206,7 +208,7 @@ class IncidenciesController extends Controller
             ->whereNotNull('email_verified_at')
             ->get();
 
-        return view('gestio/incidencies/edit', compact(['incidencia', 'prioritats', 'treballadors', 'treballador_assignat']));
+        return view('gestio/incidencies/edit', compact(['incidencia', 'prioritats', 'treballadors', 'treballador_assignat', 'rols']));
     }
 
     /**
