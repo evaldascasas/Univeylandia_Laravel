@@ -11,6 +11,7 @@ use Auth;
 use View;
 use PDF;
 use Storage;
+use File;
 
 use \App\Incidencia;
 use \App\PrioritatIncidencia;
@@ -41,7 +42,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // 
+        //
     }
 
     /**
@@ -254,7 +255,7 @@ class HomeController extends Controller
     }
 
     /**
-     * 
+     *
      */
     public function parc_afegir_cistella(Request $request)
     {
@@ -302,6 +303,11 @@ class HomeController extends Controller
 
             /*Generacio de la entrada en lo codi QR*/
             $file_path = 'storage/tickets_parc';
+
+            if( ! File::exists($file_path)) {
+                File::makeDirectory($file_path, 0775, true);
+            }
+
             $file_name_path =  $file_path . '/' . time() . $producte->id . '.png';
             $imatge = QrCode::format('png')->size(399)->color(40, 40, 40)->generate($producte->id, $file_name_path);
             //$imatge = QrCode::format('png')->size(399)->color(40,40,40)->generate('a', 'storage/tickets_parc/a.png');
