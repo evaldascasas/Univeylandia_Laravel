@@ -14,6 +14,8 @@ class ContacteTest extends DuskTestCase
      * @test
      * @return void
      */
+
+     /*
      public function usuari_envia_contacte()
      {
          $this->browse(function (Browser $browser) {
@@ -27,6 +29,7 @@ class ContacteTest extends DuskTestCase
                      ->press('Submit');
          });
     }
+    */
 
     /**
      * Test de enviar un tiket i falla
@@ -34,6 +37,7 @@ class ContacteTest extends DuskTestCase
      * @return [type] [description]
      */
 
+     /*
      public function usuari_envia_contacte_falla()
      {
          $this->browse(function (Browser $browser) {
@@ -47,4 +51,13 @@ class ContacteTest extends DuskTestCase
 
          });
     }
+    */
+
+    /**
+     * Test de enviar formulari de contecte
+     *
+     * @test
+     * @return void
+     */
+    
 }
