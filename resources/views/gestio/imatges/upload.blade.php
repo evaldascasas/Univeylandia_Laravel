@@ -51,7 +51,7 @@
             parallelUploads: 5,
             maxFiles: 5,
             maxFilesize: 2,
-            acceptedFiles: 'image/*',
+            acceptedFiles: 'image/png, image/jpg, image/jpeg',
             addRemoveLinks: true,
             paramName: 'image',
             dictDefaultMessage: '<i class="fas fa-cloud-upload-alt fa-3x"></i><br />{{ __("Arrastrar i soltar o fer clic") }}<br />{{ __("Màxim de 5 imatges de 2MB") }}',

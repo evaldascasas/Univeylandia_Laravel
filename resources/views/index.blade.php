@@ -76,10 +76,7 @@
                     </h3>
                     <p class="card-text mb-auto">{!!html_entity_decode(str_limit($noticia->descripcio, $limit=100, $end
                         = "..."))!!}</p>
-                    <form action="{{ route('noticia',$noticia->id)}}" method="get">
-                        <input type="hidden" name="id" value="{{$noticia->id}}">
-                        <button type="submit" class="btn btn-primary">Continuar llegint</button>
-                    </form>
+                    <a href="{{ route('noticia', $noticia->str_slug) }}" class="btn btn-primary">{{ __('Continuar llegint') }}</a>
                 </div>
             </div>
         </div>

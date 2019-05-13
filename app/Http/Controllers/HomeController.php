@@ -55,7 +55,7 @@ class HomeController extends Controller
         $noticies = DB::table('noticies')
             ->join('users', 'users.id', '=', 'noticies.id_usuari')
             ->join('categories', 'categories.id', '=', 'noticies.categoria')
-            ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria', 'categories.id as catId')
+            ->select('noticies.id', 'noticies.str_slug', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria', 'categories.id as catId')
             ->orderBy('id', 'DESC')
             ->paginate(2);
 

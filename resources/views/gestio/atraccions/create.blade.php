@@ -11,7 +11,7 @@
     </div>
 
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-danger alert-important">
         <ul>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -25,26 +25,26 @@
         <div class="form-row">
             <div class="col-md-3 mb-3">
                 <label for="nom">Nom de l'atracció</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Nom" name="nom" required>
+                <input type="text" class="form-control form-control-sm" placeholder="Nom" name="nom_atraccio" value="{{ old('nom_atraccio')}}" required>
             </div>
 
             <div class="col-md-3 mb-3">
                 <label for="alturamin">Altura mínima</label>
-                <input type="text" class="form-control form-control-sm" name="alturamin" required>
+                <input type="text" class="form-control form-control-sm" name="alturamin" value="{{ old('alturamin')}}" required>
             </div>
             <div class="col-md-3 mb-3">
                 <label for="alturamax">Altura màxima</label>
-                <input type="text" class="form-control form-control-sm" name="alturamax" required>
+                <input type="text" class="form-control form-control-sm" name="alturamax" value="{{ old('alturamax')}}" required>
             </div>
             <div class="col-md-12 mb-12">
                 <div class="form-group">
                     <label for="descripcio">Descripció</label>
-                    <textarea class="form-control form-control-sm" name="descripcio" id="descripcio_atraccio"></textarea>
+                    <textarea class="form-control form-control-sm" name="descripcio" id="descripcio_atraccio">{{ old('descripcio')}}</textarea>
                 </div>
             </div>
             <div class="col-md-12 mb-12">
                 <label for="datainauguracio">Data d'innauguració</label>
-                <input type="date" class="form-control form-control-sm" name="datainauguracio" required>
+                <input type="date" class="form-control form-control-sm" name="datainauguracio" value="{{ old('datainauguracio')}}" required>
             </div>
         </div>
         <div class="form-row">

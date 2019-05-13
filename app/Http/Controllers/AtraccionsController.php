@@ -77,6 +77,7 @@ class AtraccionsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'nom_atraccio'=>'required|alpha_num|unique:atraccions',
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
             'alturamin' => 'required|integer',
             'alturamax' => 'required|integer'
@@ -85,10 +86,15 @@ class AtraccionsController extends Controller
         $file = $request->file('image');
         $file_name = time() . $file->getClientOriginalName();
         $file_path = 'storage/atraccions';
+
+        if( ! File::exists($file_path)) {
+            File::makeDirectory($file_path, 0775, true);
+        }
+
         $img = Image::make($file->getRealPath())->resize(1280, 720)->save($file_path . "/" . $file_name);
 
         $atraccio = new Atraccion([
-            'nom_atraccio' => $request->get('nom'),
+            'nom_atraccio' => $request->get('nom_atraccio'),
             'tipus_atraccio' => $request->get('tipusatraccio'),
             'data_inauguracio' => $request->get('datainauguracio'),
             'altura_min' => $request->get('alturamin'),
@@ -401,7 +407,7 @@ class AtraccionsController extends Controller
             $notificacio_enviar = collect($notificacio);
 
             $user = User::find($assignacio->id_empleat);
-            
+
             $user->notify(new AssignarEmpleatAtraccio($notificacio_enviar));
         }
 

@@ -11,7 +11,7 @@
 @section("content")
 @if(session()->get('success'))
 <div class="uper">
-    <div class="alert alert-success" style="text-align:center;">
+    <div class="alert alert-success alert-important" style="text-align:center;">
         {{ session()->get('success') }}
     </div>
 </div>
@@ -19,7 +19,7 @@
 
 @if(session()->get('error'))
 <div class="uper">
-    <div class="alert alert-danger" style="text-align:center;">
+    <div class="alert alert-danger alert-important" style="text-align:center;">
         {{ session()->get('error') }}
     </div>
 </div>
@@ -77,7 +77,7 @@
 </form>
 @if(session()->get('ticket'))
 <div>
-    <div class="alert alert-info" style="overflow: auto;">
+    <div class="alert alert-info alert-important" style="overflow: auto;">
       <h1 style="text-align: center;"> INFORMACIÓ DEL TICKET </h1>
       <hr />
       <p> <b>ID:</b> {{ session()->get('ticket')->id }} </p>
