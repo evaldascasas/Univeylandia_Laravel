@@ -18,9 +18,9 @@ class IncidenceAssigned extends Notification
      *
      * @return void
      */
-    public function __construct($incidencia)
+    public function __construct($notificacio_enviar)
     {
-        $this->incidencia = $incidencia;
+        $this->incidencia = $notificacio_enviar;
     }
 
     /**
@@ -57,9 +57,9 @@ class IncidenceAssigned extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->incidencia->id,
-            'titol' => $this->incidencia->titol,
-            'descripcio' => $this->incidencia->descripcio,
+            'id' => $this->incidencia->first(),
+            'titol' => $this->incidencia->slice(1)->first(),
+            'descripcio' => $this->incidencia->slice(2)->first(),
         ];
     }
 }
