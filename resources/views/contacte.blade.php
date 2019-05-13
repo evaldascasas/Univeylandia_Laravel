@@ -82,11 +82,7 @@ img.tick {
           </div>
           <div class="row">
             <div class="col-sm-1 offset-sm-3 col-md-1 offset-md-3 col-lg-1 offset-lg-3 col-xl-1 offset-xl-3"><img class="tick" src="img/61343.svg"></div>
-            <div class="col-lg-7"><h3>Nosaltres et resoldrem tots els problemes</h3></div>
-          </div>
-          <div class="row">
-            <div class="col-sm-1 offset-sm-3 col-md-1 offset-md-3 col-lg-1 offset-lg-3 col-xl-1 offset-xl-3"><img class="tick" src="img/61343.svg"></div>
-            <div class="col-lg-7"><h3>Consultans tots els dubtes</h3></div>
+            <div class="col-lg-7"><h3>Consulta'ns dubtes</h3></div>
           </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4">
@@ -172,7 +168,7 @@ $(document).ready(function(){
 
 
 <!--El chat-->
-
+{{-- 
 <div class="chatbox chatbox--tray chatbox--empty">
     <div class="chatbox__title">
         <h5><a href="#">Chat</a></h5>
@@ -220,7 +216,7 @@ $(document).ready(function(){
 
     <!--enviar-->
     <input class="chatbox__message" placeholder="Write something interesting"></input>
-</div>
+</div> --}}
 @endsection
 
 @section("footer")
