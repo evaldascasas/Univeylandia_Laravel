@@ -57,6 +57,7 @@
                 <td>{{$usuari->numero_document}}</td>
                 <td>{{$usuari->sexe}}</td>
                 <td>{{$usuari->telefon}}</td>
+            </tr>
           @endforeach
         </table>
       </div>
