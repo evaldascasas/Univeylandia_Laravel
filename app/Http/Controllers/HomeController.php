@@ -842,7 +842,7 @@ class HomeController extends Controller
 
      /**
       * [ajaxChat description]
-      * @return xd
+      * @return \Illuminate\Http\Response
       */
       public function ajaxChat()
       {
