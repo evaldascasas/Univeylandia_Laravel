@@ -68,42 +68,50 @@ Route::resource('gestio/empleats', 'EmpleatsController')->middleware(['is_admin'
 
 // assignacio emp-zona Manteniment
 
-Route::get('gestio/zones/assign', 'AssignEmpZonaController@index')->name('zones.assign')->middleware(['is_admin', 'verified']);
-Route::get('gestio/zones/{id}/data', 'AssignEmpZonaController@viewData')->name('AssignEmpZonaData')->middleware(['is_admin', 'verified']);
-Route::get('gestio/zones/{id}/data/empleat/', 'AssignEmpZonaController@filterEmploye')->name('filterEmploye')->middleware(['is_admin', 'verified']);
-Route::any('/gestio/zones/crearassignaciomanteniment/guardar/{id}', 'AssignEmpZonaController@saveAssign')->name('zones.saveAssign')->middleware(['is_admin', 'verified']);
-Route::get('/gestio/zones/llistarAssign', 'AssignEmpZonaController@listAssign')->name('zones.list')->middleware(['is_admin', 'verified']);
-Route::get('/gestio/zones/eliminarAssign/{id}', 'AssignEmpZonaController@deleteAssign')->name('zones.emp.delete')->middleware(['is_admin', 'verified']);
+Route::get('gestio/zones/assignacions/index', 'AssignEmpZonaController@index')->name('zones.assign')->middleware(['is_admin', 'verified']);
+Route::get('gestio/zones/assignacions/{id}/create', 'AssignEmpZonaController@create')->name('zones.assignacions.create')->middleware(['is_admin', 'verified']);
+Route::post('gestio/zones/assignacions/{id}/ajax', 'AssignEmpZonaController@assignaEmpleat')->name('zones.assignaempleat')->middleware(['is_admin', 'verified']);
+Route::post('gestio/zones/assignacions/{id}/save', 'AssignEmpZonaController@guardarAssignacio')->name('zona.assignacions.guardar')->middleware(['is_admin', 'verified']);
 
-// assignacio emp-zona neteja
-Route::get('gestio/zones/{id}/data/neteja', 'AssignEmpZonaController@viewDataNeteja')->name('AssignEmpZonaDataNeteja')->middleware(['is_admin', 'verified']);
-Route::get('gestio/zones/{id}/data/empleat/neteja', 'AssignEmpZonaController@filterEmployeNeteja')->name('filterEmployeNeteja')->middleware(['is_admin', 'verified']);
-Route::any('/gestio/zones/crearassignacioneteja/guardar/{id}', 'AssignEmpZonaController@saveAssignNeteja')->name('zones.saveAssign.neteja')->middleware(['is_admin', 'verified']);
+Route::get('/gestio/zones/assignacions/list', 'AssignEmpZonaController@listAssign')->name('zones.list')->middleware(['is_admin', 'verified']);
+Route::delete('/gestio/zones/assignacions/{id}/delete', 'AssignEmpZonaController@deleteAssign')->name('zones.emp.delete')->middleware(['is_admin', 'verified']);
 
-// assignacio emp-zona Atencio al client
-Route::get('gestio/zones/{id}/data/atencio', 'AssignEmpZonaController@viewDataAtencio')->name('AssignEmpZonaDataAtencio')->middleware(['is_admin', 'verified']);
-Route::get('gestio/zones/{id}/data/empleat/atencio', 'AssignEmpZonaController@filterEmployeAtencio')->name('filterEmployeAtencio')->middleware(['is_admin', 'verified']);
-Route::any('/gestio/zones/crearassignacioAtencio/guardar/{id}', 'AssignEmpZonaController@saveAssignAtencio')->name('zones.saveAssign.atencio')->middleware(['is_admin', 'verified']);
+// Route::get('gestio/zones/assign', 'AssignEmpZonaController@index')->name('zones.assign')->middleware(['is_admin', 'verified']);
+// Route::get('gestio/zones/{id}/data', 'AssignEmpZonaController@viewData')->name('AssignEmpZonaData')->middleware(['is_admin', 'verified']);
+// Route::get('gestio/zones/{id}/data/empleat/', 'AssignEmpZonaController@filterEmploye')->name('filterEmploye')->middleware(['is_admin', 'verified']);
+// Route::any('/gestio/zones/crearassignaciomanteniment/guardar/{id}', 'AssignEmpZonaController@saveAssign')->name('zones.saveAssign')->middleware(['is_admin', 'verified']);
+// Route::get('/gestio/zones/llistarAssign', 'AssignEmpZonaController@listAssign')->name('zones.list')->middleware(['is_admin', 'verified']);
+// Route::get('/gestio/zones/eliminarAssign/{id}', 'AssignEmpZonaController@deleteAssign')->name('zones.emp.delete')->middleware(['is_admin', 'verified']);
+
+// // assignacio emp-zona neteja
+// Route::get('gestio/zones/{id}/data/neteja', 'AssignEmpZonaController@viewDataNeteja')->name('AssignEmpZonaDataNeteja')->middleware(['is_admin', 'verified']);
+// Route::get('gestio/zones/{id}/data/empleat/neteja', 'AssignEmpZonaController@filterEmployeNeteja')->name('filterEmployeNeteja')->middleware(['is_admin', 'verified']);
+// Route::any('/gestio/zones/crearassignacioneteja/guardar/{id}', 'AssignEmpZonaController@saveAssignNeteja')->name('zones.saveAssign.neteja')->middleware(['is_admin', 'verified']);
+
+// // assignacio emp-zona Atencio al client
+// Route::get('gestio/zones/{id}/data/atencio', 'AssignEmpZonaController@viewDataAtencio')->name('AssignEmpZonaDataAtencio')->middleware(['is_admin', 'verified']);
+// Route::get('gestio/zones/{id}/data/empleat/atencio', 'AssignEmpZonaController@filterEmployeAtencio')->name('filterEmployeAtencio')->middleware(['is_admin', 'verified']);
+// Route::any('/gestio/zones/crearassignacioAtencio/guardar/{id}', 'AssignEmpZonaController@saveAssignAtencio')->name('zones.saveAssign.atencio')->middleware(['is_admin', 'verified']);
 
 // assignacio emp-zona Show al client
-Route::get('gestio/zones/{id}/data/show', 'AssignEmpZonaController@viewDataShow')->name('AssignEmpZonaDataShow')->middleware(['is_admin', 'verified']);
-Route::get('gestio/zones/{id}/data/empleat/show', 'AssignEmpZonaController@filterEmployeShow')->name('filterEmployeShow')->middleware(['is_admin', 'verified']);
-Route::any('/gestio/zones/crearassignacioShow/guardar/{id}', 'AssignEmpZonaController@saveAssignShow')->name('zones.saveAssign.Show')->middleware(['is_admin', 'verified']);
+// Route::get('gestio/zones/{id}/data/show', 'AssignEmpZonaController@viewDataShow')->name('AssignEmpZonaDataShow')->middleware(['is_admin', 'verified']);
+// Route::get('gestio/zones/{id}/data/empleat/show', 'AssignEmpZonaController@filterEmployeShow')->name('filterEmployeShow')->middleware(['is_admin', 'verified']);
+// Route::any('/gestio/zones/crearassignacioShow/guardar/{id}', 'AssignEmpZonaController@saveAssignShow')->name('zones.saveAssign.Show')->middleware(['is_admin', 'verified']);
 
-// assignacio emp-zona seguretat al client
-Route::get('gestio/zones/{id}/data/seguretat', 'AssignEmpZonaController@viewDataSeguretat')->name('AssignEmpZonaDataSeguretat')->middleware(['is_admin', 'verified']);
-Route::get('gestio/zones/{id}/data/empleat/seguretat', 'AssignEmpZonaController@filterEmployeSeguretat')->name('filterEmployeSeguretat')->middleware(['is_admin', 'verified']);
-Route::any('/gestio/zones/crearassignacioseguretat/guardar/{id}', 'AssignEmpZonaController@saveAssignSeguretat')->name('zones.saveAssign.Seguretat')->middleware(['is_admin', 'verified']);
+// // assignacio emp-zona seguretat al client
+// Route::get('gestio/zones/{id}/data/seguretat', 'AssignEmpZonaController@viewDataSeguretat')->name('AssignEmpZonaDataSeguretat')->middleware(['is_admin', 'verified']);
+// Route::get('gestio/zones/{id}/data/empleat/seguretat', 'AssignEmpZonaController@filterEmployeSeguretat')->name('filterEmployeSeguretat')->middleware(['is_admin', 'verified']);
+// Route::any('/gestio/zones/crearassignacioseguretat/guardar/{id}', 'AssignEmpZonaController@saveAssignSeguretat')->name('zones.saveAssign.Seguretat')->middleware(['is_admin', 'verified']);
 
 // Resourceful Controllers
 
 Route::resource('gestio/zones', 'ZonesController')->middleware(['is_admin', 'verified']);
 
-Route::resource('gestio/AssignEmpZona', 'AssignEmpZonaController')->middleware(['is_admin', 'verified']);
+// Route::resource('gestio/AssignEmpZona', 'AssignEmpZonaController')->middleware(['is_admin', 'verified']);
 
 Route::resource('gestio/GestioServeis', 'GestioServeisController')->middleware(['is_admin', 'verified']);
 
-Route::resource('gestio/serveis', 'ServeisController')->middleware(['is_admin', 'verified']);
+// Route::resource('gestio/serveis', 'ServeisController')->middleware(['is_admin', 'verified']);
 
 Route::resource('/gestio/noticies', 'NoticiesController')->middleware(['is_admin', 'verified']);
 
@@ -241,4 +249,3 @@ Route::any('gestio/save/{id}', 'ContacteController@saveTicket')->name('saveTicke
 /*login per github*/
 Route::get('login/{provider}', 'Auth\SocialAuthController@redirectToProvider');
 Route::get('login/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
-
