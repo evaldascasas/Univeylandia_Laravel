@@ -10,11 +10,17 @@ use App\Incidencia;
 
 class GrafiquesController extends Controller
 {
+    /**
+     * 
+     */
     public function getUltimoDiaMes($elAnio, $elMes)
     {
         return date("d", (mktime(0, 0, 0, $elMes + 1, 1, $elAnio) - 1));
     }
 
+    /**
+     * 
+     */
     public function registros_mes($anio, $mes)
     {
         $primer_dia = 1;
@@ -40,6 +46,9 @@ class GrafiquesController extends Controller
         return json_encode($data);
     }
 
+    /**
+     * 
+     */
     public function vendes_mes($anio, $mes)
     {
         $primer_dia = 1;
@@ -65,6 +74,9 @@ class GrafiquesController extends Controller
         return json_encode($data);
     }
 
+    /**
+     * 
+     */
     public function graficaregistres()
     {
         $anio = date("Y");
@@ -76,6 +88,9 @@ class GrafiquesController extends Controller
         return view('gestio.grafiques.graficaregistres', compact(['anio', 'mes']));
     }
 
+    /**
+     * 
+     */
     public function graficavendes()
     {
         $anio = date("Y");
@@ -87,6 +102,9 @@ class GrafiquesController extends Controller
         return view('gestio.grafiques.graficavendes', compact(['anio', 'mes']));
     }
 
+    /**
+     * 
+     */
     public function grafica_incidencies()
     {
         $gener = Incidencia::whereMonth('created_at', 1)->count();

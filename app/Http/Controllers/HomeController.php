@@ -64,6 +64,8 @@ class HomeController extends Controller
 
     /**
      * Mostra la pàgina pública d'atraccions amb les dades de les atraccions de la base de dades.
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function atraccions()
     {
@@ -88,6 +90,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista entrades de la pàgina pública (/entrades).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function entrades()
     {
@@ -98,6 +102,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista del login de la pàgina pública (/login).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function login()
     {
@@ -106,6 +112,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista del contacte de la pàgina pública (/contacte).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function contacte()
     {
@@ -116,6 +124,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista inicial de la gestió pàgina interna (/gestio).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function gestio()
     {
@@ -124,6 +134,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista del perfil de l'usuari de la pàgina pública (/perfil).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function perfil()
     {
@@ -142,6 +154,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de les Frequently Asked Questions de la pàgina pública (/faq).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function faq()
     {
@@ -155,6 +169,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de les Condicions Generals de la pàgina pública (/condicionsgenerals).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function condicionsgenerals()
     {
@@ -163,6 +179,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de Politica de privacitat de la pàgina pública (/politicaprivacitat).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function politicaprivacitat()
     {
@@ -171,6 +189,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de Politica de cookies de la pàgina pública (/politicacookies).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function politicacookies()
     {
@@ -179,6 +199,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de Qui Som de la pàgina pública (/qui-som).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function equipdirectiu()
     {
@@ -187,6 +209,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de la visita digital de la pàgina pública (/visita-digital).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function visitadigital()
     {
@@ -195,6 +219,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista per reportar una incidència de la pàgina pública - només usuaris autentificats (/incidencia).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function incidencia()
     {
@@ -205,6 +231,8 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de les tasques dels treballadors de la pàgina interna (/tasques).
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function tasques()
     {
@@ -255,7 +283,9 @@ class HomeController extends Controller
     }
 
     /**
-     *
+     * Acció que realiza els càlculs quan s'afegeix un producte a la cistella.
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function parc_afegir_cistella(Request $request)
     {
@@ -351,6 +381,11 @@ class HomeController extends Controller
         return redirect('/cistella')->with('success', 'Ticket afegit a la cistella correctament');
     }
 
+    /**
+     * 
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function compra_finalitzada()
     {
         $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
@@ -451,6 +486,11 @@ class HomeController extends Controller
         }
     }
 
+    /**
+     * 
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function cistella()
     {
         $linia_cistella = Cistella::join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
@@ -492,6 +532,11 @@ class HomeController extends Controller
         return view('/cistella', compact('linia_cistella', 'total', 'fotos', 'total2', 'compteTotal', 'user'));
     }
 
+    /**
+     * 
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function cistella_delete(Request $request)
     {
         $linia_cistella = Linia_cistella::find($request->get('id_linia_producte'));
@@ -509,6 +554,11 @@ class HomeController extends Controller
         return redirect('/cistella')->with('success', 'Producte eliminat correctament');
     }
 
+    /**
+     * 
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function compra()
     {
         $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
@@ -554,6 +604,11 @@ class HomeController extends Controller
         }
     }
 
+    /**
+     *  Acció que llista totes les atraccions en la part pública de l'aplicatiu.
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function llistarAtraccionsPublic($id)
     {
         $atraccions = Atraccion::findOrFail($id);
@@ -563,16 +618,28 @@ class HomeController extends Controller
         return view('/atraccions_generades', compact('atraccions', 'tipus_atraccio'));
     }
 
-    public function tendes_inter()
-    {
-        return view("/tendes");
-    }
+    // /**
+    //  * Acció 
+    //  * 
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function tendes_inter()
+    // {
+    //     return view("/tendes");
+    // }
 
-    public function tenda_figures()
-    {
-        return view("/tenda_figures");
-    }
+    // public function tenda_figures()
+    // {
+    //     return view("/tenda_figures");
+    // }
 
+
+    /**
+     *  Acció que carrega una notícia mitjançant un slug.
+     * 
+     * @param string $str_slug
+     * @return \Illuminate\Http\Response
+     */
     public function noticia($str_slug)
     {
         $valid = 0;
@@ -590,6 +657,12 @@ class HomeController extends Controller
         return view("/noticia", compact('noticia', 'categoria', 'valid'));
     }
 
+    /**
+     * Acció que llista totes les notícies i les diverses categories.
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function noticies(Request $request)
     {
         $noticies = DB::table('noticies')
@@ -613,6 +686,12 @@ class HomeController extends Controller
         return view('noticies', compact('noticies'));
     }
 
+    /**
+     * Acció que mostra la promoció mitjançant un slug.
+     * 
+     * @param string $slug
+     * @return \Illuminate\Http\Response
+     */
     public function promocio($slug)
     {
         $valid = 0;
@@ -628,6 +707,12 @@ class HomeController extends Controller
         return view("/promocio", compact('promocio', 'valid'));
     }
 
+    /**
+     * Acció que llista promocions en la pàgina web pública.
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function promocions(Request $request)
     {
         $promocions = DB::table('promocions')
@@ -639,6 +724,11 @@ class HomeController extends Controller
         return view('promocions', compact('promocions'));
     }
 
+    /**
+     * Acció que mostra les votacions de cada atracció en el top d'atraccions de la pàgina web púlica.
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function votacions()
     {
         $atraccions = json_encode(DB::table('atraccions')
@@ -649,6 +739,12 @@ class HomeController extends Controller
         return view('votacions', compact('atraccions'));
     }
 
+    /**
+     * Acció que permet votar una atracció en el top d'atraccions, només 1 vegada a l'any per usuari amb sessió iniciada.
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function votacio_accio(Request $request)
     {
         if (Auth::check()) {

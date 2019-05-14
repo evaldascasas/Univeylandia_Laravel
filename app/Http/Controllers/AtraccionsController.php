@@ -54,7 +54,7 @@ class AtraccionsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Acció que s'encarrega de mostrar la vista per crear una atracció.
      *
      * @return \Illuminate\Http\Response
      */
@@ -66,7 +66,7 @@ class AtraccionsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Acció que s'encarrega de guardar una atracció en base de dades.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -108,7 +108,7 @@ class AtraccionsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Acció que s'encarrega de mostrar les dades d'una atracció.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -121,7 +121,7 @@ class AtraccionsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Acció que s'encarrega de mostrar les dades d'una atracció en un formulari per editar-les.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -136,7 +136,7 @@ class AtraccionsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Acció que s'encarrega d'actualitzar les dades d'una atracció.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -182,7 +182,7 @@ class AtraccionsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Acció que s'encarrega d'eliminar una atracció de la base de dades.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -196,7 +196,11 @@ class AtraccionsController extends Controller
         return redirect('/gestio/atraccions')->with('success', 'Atracció eliminada correctament');
     }
 
-
+    /**
+     * Acció que s'encarrega de descarregar un PDF amb totes les dades d'atraccions,
+     * 
+     * @return PDF
+     */
     public function guardarPDF()
     {
         $atraccionetes = TipusAtraccions::join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
@@ -230,7 +234,11 @@ class AtraccionsController extends Controller
         return $pdf->download('atraccions' . $temps . '.pdf');
     }
 
-
+    /**
+     * Acció que s'encarrega de mostrar una vista amb les atraccion per realitzar una assignació d'empleat a atracció.
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function assigna()
     {
         $atraccionetes = TipusAtraccions::join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
@@ -252,7 +260,12 @@ class AtraccionsController extends Controller
         return view('/gestio/atraccions/assigna', compact('atraccionetes'));
     }
 
-
+    /**
+     * Acció que s'encarrega de filtrar els empleats disponibles entre una data inicial i una data final per realitzar l'assignació d'empleat a atracció. AJAX
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function filterEmpleats(Request $request)
     {
         $request->validate([
@@ -266,6 +279,13 @@ class AtraccionsController extends Controller
         return response()->json(array('empleats' => $empleats), 200);
     }
 
+    /**
+     * Acció que s'encarrega de mostrar la vista per realitzar el filtrat d'empleats per data i rol.
+     * 
+     * @param \Illuminate\Http\Request  $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
     public function createAssignacio(Request $request, $id)
     {
         $atraccio = Atraccion::findOrFail($id);
@@ -316,6 +336,13 @@ class AtraccionsController extends Controller
     //     return view('/gestio/atraccions/crearassignaciogeneral', compact('atraccio'));
     // }
 
+    /**
+     * Acció que s'encarrega d'emmagatzemar les dades de l'assignació d'empleat a atracció en la base de dades, també envia una notificació a l'usuari asignat.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
     public function guardarAssignacio(Request $request, $id)
     {
         $atraccio = Atraccion::findOrFail($id);
@@ -344,6 +371,11 @@ class AtraccionsController extends Controller
         return redirect('/gestio/atraccions/assigna')->with('success', 'Empleat assignat correctament');
     }
 
+    /**
+     * Acció que mostra un llistat de les assignacions d'empleats a atraccions que hi ha en la base de dades.
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function assignacions()
     {
         $assignacio = AssignacioAtraccion::leftJoin('users', 'users.id', 'assign_emp_atraccions.id_empleat')
@@ -415,16 +447,26 @@ class AtraccionsController extends Controller
     //     return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio modificada correctament');
     // }
 
+    /**
+     * Acció que s'encarrega d'eliminar l'assignació d'empleat a atracció de la base de dades.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroyAssignacions($id)
     {
         $assignacio = AssignacioAtraccion::find($id);
 
         $assignacio->delete();
 
-        return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio suprimida correctament');
+        return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignació suprimida correctament');
     }
 
-
+    /**
+     * Acció que s'encarrega de generar un PDF amb les assignacions d'empleat a atraccions.
+     * 
+     * @return PDF
+     */
     public function guardarAssignacionsPDF()
     {
         $assignacio = AssignacioAtraccion::leftJoin('users', 'users.id', 'assign_emp_atraccions.id_empleat')

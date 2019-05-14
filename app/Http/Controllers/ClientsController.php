@@ -11,14 +11,13 @@ use App\Exports\ClientsExport;
 use App\Imports\ClientsImport;
 use Maatwebsite\Excel\Facades\Excel;
 
-use Image;
 use PDF;
 use Carbon;
 
 class ClientsController extends Controller
 {
     /**
-     * Mostra un llistat de clients.
+     * Acció que s'encarrega de mostrar un llistat de clients.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +31,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Mostra el formulari de creació d'usuaris client.
+     * Acció que s'encarrega de mostrar el formulari de creació d'usuaris client.
      *
      * @return \Illuminate\Http\Response
      */
@@ -42,7 +41,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Emmagatzema un usuari client en la base de dades. Si l'usuari s'emmagatzema de forma correcta, 
+     * Acció que emmagatzema un usuari client en la base de dades. Si l'usuari s'emmagatzema de forma correcta, 
      * s'envia un correu electrònic amb un enllaç per restablir la contrasenya.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -97,7 +96,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Mostra les dades de l'usuari client especificat.
+     * Acció que s'encarrega de mostrar les dades de l'usuari client especificat en un formulari no editable.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -110,7 +109,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Mostra el formulari per editar l'usuari client especificat.
+     * Acció que s'encarrega de mostrar el formulari per editar l'usuari client especificat amb les dades del client.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -123,7 +122,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Actualitza la informació de l'usuari client especificat.
+     * Acció que s'encarrega d'actualitzar la informació de l'usuari client especificat.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -172,7 +171,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Desactiva l'usuari client especificat.
+     * Acció que s'encarrega de desactivar l'usuari client especificat.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -187,7 +186,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Mostra un llistat dels usuaris client desactivats.
+     * Acció que mostra un llistat dels usuaris client desactivats.
      * 
      * @return \Illuminate\Http\Response
      */
@@ -202,7 +201,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Reactiva l'usuari especificat.
+     * Acció que s'encarrega de reactivar l'usuari especificat.
      * 
      * @param int $id
      * @return \Illuminate\Http\Response
@@ -219,7 +218,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Genera un arxiu PDF amb les dades de tots els usuaris client.
+     * Acció que s'encarrega de generar un arxiu PDF amb les dades de tots els usuaris client.
      * 
      * @return PDF
      */
@@ -243,7 +242,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Genera un arxiu CSV amb les dades importants dels usuaris client.
+     * Acció que s'encarrega de generar un arxiu CSV amb les dades importants dels usuaris client.
      * 
      * @return CSV
      */
@@ -262,7 +261,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * Import client data with a CSV file
+     * Acció que s'encarrega d'importar dades de clients d'un CSV a la base de dades.
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -270,7 +269,6 @@ class ClientsController extends Controller
     public function importCSV(Request $request)
     {
         $file = $request->file('file');
-        $ext = $file->getClientOriginalExtension();
 
         $request->validate([
             'file' => ['file', 'required', 'mimetypes:text/plain,text/csv,csv,application/csv'],
