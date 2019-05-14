@@ -91,9 +91,9 @@
             <!-- MODAL FOTO -->
             <div class="modal fade" id="exampleModal{{$producte->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content" style="width:120%;">
+                <div class="modal-content text-center">
                   <div class="modal-body">
-                    <img src="{{ asset($producte->foto_path) }}" style="display:block;margin:auto;width:100%">
+                    <img class="img-fluid" src="{{ asset($producte->foto_path) }}">
                   </div>
                 </div>
               </div>

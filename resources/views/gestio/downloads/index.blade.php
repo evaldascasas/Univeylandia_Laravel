@@ -9,7 +9,7 @@
         <p>
             {{ __('En aquesta part de la pàgina web es pot trobar programari fet pel departament d\'informàtica del Parc Univeylandia.') }}
             <ul>
-                <li><a href="{{ asset('storage/software/UniveylandiaParc-1.0.0.jar') }}" download="Univeylandia-gestio-1.0.jar">{{ ('Instal·lador programari de gestió') }}</a></li>
+                <li><a href="{{ asset('storage/software/UniveylandiaGestio-1.0.jar') }}" download="Univeylandia-gestio-1.0.jar">{{ ('Instal·lador programari de gestió') }}</a></li>
                 {{ storage_path("public/atraccions/") }}
                 {{-- <img src="{{ asset('storage/atraccions/1557238969atraccions.jpg') }}"> --}}
                 <br/>
