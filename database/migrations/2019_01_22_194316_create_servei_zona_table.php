@@ -17,8 +17,8 @@ class CreateServeiZonaTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('id_zona');
             $table->foreign('id_zona')->references('id')->on('zones');
-            $table->unsignedInteger('id_servei');
-            $table->foreign('id_servei')->references('id')->on('serveis');
+            // $table->unsignedInteger('id_servei');
+            // $table->foreign('id_servei')->references('id')->on('serveis');
             $table->unsignedInteger('id_empleat');
             $table->foreign('id_empleat')->references('id')->on('users');
             $table->date('data_inici');
