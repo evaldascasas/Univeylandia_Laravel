@@ -117,7 +117,7 @@
             </li>
           </ul>
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('serveis*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('serveis*') ? 'true' : 'false' }}" href="#submenu6">
               <span data-feather="truck"></span>
               Assignacions Empleat-Servei-Zona
@@ -130,9 +130,9 @@
               <a class="nav-link nav-interior {{ request()->routeIs('serveis.create') ? 'active' : '' }}" href="{{route('serveis.create')}}"><span data-feather="plus-square"></span>Crear Assignació</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-interior {{ request()->routeIs('serveis.index') ? 'active' : '' }}" href="{{route('serveis.index')}}"><span data-feather="file-text"></span>Gestionar Assignacions</a>
+              <a class="nav-link nav-interior {{ request()->routeIs('º.index') ? 'active' : '' }}" href="{{route('serveis.index')}}"><span data-feather="file-text"></span>Gestionar Assignacions</a>
             </li>
-          </ul>
+          </ul> --}}
 
 
           <li class="nav-item">
@@ -149,6 +149,12 @@
             </li>
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('zones.index') ? 'active' : '' }}" href="{{ route('zones.index') }}"><span data-feather="file-text"></span>Gestionar Zones</a>
+            </li>
+            <li>
+              <a class="nav-link nav-interior {{ request()->routeIs('zones.assign') ? 'active' : ''}}" href="{{ route('zones.assign')}}"><span data-feather="file-text"></span>Assignar Empleat</a>
+            </li>
+            <li>
+              <a class="nav-link nav-interior {{ request()->routeIs('zones.list') ? 'active' : ''}}" href="{{ route('zones.list')}}"><span data-feather="file-text"></span>Llistar Assignacions</a>
             </li>
           </ul>
 
@@ -215,7 +221,7 @@
             </li>
           </ul> --}}
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('AssignEmpZona*') ? 'active' : '' }}" data-toggle="collapse" aria-expanded="{{ request()->routeIs('AssignEmpZona*') ? 'true' : 'false' }}" href="#submenu11">
               <span data-feather="truck"></span>
               Empleats Zones
@@ -230,7 +236,7 @@
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('AssignEmpZona.index') ? 'active' : '' }}" href="{{ route('AssignEmpZona.index') }}"><span data-feather="file-text"></span>Gestionar Assignacions</a>
             </li>
-          </ul>
+          </ul> --}}
 
 
           <li class="nav-item">
