@@ -28,7 +28,7 @@ class AtraccionsController extends Controller
     /**
      * Acció que s'encarrega de mostrar una llista d'atraccions.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function index()
     {
@@ -56,7 +56,7 @@ class AtraccionsController extends Controller
     /**
      * Acció que s'encarrega de mostrar la vista per crear una atracció.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function create()
     {
@@ -69,7 +69,7 @@ class AtraccionsController extends Controller
      * Acció que s'encarrega de guardar una atracció en base de dades.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function store(Request $request)
     {
@@ -111,7 +111,7 @@ class AtraccionsController extends Controller
      * Acció que s'encarrega de mostrar les dades d'una atracció.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function show($id)
     {
@@ -124,7 +124,7 @@ class AtraccionsController extends Controller
      * Acció que s'encarrega de mostrar les dades d'una atracció en un formulari per editar-les.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function edit($id)
     {
@@ -140,7 +140,7 @@ class AtraccionsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function update(Request $request, $id)
     {
@@ -185,7 +185,7 @@ class AtraccionsController extends Controller
      * Acció que s'encarrega d'eliminar una atracció de la base de dades.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function destroy($id)
     {
@@ -237,7 +237,7 @@ class AtraccionsController extends Controller
     /**
      * Acció que s'encarrega de mostrar una vista amb les atraccion per realitzar una assignació d'empleat a atracció.
      * 
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function assigna()
     {
@@ -264,7 +264,7 @@ class AtraccionsController extends Controller
      * Acció que s'encarrega de filtrar els empleats disponibles entre una data inicial i una data final per realitzar l'assignació d'empleat a atracció. AJAX
      * 
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function filterEmpleats(Request $request)
     {
@@ -284,7 +284,7 @@ class AtraccionsController extends Controller
      * 
      * @param \Illuminate\Http\Request  $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function createAssignacio(Request $request, $id)
     {
@@ -341,7 +341,7 @@ class AtraccionsController extends Controller
      * 
      * @param  \Illuminate\Http\Request  $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function guardarAssignacio(Request $request, $id)
     {
@@ -374,7 +374,7 @@ class AtraccionsController extends Controller
     /**
      * Acció que mostra un llistat de les assignacions d'empleats a atraccions que hi ha en la base de dades.
      * 
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function assignacions()
     {
@@ -451,7 +451,7 @@ class AtraccionsController extends Controller
      * Acció que s'encarrega d'eliminar l'assignació d'empleat a atracció de la base de dades.
      * 
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function destroyAssignacions($id)
     {

@@ -22,7 +22,7 @@ class IncidenciesController extends Controller
     /**
      * Acció que s'encarrega de mostrar una llista d'incidencies per a assignar.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function index()
     {
@@ -46,7 +46,7 @@ class IncidenciesController extends Controller
     /**
      * Acció que s'encarrega de mostrar les incidencies assignades.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function assigned()
     {
@@ -72,7 +72,7 @@ class IncidenciesController extends Controller
     /**
      * Acció que s'encarrega de mostrar les incidencies finalitzades.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function done()
     {
@@ -99,7 +99,7 @@ class IncidenciesController extends Controller
     /**
      * Acció que s'encarrega de retornar la vista per a crear una incidencia.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function create()
     {
@@ -113,7 +113,7 @@ class IncidenciesController extends Controller
      * Acció que s'encarrega de guardar una incidencia.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function store(Request $request)
     {
@@ -142,7 +142,7 @@ class IncidenciesController extends Controller
      * Acció que s'encarrega de guardar les incidencies reportades.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function store_incidencia(Request $request)
     {
@@ -171,7 +171,7 @@ class IncidenciesController extends Controller
      * Acció que s'encarrega de mostrar totes les dades d'una incidencia.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function show($id)
     {
@@ -192,7 +192,7 @@ class IncidenciesController extends Controller
      * Acció que s'encarrega de carregar les dades a l'hora de modificar una incidencia.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function edit($id)
     {
@@ -217,7 +217,7 @@ class IncidenciesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function update(Request $request, $id)
     {
@@ -262,7 +262,7 @@ class IncidenciesController extends Controller
      * Acció que s'encarrega de borrar la incidencia especificada.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function destroy($id)
     {
@@ -277,7 +277,7 @@ class IncidenciesController extends Controller
      * Acció que s'encarrega de canviar l'estat de la incidencia a finalitzada/done.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function conclude($id)
     {
@@ -293,7 +293,7 @@ class IncidenciesController extends Controller
     /**
      * Acció encarregada de generar el PDF.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function assignadesGuardarPDF()
     {

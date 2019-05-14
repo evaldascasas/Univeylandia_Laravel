@@ -18,7 +18,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Selecciona totes les zona i les retorna a la vista indez
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function index()
     {
@@ -43,7 +43,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Busca els empleats lliures i els retorna a la vista
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function filterEmploye(Request $request, $id)
     {
@@ -60,7 +60,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Guarda els empleats assignats
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function saveAssign(Request $request, $id)
     {
@@ -88,7 +88,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Llista els empleats assignats
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function listAssign()
     {
@@ -100,7 +100,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Borra les assignacions
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function deleteAssign($id)
     {
@@ -118,7 +118,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Busca les sones i retorna la vista date
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function viewDataNeteja(Request $request, $id)
     {
@@ -130,7 +130,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Filtra els empleats per rol
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function filterEmployeNeteja(Request $request, $id)
     {
@@ -147,7 +147,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Guarda l'assignacio
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function saveAssignNeteja(Request $request, $id)
     {
@@ -174,7 +174,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Busca les zones amb el mateix id
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function viewDataAtencio(Request $request, $id)
     {
@@ -186,7 +186,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Filtra els empleats per rol i retorna una llista de empleats amb el rol seleccionat
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function filterEmployeAtencio(Request $request, $id)
     {
@@ -203,7 +203,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Guarda l'assignacio del empleat
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function saveAssignAtencio(Request $request, $id)
     {
@@ -230,7 +230,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Retorna la vista per a les dates
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function viewDataShow(Request $request, $id)
     {
@@ -242,7 +242,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Filtra els empleats per rol
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function filterEmployeShow(Request $request, $id)
     {
@@ -259,7 +259,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Guarda les assignacions
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function saveAssignShow(Request $request, $id)
     {
@@ -286,7 +286,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Retorna la vista de les dates 
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function viewDataSeguretat(Request $request, $id)
     {
@@ -298,7 +298,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Filtra els empleats de seguretat
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function filterEmployeSeguretat(Request $request, $id)
     {
@@ -316,7 +316,7 @@ class AssignEmpZonaController extends Controller
     /**
      * Guarda les assignacions
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function saveAssignSeguretat(Request $request, $id)
     {

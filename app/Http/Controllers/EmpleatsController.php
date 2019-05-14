@@ -18,7 +18,7 @@ class EmpleatsController extends Controller
     /**
      * Acció que s'encarrega de mostrar tots els usuaris empleat que no són administradors.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function index()
     {
@@ -63,7 +63,7 @@ class EmpleatsController extends Controller
     /**
      * Acció que s'encarrega de mostrar un formulari per a la creació d'un usuari empleat.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function create()
     {
@@ -79,7 +79,7 @@ class EmpleatsController extends Controller
      * Envia un correu a l'usuari empleat creat amb un enllaç per canviar la contrasenya.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function store(Request $request)
     {
@@ -160,7 +160,7 @@ class EmpleatsController extends Controller
      * Acció que s'encarrega de mostrar dades d'un usuari empleat concret en un formulari no editable.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function show($id)
     {
@@ -179,7 +179,7 @@ class EmpleatsController extends Controller
      * Acció que s'encarrega de mostrar les dades d'un usuari empleat en un formulari editable.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function edit($id)
     {
@@ -197,7 +197,7 @@ class EmpleatsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function update(Request $request, $id)
     {
@@ -281,7 +281,7 @@ class EmpleatsController extends Controller
      * Acció que desactiva un usuari empleat, si el usuari en questió és el que està en sessió, no es pot eliminar.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function destroy($id)
     {
@@ -305,7 +305,7 @@ class EmpleatsController extends Controller
     /**
      * Acció que llista les dades dels usuaris empleats desactivats.
      * 
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function trashed()
     {
@@ -351,7 +351,7 @@ class EmpleatsController extends Controller
      * Acció que reactiva un usuari empleat desactivat.
      * 
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function reactivate($id)
     {
@@ -373,7 +373,7 @@ class EmpleatsController extends Controller
     /**
      * Acció que mostra les dades dels usuaris administradors.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function admins()
     {

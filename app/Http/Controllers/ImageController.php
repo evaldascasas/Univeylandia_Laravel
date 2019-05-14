@@ -21,7 +21,7 @@ class ImageController extends Controller
 	 * Retorna les dades necessàries per crear la galeria de fotos.
      * Retorna una col·lecció amb les imatges pujades al servidor, amb el thumbnail i la foto amb marca d'aigua.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
 	public function index()
 	{
@@ -41,7 +41,7 @@ class ImageController extends Controller
 	/**
 	 * Mostra el formulari per pujar imatges.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
 	public function save()
 	{
@@ -55,7 +55,7 @@ class ImageController extends Controller
 	 * Crea un producte de tipus foto i els seus atributs.
 	 * 
 	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
+	 * @return /Illuminate/Http/Response
 	 */
    	public function upload(Request $request)
    	{

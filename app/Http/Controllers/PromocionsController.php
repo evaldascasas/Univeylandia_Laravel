@@ -20,7 +20,7 @@ class PromocionsController extends Controller
      /**
       * Consulta a la base de dades les promocions
       *
-      * @return \Illuminate\Http\Response
+      * @return /Illuminate/Http/Response
       */
      public function index(Request $request)
      {
@@ -36,7 +36,7 @@ class PromocionsController extends Controller
      /**
       * Retorna la vista create
       *
-      * @return \Illuminate\Http\Response
+      * @return /Illuminate/Http/Response
       */
      public function create()
      {
@@ -47,7 +47,7 @@ class PromocionsController extends Controller
       * Guarda les noves promocions inserides per l'usuari a la base de dades
       *
       * @param  \Illuminate\Http\Request  $request
-      * @return \Illuminate\Http\Response
+      * @return /Illuminate/Http/Response
       */
      public function store(Request $request)
      {
@@ -86,7 +86,7 @@ class PromocionsController extends Controller
       * Rep un id i busca  a la taula promocions la promocio seleccionada i la retorna a la vista
       *
       * @param  int  $id
-      * @return \Illuminate\Http\Response
+      * @return /Illuminate/Http/Response
       */
      public function show($id)
      {
@@ -99,7 +99,7 @@ class PromocionsController extends Controller
       * Rep un id la busca a la base de dades i retorna la consulta a la vista
       *
       * @param  int  $id
-      * @return \Illuminate\Http\Response
+      * @return /Illuminate/Http/Response
       */
      public function edit($id)
      {
@@ -113,7 +113,7 @@ class PromocionsController extends Controller
       *
       * @param  \Illuminate\Http\Request  $request
       * @param  int  $id
-      * @return \Illuminate\Http\Response
+      * @return /Illuminate/Http/Response
       */
      public function update(Request $request, $id)
      {
@@ -150,7 +150,7 @@ class PromocionsController extends Controller
       * Elimina la promocio seleccionada
       *
       * @param  int  $id
-      * @return \Illuminate\Http\Response
+      * @return /Illuminate/Http/Response
       */
      public function destroy($id)
      {

@@ -19,7 +19,7 @@ class ClientsController extends Controller
     /**
      * Acció que s'encarrega de mostrar un llistat de clients.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function index()
     {
@@ -33,7 +33,7 @@ class ClientsController extends Controller
     /**
      * Acció que s'encarrega de mostrar el formulari de creació d'usuaris client.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function create()
     {
@@ -45,7 +45,7 @@ class ClientsController extends Controller
      * s'envia un correu electrònic amb un enllaç per restablir la contrasenya.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function store(Request $request)
     {
@@ -99,7 +99,7 @@ class ClientsController extends Controller
      * Acció que s'encarrega de mostrar les dades de l'usuari client especificat en un formulari no editable.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function show($id)
     {
@@ -112,7 +112,7 @@ class ClientsController extends Controller
      * Acció que s'encarrega de mostrar el formulari per editar l'usuari client especificat amb les dades del client.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function edit($id)
     {
@@ -126,7 +126,7 @@ class ClientsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function update(Request $request, $id)
     {
@@ -174,7 +174,7 @@ class ClientsController extends Controller
      * Acció que s'encarrega de desactivar l'usuari client especificat.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function destroy($id)
     {
@@ -188,7 +188,7 @@ class ClientsController extends Controller
     /**
      * Acció que mostra un llistat dels usuaris client desactivats.
      * 
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function trashed()
     {
@@ -204,7 +204,7 @@ class ClientsController extends Controller
      * Acció que s'encarrega de reactivar l'usuari especificat.
      * 
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function reactivate($id)
     {
@@ -264,7 +264,7 @@ class ClientsController extends Controller
      * Acció que s'encarrega d'importar dades de clients d'un CSV a la base de dades.
      * 
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function importCSV(Request $request)
     {

@@ -15,7 +15,7 @@ class ServeisController extends Controller
     /**
      * Acció que s'encarrega de llistar els serveis del parc.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function index()
     {
@@ -35,7 +35,7 @@ class ServeisController extends Controller
     /**
      * Acció que s'encarrega de retornar la vista per a crear un servei.
      *
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function create()
     {
@@ -52,7 +52,7 @@ class ServeisController extends Controller
      * Acció que guarda el servei creat a la base de dades.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function store(Request $request)
     {
@@ -81,7 +81,7 @@ class ServeisController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function show($id)
     { }
@@ -90,7 +90,7 @@ class ServeisController extends Controller
      * Acció que s'encarrega de mostrar les dades del servei per a modificarles.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function edit($id)
     {
@@ -110,7 +110,7 @@ class ServeisController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function update(Request $request, $id)
     {
@@ -139,7 +139,7 @@ class ServeisController extends Controller
      * Acció que s'encarrega de canviar l'estat del servei a finalitzat
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return /Illuminate/Http/Response
      */
     public function destroy($id)
     {
