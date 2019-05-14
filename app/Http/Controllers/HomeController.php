@@ -64,7 +64,7 @@ class HomeController extends Controller
 
     /**
      * Mostra la pàgina pública d'atraccions amb les dades de les atraccions de la base de dades.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function atraccions()
@@ -90,7 +90,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista entrades de la pàgina pública (/entrades).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function entrades()
@@ -102,7 +102,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista del login de la pàgina pública (/login).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function login()
@@ -112,7 +112,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista del contacte de la pàgina pública (/contacte).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function contacte()
@@ -124,7 +124,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista inicial de la gestió pàgina interna (/gestio).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function gestio()
@@ -134,7 +134,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista del perfil de l'usuari de la pàgina pública (/perfil).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function perfil()
@@ -154,7 +154,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de les Frequently Asked Questions de la pàgina pública (/faq).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function faq()
@@ -169,7 +169,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de les Condicions Generals de la pàgina pública (/condicionsgenerals).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function condicionsgenerals()
@@ -179,7 +179,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de Politica de privacitat de la pàgina pública (/politicaprivacitat).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function politicaprivacitat()
@@ -189,7 +189,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de Politica de cookies de la pàgina pública (/politicacookies).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function politicacookies()
@@ -199,7 +199,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de Qui Som de la pàgina pública (/qui-som).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function equipdirectiu()
@@ -209,7 +209,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de la visita digital de la pàgina pública (/visita-digital).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function visitadigital()
@@ -219,7 +219,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista per reportar una incidència de la pàgina pública - només usuaris autentificats (/incidencia).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function incidencia()
@@ -231,7 +231,7 @@ class HomeController extends Controller
 
     /**
      * Retorna la vista de les tasques dels treballadors de la pàgina interna (/tasques).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function tasques()
@@ -284,7 +284,7 @@ class HomeController extends Controller
 
     /**
      * Acció que realiza els càlculs quan s'afegeix un producte a la cistella.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function parc_afegir_cistella(Request $request)
@@ -334,6 +334,7 @@ class HomeController extends Controller
             /*Generacio de la entrada en lo codi QR*/
             $file_path = 'storage/tickets_parc';
 
+            //Comprovació de que la carpeta on es guardaràn les imatges dels productes existeis i si no crearla
             if( ! File::exists($file_path)) {
                 File::makeDirectory($file_path, 0775, true);
             }
@@ -382,14 +383,14 @@ class HomeController extends Controller
     }
 
     /**
-     * 
-     * 
+     * Retorna la vista de la compra finalitzada i processa els productes de la cistella per a convertir-los a ventes
      * @return \Illuminate\Http\Response
      */
     public function compra_finalitzada()
     {
         $quantitat_cistella = Linia_cistella::join('cistelles', 'cistelles.id', '=', 'linia_cistelles.id_cistella')
             ->where('cistelles.id_usuari', '=', Auth::id())->count();
+        //Comprova si hi han productes a la cistella del usuari
         if ($quantitat_cistella > 0) {
             $elements_cistella = DB::table('linia_cistelles')
                 ->join('cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
@@ -414,7 +415,7 @@ class HomeController extends Controller
             ]);
 
             $venta->save();
-
+            //Canvía els productes amb quantitat X a 1 i genera els restants
             foreach ($elements_cistella as $element_cistella) {
 
                 if ($element_cistella->tipus == 1 || $element_cistella->tipus == 2 || $element_cistella->tipus == 3 || $element_cistella->tipus == 4 || $element_cistella->tipus == 5 || $element_cistella->tipus == 6 || $element_cistella->tipus == 7) {
@@ -487,12 +488,12 @@ class HomeController extends Controller
     }
 
     /**
-     * 
-     * 
+     * Retorna la vista de la cistella, on apareixen els tickets i fotos dividits en dues taules
      * @return \Illuminate\Http\Response
      */
     public function cistella()
     {
+        //tickets
         $linia_cistella = Cistella::join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
             ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
             ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
@@ -516,6 +517,7 @@ class HomeController extends Controller
         $total2 = 0;
         $compteTotal = 0;
 
+        //fotos
         $fotos = DB::table('cistelles')
             ->join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
             ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
@@ -533,8 +535,8 @@ class HomeController extends Controller
     }
 
     /**
-     * 
-     * 
+     * Elimina un producte de la cistella, depenent del tipus del mateix realiza una acció o un altra
+     * @param  Request $request [description]
      * @return \Illuminate\Http\Response
      */
     public function cistella_delete(Request $request)
@@ -546,6 +548,7 @@ class HomeController extends Controller
 
         $linia_cistella->delete();
 
+        //Si es un ticket, també elimina el producte
         if ($tipus_producte->id == 1 || $tipus_producte->id == 2 || $tipus_producte->id == 3 || $tipus_producte->id == 4 || $tipus_producte->id == 5 || $tipus_producte->id == 6 || $tipus_producte->id == 7) {
             $producte->delete();
             $atributs_producte->delete();
@@ -555,8 +558,7 @@ class HomeController extends Controller
     }
 
     /**
-     * 
-     * 
+     * Retorna la vista de la compra, on apareixen les diferents opcions de pagament
      * @return \Illuminate\Http\Response
      */
     public function compra()
@@ -606,7 +608,7 @@ class HomeController extends Controller
 
     /**
      *  Acció que llista totes les atraccions en la part pública de l'aplicatiu.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function llistarAtraccionsPublic($id)
@@ -619,8 +621,8 @@ class HomeController extends Controller
     }
 
     // /**
-    //  * Acció 
-    //  * 
+    //  * Acció
+    //  *
     //  * @return \Illuminate\Http\Response
     //  */
     // public function tendes_inter()
@@ -636,7 +638,7 @@ class HomeController extends Controller
 
     /**
      *  Acció que carrega una notícia mitjançant un slug.
-     * 
+     *
      * @param string $str_slug
      * @return \Illuminate\Http\Response
      */
@@ -659,7 +661,7 @@ class HomeController extends Controller
 
     /**
      * Acció que llista totes les notícies i les diverses categories.
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
@@ -688,7 +690,7 @@ class HomeController extends Controller
 
     /**
      * Acció que mostra la promoció mitjançant un slug.
-     * 
+     *
      * @param string $slug
      * @return \Illuminate\Http\Response
      */
@@ -709,7 +711,7 @@ class HomeController extends Controller
 
     /**
      * Acció que llista promocions en la pàgina web pública.
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
@@ -726,7 +728,7 @@ class HomeController extends Controller
 
     /**
      * Acció que mostra les votacions de cada atracció en el top d'atraccions de la pàgina web púlica.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function votacions()
@@ -741,7 +743,7 @@ class HomeController extends Controller
 
     /**
      * Acció que permet votar una atracció en el top d'atraccions, només 1 vegada a l'any per usuari amb sessió iniciada.
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
@@ -789,6 +791,10 @@ class HomeController extends Controller
     //     return view('construccio');
     // }
 
+    /**
+     * Acció que modifica la quantitat d'un producte a la cistella
+     * @return \Illuminate\Http\Response
+     */
     public function modificar_element_cistella_ajax()
     {
         $update_linia_cistella = Linia_cistella::where('id', request('id_linia_cistella'))->update(['quantitat' => request('quantitat_mod')]);
@@ -796,6 +802,10 @@ class HomeController extends Controller
         return 'El buen update gente';
     }
 
+    /**
+     * Acció que modifica el número de viatges d'un ticket a la cistella
+     * @return \Illuminate\Http\Response
+     */
     public function modificar_element_cistella_ajaxV()
     {
         $numviatges = request('quantitat_mod');
@@ -813,52 +823,46 @@ class HomeController extends Controller
         return 'El buen update de viages gente';
     }
 
+    /**
+     * Retorna la vista de la sala del chat realitzada amb ajax (arxiu de text)
+     * @return \Illuminate\Http\Response
+     */
     public function sala_chat()
     {
         return view('sala_chat');
     }
 
-    public function notificacionsGeneral()
-    {
-        $user = Auth::user();
+    /**
+     * Retorna la vista del llistat de notificacions
+     * @return \Illuminate\Http\Response
+     */
+     public function notificacionsGeneral(){
+       return view('notificacions');
+     }
 
-        /**
-         *     $incidencies = json_decode(DB::table('notifications')->where('Type', 'AppNotificationsIncidenceAssigned')
-         *  ->where('notifiable_id', $user->id)
-         *  ->get());
-         */
+     /**
+      * [ajaxChat description]
+      * @return \Illuminate\Http\Response
+      */
+      public function ajaxChat()
+      {
+          ini_set('max_execution_time', 7000);
 
-        $incidencies = array();
+          while (Chat::where('check', 0)->count() < 1) {
+              usleep(1000);
+          }
 
-        foreach ($user->notifications as $notification) {
-            //$user->notification->map(function($n){
-            if ($notification->type === 'App\Notifications\IncidenceAssigned') {
-                $incidencies[] = $notification->data['titol'];
-            }
-        };
-
-        return view('notificacions', compact('incidencies'));
-    }
-
-    public function ajaxChat()
-    {
-        ini_set('max_execution_time', 7000);
-
-        while (Chat::where('check', 0)->count() < 1) {
-            usleep(1000);
-        }
-
-        if (Chat::where('check', 0)->count() > 0) {
-            $message = Chat::where('check', 0)->first();
-            $id = $message->id;
-            $update = Chat::find($id);
-            $update->check = 1;
-            $update->save();
+          if (Chat::where('check', 0)->count() > 0) {
+              $message = Chat::where('check', 0)->first();
+              $id = $message->id;
+              $update = Chat::find($id);
+              $update->check = 1;
+              $update->save();
 
 
-            return response()->json([
-                'msg' => $message->name,
-            ]);
-        }
-    }
+              return response()->json([
+                  'msg' => $message->name,
+              ]);
+          }
+      }
 }
