@@ -39,8 +39,9 @@
             </li>
         </ul>
         <form class="form my-2 my-lg-0">
-            <input class="form-control" type="search" placeholder="Cercar" aria-label="Cercar">
-            {{-- <button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button> --}}
+            <form class="form-inline my-2 my-lg-0">
+                <iframe src="https://duckduckgo.com/search.html?width=200&site=www.univeylandia-parc.cat&prefill=Cercar" style="overflow:hidden;margin:0;padding:0;width:258px;height:40px;" frameborder="0"></iframe>
+            </form>
         </form>
     </div>
 </nav>
