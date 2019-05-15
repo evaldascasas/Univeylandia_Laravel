@@ -27,7 +27,7 @@
     @csrf
     <div class="form-group">
         <label for="cognom1">Títol</label>
-        <input type="text" class="form-control" name="titol" value={{ $noticia->titol }}>
+        <input type="text" class="form-control" name="titol" value="{{ $noticia->titol }}">
     </div>
     <div class="form-group">
         <label>Descripció</label>
