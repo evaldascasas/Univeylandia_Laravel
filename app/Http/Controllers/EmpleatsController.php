@@ -12,6 +12,7 @@ use \App\Rol;
 use \App\DadesEmpleat;
 use \App\User;
 use Carbon;
+use PDF;
 
 class EmpleatsController extends Controller
 {
@@ -413,5 +414,57 @@ class EmpleatsController extends Controller
             ]);
 
         return view('gestio/empleats/admins', compact('users'));
+    }
+
+    /**
+     * Acció que exporta els empleats en format PDF.
+     * 
+     * @return PDF
+     */
+    public function generarPDF()
+    {
+        $empleats = User::whereNotNull('email_verified_at')
+            ->where('id_rol', '!=', 1)
+            ->whereNotNull('id_dades_empleat')
+            ->leftJoin('dades_empleats', 'dades_empleats.id', 'users.id_dades_empleat')
+            ->leftJoin('rols', 'rols.id', 'users.id_rol')
+            ->leftJoin('horaris', 'horaris.id', 'dades_empleats.id_horari')
+            ->get([
+                'users.id',
+                'users.nom',
+                'users.cognom1',
+                'users.cognom2',
+                'users.email',
+                'users.password',
+                'users.data_naixement',
+                'users.adreca',
+                'users.ciutat',
+                'users.provincia',
+                'users.codi_postal',
+                'users.tipus_document',
+                'users.numero_document',
+                'users.sexe',
+                'users.telefon',
+                'users.cognom2',
+                'users.id_rol',
+                'dades_empleats.codi_seg_social as codi_seg_social',
+                'dades_empleats.num_nomina as num_nomina',
+                'dades_empleats.IBAN as IBAN',
+                'dades_empleats.especialitat as especialitat',
+                'dades_empleats.carrec as carrec',
+                'dades_empleats.data_inici_contracte as data_inici_contracte',
+                'dades_empleats.data_fi_contracte as data_fi_contracte',
+                'horaris.torn as id_horari',
+            ]);
+        $mytime = Carbon\Carbon::now();
+        $temps = $mytime->toDateString();
+
+        try {
+            $pdf = PDF::loadView('/gestio/empleats/pdfEmpleats', compact('empleats'));
+        } catch (Exception $e) {
+            return abort(404);
+        }
+
+        return $pdf->download('LlistatEmpleats_' . $temps . '.pdf');
     }
 }
