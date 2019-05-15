@@ -69,6 +69,11 @@ class TendaController extends Controller
             ->join('atraccions', 'user_entra_atraccio.id_atraccio', 'atraccions.id')
             ->join('atributs_producte', 'atributs_producte.id_atraccio', 'user_entra_atraccio.id_atraccio')
             ->join('productes', 'productes.atributs', 'atributs_producte.id')
+            ->select('productes.id as id',
+            'atributs_producte.foto_path as foto_path',
+            'atributs_producte.foto_path_aigua as foto_path_aigua',
+            'atraccions.nom_atraccio as nom_atraccio',
+            'atraccions.created_at as created_at')
             ->where('atributs_producte.nom', '=', 8)
             ->whereNotExists(function ($atributs) {
                 $atributs->select(DB::raw(1))
@@ -79,8 +84,8 @@ class TendaController extends Controller
             })
             ->whereRaw('ABS(TIMESTAMPDIFF(MINUTE, user_entra_atraccio.created_at , atributs_producte.created_at)) >= 0')
             ->whereRaw('ABS(TIMESTAMPDIFF(MINUTE, user_entra_atraccio.created_at , atributs_producte.created_at)) <= 7')
-            ->orderBy('atributs_producte.id', 'DESC')
-            ->distinct('productes.id')
+            ->orderBy('id', 'DESC')
+            ->distinct('id')
             ->get([
                 'productes.id as id',
                 'atributs_producte.foto_path as foto_path',
@@ -88,7 +93,6 @@ class TendaController extends Controller
                 'atraccions.nom_atraccio as nom_atraccio',
                 'atraccions.created_at as created_at',
             ]);
-
         $atraccio = Atraccion::findOrFail($id);
 
         //Antiga query per a retornar les fotos d'atraccions
