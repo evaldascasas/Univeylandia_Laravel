@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 use Auth;
 use View;
@@ -14,6 +15,7 @@ use \App\User_entra_atraccio;
 use \App\Venta_productes;
 use \App\producte;
 use \App\Atributs_producte;
+use \App\User;
 
 class PerfilController extends Controller
 {
@@ -29,7 +31,7 @@ class PerfilController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Mostrar totes els productes que ha comprat l'usuari.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -81,12 +83,109 @@ class PerfilController extends Controller
     }
 
     /**
+     * Acció que permet descarregar una imatge o entrada.
      * 
+     * @param int $id
+     * @return /Illuminate/Http/Response;
      */
     public function imgDownload($id)
     {
         $foto = Atributs_producte::find($id);
 
         return Response::download($foto->foto_path);
+    }
+
+    /**
+     * Retorna la vista per editar el perfil d'usuari.
+     * 
+     * @return /Illuminate/Http/Response;
+     */
+    public function edit()
+    {
+        $perfil = User::findOrFail(Auth::id());
+
+        return view('perfil/edit', compact('perfil'));
+    }
+
+    /**
+     * Reatlitza l'actualització de les dades del perfil d'usuari.
+     */
+    public function update(Request $request)
+    {
+        $request->validate([
+            'nom' => 'required|alpha',
+            'cognom1' => 'required|alpha',
+            'cognom2' => 'alpha',
+            'telefon' => 'required|numeric',
+            'adreca' => 'required',
+            'ciutat' => 'required|alpha',
+            'provincia' => 'required|alpha',
+            'codi_postal' => 'required|numeric',
+        ]);
+
+        $perfil = User::findOrFail(Auth::id());
+
+        $perfil->nom = $request->get('nom');
+        $perfil->cognom1 = $request->get('cognom1');
+        $perfil->cognom2 = $request->get('cognom2');
+        $perfil->telefon = $request->get('telefon');
+        $perfil->adreca = $request->get('adreca');
+        $perfil->ciutat = $request->get('ciutat');
+        $perfil->provincia = $request->get('provincia');
+        $perfil->codi_postal = $request->get('codi_postal');
+
+        $perfil->update();
+
+        return redirect('/perfil')->with('success', 'Perfil actualitzat correctament');
+    }
+
+    /**
+     * Retorna la vista amb el formulari per modificar la contrasenya de l'usuari.
+     */
+    public function editPassword()
+    {
+        return view('/perfil/password');
+    }
+
+    /**
+     * Acció que realitza l'actualització de la contrasenya de l'usuari.
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'password_old' => 'required',
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required'
+        ]);
+
+        $user = User::find(Auth::id());
+
+        if (Hash::check($request->get('password_old'), Auth::user()->password)) {
+
+            $user->password = Hash::make($request->get('password'));
+
+            $user->update();
+
+        } else return redirect('/perfil/edit/password')->with('error', 'Error: Introdueix la contrasenya correcta');
+
+        return redirect('/perfil')->with('success', 'Contrasenya actualitzada correctament');
+    }
+
+    /**
+     * Acció que desactiva un usuari client o treballador, els administradors no poden ser borrats d'aquesta forma.
+     */
+    public function destroy()
+    {
+        $perfil = User::findOrFail(Auth::id());
+
+        if ($perfil->id_rol == 2) {
+            return redirect('/perfil')->with('error', 'No et pots desactivar sent gestor.');
+        } else {
+            $perfil->delete();
+
+            Auth::logout();
+
+            return redirect('/');
+        }
     }
 }
