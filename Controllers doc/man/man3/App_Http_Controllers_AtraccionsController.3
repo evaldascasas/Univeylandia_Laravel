@@ -1,0 +1,251 @@
+.TH "AtraccionsController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AtraccionsController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBcreate\fP ()"
+.br
+.ti -1c
+.RI "\fBstore\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBshow\fP ($id)"
+.br
+.ti -1c
+.RI "\fBedit\fP ($id)"
+.br
+.ti -1c
+.RI "\fBupdate\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBdestroy\fP ($id)"
+.br
+.ti -1c
+.RI "\fBguardarPDF\fP ()"
+.br
+.ti -1c
+.RI "\fBassigna\fP ()"
+.br
+.ti -1c
+.RI "\fBfilterEmpleats\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBcreateAssignacio\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBguardarAssignacio\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBassignacions\fP ()"
+.br
+.ti -1c
+.RI "\fBdestroyAssignacions\fP ($id)"
+.br
+.ti -1c
+.RI "\fBguardarAssignacionsPDF\fP ()"
+.br
+.in -1c
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "assigna ()"
+Acció que s'encarrega de mostrar una vista amb les atraccion per realitzar una assignació d'empleat a atracció\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "assignacions ()"
+Acció que mostra un llistat de les assignacions d'empleats a atraccions que hi ha en la base de dades\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "create ()"
+Acció que s'encarrega de mostrar la vista per crear una atracció\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "createAssignacio (Request $request,  $id)"
+Acció que s'encarrega de mostrar la vista per realitzar el filtrat d'empleats per data i rol\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.br
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "destroy ( $id)"
+Acció que s'encarrega d'eliminar una atracció de la base de dades\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "destroyAssignacions ( $id)"
+Acció que s'encarrega d'eliminar l'assignació d'empleat a atracció de la base de dades\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "edit ( $id)"
+Acció que s'encarrega de mostrar les dades d'una atracció en un formulari per editar-les\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "filterEmpleats (Request $request)"
+Acció que s'encarrega de filtrar els empleats disponibles entre una data inicial i una data final per realitzar l'assignació d'empleat a atracció\&. AJAX
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "guardarAssignacio (Request $request,  $id)"
+Acció que s'encarrega d'emmagatzemar les dades de l'assignació d'empleat a atracció en la base de dades, també envia una notificació a l'usuari asignat\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.br
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "guardarAssignacionsPDF ()"
+Acció que s'encarrega de generar un PDF amb les assignacions d'empleat a atraccions\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+PDF 
+.RE
+.PP
+
+.SS "guardarPDF ()"
+Acció que s'encarrega de descarregar un PDF amb totes les dades d'atraccions,
+.PP
+\fBRetorna:\fP
+.RS 4
+PDF 
+.RE
+.PP
+
+.SS "index ()"
+Acció que s'encarrega de mostrar una llista d'atraccions\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "show ( $id)"
+Acció que s'encarrega de mostrar les dades d'una atracció\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "store (Request $request)"
+Acció que s'encarrega de guardar una atracció en base de dades\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "update (Request $request,  $id)"
+Acció que s'encarrega d'actualitzar les dades d'una atracció\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.br
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

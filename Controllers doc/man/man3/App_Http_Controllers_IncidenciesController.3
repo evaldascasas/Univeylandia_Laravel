@@ -1,0 +1,201 @@
+.TH "IncidenciesController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IncidenciesController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBassigned\fP ()"
+.br
+.ti -1c
+.RI "\fBdone\fP ()"
+.br
+.ti -1c
+.RI "\fBcreate\fP ()"
+.br
+.ti -1c
+.RI "\fBstore\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBstore_incidencia\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBshow\fP ($id)"
+.br
+.ti -1c
+.RI "\fBedit\fP ($id)"
+.br
+.ti -1c
+.RI "\fBupdate\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBdestroy\fP ($id)"
+.br
+.ti -1c
+.RI "\fBconclude\fP ($id)"
+.br
+.ti -1c
+.RI "\fBassignadesGuardarPDF\fP ()"
+.br
+.in -1c
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "assignadesGuardarPDF ()"
+Acció encarregada de generar el PDF\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "assigned ()"
+Acció que s'encarrega de mostrar les incidencies assignades\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "conclude ( $id)"
+Acció que s'encarrega de canviar l'estat de la incidencia a finalitzada/done\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "create ()"
+Acció que s'encarrega de retornar la vista per a crear una incidencia\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "destroy ( $id)"
+Acció que s'encarrega de borrar la incidencia especificada\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "done ()"
+Acció que s'encarrega de mostrar les incidencies finalitzades\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "edit ( $id)"
+Acció que s'encarrega de carregar les dades a l'hora de modificar una incidencia\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "index ()"
+Acció que s'encarrega de mostrar una llista d'incidencies per a assignar\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "show ( $id)"
+Acció que s'encarrega de mostrar totes les dades d'una incidencia\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "store (Request $request)"
+Acció que s'encarrega de guardar una incidencia\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "store_incidencia (Request $request)"
+Acció que s'encarrega de guardar les incidencies reportades\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "update (Request $request,  $id)"
+Accio que s'encarrega de actualizar les dades modificades d'una incidencia\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.br
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

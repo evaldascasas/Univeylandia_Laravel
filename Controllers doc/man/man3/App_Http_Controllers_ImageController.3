@@ -1,0 +1,73 @@
+.TH "ImageController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ImageController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBsave\fP ()"
+.br
+.ti -1c
+.RI "\fBupload\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBgenerateFilenameForPNG\fP ()"
+.br
+.in -1c
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "generateFilenameForPNG ()"
+Acció que genera un nom random a una foto\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+string $filename 
+.RE
+.PP
+
+.SS "index ()"
+Retorna les dades necessàries per crear la galeria de fotos\&. Retorna una col·lecció amb les imatges pujades al servidor, amb el thumbnail i la foto amb marca d'aigua\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "save ()"
+Mostra el formulari per pujar imatges\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "upload (Request $request)"
+Guarda les imatges rebudes d'un formulari, genera un thumbnail i una imatge amb marca d'aigua per cada imatge rebuda\&. Crea un producte de tipus foto i els seus atributs\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

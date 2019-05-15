@@ -1,0 +1,131 @@
+.TH "PromocionsController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PromocionsController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fBindex\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBcreate\fP ()"
+.br
+.ti -1c
+.RI "\fBstore\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBshow\fP ($id)"
+.br
+.ti -1c
+.RI "\fBedit\fP ($id)"
+.br
+.ti -1c
+.RI "\fBupdate\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBdestroy\fP ($id)"
+.br
+.in -1c
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "create ()"
+Retorna la vista create
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "destroy ( $id)"
+Elimina la promocio seleccionada
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "edit ( $id)"
+Rep un id la busca a la base de dades i retorna la consulta a la vista
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "index (Request $request)"
+Consulta a la base de dades les promocions
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "show ( $id)"
+Rep un id i busca a la taula promocions la promocio seleccionada i la retorna a la vista
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "store (Request $request)"
+Guarda les noves promocions inserides per l'usuari a la base de dades
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "update (Request $request,  $id)"
+Rep un id el selecciona a la taula promocions de la base de dades i el modifica amb el request
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.br
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

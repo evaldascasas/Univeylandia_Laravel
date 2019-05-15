@@ -1,0 +1,194 @@
+\hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller}{}\section{Referència de la Classe Empleats\+Controller}
+\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller}\index{Empleats\+Controller@{Empleats\+Controller}}
+Diagrama d\textquotesingle{}Herència per a Empleats\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_app_1_1_http_1_1_controllers_1_1_empleats_controller}
+\end{center}
+\end{figure}
+\subsection*{Mètodes públics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a149eb92716c1084a935e04a8d95f7347}{index}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a435e7d7525d4bcd0ed5e34a469f3adf6}{create}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a9ef485163104597c12185b53cdacf638}{store}} (Request \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_ae4914d07a9bbe4aede7a5dea759f6287}{show}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a459ed16587e3a50b39b672c7e473abc5}{edit}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_affb03cc19897a1800a0f411264d6c7cc}{update}} (Request \$request, \$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a726fa8a4b4b187b9ca32ba427aac8137}{destroy}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a27e5c7c270aebe0baec29a042d450df4}{trashed}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a796ea4077bb7fe14af9f92e4ed083556}{reactivate}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a078272765f603742eaf0ec39b2ec5596}{admins}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a3fb43ccec4eb67c487c799e63e78ebdc}{generar\+P\+DF}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Documentació de les Funcions Membre}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a078272765f603742eaf0ec39b2ec5596}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a078272765f603742eaf0ec39b2ec5596}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!admins@{admins}}
+\index{admins@{admins}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{admins()}{admins()}}
+{\footnotesize\ttfamily admins (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que mostra les dades dels usuaris administradors.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a435e7d7525d4bcd0ed5e34a469f3adf6}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a435e7d7525d4bcd0ed5e34a469f3adf6}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!create@{create}}
+\index{create@{create}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de mostrar un formulari per a la creació d\textquotesingle{}un usuari empleat.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a726fa8a4b4b187b9ca32ba427aac8137}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a726fa8a4b4b187b9ca32ba427aac8137}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!destroy@{destroy}}
+\index{destroy@{destroy}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily destroy (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que desactiva un usuari empleat, si el usuari en questió és el que està en sessió, no es pot eliminar.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a459ed16587e3a50b39b672c7e473abc5}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a459ed16587e3a50b39b672c7e473abc5}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!edit@{edit}}
+\index{edit@{edit}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{edit()}{edit()}}
+{\footnotesize\ttfamily edit (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de mostrar les dades d\textquotesingle{}un usuari empleat en un formulari editable.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a3fb43ccec4eb67c487c799e63e78ebdc}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a3fb43ccec4eb67c487c799e63e78ebdc}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!generar\+P\+DF@{generar\+P\+DF}}
+\index{generar\+P\+DF@{generar\+P\+DF}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{generar\+P\+D\+F()}{generarPDF()}}
+{\footnotesize\ttfamily generar\+P\+DF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que exporta els empleats en format P\+DF.
+
+\begin{DoxyReturn}{Retorna}
+P\+DF 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a149eb92716c1084a935e04a8d95f7347}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a149eb92716c1084a935e04a8d95f7347}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!index@{index}}
+\index{index@{index}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de mostrar tots els usuaris empleat que no són administradors.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a796ea4077bb7fe14af9f92e4ed083556}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a796ea4077bb7fe14af9f92e4ed083556}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!reactivate@{reactivate}}
+\index{reactivate@{reactivate}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{reactivate()}{reactivate()}}
+{\footnotesize\ttfamily reactivate (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que reactiva un usuari empleat desactivat.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_ae4914d07a9bbe4aede7a5dea759f6287}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_ae4914d07a9bbe4aede7a5dea759f6287}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!show@{show}}
+\index{show@{show}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{show()}{show()}}
+{\footnotesize\ttfamily show (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de mostrar dades d\textquotesingle{}un usuari empleat concret en un formulari no editable.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a9ef485163104597c12185b53cdacf638}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a9ef485163104597c12185b53cdacf638}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!store@{store}}
+\index{store@{store}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{store()}{store()}}
+{\footnotesize\ttfamily store (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega d\textquotesingle{}emmagatzemar les dades d\textquotesingle{}un usuari empleat en la base de dades, compta amb una transacció de base de dades, per si falla al introduir les dades. Envia un correu a l\textquotesingle{}usuari empleat creat amb un enllaç per canviar la contrasenya.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Request & {\em \$request} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a27e5c7c270aebe0baec29a042d450df4}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_a27e5c7c270aebe0baec29a042d450df4}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!trashed@{trashed}}
+\index{trashed@{trashed}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{trashed()}{trashed()}}
+{\footnotesize\ttfamily trashed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que llista les dades dels usuaris empleats desactivats.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_affb03cc19897a1800a0f411264d6c7cc}\label{class_app_1_1_http_1_1_controllers_1_1_empleats_controller_affb03cc19897a1800a0f411264d6c7cc}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}!update@{update}}
+\index{update@{update}!App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Empleats\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily update (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega d\textquotesingle{}emmagatzemar les dades actualitzades d\textquotesingle{}un usuari empleat concret. Compta amb l\textquotesingle{}ús de transacció de base de dades per si falla al actualitzar les dades.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Request & {\em \$request} & \\
+\hline
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+
+
+La documentació d\textquotesingle{}aquesta classe es va generar a partir del següent fitxer\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/\+Carpetes/\+Documents/\+Git\+Hub/\+Univeylandia\+\_\+\+Laravel/app/\+Http/\+Controllers/Empleats\+Controller.\+php\end{DoxyCompactItemize}

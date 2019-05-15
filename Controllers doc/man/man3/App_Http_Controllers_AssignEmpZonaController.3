@@ -1,0 +1,271 @@
+.TH "AssignEmpZonaController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AssignEmpZonaController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP i \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBcreate\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBassignaEmpleat\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBguardarAssignacio\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBlistAssign\fP ()"
+.br
+.ti -1c
+.RI "\fBdeleteAssign\fP ($id)"
+.br
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBviewData\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBfilterEmploye\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBsaveAssign\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBlistAssign\fP ()"
+.br
+.ti -1c
+.RI "\fBdeleteAssign\fP ($id)"
+.br
+.ti -1c
+.RI "\fBviewDataNeteja\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBfilterEmployeNeteja\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBsaveAssignNeteja\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBviewDataAtencio\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBfilterEmployeAtencio\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBsaveAssignAtencio\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBviewDataShow\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBfilterEmployeShow\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBsaveAssignShow\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBviewDataSeguretat\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBfilterEmployeSeguretat\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBsaveAssignSeguretat\fP (Request $request, $id)"
+.br
+.in -1c
+.SH "Descripció Detallada"
+.PP 
+Classe per assignar empleat a zona
+.PP
+\fBRetorna:\fP
+.RS 4
+.RE
+.PP
+Classe per assignar empleat a zona 
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "deleteAssign ( $id)"
+Borra les assignacions
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "filterEmploye (Request $request,  $id)"
+Busca els empleats lliures i els retorna a la vista
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "filterEmployeAtencio (Request $request,  $id)"
+Filtra els empleats per rol i retorna una llista de empleats amb el rol seleccionat
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "filterEmployeNeteja (Request $request,  $id)"
+Filtra els empleats per rol
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "filterEmployeSeguretat (Request $request,  $id)"
+Filtra els empleats de seguretat
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "filterEmployeShow (Request $request,  $id)"
+Filtra els empleats per rol
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "index ()"
+Selecciona totes les zona i les retorna a la vista indez
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "index ()"
+Selecciona totes les zona i les retorna a la vista indez, si manel esta vista es la millor :) com el teu vendor
+.PP
+\fBRetorna:\fP
+.RS 4
+.RE
+.PP
+
+.SS "listAssign ()"
+Llista els empleats assignats
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "saveAssign (Request $request,  $id)"
+Guarda els empleats assignats
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "saveAssignAtencio (Request $request,  $id)"
+Guarda l'assignacio del empleat
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "saveAssignNeteja (Request $request,  $id)"
+Guarda l'assignacio
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "saveAssignSeguretat (Request $request,  $id)"
+Guarda les assignacions
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "saveAssignShow (Request $request,  $id)"
+Guarda les assignacions
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "viewData (Request $request,  $id)"
+Busca una Zona en concret i retorna la zona a la vista
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fIzona\fP 
+.RE
+.PP
+
+.SS "viewDataAtencio (Request $request,  $id)"
+Busca les zones amb el mateix id
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "viewDataNeteja (Request $request,  $id)"
+Busca les sones i retorna la vista date
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "viewDataSeguretat (Request $request,  $id)"
+Retorna la vista de les dates
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "viewDataShow (Request $request,  $id)"
+Retorna la vista per a les dates
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

@@ -1,0 +1,76 @@
+\hypertarget{class_app_1_1_http_1_1_controllers_1_1_image_controller}{}\section{Referència de la Classe Image\+Controller}
+\label{class_app_1_1_http_1_1_controllers_1_1_image_controller}\index{Image\+Controller@{Image\+Controller}}
+Diagrama d\textquotesingle{}Herència per a Image\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_app_1_1_http_1_1_controllers_1_1_image_controller}
+\end{center}
+\end{figure}
+\subsection*{Mètodes públics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_image_controller_a149eb92716c1084a935e04a8d95f7347}{index}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_image_controller_afc8a3c62679cf00ade9f15fb2a6d6132}{save}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_image_controller_abc332ce722c8ad0e5e856fb246d68495}{upload}} (Request \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_image_controller_a7ed73da32ee3c34907b2124fe3a4e613}{generate\+Filename\+For\+P\+NG}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Documentació de les Funcions Membre}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_image_controller_a7ed73da32ee3c34907b2124fe3a4e613}\label{class_app_1_1_http_1_1_controllers_1_1_image_controller_a7ed73da32ee3c34907b2124fe3a4e613}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller}!generate\+Filename\+For\+P\+NG@{generate\+Filename\+For\+P\+NG}}
+\index{generate\+Filename\+For\+P\+NG@{generate\+Filename\+For\+P\+NG}!App\+::\+Http\+::\+Controllers\+::\+Image\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller}}
+\subsubsection{\texorpdfstring{generate\+Filename\+For\+P\+N\+G()}{generateFilenameForPNG()}}
+{\footnotesize\ttfamily generate\+Filename\+For\+P\+NG (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que genera un nom random a una foto.
+
+\begin{DoxyReturn}{Retorna}
+string \$filename 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_image_controller_a149eb92716c1084a935e04a8d95f7347}\label{class_app_1_1_http_1_1_controllers_1_1_image_controller_a149eb92716c1084a935e04a8d95f7347}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller}!index@{index}}
+\index{index@{index}!App\+::\+Http\+::\+Controllers\+::\+Image\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retorna les dades necessàries per crear la galeria de fotos. Retorna una col·lecció amb les imatges pujades al servidor, amb el thumbnail i la foto amb marca d\textquotesingle{}aigua.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_image_controller_afc8a3c62679cf00ade9f15fb2a6d6132}\label{class_app_1_1_http_1_1_controllers_1_1_image_controller_afc8a3c62679cf00ade9f15fb2a6d6132}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller}!save@{save}}
+\index{save@{save}!App\+::\+Http\+::\+Controllers\+::\+Image\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller}}
+\subsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily save (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Mostra el formulari per pujar imatges.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_image_controller_abc332ce722c8ad0e5e856fb246d68495}\label{class_app_1_1_http_1_1_controllers_1_1_image_controller_abc332ce722c8ad0e5e856fb246d68495}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller}!upload@{upload}}
+\index{upload@{upload}!App\+::\+Http\+::\+Controllers\+::\+Image\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Image\+Controller}}
+\subsubsection{\texorpdfstring{upload()}{upload()}}
+{\footnotesize\ttfamily upload (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+Guarda les imatges rebudes d\textquotesingle{}un formulari, genera un thumbnail i una imatge amb marca d\textquotesingle{}aigua per cada imatge rebuda. Crea un producte de tipus foto i els seus atributs.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Request & {\em \$request} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+
+
+La documentació d\textquotesingle{}aquesta classe es va generar a partir del següent fitxer\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/\+Carpetes/\+Documents/\+Git\+Hub/\+Univeylandia\+\_\+\+Laravel/app/\+Http/\+Controllers/Image\+Controller.\+php\end{DoxyCompactItemize}

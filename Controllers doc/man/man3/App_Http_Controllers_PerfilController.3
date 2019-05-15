@@ -1,0 +1,94 @@
+.TH "PerfilController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PerfilController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fB__construct\fP ()"
+.br
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBimgDownload\fP ($id)"
+.br
+.ti -1c
+.RI "\fBedit\fP ()"
+.br
+.ti -1c
+.RI "\fBupdate\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBeditPassword\fP ()"
+.br
+.ti -1c
+.RI "\fBupdatePassword\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBdestroy\fP ()"
+.br
+.in -1c
+.SH "Documentació del Constructor i el Destructor"
+.PP 
+.SS "__construct ()"
+Create a new controller instance\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "destroy ()"
+Acció que desactiva un usuari client o treballador, els administradors no poden ser borrats d'aquesta forma\&. 
+.SS "edit ()"
+Retorna la vista per editar el perfil d'usuari\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response; 
+.RE
+.PP
+
+.SS "editPassword ()"
+Retorna la vista amb el formulari per modificar la contrasenya de l'usuari\&. 
+.SS "imgDownload ( $id)"
+Acció que permet descarregar una imatge o entrada\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response; 
+.RE
+.PP
+
+.SS "index ()"
+Mostrar totes els productes que ha comprat l'usuari\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+.RE
+.PP
+
+.SS "update (Request $request)"
+Reatlitza l'actualització de les dades del perfil d'usuari\&. 
+.SS "updatePassword (Request $request)"
+Acció que realitza l'actualització de la contrasenya de l'usuari\&. 
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

@@ -1,0 +1,441 @@
+.TH "HomeController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HomeController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fB__construct\fP ()"
+.br
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBatraccions\fP ()"
+.br
+.ti -1c
+.RI "\fBentrades\fP ()"
+.br
+.ti -1c
+.RI "\fBlogin\fP ()"
+.br
+.ti -1c
+.RI "\fBcontacte\fP ()"
+.br
+.ti -1c
+.RI "\fBgestio\fP ()"
+.br
+.ti -1c
+.RI "\fBperfil\fP ()"
+.br
+.ti -1c
+.RI "\fBfaq\fP ()"
+.br
+.ti -1c
+.RI "\fBcondicionsgenerals\fP ()"
+.br
+.ti -1c
+.RI "\fBpoliticaprivacitat\fP ()"
+.br
+.ti -1c
+.RI "\fBpoliticacookies\fP ()"
+.br
+.ti -1c
+.RI "\fBequipdirectiu\fP ()"
+.br
+.ti -1c
+.RI "\fBvisitadigital\fP ()"
+.br
+.ti -1c
+.RI "\fBincidencia\fP ()"
+.br
+.ti -1c
+.RI "\fBtasques\fP ()"
+.br
+.ti -1c
+.RI "\fBparc_afegir_cistella\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBcompra_finalitzada\fP ()"
+.br
+.ti -1c
+.RI "\fBcistella\fP ()"
+.br
+.ti -1c
+.RI "\fBcistella_delete\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBcompra\fP ()"
+.br
+.ti -1c
+.RI "\fBllistarAtraccionsPublic\fP ($id)"
+.br
+.ti -1c
+.RI "\fBnoticia\fP ($str_slug)"
+.br
+.ti -1c
+.RI "\fBnoticies\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBpromocio\fP ($slug)"
+.br
+.ti -1c
+.RI "\fBpromocions\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBvotacions\fP ()"
+.br
+.ti -1c
+.RI "\fBvotacio_accio\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBmodificar_element_cistella_ajax\fP ()"
+.br
+.ti -1c
+.RI "\fBmodificar_element_cistella_ajaxV\fP ()"
+.br
+.ti -1c
+.RI "\fBsala_chat\fP ()"
+.br
+.ti -1c
+.RI "\fBnotificacionsGeneral\fP ()"
+.br
+.in -1c
+.SH "Documentació del Constructor i el Destructor"
+.PP 
+.SS "__construct ()"
+Create a new controller instance\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "atraccions ()"
+Mostra la pàgina pública d'atraccions amb les dades de les atraccions de la base de dades\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "cistella ()"
+Retorna la vista de la cistella, on apareixen els tickets i fotos dividits en dues taules 
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "cistella_delete (Request $request)"
+Elimina un producte de la cistella, depenent del tipus del mateix realiza una acció o un altra 
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP [description] 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "compra ()"
+Retorna la vista de la compra, on apareixen les diferents opcions de pagament 
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "compra_finalitzada ()"
+Retorna la vista de la compra finalitzada i processa els productes de la cistella per a convertir-los a ventes 
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "condicionsgenerals ()"
+Retorna la vista de les Condicions Generals de la pàgina pública (/condicionsgenerals)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "contacte ()"
+Retorna la vista del contacte de la pàgina pública (/contacte)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "entrades ()"
+Retorna la vista entrades de la pàgina pública (/entrades)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "equipdirectiu ()"
+Retorna la vista de Qui Som de la pàgina pública (/qui-som)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "faq ()"
+Retorna la vista de les Frequently Asked Questions de la pàgina pública (/faq)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "gestio ()"
+Retorna la vista inicial de la gestió pàgina interna (/gestio)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "incidencia ()"
+Retorna la vista per reportar una incidència de la pàgina pública - només usuaris autentificats (/incidencia)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "index ()"
+Mostra la pàgina inicial de l'aplicatiu i hi carrega notícies\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "llistarAtraccionsPublic ( $id)"
+Acció que llista totes les atraccions en la part pública de l'aplicatiu\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "login ()"
+Retorna la vista del login de la pàgina pública (/login)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "modificar_element_cistella_ajax ()"
+Acció que modifica la quantitat d'un producte a la cistella 
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "modificar_element_cistella_ajaxV ()"
+Acció que modifica el número de viatges d'un ticket a la cistella 
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "noticia ( $str_slug)"
+Acció
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response Acció que carrega una notícia mitjançant un slug\&.
+.RE
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$str_slug\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "noticies (Request $request)"
+Acció que llista totes les notícies i les diverses categories\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "notificacionsGeneral ()"
+Retorna la vista del llistat de notificacions 
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "parc_afegir_cistella (Request $request)"
+Acció que realiza els càlculs quan s'afegeix un producte a la cistella\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "perfil ()"
+Retorna la vista del perfil de l'usuari de la pàgina pública (/perfil)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "politicacookies ()"
+Retorna la vista de Politica de cookies de la pàgina pública (/politicacookies)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "politicaprivacitat ()"
+Retorna la vista de Politica de privacitat de la pàgina pública (/politicaprivacitat)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "promocio ( $slug)"
+Acció que mostra la promoció mitjançant un slug\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$slug\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "promocions (Request $request)"
+Acció que llista promocions en la pàgina web pública\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "sala_chat ()"
+Retorna la vista de la sala del chat realitzada amb ajax (arxiu de text) 
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "tasques ()"
+Retorna la vista de les tasques dels treballadors de la pàgina interna (/tasques)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "visitadigital ()"
+Retorna la vista de la visita digital de la pàgina pública (/visita-digital)\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "votacio_accio (Request $request)"
+Acció que permet votar una atracció en el top d'atraccions, només 1 vegada a l'any per usuari amb sessió iniciada\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "votacions ()"
+Acció que mostra les votacions de cada atracció en el top d'atraccions de la pàgina web púlica\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

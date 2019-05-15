@@ -1,0 +1,212 @@
+\hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller}{}\section{Referència de la Classe Clients\+Controller}
+\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller}\index{Clients\+Controller@{Clients\+Controller}}
+Diagrama d\textquotesingle{}Herència per a Clients\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_app_1_1_http_1_1_controllers_1_1_clients_controller}
+\end{center}
+\end{figure}
+\subsection*{Mètodes públics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a149eb92716c1084a935e04a8d95f7347}{index}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a435e7d7525d4bcd0ed5e34a469f3adf6}{create}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a9ef485163104597c12185b53cdacf638}{store}} (Request \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_ae4914d07a9bbe4aede7a5dea759f6287}{show}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a459ed16587e3a50b39b672c7e473abc5}{edit}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_affb03cc19897a1800a0f411264d6c7cc}{update}} (Request \$request, \$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a726fa8a4b4b187b9ca32ba427aac8137}{destroy}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a27e5c7c270aebe0baec29a042d450df4}{trashed}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a796ea4077bb7fe14af9f92e4ed083556}{reactivate}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_afae9830398418f6a786a2c3829fbe622}{guardar\+Client\+P\+DF}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a85eb498786fcc18b539cb141f988b18b}{export\+C\+SV}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_clients_controller_ac4558929a5961fdc5574d0cd847561a6}{import\+C\+SV}} (Request \$request)
+\end{DoxyCompactItemize}
+
+
+\subsection{Documentació de les Funcions Membre}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a435e7d7525d4bcd0ed5e34a469f3adf6}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a435e7d7525d4bcd0ed5e34a469f3adf6}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!create@{create}}
+\index{create@{create}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de mostrar el formulari de creació d\textquotesingle{}usuaris client.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a726fa8a4b4b187b9ca32ba427aac8137}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a726fa8a4b4b187b9ca32ba427aac8137}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!destroy@{destroy}}
+\index{destroy@{destroy}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily destroy (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de desactivar l\textquotesingle{}usuari client especificat.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a459ed16587e3a50b39b672c7e473abc5}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a459ed16587e3a50b39b672c7e473abc5}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!edit@{edit}}
+\index{edit@{edit}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{edit()}{edit()}}
+{\footnotesize\ttfamily edit (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de mostrar el formulari per editar l\textquotesingle{}usuari client especificat amb les dades del client.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a85eb498786fcc18b539cb141f988b18b}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a85eb498786fcc18b539cb141f988b18b}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!export\+C\+SV@{export\+C\+SV}}
+\index{export\+C\+SV@{export\+C\+SV}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{export\+C\+S\+V()}{exportCSV()}}
+{\footnotesize\ttfamily export\+C\+SV (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de generar un arxiu C\+SV amb les dades importants dels usuaris client.
+
+\begin{DoxyReturn}{Retorna}
+C\+SV 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_afae9830398418f6a786a2c3829fbe622}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_afae9830398418f6a786a2c3829fbe622}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!guardar\+Client\+P\+DF@{guardar\+Client\+P\+DF}}
+\index{guardar\+Client\+P\+DF@{guardar\+Client\+P\+DF}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{guardar\+Client\+P\+D\+F()}{guardarClientPDF()}}
+{\footnotesize\ttfamily guardar\+Client\+P\+DF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de generar un arxiu P\+DF amb les dades de tots els usuaris client.
+
+\begin{DoxyReturn}{Retorna}
+P\+DF 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_ac4558929a5961fdc5574d0cd847561a6}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_ac4558929a5961fdc5574d0cd847561a6}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!import\+C\+SV@{import\+C\+SV}}
+\index{import\+C\+SV@{import\+C\+SV}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{import\+C\+S\+V()}{importCSV()}}
+{\footnotesize\ttfamily import\+C\+SV (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega d\textquotesingle{}importar dades de clients d\textquotesingle{}un C\+SV a la base de dades.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Request & {\em \$request} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a149eb92716c1084a935e04a8d95f7347}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a149eb92716c1084a935e04a8d95f7347}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!index@{index}}
+\index{index@{index}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de mostrar un llistat de clients.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a796ea4077bb7fe14af9f92e4ed083556}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a796ea4077bb7fe14af9f92e4ed083556}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!reactivate@{reactivate}}
+\index{reactivate@{reactivate}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{reactivate()}{reactivate()}}
+{\footnotesize\ttfamily reactivate (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de reactivar l\textquotesingle{}usuari especificat.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_ae4914d07a9bbe4aede7a5dea759f6287}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_ae4914d07a9bbe4aede7a5dea759f6287}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!show@{show}}
+\index{show@{show}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{show()}{show()}}
+{\footnotesize\ttfamily show (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega de mostrar les dades de l\textquotesingle{}usuari client especificat en un formulari no editable.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a9ef485163104597c12185b53cdacf638}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a9ef485163104597c12185b53cdacf638}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!store@{store}}
+\index{store@{store}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{store()}{store()}}
+{\footnotesize\ttfamily store (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+Acció que emmagatzema un usuari client en la base de dades. Si l\textquotesingle{}usuari s\textquotesingle{}emmagatzema de forma correcta, s\textquotesingle{}envia un correu electrònic amb un enllaç per restablir la contrasenya.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Request & {\em \$request} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a27e5c7c270aebe0baec29a042d450df4}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_a27e5c7c270aebe0baec29a042d450df4}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!trashed@{trashed}}
+\index{trashed@{trashed}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{trashed()}{trashed()}}
+{\footnotesize\ttfamily trashed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Acció que mostra un llistat dels usuaris client desactivats.
+
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_clients_controller_affb03cc19897a1800a0f411264d6c7cc}\label{class_app_1_1_http_1_1_controllers_1_1_clients_controller_affb03cc19897a1800a0f411264d6c7cc}} 
+\index{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}!update@{update}}
+\index{update@{update}!App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller@{App\+::\+Http\+::\+Controllers\+::\+Clients\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily update (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Acció que s\textquotesingle{}encarrega d\textquotesingle{}actualitzar la informació de l\textquotesingle{}usuari client especificat.
+
+
+\begin{DoxyParams}[1]{Paràmetres}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Request & {\em \$request} & \\
+\hline
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+/\+Illuminate/\+Http/\+Response 
+\end{DoxyReturn}
+
+
+La documentació d\textquotesingle{}aquesta classe es va generar a partir del següent fitxer\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/\+Carpetes/\+Documents/\+Git\+Hub/\+Univeylandia\+\_\+\+Laravel/app/\+Http/\+Controllers/Clients\+Controller.\+php\end{DoxyCompactItemize}

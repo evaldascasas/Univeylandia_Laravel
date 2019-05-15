@@ -1,0 +1,184 @@
+.TH "EmpleatsController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+EmpleatsController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBcreate\fP ()"
+.br
+.ti -1c
+.RI "\fBstore\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBshow\fP ($id)"
+.br
+.ti -1c
+.RI "\fBedit\fP ($id)"
+.br
+.ti -1c
+.RI "\fBupdate\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBdestroy\fP ($id)"
+.br
+.ti -1c
+.RI "\fBtrashed\fP ()"
+.br
+.ti -1c
+.RI "\fBreactivate\fP ($id)"
+.br
+.ti -1c
+.RI "\fBadmins\fP ()"
+.br
+.ti -1c
+.RI "\fBgenerarPDF\fP ()"
+.br
+.in -1c
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "admins ()"
+Acció que mostra les dades dels usuaris administradors\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "create ()"
+Acció que s'encarrega de mostrar un formulari per a la creació d'un usuari empleat\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "destroy ( $id)"
+Acció que desactiva un usuari empleat, si el usuari en questió és el que està en sessió, no es pot eliminar\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "edit ( $id)"
+Acció que s'encarrega de mostrar les dades d'un usuari empleat en un formulari editable\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "generarPDF ()"
+Acció que exporta els empleats en format PDF\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+PDF 
+.RE
+.PP
+
+.SS "index ()"
+Acció que s'encarrega de mostrar tots els usuaris empleat que no són administradors\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "reactivate ( $id)"
+Acció que reactiva un usuari empleat desactivat\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "show ( $id)"
+Acció que s'encarrega de mostrar dades d'un usuari empleat concret en un formulari no editable\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "store (Request $request)"
+Acció que s'encarrega d'emmagatzemar les dades d'un usuari empleat en la base de dades, compta amb una transacció de base de dades, per si falla al introduir les dades\&. Envia un correu a l'usuari empleat creat amb un enllaç per canviar la contrasenya\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "trashed ()"
+Acció que llista les dades dels usuaris empleats desactivats\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "update (Request $request,  $id)"
+Acció que s'encarrega d'emmagatzemar les dades actualitzades d'un usuari empleat concret\&. Compta amb l'ús de transacció de base de dades per si falla al actualitzar les dades\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.br
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

@@ -1,0 +1,201 @@
+.TH "ClientsController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ClientsController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBcreate\fP ()"
+.br
+.ti -1c
+.RI "\fBstore\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBshow\fP ($id)"
+.br
+.ti -1c
+.RI "\fBedit\fP ($id)"
+.br
+.ti -1c
+.RI "\fBupdate\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBdestroy\fP ($id)"
+.br
+.ti -1c
+.RI "\fBtrashed\fP ()"
+.br
+.ti -1c
+.RI "\fBreactivate\fP ($id)"
+.br
+.ti -1c
+.RI "\fBguardarClientPDF\fP ()"
+.br
+.ti -1c
+.RI "\fBexportCSV\fP ()"
+.br
+.ti -1c
+.RI "\fBimportCSV\fP (Request $request)"
+.br
+.in -1c
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "create ()"
+Acció que s'encarrega de mostrar el formulari de creació d'usuaris client\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "destroy ( $id)"
+Acció que s'encarrega de desactivar l'usuari client especificat\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "edit ( $id)"
+Acció que s'encarrega de mostrar el formulari per editar l'usuari client especificat amb les dades del client\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "exportCSV ()"
+Acció que s'encarrega de generar un arxiu CSV amb les dades importants dels usuaris client\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+CSV 
+.RE
+.PP
+
+.SS "guardarClientPDF ()"
+Acció que s'encarrega de generar un arxiu PDF amb les dades de tots els usuaris client\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+PDF 
+.RE
+.PP
+
+.SS "importCSV (Request $request)"
+Acció que s'encarrega d'importar dades de clients d'un CSV a la base de dades\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "index ()"
+Acció que s'encarrega de mostrar un llistat de clients\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "reactivate ( $id)"
+Acció que s'encarrega de reactivar l'usuari especificat\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "show ( $id)"
+Acció que s'encarrega de mostrar les dades de l'usuari client especificat en un formulari no editable\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "store (Request $request)"
+Acció que emmagatzema un usuari client en la base de dades\&. Si l'usuari s'emmagatzema de forma correcta, s'envia un correu electrònic amb un enllaç per restablir la contrasenya\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "trashed ()"
+Acció que mostra un llistat dels usuaris client desactivats\&.
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+.SS "update (Request $request,  $id)"
+Acció que s'encarrega d'actualitzar la informació de l'usuari client especificat\&.
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.br
+\fI$id\fP 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+/Illuminate/Http/Response 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.

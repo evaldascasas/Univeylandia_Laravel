@@ -1,0 +1,92 @@
+.TH "ContacteController" 3 "Dc Mai 15 2019" "Version 1.0" "Univeylandia" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ContacteController
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Hereta de \fBController\fP\&.
+.SS "Mètodes públics"
+
+.in +1c
+.ti -1c
+.RI "\fBindex\fP ()"
+.br
+.ti -1c
+.RI "\fBstore\fP (Request $request)"
+.br
+.ti -1c
+.RI "\fBllistarEmpleats\fP ($id)"
+.br
+.ti -1c
+.RI "\fBsaveTicket\fP (Request $request, $id)"
+.br
+.ti -1c
+.RI "\fBassignList\fP ()"
+.br
+.ti -1c
+.RI "\fBdestroy\fP ($id)"
+.br
+.ti -1c
+.RI "\fBconclude\fP ($id)"
+.br
+.in -1c
+.SH "Documentació de les Funcions Membre"
+.PP 
+.SS "assignList ()"
+Acció que s'encarrega de llistar tots els tiquets que estan assignats a un empleat 
+.SS "conclude ( $id)"
+Acció que canvia l'estat del tiquet a finalitzat 
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+
+.SS "destroy ( $id)"
+Acció que s'encarrega de borrar el tiquet 
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+
+.SS "index ()"
+Acció que s'encarrega d'imprimir els tiquets que no estiguen assignats a cap empleat 
+.SS "llistarEmpleats ( $id)"
+Acció que s'encarrega de llistar els empleats, per a assignar-los al tiquet 
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+
+.SS "saveTicket (Request $request,  $id)"
+Acció que s'encarrega de guardar l'assignacio a la base de dades, genera una notificacio per al empleat assignat i tambe envia un correu al client que ha fet el tiquet 
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.br
+\fI$id\fP 
+.RE
+.PP
+
+.SS "store (Request $request)"
+Acció que s'encarrega de guardar els tiquets a la base de dades 
+.PP
+\fBParàmetres:\fP
+.RS 4
+\fI$request\fP 
+.RE
+.PP
+
+
+.SH "Autor"
+.PP 
+Generat automàticament per Doxygen per a Univeylandia a partir del codi font\&.
