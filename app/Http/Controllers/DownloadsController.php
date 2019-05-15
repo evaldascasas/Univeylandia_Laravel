@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
+use File;
 
 class DownloadsController extends Controller
 {
@@ -19,6 +20,12 @@ class DownloadsController extends Controller
         // sleep(5);
 
         // Storage::deleteDirectory('public/asd');
+
+        // $file = storage_path('installed');
+
+        // $wat = File::exists($file);
+
+        // dd($wat);
 
         return view('gestio.downloads.index');
     }
